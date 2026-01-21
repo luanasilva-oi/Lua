@@ -1,0 +1,61 @@
+body.dark {
+  background:#0e0e0e;
+  color:#fff;
+  font-family:Arial, sans-serif;
+  margin:0;
+}
+
+.center {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.card {
+  background:#1a1a1a;
+  padding:30px;
+  border-radius:10px;
+  max-width:400px;
+  text-align:center;
+}
+
+button, .btn {
+  background:#e91e63;
+  color:#fff;
+  padding:15px 25px;
+  border:none;
+  border-radius:8px;
+  text-decoration:none;
+  display:inline-block;
+  margin-top:15px;
+  cursor:pointer;
+}
+
+.hero {
+  display:flex;
+  gap:30px;
+  padding:30px;
+  flex-wrap:wrap;
+}
+
+.grid {
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+
+.locked {
+  position:relative;
+  opacity:0.5;
+}
+
+.locked span {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#000;
+  padding:10px;
+  border-radius:6px;
+}
