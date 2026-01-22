@@ -309,3 +309,20 @@
 #purchase-toast span {
   font-weight: bold;
 }
+/* ====== DESTAQUE PLANO COMPLETO ====== */
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(229, 57, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(229, 57, 53, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(229, 57, 53, 0.4);
+  }
+}
+
+.plan-card.complete {
+  animation: pulseGlow 2.8s infinite;
+}
