@@ -1,15 +1,58 @@
-<script>
-const params = new URLSearchParams(window.location.search);
-const plano = params.get("plano");
-const token = params.get("token");
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Acesso Liberado</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
 
-// tokens válidos
-const tokens = {
-  basico: "K9F2X",
-  completo: "P7Z8A"
-};
+<body class="dark">
 
-if (!plano || !token || tokens[plano] !== token) {
-  document.body.innerHTML = "<h2>Acesso negado 🔒</h2>";
-}
-</script>
+  <div class="profile-container">
+
+    <h1>Acesso Liberado 🔓</h1>
+
+    <!-- PLANO BÁSICO -->
+    <div id="basico" style="display:none">
+      <a href="https://drive.google.com/drive/folders/1Fwqr1jW8OEA8d0VstIR_JwcJptG_Dn9K?usp=sharing" target="_blank" class="plan-btn basic">
+        👉 ACESSAR CONTEÚDO BÁSICO
+      </a>
+    </div>
+
+    <!-- PLANO COMPLETO -->
+    <div id="completo" style="display:none">
+      <a href="https://drive.google.com/drive/folders/1CT5-n5tsO7M4Ftyu-h0XEb0bOm4J5lXQ?usp=sharing" target="_blank" class="plan-btn complete">
+        🔥 ACESSAR CONTEÚDO COMPLETO
+      </a>
+    </div>
+
+  </div>
+
+  <!-- 👇 SCRIPT DE SEGURANÇA FICA AQUI 👇 -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plano = params.get("plano");
+    const token = params.get("token");
+
+    const tokens = {
+      basico: "K9F2X",
+      completo: "P7Z8A"
+    };
+
+    if (!plano || !token || tokens[plano] !== token) {
+      document.body.innerHTML =
+        "<h2 style='color:white;text-align:center'>Acesso negado 🔒</h2>";
+    }
+
+    if (plano === "basico") {
+      document.getElementById("basico").style.display = "block";
+    }
+
+    if (plano === "completo") {
+      document.getElementById("completo").style.display = "block";
+    }
+  </script>
+  <!-- 👆 ATÉ AQUI 👆 -->
+
+</body>
+</html>
