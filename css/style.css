@@ -76,6 +76,46 @@
   text-decoration: none;
   font-weight: bold;
 }
+.age-bg {
+  background: #0b0b0b;
+}
+
+.age-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.age-box {
+  background: #151515;
+  max-width: 420px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.age-box h1 {
+  margin-bottom: 15px;
+}
+
+.age-box p {
+  color: #ccc;
+}
+
+.age-box button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.age-note {
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #888;
+}
 
 .plan-btn.vip {
   background: #ff9800;
