@@ -143,30 +143,6 @@ function showPurchase() {
 
 setInterval(showPurchase, Math.random() * 6000 + 7000);
 </script>
-<script>
-const params = new URLSearchParams(window.location.search);
-const plano = params.get("plano");
-const token = params.get("token");
 
-// TOKENS VÁLIDOS
-const tokens = {
-  basico: "K9F2X",
-  completo: "P7Z8A"
-};
-
-// BLOQUEIO
-if (!plano || !token || tokens[plano] !== token) {
-  document.body.innerHTML = "<h2 style='color:white;text-align:center'>Acesso negado 🔒</h2>";
-}
-
-// MOSTRA CONTEÚDO CORRETO
-if (plano === "basico") {
-  document.getElementById("basico").style.display = "block";
-}
-
-if (plano === "completo") {
-  document.getElementById("completo").style.display = "block";
-}
-</script>
 </body>
 </html>
