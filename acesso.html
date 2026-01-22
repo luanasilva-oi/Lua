@@ -26,33 +26,43 @@
       </a>
     </div>
 
+    <!-- MENSAGEM DE ACESSO NEGADO -->
+    <div id="negado" style="display:none; text-align:center; color:white; margin-top:40px;">
+      <h2>Acesso negado 🔒</h2>
+      <p>Você não tem permissão para visualizar este conteúdo.</p>
+    </div>
+
   </div>
 
-  <!-- 👇 SCRIPT DE SEGURANÇA FICA AQUI 👇 -->
+  <!-- SCRIPT DE SEGURANÇA -->
   <script>
+    // Pega os parâmetros da URL
     const params = new URLSearchParams(window.location.search);
     const plano = params.get("plano");
     const token = params.get("token");
 
+    // Tokens válidos
     const tokens = {
       basico: "K9F2X",
       completo: "P7Z8A"
     };
 
+    // Função para mostrar o plano correto
+    function mostrarPlano(plano) {
+      if (plano === "basico") {
+        document.getElementById("basico").style.display = "block";
+      } else if (plano === "completo") {
+        document.getElementById("completo").style.display = "block";
+      }
+    }
+
+    // Verifica token
     if (!plano || !token || tokens[plano] !== token) {
-      document.body.innerHTML =
-        "<h2 style='color:white;text-align:center'>Acesso negado 🔒</h2>";
-    }
-
-    if (plano === "basico") {
-      document.getElementById("basico").style.display = "block";
-    }
-
-    if (plano === "completo") {
-      document.getElementById("completo").style.display = "block";
+      document.getElementById("negado").style.display = "block";
+    } else {
+      mostrarPlano(plano);
     }
   </script>
-  <!-- 👆 ATÉ AQUI 👆 -->
 
 </body>
 </html>
