@@ -73,6 +73,37 @@ if(localStorage.getItem('age_ok') !== '1'){
   </p>
 
 </div>
+<div id="purchase-toast"></div>
+
+<script>
+const names = [
+  "Henrique", "Gustavo", "Mateus", "Lucas", "Rafael",
+  "Bruno", "Diego", "Felipe", "André", "Caio"
+];
+
+const plans = [
+  { name: "Plano Essencial", type: "basic" },
+  { name: "Plano Completo", type: "complete" }
+];
+
+function showPurchase() {
+  const toast = document.getElementById("purchase-toast");
+  const name = names[Math.floor(Math.random() * names.length)];
+  const plan = plans[Math.floor(Math.random() * plans.length)];
+
+  toast.className = `show ${plan.type}`;
+  toast.innerHTML = `
+    <strong>${name}</strong> comprou o <br>
+    <span>${plan.name}</span>
+  `;
+
+  setTimeout(() => {
+    toast.className = "";
+  }, 4000);
+}
+
+setInterval(showPurchase, Math.floor(Math.random() * 6000) + 7000);
+</script>
 
 </body>
 </html>
