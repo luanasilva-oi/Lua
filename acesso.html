@@ -35,34 +35,23 @@
   </div>
 
   <!-- SCRIPT DE SEGURANÇA -->
-  <script>
-    // Pega os parâmetros da URL
-    const params = new URLSearchParams(window.location.search);
-    const plano = params.get("plano");
-    const token = params.get("token");
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const plano = params.get("plano");
 
-    // Tokens válidos
-    const tokens = {
-      basico: "K9F2X",
-      completo: "P7Z8A"
-    };
-
-    // Função para mostrar o plano correto
-    function mostrarPlano(plano) {
-      if (plano === "basico") {
-        document.getElementById("basico").style.display = "block";
-      } else if (plano === "completo") {
-        document.getElementById("completo").style.display = "block";
-      }
+  // Se não tiver plano válido → bloqueia
+  if (plano !== "basico" && plano !== "completo") {
+    document.getElementById("negado").style.display = "block";
+  } else {
+    if (plano === "basico") {
+      document.getElementById("basico").style.display = "block";
     }
 
-    // Verifica token
-    if (!plano || !token || tokens[plano] !== token) {
-      document.getElementById("negado").style.display = "block";
-    } else {
-      mostrarPlano(plano);
+    if (plano === "completo") {
+      document.getElementById("completo").style.display = "block";
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
