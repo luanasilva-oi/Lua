@@ -437,3 +437,9 @@ body.dark {
   font-weight: bold;
   pointer-events: none;
 }
+.preview-card video {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: blur(6px) brightness(0.7);
+}
