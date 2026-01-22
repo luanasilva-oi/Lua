@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Acesso Privado</title>
+<title>Perfil Privado</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
+
 <script>
 if(localStorage.getItem('age_ok') !== '1'){
   window.location.href = "index.html";
@@ -13,28 +14,54 @@ if(localStorage.getItem('age_ok') !== '1'){
 </head>
 
 <body class="dark">
-<header>
-  <h1>Conteúdo Privado 🔒</h1>
-  <p>Material exclusivo que não é postado em redes sociais.</p>
-</header>
 
-<section class="hero">
-  <img src="https://via.placeholder.com/400x500" alt="preview">
-  <div>
-    <h2>Acesso Completo</h2>
-    <ul>
-      <li>✔ Vídeos exclusivos</li>
-      <li>✔ Atualizações frequentes</li>
-      <li>✔ Conteúdo privado</li>
-    </ul>
+<div class="profile-container">
 
-    <!-- LINK DA KIWIFY -->
-    <a class="btn" href="COLE_AQUI_SEU_LINK_DA_KIWIFY">Quero Acessar 🔥</a>
+  <!-- PERFIL -->
+  <div class="profile-header">
+    <img class="avatar" src="https://via.placeholder.com/160x160" alt="perfil">
+    <h1>Luana Silva</h1>
+    <span class="status">🟢 Disponível agora</span>
+    <p class="bio">
+      Conteúdo exclusivo e privado.  
+      Acesso para quem quer ver mais do que é postado nas redes.
+    </p>
   </div>
-</section>
 
-<footer>
-  <a href="preview.html">Ver prévias</a>
-</footer>
+  <!-- PRÉVIAS -->
+  <h2 class="section-title">Prévias 🔒</h2>
+
+  <div class="preview-grid">
+    <div class="preview-card locked">
+      <img src="https://via.placeholder.com/300x400">
+      <span>Bloqueado</span>
+    </div>
+
+    <div class="preview-card locked">
+      <img src="https://via.placeholder.com/300x400">
+      <span>Bloqueado</span>
+    </div>
+
+    <div class="preview-card locked">
+      <img src="https://via.placeholder.com/300x400">
+      <span>Bloqueado</span>
+    </div>
+  </div>
+
+  <!-- PLANOS -->
+  <h2 class="section-title">Liberar Acesso</h2>
+
+  <div class="plans">
+    <a class="plan-btn" href="COLE_AQUI_SEU_LINK_KIWIFY">
+      🔓 Acesso Completo – R$19,99
+    </a>
+
+    <a class="plan-btn vip" href="COLE_AQUI_SEU_LINK_KIWIFY">
+      ⭐ Acesso VIP – Conteúdo Extra
+    </a>
+  </div>
+
+</div>
+
 </body>
 </html>
