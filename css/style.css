@@ -338,3 +338,59 @@
   border-radius: 20px;
   width: fit-content;
 }
+/* ====== MOBILE OPTIMIZATION ====== */
+
+@media (max-width: 768px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .profile-container {
+    padding: 15px;
+    border-radius: 14px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .bio {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .preview-card span {
+    font-size: 12px;
+  }
+
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-card {
+    padding: 20px;
+  }
+
+  .price {
+    font-size: 26px;
+  }
+
+  .plan-btn {
+    font-size: 16px;
+    padding: 16px;
+  }
+
+  #purchase-toast {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    font-size: 13px;
+  }
+}
