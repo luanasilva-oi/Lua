@@ -326,3 +326,15 @@
 .plan-card.complete {
   animation: pulseGlow 2.8s infinite;
 }
+/* ====== CONTADOR DE ACESSOS ====== */
+
+#daily-access {
+  margin: 14px auto;
+  text-align: center;
+  font-size: 14px;
+  color: #ff5252;
+  background: rgba(255, 82, 82, 0.08);
+  padding: 8px 14px;
+  border-radius: 20px;
+  width: fit-content;
+}
