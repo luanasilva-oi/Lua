@@ -250,3 +250,27 @@
   color: #888;
   text-align: center;
 }
+/* ====== CORES DOS PLANOS ====== */
+
+.plan-btn.basic {
+  background: #ff9800; /* LARANJA */
+  color: #000;
+}
+
+.plan-card.basic {
+  border: 1px solid #ff9800;
+}
+
+.plan-btn.complete {
+  background: #e53935; /* VERMELHO */
+  color: #fff;
+}
+
+.plan-card.complete {
+  border: 2px solid #e53935;
+}
+
+/* mantém o destaque visual */
+.plan-card.complete {
+  transform: scale(1.04);
+}
