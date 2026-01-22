@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Conteúdo Adulto</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Conteúdo Adulto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+}
+</style>
 </head>
-<body class="center dark">
-  <div class="card">
-    <h1>🔞 Aviso de Conteúdo Adulto</h1>
-    <p>Este site contém conteúdo exclusivo destinado apenas a maiores de 18 anos.</p>
+
+<body class="dark age-bg">
+
+<div class="age-container">
+  <div class="age-box">
+    <h1>🔞 Aviso de Conteúdo</h1>
+    <p>
+      Este site contém conteúdo exclusivo destinado apenas a maiores de 18 anos.
+    </p>
+
     <button onclick="acceptAge()">Sou maior de 18</button>
-    <p class="small">Ao continuar, você confirma que é maior de idade.</p>
+
+    <span class="age-note">
+      Ao continuar, você confirma que é maior de idade.
+    </span>
   </div>
+</div>
 
 <script>
 function acceptAge(){
@@ -20,5 +37,6 @@ function acceptAge(){
   window.location.href = "landing.html";
 }
 </script>
+
 </body>
 </html>
