@@ -9,7 +9,13 @@
 <script>
 if(localStorage.getItem('age_ok') !== '1'){
   window.location.href = "index.html";
-}
+}<script>
+setInterval(() => {
+  document.getElementById("online-count").innerText =
+    Math.floor(Math.random() * 6) + 8;
+}, 6000);
+</script>
+
 </script>
 </head>
 
