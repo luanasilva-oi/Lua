@@ -1,3 +1,9 @@
+body.dark {
+  background: #000;
+  color: #fff;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 .profile-container {
   background: #0b0b0b;
   border-radius: 16px;
