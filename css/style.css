@@ -406,3 +406,34 @@ body.dark {
   color: #4caf50;
   margin-bottom: 10px;
 }
+.preview-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.preview-card:hover {
+  transform: scale(1.02);
+}
+
+.preview-card img {
+  width: 100%;
+  display: block;
+  filter: blur(6px) brightness(0.7);
+}
+
+.preview-card span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none;
+}
