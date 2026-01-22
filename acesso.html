@@ -1,1 +1,15 @@
+<script>
+const params = new URLSearchParams(window.location.search);
+const plano = params.get("plano");
+const token = params.get("token");
 
+// tokens válidos
+const tokens = {
+  basico: "K9F2X",
+  completo: "P7Z8A"
+};
+
+if (!plano || !token || tokens[plano] !== token) {
+  document.body.innerHTML = "<h2>Acesso negado 🔒</h2>";
+}
+</script>
