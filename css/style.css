@@ -120,3 +120,62 @@
 .plan-btn.vip {
   background: #ff9800;
 }
+/* ====== AGE GATE ====== */
+
+.age-bg {
+  background: #000;
+}
+
+.age-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.age-box {
+  background: #0f0f0f;
+  max-width: 480px;
+  width: 100%;
+  padding: 35px 30px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+.age-box h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.age-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.age-btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #ffb400;   /* AMARELO PORNHUB */
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.age-btn:hover {
+  background: #ffc933;
+}
+
+.age-note {
+  display: block;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #888;
+}
