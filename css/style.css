@@ -394,3 +394,9 @@
     font-size: 13px;
   }
 }
+#online-users {
+  text-align: center;
+  font-size: 13px;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
