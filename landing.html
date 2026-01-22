@@ -7,15 +7,9 @@
 <link rel="stylesheet" href="css/style.css">
 
 <script>
-if(localStorage.getItem('age_ok') !== '1'){
+if (localStorage.getItem('age_ok') !== '1') {
   window.location.href = "index.html";
-}<script>
-setInterval(() => {
-  document.getElementById("online-count").innerText =
-    Math.floor(Math.random() * 6) + 8;
-}, 6000);
-</script>
-
+}
 </script>
 </head>
 
@@ -29,13 +23,19 @@ setInterval(() => {
     <h1>Luana Silva</h1>
     <span class="status">🟢 Disponível agora</span>
     <p class="bio">
-  Perfil privado com acesso restrito.  
-  Conteúdo exclusivo disponível somente após confirmação.
-</p>
+      Perfil privado com acesso restrito.<br>
+      Conteúdo exclusivo disponível somente após confirmação.
+    </p>
+  </div>
+
+  <!-- CONTADOR -->
+  <div id="daily-access">
+    🔥 <strong id="access-count">37</strong> acessos hoje
   </div>
 
   <!-- PRÉVIAS -->
-  <h2 class="section-title">Prévias 🔒</h2>
+  <h2 class="section-title">Conteúdo Bloqueado 🔒</h2>
+
   <div class="preview-grid">
     <div class="preview-card locked">
       <img src="PREVIEW1.jpg"><span>Bloqueado</span>
@@ -47,48 +47,70 @@ setInterval(() => {
       <img src="PREVIEW3.jpg"><span>Bloqueado</span>
     </div>
   </div>
-<div id="online-users">
-  🟢 <strong id="online-count">12</strong> pessoas online agora
-</div>
+
+  <!-- ONLINE -->
+  <div id="online-users">
+    🟢 <strong id="online-count">12</strong> pessoas online agora
+  </div>
+
   <!-- PLANOS -->
   <h2 class="section-title">Escolha seu acesso</h2>
 
   <div class="plans-grid">
 
     <!-- PLANO BÁSICO -->
-<div class="plan-card basic">
-  <h3>Acesso Essencial</h3>
-  <p class="plan-desc">Seleção exclusiva de conteúdos</p>
-  <div class="price">R$ 19,99</div>
-  <a class="plan-btn basic" href="LINK_KIWIFY_BASICO">
-    Liberar Acesso
-  </a>
+    <div class="plan-card basic">
+      <h3>Acesso Essencial</h3>
+      <p class="plan-desc">Seleção exclusiva de conteúdos</p>
+      <div class="price">R$ 19,99</div>
+      <a class="plan-btn basic" href="LINK_KIWIFY_BASICO">
+        Liberar Acesso
+      </a>
+    </div>
+
+    <!-- PLANO COMPLETO -->
+    <div class="plan-card complete featured">
+      <div class="badge">Mais escolhido</div>
+      <h3>Acesso Completo ⭐</h3>
+      <p class="plan-desc">Biblioteca completa + atualizações</p>
+      <div class="price">R$ 29,90</div>
+      <a class="plan-btn complete" href="LINK_KIWIFY_COMPLETO">
+        Acessar Agora
+      </a>
+    </div>
+
+  </div>
+
+  <p class="meta-note">
+    A maioria dos usuários escolhe o acesso completo.
+  </p>
+
 </div>
 
-<!-- PLANO COMPLETO -->
-<div class="plan-card complete featured">
-  <div class="badge">Mais escolhido</div>
-  <h3>Acesso Completo ⭐</h3>
-  <p class="plan-desc">Biblioteca completa + atualizações</p>
-  <div class="price">R$ 29,90</div>
-  <a class="plan-btn complete" href="LINK_KIWIFY_COMPLETO">
-    Acessar Agora
-  </a>
-</div>
-
-<p class="meta-note">
-  A maioria dos usuários escolhe o acesso completo.
-</p>
-
-</div>
+<!-- NOTIFICAÇÃO -->
 <div id="purchase-toast"></div>
 
+<!-- JS -->
 <script>
-const names = [
-  "Henrique", "Gustavo", "Mateus", "Lucas", "Rafael",
-  "Bruno", "Diego", "Felipe", "André", "Caio"
-];
+// ONLINE USERS
+setInterval(() => {
+  document.getElementById("online-count").innerText =
+    Math.floor(Math.random() * 6) + 8;
+}, 6000);
 
+// CONTADOR DIÁRIO
+(function () {
+  const today = new Date().toDateString();
+  if (localStorage.getItem("access_day") !== today) {
+    localStorage.setItem("access_day", today);
+    localStorage.setItem("access_count", Math.floor(Math.random() * 30) + 25);
+  }
+  document.getElementById("access-count").innerText =
+    localStorage.getItem("access_count");
+})();
+
+// COMPRAS FAKE
+const names = ["Henrique","Gustavo","Mateus","Lucas","Rafael","Bruno","Diego","Felipe"];
 const plans = [
   { name: "Plano Essencial", type: "basic" },
   { name: "Plano Completo", type: "complete" }
@@ -100,17 +122,12 @@ function showPurchase() {
   const plan = plans[Math.floor(Math.random() * plans.length)];
 
   toast.className = `show ${plan.type}`;
-  toast.innerHTML = `
-    <strong>${name}</strong> comprou o <br>
-    <span>${plan.name}</span>
-  `;
+  toast.innerHTML = `<strong>${name}</strong> comprou<br><span>${plan.name}</span>`;
 
-  setTimeout(() => {
-    toast.className = "";
-  }, 4000);
+  setTimeout(() => toast.className = "", 4000);
 }
 
-setInterval(showPurchase, Math.floor(Math.random() * 6000) + 7000);
+setInterval(showPurchase, Math.random() * 6000 + 7000);
 </script>
 
 </body>
