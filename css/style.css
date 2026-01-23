@@ -5,11 +5,15 @@ body.dark {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BANNER */
+/* ===== BANNER ESTILO ONLYFANS ===== */
 .profile-banner {
-  background: url("../assets/banner.jpg") center/cover no-repeat;
-  height: 220px;
-  border-radius: 0 0 24px 24px;
+  width: 100%;
+  height: 260px;
+  background-image: url("../assets/banner.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* NÃO CORTA */
+  background-color: #000;   /* fundo preto igual OF */
 }
 
 /* CONTAINER */
