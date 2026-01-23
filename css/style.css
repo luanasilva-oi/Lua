@@ -14,7 +14,7 @@ body.dark {
 
 .profile-header {
   position: relative;
-  margin-top: -60px; /* CONTROLA A DISTÂNCIA */
+  margin-top: -70px;
   text-align: center;
 }
 
@@ -364,9 +364,9 @@ body.dark {
   }
 
   .avatar {
-    width: 90px;
-    height: 90px;
-  }
+  position: relative;
+  z-index: 10;
+}
 
   .bio {
     font-size: 14px;
@@ -453,9 +453,8 @@ body.dark {
 /* ===== BANNER ===== */
 .profile-banner {
   background: url("assets/banner.jpg") center/cover no-repeat;
-  height: 220px; /* controla o quanto desce */
-  border-radius: 16px 16px 0 0;
-  margin: -20px -20px 0 -20px;
+  height: 220px;
+  border-radius: 0 0 24px 24px;
   position: relative;
 }
 
@@ -472,13 +471,13 @@ body.dark {
 }
 @media (max-width: 768px) {
   .profile-banner {
-    height: 100px;
+    height: 130px;
     margin-bottom: 60px;
   }
 
   .avatar {
     width: 100px;
     height: 100px;
-    margin-top: -70px;
+    margin-top: -60px;
   }
 }
