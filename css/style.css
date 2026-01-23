@@ -11,8 +11,9 @@ body.dark {
 }
 
 .profile-header {
+  position: relative;
+  margin-top: -60px; /* CONTROLA A DISTÂNCIA */
   text-align: center;
-  margin-top: -10px;
 }
 
 .avatar {
