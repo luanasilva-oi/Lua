@@ -409,3 +409,61 @@ body.dark {
         font-size: 13px;
     }
 }
+/* =================================================== */
+/* NOVO ESTILO DO CABEÇALHO (ESTILO REDE SOCIAL) */
+/* =================================================== */
+
+.profile-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Alinha o nome e o selo de verificado na mesma linha */
+.profile-info h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espaço entre o nome e o selo */
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Estilo do selo de verificado */
+.verified-badge {
+    width: 20px;
+    height: 20px;
+    color: #1DA1F2; /* Azão do Twitter */
+    background-color: #1DA1F2;
+    border-radius: 50%;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+/* Linha do usuário e status */
+.user-status-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Espaço entre o @ e o status */
+    margin-top: 5px;
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+}
+
+.username {
+    font-size: 16px;
+    color: #aaa;
+}
+
+.status-indicator {
+    font-size: 14px;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Ajuste fino para a bio */
+.bio {
+    margin-top: 15px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
