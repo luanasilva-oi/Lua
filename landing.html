@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Perfil Privado</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="css/style.css">
 
 <script>
@@ -15,12 +16,15 @@ if (localStorage.getItem('age_ok') !== '1') {
 
 <body class="dark">
 
-<div class="profile-container">
+<!-- BANNER -->
 <div class="profile-banner"></div>
+
+<!-- CONTEÚDO -->
+<div class="profile-container">
 
   <!-- PERFIL -->
   <div class="profile-header">
-    <img class="avatar" src="assets/avatar.jpg" alt="perfil">
+    <img class="avatar" src="assets/avatar.jpg" alt="Perfil">
     <h1>Luana Silva</h1>
     <span class="status">🟢 Disponível agora</span>
     <p class="bio">
@@ -39,28 +43,28 @@ if (localStorage.getItem('age_ok') !== '1') {
 
   <div class="preview-grid">
 
-  <div class="preview-card locked" onclick="window.location.href='https://pay.kiwify.com.br/OCvaqhO'">
-    <video autoplay loop muted playsinline>
-      <source src="assets/preview1.mp4" type="video/mp4">
-    </video>
-    <span>🔒 Ver completo</span>
-  </div>
+    <div class="preview-card" onclick="window.location.href='https://pay.kiwify.com.br/OCvaqhO'">
+      <video autoplay loop muted playsinline>
+        <source src="assets/preview1.mp4" type="video/mp4">
+      </video>
+      <span>🔒 Ver completo</span>
+    </div>
 
-  <div class="preview-card locked" onclick="window.location.href='https://pay.kiwify.com.br/OCvaqhO'">
-    <video autoplay loop muted playsinline>
-      <source src="assets/preview2.mp4" type="video/mp4">
-    </video>
-    <span>🔒 Ver completo</span>
-  </div>
+    <div class="preview-card" onclick="window.location.href='https://pay.kiwify.com.br/OCvaqhO'">
+      <video autoplay loop muted playsinline>
+        <source src="assets/preview2.mp4" type="video/mp4">
+      </video>
+      <span>🔒 Ver completo</span>
+    </div>
 
-  <div class="preview-card locked" onclick="window.location.href='https://pay.kiwify.com.br/OCvaqhO'">
-    <video autoplay loop muted playsinline>
-      <source src="assets/preview3.mp4" type="video/mp4">
-    </video>
-    <span>🔒 Ver completo</span>
-  </div>
+    <div class="preview-card" onclick="window.location.href='https://pay.kiwify.com.br/OCvaqhO'">
+      <video autoplay loop muted playsinline>
+        <source src="assets/preview3.mp4" type="video/mp4">
+      </video>
+      <span>🔒 Ver completo</span>
+    </div>
 
-</div>
+  </div>
 
   <!-- ONLINE -->
   <div id="online-users">
@@ -72,21 +76,19 @@ if (localStorage.getItem('age_ok') !== '1') {
 
   <div class="plans-grid">
 
-    <!-- PLANO BÁSICO -->
     <div class="plan-card basic">
       <h3>Acesso Essencial</h3>
-      <p class="plan-desc">Seleção exclusiva de conteúdos</p>
+      <p class="plan-desc">Conteúdo selecionado</p>
       <div class="price">R$ 19,99</div>
       <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">
         Liberar Acesso
       </a>
     </div>
 
-    <!-- PLANO COMPLETO -->
     <div class="plan-card complete featured">
       <div class="badge">Mais escolhido</div>
       <h3>Acesso Completo ⭐</h3>
-      <p class="plan-desc">Biblioteca completa + atualizações</p>
+      <p class="plan-desc">Tudo liberado + atualizações</p>
       <div class="price">R$ 29,90</div>
       <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">
         Acessar Agora
@@ -104,15 +106,12 @@ if (localStorage.getItem('age_ok') !== '1') {
 <!-- NOTIFICAÇÃO -->
 <div id="purchase-toast"></div>
 
-<!-- JS -->
 <script>
-// ONLINE USERS
 setInterval(() => {
   document.getElementById("online-count").innerText =
     Math.floor(Math.random() * 6) + 8;
 }, 6000);
 
-// CONTADOR DIÁRIO
 (function () {
   const today = new Date().toDateString();
   if (localStorage.getItem("access_day") !== today) {
@@ -123,8 +122,7 @@ setInterval(() => {
     localStorage.getItem("access_count");
 })();
 
-// COMPRAS FAKE
-const names = ["Henrique","Gustavo","Mateus","Lucas","Rafael","Bruno","Diego","Felipe"];
+const names = ["Felipe","Lucas","Rafael","Bruno","Diego","Mateus"];
 const plans = [
   { name: "Plano Essencial", type: "basic" },
   { name: "Plano Completo", type: "complete" }
@@ -141,7 +139,7 @@ function showPurchase() {
   setTimeout(() => toast.className = "", 4000);
 }
 
-setInterval(showPurchase, Math.random() * 6000 + 7000);
+setInterval(showPurchase, 9000);
 </script>
 
 </body>
