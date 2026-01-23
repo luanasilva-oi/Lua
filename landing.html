@@ -10,24 +10,21 @@
     <!-- Este script redireciona usuários não verificados antes que a página seja renderizada -->
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
-            window.location.href = "index.html";
+            window.location.href = "index.html"; // Altere para a sua página de verificação
         }
     </script>
 </head>
 <body class="dark">
 
-    <div class="profile-container">
-
-  <!-- BANNER DO PERFIL -->
-  <div class="profile-banner"></div>
-
-  <div class="profile-header">
-    <img src="./assets/avatar.jpg" class="avatar">
-    <h1>Luana Silva</h1>
-    <span class="status">🟢 Disponível agora</span>
-    <p class="bio">Perfil privado com acesso restrito.</p>
-  </div>
+    <main class="profile-container">
         
+        <!-- CABEÇALHO DO PERFIL -->
+        <header class="profile-header">
+            <div class="profile-banner"></div>
+            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            <h1>Luana Silva</h1>
+            <span class="status">🟢 Disponível agora</span>
+            <p class="bio">Perfil privado com acesso restrito.</p>
         </header>
 
         <!-- SEÇÃO DE CONTADORES E STATUS -->
@@ -120,7 +117,6 @@
             setInterval(updateOnlineUsers, 6000);
             updateOnlineUsers(); // Executa uma vez imediatamente
 
-
             /**
              * Inicializa o contador de acessos diários.
              * Usa o localStorage para persistir a contagem durante o dia.
@@ -141,7 +137,6 @@
                 accessCountEl.innerText = localStorage.getItem("access_count");
             }
             initializeDailyAccess();
-
 
             /**
              * Exibe uma notificação toast de compra falsa.
