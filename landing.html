@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/style.css">
     
     <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
-    <!-- Este script redireciona usuários não verificados antes que a página seja renderizada -->
+    <!-- Se um usuário tentar acessar esta página diretamente sem ter verificado a idade, ele será redirecionado -->
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
-            window.location.href = "index.html"; // Altere para a sua página de verificação
+            window.location.href = "index.html";
         }
     </script>
 </head>
@@ -69,7 +69,12 @@
                 <!-- PLANO BÁSICO -->
                 <div class="plan-card basic">
                     <h3>Acesso Essencial</h3>
-                    <p class="plan-desc">Seleção exclusiva de conteúdos</p>
+                    <ul class="plan-desc">
+                        <li>Uma curadoria com meus 100 melhores momentos de autoexploração e sensualidade.</li>
+                        <li>Vídeos íntimos com brinquedos.</li>
+                        <li>Momentos puros de prazer e descoberta.</li>
+                        <li>Uma introdução ao meu universo mais pessoal.</li>
+                    </ul>
                     <div class="price">R$ 19,99</div>
                     <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
                 </div>
@@ -78,7 +83,12 @@
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
                     <h3>Acesso Completo ⭐</h3>
-                    <p class="plan-desc">Biblioteca completa + atualizações</p>
+                    <ul class="plan-desc">
+                        <li>Acesso total à minha biblioteca com mais de 600 vídeos. Sem censura, sem limites.</li>
+                        <li>Cenas explícitas de masturbação e êxtase.</li>
+                        <li>Close-ups íntimos e sons de prazer autênticos.</li>
+                        <li>Posando e me exibindo completamente nua para você.</li>
+                    </ul>
                     <div class="price">R$ 29,90</div>
                     <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">Acessar Agora</a>
                 </div>
@@ -89,94 +99,9 @@
     </main>
 
     <!-- ELEMENTO DE NOTIFICAÇÃO (TOAST) -->
-    <!-- Fica fora do <main> pois é um elemento sobreposto -->
     <div id="purchase-toast"></div>
 
     <!-- JAVASCRIPT -->
-    <script>
-        // Garante que o script só execute após o carregamento completo do DOM
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // --- ELEMENTOS DO DOM ---
-            const onlineCountEl = document.getElementById("online-count");
-            const accessCountEl = document.getElementById("access-count");
-            const purchaseToastEl = document.getElementById("purchase-toast");
-
-            // --- FUNCIONALIDADES DINÂMICAS ---
-
-            /**
-             * Atualiza o contador de usuários online com um valor aleatório.
-             */
-            function updateOnlineUsers() {
-                const minUsers = 8;
-                const maxUsers = 14;
-                const randomUsers = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
-                onlineCountEl.innerText = randomUsers;
-            }
-            // Executa a função a cada 6 segundos
-            setInterval(updateOnlineUsers, 6000);
-            updateOnlineUsers(); // Executa uma vez imediatamente
-
-            /**
-             * Inicializa o contador de acessos diários.
-             * Usa o localStorage para persistir a contagem durante o dia.
-             */
-            function initializeDailyAccess() {
-                const today = new Date().toDateString();
-                const storedDay = localStorage.getItem("access_day");
-
-                if (storedDay !== today) {
-                    // Se for um novo dia, redefine o contador
-                    const minAccess = 25;
-                    const maxAccess = 55;
-                    const randomAccess = Math.floor(Math.random() * (maxAccess - minAccess + 1)) + minAccess;
-                    
-                    localStorage.setItem("access_day", today);
-                    localStorage.setItem("access_count", randomAccess);
-                }
-                accessCountEl.innerText = localStorage.getItem("access_count");
-            }
-            initializeDailyAccess();
-
-            /**
-             * Exibe uma notificação toast de compra falsa.
-             */
-            function showFakePurchase() {
-                const names = ["Henrique", "Gustavo", "Mateus", "Lucas", "Rafael", "Bruno", "Diego", "Felipe"];
-                const plans = [
-                    { name: "Plano Essencial", type: "basic" },
-                    { name: "Plano Completo", type: "complete" }
-                ];
-
-                const randomName = names[Math.floor(Math.random() * names.length)];
-                const randomPlan = plans[Math.floor(Math.random() * plans.length)];
-
-                // Adiciona a classe e o conteúdo para exibir o toast
-                purchaseToastEl.className = `show ${randomPlan.type}`;
-                purchaseToastEl.innerHTML = `<strong>${randomName}</strong> comprou<br><span>${randomPlan.name}</span>`;
-
-                // Remove o toast após 4 segundos
-                setTimeout(() => {
-                    purchaseToastEl.className = "";
-                }, 4000);
-            }
-
-            /**
-             * Inicia o loop de notificações de compra em intervalos aleatórios.
-             */
-            function startFakePurchaseNotifications() {
-                function scheduleNextNotification() {
-                    const interval = Math.random() * 6000 + 7000; // Intervalo entre 7 e 13 segundos
-                    setTimeout(() => {
-                        showFakePurchase();
-                        scheduleNextNotification(); // Agenda a próxima notificação
-                    }, interval);
-                }
-                scheduleNextNotification(); // Inicia o processo
-            }
-            startFakePurchaseNotifications();
-
-        });
-    </script>
+    <script src="js/script.js" defer></script>
 </body>
 </html>
