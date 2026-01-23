@@ -12,14 +12,17 @@ body.dark {
 
 .profile-header {
   text-align: center;
+  margin-top: -10px;
 }
 
 .avatar {
-  width: 160px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #e91e63;
+  border: 4px solid #0b0b0b;
+  margin-top: -80px;          /* sobe sobre o banner */
+  background: #000;
 }
 
 .status {
@@ -442,13 +445,13 @@ body.dark {
   height: auto;
   display: block;
   filter: blur(6px) brightness(0.7);
-}
 .profile-banner {
   background: url("assets/banner.jpg") center/cover no-repeat;
-  height: 160px;
+  height: 120px;              /* ↓ menor */
   border-radius: 16px 16px 0 0;
-  margin: -20px -20px 15px -20px;
-  filter: brightness(0.6);
+  margin: -20px -20px 60px -20px; /* espaço pro avatar */
+  position: relative;
+  filter: brightness(0.7);
 }
 /* ===== BANNER ===== */
 .top-banner {
@@ -460,4 +463,16 @@ body.dark {
 .top-banner img {
   width: 100%;
   display: block;
+}
+@media (max-width: 768px) {
+  .profile-banner {
+    height: 90px;
+    margin-bottom: 50px;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    margin-top: -70px;
+  }
 }
