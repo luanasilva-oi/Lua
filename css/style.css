@@ -184,3 +184,15 @@ body.dark {
 .age-btn:hover {
   background: #ffd44d;
 }
+@media (max-width: 768px) {
+  .profile-banner {
+    height: 160px;
+    background-size: contain;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    margin-top: -65px;
+  }
+}
