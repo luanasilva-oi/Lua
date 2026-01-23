@@ -79,5 +79,33 @@ document.addEventListener('DOMContentLoaded', () => {
         scheduleNextNotification(); // Inicia o processo
     }
     startFakePurchaseNotifications();
+    // --- CONTADOR DE VISUALIZAÇÕES PESSOAL ---
+    function initializePersonalCounter() {
+        // Verifica se o "segredo" está na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const secretKey = urlParams.get('stats');
 
+        if (secretKey === 'liberado123') { // <-- Você pode mudar 'liberado123' para o que quiser
+            const counterEl = document.getElementById('view-counter');
+            const countEl = document.getElementById('admin-view-count');
+
+            // Mostra o painel do contador
+            counterEl.style.display = 'block';
+
+            // Pega o número atual de visitas do localStorage
+            let currentCount = parseInt(localStorage.getItem('personal_page_views') || '0');
+            
+            // Incrementa o contador
+            currentCount++;
+            
+            // Salva o novo número
+            localStorage.setItem('personal_page_views', currentCount);
+
+            // Exibe o número na página
+            countEl.innerText = currentCount;
+        }
+    }
+
+    // Chama a função quando a página carrega
+    initializePersonalCounter();
 });
