@@ -450,3 +450,14 @@ body.dark {
   margin: -20px -20px 15px -20px;
   filter: brightness(0.6);
 }
+/* ===== BANNER ===== */
+.top-banner {
+  margin-bottom: 20px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.top-banner img {
+  width: 100%;
+  display: block;
+}
