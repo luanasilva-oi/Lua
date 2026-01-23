@@ -445,11 +445,14 @@ body.dark {
   height: auto;
   display: block;
   filter: blur(6px) brightness(0.7);
+}
+
+/* ===== BANNER ===== */
 .profile-banner {
   background: url("assets/banner.jpg") center/cover no-repeat;
-  height: 120px;              /* ↓ menor */
+  height: 120px;
   border-radius: 16px 16px 0 0;
-  margin: -20px -20px 60px -20px; /* espaço pro avatar */
+  margin: -20px -20px 60px -20px;
   position: relative;
   filter: brightness(0.7);
 }
