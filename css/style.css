@@ -185,9 +185,33 @@ body.dark {
     margin-bottom: 8px;
 }
 
+/* =================================================== */
+/* ESTILO DA LISTA DE DESCRIÇÃO DOS PLANOS (NOVO) */
+/* =================================================== */
 .plan-desc {
-    color: #bbb;
+    list-style: none; /* Remove as bolinhas da lista */
+    padding: 0;
+    margin: 15px 0;
+    text-align: left;
     font-size: 14px;
+    color: #bbb;
+    line-height: 1.6;
+}
+
+.plan-desc li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+/* Adiciona um marcador customizado (opcional) */
+.plan-desc li::before {
+    content: '✓';
+    color: #ff9800; /* Cor do marcador (laranja) */
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
 }
 
 .price {
