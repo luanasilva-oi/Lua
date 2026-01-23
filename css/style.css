@@ -81,7 +81,7 @@ body.dark {
 
 /* --- Banner & Header --- */
 .profile-banner {
-    background: url("assets/banner.jpg") center/cover no-repeat;
+    background: url("../assets/banner.jpg") center/cover no-repeat;
     height: 220px;
     border-radius: 0 0 24px 24px;
     position: relative;
