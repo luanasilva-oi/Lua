@@ -1,0 +1,83 @@
+// Garante que o script só execute após o carregamento completo do DOM
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- ELEMENTOS DO DOM ---
+    const onlineCountEl = document.getElementById("online-count");
+    const accessCountEl = document.getElementById("access-count");
+    const purchaseToastEl = document.getElementById("purchase-toast");
+
+    // --- FUNCIONALIDADES DINÂMICAS ---
+
+    /**
+     * Atualiza o contador de usuários online com um valor aleatório.
+     */
+    function updateOnlineUsers() {
+        const minUsers = 8;
+        const maxUsers = 14;
+        const randomUsers = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
+        onlineCountEl.innerText = randomUsers;
+    }
+    // Executa a função a cada 6 segundos
+    setInterval(updateOnlineUsers, 6000);
+    updateOnlineUsers(); // Executa uma vez imediatamente
+
+    /**
+     * Inicializa o contador de acessos diários.
+     * Usa o localStorage para persistir a contagem durante o dia.
+     */
+    function initializeDailyAccess() {
+        const today = new Date().toDateString();
+        const storedDay = localStorage.getItem("access_day");
+
+        if (storedDay !== today) {
+            // Se for um novo dia, redefine o contador
+            const minAccess = 25;
+            const maxAccess = 55;
+            const randomAccess = Math.floor(Math.random() * (maxAccess - minAccess + 1)) + minAccess;
+            
+            localStorage.setItem("access_day", today);
+            localStorage.setItem("access_count", randomAccess);
+        }
+        accessCountEl.innerText = localStorage.getItem("access_count");
+    }
+    initializeDailyAccess();
+
+    /**
+     * Exibe uma notificação toast de compra falsa.
+     */
+    function showFakePurchase() {
+        const names = ["Henrique", "Gustavo", "Mateus", "Lucas", "Rafael", "Bruno", "Diego", "Felipe"];
+        const plans = [
+            { name: "Plano Essencial", type: "basic" },
+            { name: "Plano Completo", type: "complete" }
+        ];
+
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomPlan = plans[Math.floor(Math.random() * plans.length)];
+
+        // Adiciona a classe e o conteúdo para exibir o toast
+        purchaseToastEl.className = `show ${randomPlan.type}`;
+        purchaseToastEl.innerHTML = `<strong>${randomName}</strong> comprou<br><span>${randomPlan.name}</span>`;
+
+        // Remove o toast após 4 segundos
+        setTimeout(() => {
+            purchaseToastEl.className = "";
+        }, 4000);
+    }
+
+    /**
+     * Inicia o loop de notificações de compra em intervalos aleatórios.
+     */
+    function startFakePurchaseNotifications() {
+        function scheduleNextNotification() {
+            const interval = Math.random() * 6000 + 7000; // Intervalo entre 7 e 13 segundos
+            setTimeout(() => {
+                showFakePurchase();
+                scheduleNextNotification(); // Agenda a próxima notificação
+            }, interval);
+        }
+        scheduleNextNotification(); // Inicia o processo
+    }
+    startFakePurchaseNotifications();
+
+});
