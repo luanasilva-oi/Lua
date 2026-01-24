@@ -495,6 +495,12 @@ body.dark {
 }
 /* --- BARRA DE URGENCIA --- */
 .urgency-bar {
+    position: fixed; /* <-- FIXA A BARRA NO TOPO DA TELA */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* <-- GARANTE QUE FIQUE POR CIMA DE TUDO */
+
     background: linear-gradient(90deg, #ff416c, #ff4b2b);
     color: white;
     text-align: center;
@@ -502,6 +508,11 @@ body.dark {
     font-size: 14px;
     font-weight: bold;
     animation: pulseGlow 2s infinite;
+}
+
+/* Adiciona um espaço no topo da página para o conteúdo não ficar escondido atrás da barra */
+body {
+    padding-top: 40px; /* Ajuste este valor se a barra for muito alta ou baixa */
 }
 /* --- ESTILO DE NAVEGAÇÃO POR TECLADO (FOCUS) --- */
 .plan-btn:focus,
