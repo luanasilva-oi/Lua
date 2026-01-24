@@ -33,7 +33,18 @@
 <script>
 function acceptAge(){
   localStorage.setItem('age_ok','1');
-  window.location.href = "landing.html";
+  
+  // Verifica se há um destino preferido no localStorage
+  const preferredDestination = localStorage.getItem('redirect_target');
+  
+  if (preferredDestination === 'meta-safe') {
+    // Se o destino for a página segura, vai para lá e limpa a preferência
+    localStorage.removeItem('redirect_target'); // Limpa para não afetar futuros acessos
+    window.location.href = "meta-safe.html";
+  } else {
+    // Padrão: vai para a página de vendas
+    window.location.href = "landing.html";
+  }
 }
 </script>
 
