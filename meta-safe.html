@@ -5,6 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luana Silva | Conteúdo Exclusivo</title>
     <link rel="stylesheet" href="css/style.css">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luana Silva | Conteúdo Exclusivo</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- ESTILO PARA CORRIGIR O LAYOUT SEM BANNER -->
+    <style>
+        .profile-header {
+            margin-top: 0; /* Reseta a margem que puxava o cabeçalho para cima */
+            padding-top: 20px; /* Adiciona um espaçamento no topo */
+        }
+
+        .avatar {
+            margin-top: 0; /* Reseta a margem que empurrava a foto para cima */
+        }
+    </style>
+    
+    <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
+    <script>
+        if (localStorage.getItem('age_ok') !== '1') {
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
     
     <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
     <!-- Se um usuário tentar acessar esta página diretamente sem ter verificado a idade, ele será redirecionado -->
