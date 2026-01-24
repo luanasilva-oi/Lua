@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luana Silva | Conteúdo Exclusivo</title>
     <link rel="stylesheet" href="css/style.css">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luana Silva | Conteúdo Exclusivo</title>
-    <link rel="stylesheet" href="css/style.css">
     
     <!-- ESTILO PARA CORRIGIR O LAYOUT SEM BANNER -->
     <style>
@@ -24,15 +19,6 @@
     </style>
     
     <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
-    <script>
-        if (localStorage.getItem('age_ok') !== '1') {
-            window.location.href = "index.html";
-        }
-    </script>
-</head>
-    
-    <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
-    <!-- Se um usuário tentar acessar esta página diretamente sem ter verificado a idade, ele será redirecionado -->
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html";
@@ -86,10 +72,10 @@
     </main>
 
     <!-- JAVASCRIPT (SEM O PIXEL E SEM OS CONTADORES/NOTIFICAÇÕES) -->
-<script>
-    // Este script define uma preferência de redirecionamento para a próxima vez que o usuário passar pela verificação de idade.
-    // Isso garante que, se ele sair e voltar, seja levado para a página correta.
-    localStorage.setItem('redirect_target', 'meta-safe');
-</script>
+    <script>
+        // Este script define uma preferência de redirecionamento para a próxima vez que o usuário passar pela verificação de idade.
+        // Isso garante que, se ele sair e voltar, seja levado para a página correta.
+        localStorage.setItem('redirect_target', 'meta-safe');
+    </script>
 </body>
 </html>
