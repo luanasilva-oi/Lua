@@ -514,7 +514,7 @@ body.dark {
 
 /* Adiciona um espaço no topo da página para o conteúdo não ficar escondido atrás da barra */
 body {
-    padding-top: 40px; /* Ajuste este valor se a barra for muito alta ou baixa */
+     /* Ajuste este valor se a barra for muito alta ou baixa */
 }
 /* --- ESTILO DE NAVEGAÇÃO POR TECLADO (FOCUS) --- */
 .plan-btn:focus,
