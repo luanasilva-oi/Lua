@@ -18,8 +18,12 @@
         }
     </style>
     
-    <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
+    <!-- SCRIPTS DO CABEÇALHO (ORDEM CORRIGIDA) -->
     <script>
+        // 1. PRIMEIRO: Define o destino preferido para o redirecionamento
+        localStorage.setItem('redirect_target', 'meta-safe');
+
+        // 2. SEGUNDO: Verifica se a idade já foi confirmada
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html";
         }
@@ -71,11 +75,7 @@
 
     </main>
 
-    <!-- JAVASCRIPT (SEM O PIXEL E SEM OS CONTADORES/NOTIFICAÇÕES) -->
-    <script>
-        // Este script define uma preferência de redirecionamento para a próxima vez que o usuário passar pela verificação de idade.
-        // Isso garante que, se ele sair e voltar, seja levado para a página correta.
-        localStorage.setItem('redirect_target', 'meta-safe');
-    </script>
+    <!-- O script que estava aqui foi movido para o <head>, então esta parte está vazia agora -->
+
 </body>
 </html>
