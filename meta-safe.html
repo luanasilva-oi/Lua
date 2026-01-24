@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luana Silva | Conteúdo Exclusivo</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
+    <!-- Se um usuário tentar acessar esta página diretamente sem ter verificado a idade, ele será redirecionado -->
+    <script>
+        if (localStorage.getItem('age_ok') !== '1') {
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body class="dark">
+
+    <main class="profile-container">
+        
+        <!-- CABEÇALHO DO PERFIL -->
+        <header class="profile-header">
+            <div class="profile-banner"></div>
+            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            
+            <div class="profile-info">
+                <h1>
+                    Luana Silva 
+                    <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        <path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                    </svg>
+                </h1>
+                
+                <div class="user-status-line">
+                    <span class="username">@luanasilva.official</span>
+                    <span class="status-indicator">🟢 Disponível agora</span>
+                </div>
+            </div>
+
+            <!-- BIO SEGURA PARA A META -->
+            <p class="bio">
+                Conteúdo exclusivo e privado que não posto em redes sociais.<br>
+                Minha vida real, sem filtros e sem censura.<br>
+                Acesso liberado apenas para maiores de 18 anos.
+            </p>
+        </header>
+
+        <!-- SEÇÃO DE CHAMADA PARA AÇÃO (CTA) -->
+        <section id="cta-section">
+            <h2 class="section-title">🔒 Área Restrita</h2>
+            <p class="cta-description">
+                Você foi convidado a acessar meu conteúdo privado. Clique abaixo para continuar.
+            </p>
+            
+            <!-- BOTÃO PONTE PARA A PÁGINA REAL -->
+            <a href="landing.html" class="plan-btn complete" style="max-width: 300px; margin: 20px auto;">
+                👉 Entrar na Área Privada
+            </a>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT (SEM O PIXEL E SEM OS CONTADORES/NOTIFICAÇÕES) -->
+    <script>
+        // Este script está vazio de propósito para não carregar funcionalidades desnecessárias ou arriscadas nesta página.
+    </script>
+</body>
+</html>
