@@ -492,3 +492,13 @@ body.dark {
 .plan-btn:hover {
     transform: scale(1.05); /* Faz o botão crescer um pouco */
 }
+/* --- BARRA DE URGENCIA --- */
+.urgency-bar {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    animation: pulseGlow 2s infinite;
+}
