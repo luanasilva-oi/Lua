@@ -475,3 +475,20 @@ body.dark {
     margin-left: auto;
     margin-right: auto;
 }
+/* --- MELHORANDO OS EFEITOS DE INTERAÇÃO --- */
+.plan-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px); /* Faz o card "subir" */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra */
+}
+
+.plan-btn {
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.plan-btn:hover {
+    transform: scale(1.05); /* Faz o botão crescer um pouco */
+}
