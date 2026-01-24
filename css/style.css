@@ -82,7 +82,7 @@ body.dark {
 /* --- Banner & Header --- */
 .profile-banner {
     background: url("../assets/banner.jpg") center/cover no-repeat;
-    height: 280px; /* <-- AUMENTAMOS A ALTURA */
+    height: 290px; /* <-- AUMENTAMOS A ALTURA */
     border-radius: 0 0 24px 24px;
     position: relative;
     margin: 0px -20px 0 -20px;
