@@ -361,14 +361,14 @@ body.dark {
     }
 
     .profile-banner {
-        height: 130px;
+        height: 180px;
         margin-bottom: 60px;
     }
 
     .avatar {
         width: 100px;
         height: 100px;
-        margin-top: -60px;
+        margin-top: -80px;
     }
 
     .bio {
