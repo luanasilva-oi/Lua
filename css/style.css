@@ -495,19 +495,21 @@ body.dark {
 }
 /* --- BARRA DE URGENCIA --- */
 .urgency-bar {
-    position: fixed; /* <-- FIXA A BARRA NO TOPO DA TELA */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* <-- GARANTE QUE FIQUE POR CIMA DE TUDO */
+    position: sticky; /* <-- FAZ A BARRA "GRUDAR" NO TOPO AO ROLAR */
+    top: 0; /* <-- Define que ela vai grudar no topo da tela */
+    z-index: 100; /* <-- Fica por cima do conteúdo ao rolar */
 
     background: linear-gradient(90deg, #ff416c, #ff4b2b);
     color: white;
     text-align: center;
-    padding: 8px;
+    padding: 10px;
     font-size: 14px;
     font-weight: bold;
     animation: pulseGlow 2s infinite;
+
+    margin-bottom: 20px; /* Espaço entre a barra e os planos */
+    border-radius: 8px; /* Deixa a barra com as bordas arredondadas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
 /* Adiciona um espaço no topo da página para o conteúdo não ficar escondido atrás da barra */
