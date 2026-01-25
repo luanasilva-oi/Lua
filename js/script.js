@@ -7,52 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const purchaseToastEl = document.getElementById("purchase-toast");
 
     // --- FUNCIONALIDADES DINÂMICAS ---
-    function updateOnlineUsers() {
-        const minUsers = 8; const maxUsers = 14;
-        onlineCountEl.innerText = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
-    }
+    function updateOnlineUsers() { /* ... */ }
     setInterval(updateOnlineUsers, 6000); updateOnlineUsers();
-
-    function initializeDailyAccess() {
-        const today = new Date().toDateString();
-        if (localStorage.getItem("access_day") !== today) {
-            const minAccess = 25; const maxAccess = 55;
-            const randomAccess = Math.floor(Math.random() * (maxAccess - minAccess + 1)) + minAccess;
-            localStorage.setItem("access_day", today); localStorage.setItem("access_count", randomAccess);
-        }
-        accessCountEl.innerText = localStorage.getItem("access_count");
-    }
+    function initializeDailyAccess() { /* ... */ }
     initializeDailyAccess();
-
-    function showFakePurchase() {
-        const names = ["Henrique", "Gustavo", "Mateus", "Lucas", "Rafael", "Bruno", "Diego", "Felipe"];
-        const plans = [{ name: "Plano Essencial", type: "basic" }, { name: "Plano Completo", type: "complete" }];
-        const randomName = names[Math.floor(Math.random() * names.length)];
-        const randomPlan = plans[Math.floor(Math.random() * plans.length)];
-        purchaseToastEl.className = `show ${randomPlan.type}`;
-        purchaseToastEl.innerHTML = `<strong>${randomName}</strong> comprou<br><span>${randomPlan.name}</span>`;
-        setTimeout(() => { purchaseToastEl.className = ""; }, 4000);
-    }
-    function startFakePurchaseNotifications() {
-        function scheduleNextNotification() {
-            setTimeout(() => { showFakePurchase(); scheduleNextNotification(); }, Math.random() * 6000 + 7000);
-        }
-        scheduleNextNotification();
-    }
+    function showFakePurchase() { /* ... */ }
     startFakePurchaseNotifications();
-
-    function initializePersonalCounter() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('stats') === 'liberado123') {
-            const counterEl = document.getElementById('view-counter');
-            const countEl = document.getElementById('admin-view-count');
-            counterEl.style.display = 'block';
-            let currentCount = parseInt(localStorage.getItem('personal_page_views') || '0');
-            currentCount++;
-            localStorage.setItem('personal_page_views', currentCount);
-            countEl.innerText = currentCount;
-        }
-    }
     initializePersonalCounter();
 
     // --- CLICK-TO-LOAD PARA VÍDEOS ---
@@ -67,32 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- LÓGICA DO MODAL (DEPURGADA E FUNCIONAL) ---
+    // --- LÓGICA DO MODAL (FUNCIONAL EM TODAS AS PÁGINAS) ---
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
     const mainContent = document.getElementById('main-content');
 
     if (consentModal && consentYesBtn && mainContent) {
-        // Adiciona um log para depuração
-        console.log("Elementos do modal encontrados. Adicionando listener...");
-
-        // Fecha o modal e revela o conteúdo
         consentYesBtn.addEventListener('click', () => {
-            console.log("Botão 'Concordo e Prosseguir' clicado.");
             consentModal.style.display = 'none';
             mainContent.style.filter = 'none';
             mainContent.style.pointerEvents = 'auto';
         });
-
-        // Fecha o modal se o usuário clicar no fundo
         consentModal.addEventListener('click', (event) => {
             if (event.target === consentModal) {
-                console.log("Fundo do modal clicado.");
                 consentModal.style.display = 'none';
                 mainContent.style.filter = 'none';
                 mainContent.style.pointerEvents = 'auto';
             }
         });
     }
-
 });
