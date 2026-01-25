@@ -81,21 +81,17 @@ body.dark {
 }
 
 /* --- Banner & Header --- */
-.profile-banner {
-    /* A propriedade background foi removida para usar a tag <video> */
-    height: 300px;
-    border-radius: 0 0 24px 24px;
-    position: relative;
-    margin: 0px -20px 0 -20px;
-    width: calc(100% + 40px); /* Garante que o vídeo preencha o espaço */
-    object-fit: cover;
-    display: block;
+.profile-header {
+    text-align: center;
+    position: relative; /* Contexto para o avatar */
 }
 
-.profile-header {
-    position: relative;
-    margin-top: -70px;
-    text-align: center;
+.profile-banner {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px 16px 0 0; /* Borda arredondada só no topo */
 }
 
 .avatar {
@@ -103,8 +99,8 @@ body.dark {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #0b0b0b;
-    margin-top: -100px;
+    border: 4px solid #0b0b0b; /* Cor da borda igual ao fundo */
+    margin-top: -60px; /* Puxa o avatar para cima, sobrepondo o banner */
     background: #000;
     position: relative;
     z-index: 10;
