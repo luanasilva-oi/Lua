@@ -6,7 +6,6 @@
     <title>Luana Silva | Perfil Privado</title>
     <link rel="stylesheet" href="css/style.css">
     <script>
-        // Redireciona para a verificação de idade se o usuário não tiver confirmado
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html?go=bio";
         }
@@ -44,25 +43,21 @@
             <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
         </section>
 
-<!-- SEÇÃO DE PRÉVIAS DE CONTEÚDO (COM VÍDEO BORRADO) -->
+<!-- SEÇÃO DE PRÉVIAS DE CONTEÚDO (SEM TEXTO) -->
 <section id="content-previews">
     <h2 class="section-title">Conteúdo Bloqueado 🔒</h2>
     <div class="preview-grid">
         <div class="preview-card locked">
             <video class="blurred-preview-video" src="assets/preview1.mp4" autoplay loop muted playsinline preload="auto"></video>
-            <span>👉 Clique para revelar 👈</span>
         </div>
         <div class="preview-card locked">
             <video class="blurred-preview-video" src="assets/preview2.mp4" autoplay loop muted playsinline preload="auto"></video>
-            <span>👉 Clique para revelar 👈</span>
         </div>
         <div class="preview-card locked">
             <video class="blurred-preview-video" src="assets/preview3.mp4" autoplay loop muted playsinline preload="auto"></video>
-            <span>👉 Clique para revelar 👈</span>
         </div>
         <div class="preview-card locked">
             <video class="blurred-preview-video" src="assets/preview4.mp4" autoplay loop muted playsinline preload="auto"></video>
-            <span>👉 Clique para revelar 👈</span>
         </div>
     </div>
 </section>
