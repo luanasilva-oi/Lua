@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
 <script>
-    // Se não houver parâmetro, assume que é o link direto (bio.html)
     function getQueryParam(param) {
         const params = new URLSearchParams(window.location.search);
         return params.get(param);
@@ -17,8 +16,9 @@
 
 <div class="age-container">
     <div class="age-box">
-        <h1>🔞 Conteúdo Adulto</h1>
-        <p class="age-text">Este site contém conteúdo exclusivo destinado apenas a maiores de 18 anos. Ao continuar, você confirma que tem idade legal para acessar este material.</p>
+        <!-- TEXTO ALTERADO AQUI -->
+        <h1>Aviso</h1>
+        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
         <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
         <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
     </div>
@@ -28,14 +28,11 @@
 function acceptAge(){
     localStorage.setItem('age_ok','1');
     
-    // Pega o parâmetro 'go' para decidir o destino
     const destination = getQueryParam('go');
 
     if (destination === 'meta') {
-        // Vindo do Instagram/Anúncios: vai para a página de acesso segura (que agora é a acesso.html)
-        window.location.href = "acesso.html"; // <--- MUDANÇA AQUI!
+        window.location.href = "meta-safe.html";
     } else {
-        // Padrão: vai para a página explícita
         window.location.href = "bio.html";
     }
 }
