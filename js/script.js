@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const consentYesBtn = document.getElementById('consent-yes');
     const mainContent = document.getElementById('main-content');
 
-    if (consentModal && mainContent && isFromMeta) {
+    if (consentModal && consentYesBtn && mainContent && isFromMeta) {
         mainContent.style.filter = 'blur(10px)'; mainContent.style.pointerEvents = 'none';
         consentYesBtn.addEventListener('click', () => {
             consentModal.style.display = 'none'; mainContent.style.filter = 'none'; mainContent.style.pointerEvents = 'auto';
