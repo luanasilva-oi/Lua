@@ -109,6 +109,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 45000);
         }
         // DENTRO DO document.addEventListener('DOMContentLoaded', () => { ... });
+        // LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
+function startPromoCountdown() {
+    const countdownEl = document.getElementById('countdown-timer');
+    if (!countdownEl) return;
+    let timeInSeconds = 2 * 60 * 60;
+    const interval = setInterval(() => {
+        const hours = Math.floor(timeInSeconds / 3600);
+        const minutes = Math.floor((timeInSeconds % 3600) / 60);
+        const seconds = timeInSeconds % 60;
+        const displayTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        countdownEl.textContent = displayTime;
+        if (timeInSeconds <= 0) {
+            clearInterval(interval);
+            countdownEl.textContent = "OFERTA ENCERRADA";
+            countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
+        }
+        timeInSeconds--;
+    }, 1000);
+}
+startPromoCountdown();
 
 // ==========================================================
 // 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
