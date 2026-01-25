@@ -5,23 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Privado</title>
     <link rel="stylesheet" href="css/style.css">
-    <script>if (localStorage.getItem('age_ok') !== '1') { window.location.href = "index.html"; }</script>
+    <script>
+        if (localStorage.getItem('age_ok') !== '1') {
+            window.location.href = "index.html";
+        }
+    </script>
 </head>
 <body class="dark">
-    <main class="profile-container">
-        <header class="profile-header">
-            <video class="profile-banner" autoplay loop muted playsinline><source src="assets/banner.mp4" type="video/mp4"></video>
-            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
-            <div class="profile-info">
-                <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
-                <div class="user-status-line"><span class="username">@luanasilva.official</span><span class="status-indicator">🟢 Disponível agora</span></div>
+
+    <!-- MODAL DE CONSENTIMENTO -->
+    <div id="consent-modal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmação Final</h2>
+            <p>O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
+            <div class="modal-buttons">
+                <button id="consent-yes" class="plan-btn complete">Concordo e Prosseguir</button>
+                <a href="landing.html" class="plan-btn basic">Voltar</a>
             </div>
-            <p class="bio">Bem-vindo ao meu mundo. Aqui não há filtros, apenas eu, 100% real e pronta para compartilhar meus momentos mais íntimos.<br>Este é o meu espaço para explorar o prazer sem julgamentos. Se prepare para uma experiência autêntica.<br>Escolha seu plano e entre na minha vida particular.</p>
+        </div>
+    </div>
+
+    <main class="profile-container" id="main-content">
+        
+        <!-- CABEÇALHO DO PERFIL -->
+        <header class="profile-header">
+            <video class="profile-banner" autoplay loop muted playsinline>
+                <source src="assets/banner.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            
+            <div class="profile-info">
+                <h1>
+                    Luana Silva 
+                    <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        <path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                    </svg>
+                </h1>
+                
+                <div class="user-status-line">
+                    <span class="username">@luanasilva.official</span>
+                    <span class="status-indicator">🟢 Disponível agora</span>
+                </div>
+            </div>
+
+            <!-- BIO EXPLÍCITA -->
+            <p class="bio">
+                Bem-vindo ao meu mundo. Aqui não há filtros, apenas eu, 100% real e pronta para compartilhar meus momentos mais íntimos.<br>
+                Este é o meu espaço para explorar o prazer sem julgamentos. Se prepare para uma experiência autêntica.<br>
+                Escolha seu plano e entre na minha vida particular.
+            </p>
         </header>
+
+        <!-- SEÇÃO DE CONTADORES E STATUS -->
         <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">37</strong> acessos hoje</div>
-            <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
+            <div id="daily-access">
+                🔥 <strong id="access-count">37</strong> acessos hoje
+            </div>
+            <div id="online-users">
+                🟢 <strong id="online-count">12</strong> pessoas online agora
+            </div>
         </section>
+
+        <!-- SEÇÃO DE PRÉVIAS COM CLICK-TO-LOAD -->
         <section id="content-previews">
             <h2 class="section-title">Conteúdo Bloqueado 🔒</h2>
             <div class="preview-grid">
@@ -31,26 +77,42 @@
                 <div class="preview-card locked" data-src="assets/preview4.mp4"><img src="assets/preview4-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>🔥 Clique para reproduzir</span></div>
             </div>
         </section>
+
+        <!-- SEÇÃO DE PLANOS E PREÇOS -->
         <section id="pricing-plans">
             <h2 class="section-title">Escolha seu acesso</h2>
             <div class="plans-grid">
                 <div class="plan-card basic">
                     <h3>Acesso Essencial</h3>
-                    <ul class="plan-desc"><li>Uma curadoria com meus 100 melhores momentos de autoexploração e sensualidade.</li><li>Vídeos íntimos com brinquedos.</li><li>Momentos puros de prazer e descoberta.</li><li>Uma introdução ao meu universo mais pessoal.</li></ul>
+                    <ul class="plan-desc">
+                        <li>Uma curadoria com meus 100 melhores momentos de autoexploração e sensualidade.</li>
+                        <li>Vídeos íntimos com brinquedos.</li>
+                        <li>Momentos puros de prazer e descoberta.</li>
+                        <li>Uma introdução ao meu universo mais pessoal.</li>
+                    </ul>
                     <div class="price">R$ 19,99</div>
                     <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
                 </div>
+                
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
                     <h3>Acesso Completo ⭐</h3>
-                    <ul class="plan-desc"><li>Acesso total à minha biblioteca com mais de 600 vídeos. Sem censura, sem limites.</li><li>Cenas explícitas de masturbação e êxtase.</li><li>Close-ups íntimos e sons de prazer autênticos.</li><li>Posando e me exibindo completamente nua para você.</li><li>Galeria com mais de 500 imagens privadas e exclusivas.</li></ul>
+                    <ul class="plan-desc">
+                        <li>Acesso total à minha biblioteca com mais de 600 vídeos. Sem censura, sem limites.</li>
+                        <li>Cenas explícitas de masturbação e êxtase.</li>
+                        <li>Close-ups íntimos e sons de prazer autênticos.</li>
+                        <li>Posando e me exibindo completamente nua para você.</li>
+                        <li>Galeria com mais de 500 imagens privadas e exclusivas.</li>
+                    </ul>
                     <div class="price">R$ 29,90</div>
                     <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">Acessar Agora</a>
                 </div>
             </div>
             <p class="meta-note">A maioria dos usuários escolhe o acesso completo.</p>
         </section>
+
     </main>
+
     <div id="purchase-toast"></div>
     <script src="js/script.js" defer></script>
 </body>
