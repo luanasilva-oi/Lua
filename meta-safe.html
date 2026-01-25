@@ -17,8 +17,12 @@
         }
     </style>
     
-    <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
+    <!-- SCRIPT ÚNICO E CORRIGIDO -->
     <script>
+        // 1. PRIMEIRO: Define o destino preferido ANTES de qualquer coisa
+        localStorage.setItem('redirect_target', 'meta-safe');
+
+        // 2. SEGUNDO: Verifica se a idade já foi confirmada
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html";
         }
