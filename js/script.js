@@ -67,24 +67,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- LÓGICA DO MODAL (APENAS PARA O TRÁFEGO DA META) ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const isFromMeta = urlParams.get('from') === 'meta';
-
+    // --- LÓGICA DO MODAL (CORRIGIDA PARA FUNCIONAR EM AMBOS OS LINKS) ---
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
     const mainContent = document.getElementById('main-content');
 
-    if (consentModal && consentYesBtn && mainContent && isFromMeta) {
-        mainContent.style.filter = 'blur(10px)'; mainContent.style.pointerEvents = 'none';
+    // Verifica se os elementos do modal existem na página antes de continuar
+    if (consentModal && consentYesBtn && mainContent) {
+
+        // Adiciona o evento de clique ao botão
         consentYesBtn.addEventListener('click', () => {
-            consentModal.style.display = 'none'; mainContent.style.filter = 'none'; mainContent.style.pointerEvents = 'auto';
+            consentModal.style.display = 'none';
+            mainContent.style.filter = 'none';
+            mainContent.style.pointerEvents = 'auto';
         });
+
+        // Fecha o modal se o usuário clicar no fundo
         consentModal.addEventListener('click', (event) => {
             if (event.target === consentModal) {
-                consentModal.style.display = 'none'; mainContent.style.filter = 'none'; mainContent.style.pointerEvents = 'auto';
+                consentModal.style.display = 'none';
+                mainContent.style.filter = 'none';
+                mainContent.style.pointerEvents = 'auto';
             }
         });
+
+        // LÓGICA PARA MOSTRAR O MODAL (SE NECESSÁRIO)
+        const urlParams = new URLSearchParams(window.location.search);
+        const isFromMeta = urlParams.get('from') === 'meta';
+
+        // Mostra o modal se vier da meta OU se for a página bio.html
+        if (isFromMeta || window.location.pathname.endsWith('/bio.html')) {
+            mainContent.style.filter = 'blur(10px)';
+            mainContent.style.pointerEvents = 'none';
+        }
     }
 
 });
