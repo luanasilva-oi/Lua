@@ -15,10 +15,10 @@
         }
     </style>
     <script>
-        // 1. PRIMEIRO: Define o destino preferido ANTES de qualquer coisa
+        // Define o destino preferido ANTES de qualquer coisa
         localStorage.setItem('redirect_target', 'meta-safe');
 
-        // 2. SEGUNDO: Verifica se a idade já foi confirmada
+        // Verifica se a idade já foi confirmada
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html?go=meta";
         }
@@ -38,8 +38,27 @@
             <h2 class="section-title">Publicações Exclusivas</h2>
             <p class="cta-description">Acesse meus projetos e publicações exclusivas, criadas com carinho para quem apoia meu trabalho online.</p>
             <a href="landing.html?from=meta" class="plan-btn complete" style="max-width: 300px; margin: 20px auto;">
-    Explorar Projetos
-</a>
+                Explorar Projetos
+            </a>
+        </section>
+
+        <!-- SEÇÃO DE PRÉVIAS CLICÁVEIS -->
+        <section id="content-previews">
+            <h2 class="section-title">Meus Projetos</h2>
+            <div class="preview-grid">
+                <a href="https://pay.kiwify.com.br/OCvaqhO" target="_blank" class="preview-card">
+                    <img src="assets/preview-safe-1.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </a>
+                <a href="https://pay.kiwify.com.br/OCvaqhO" target="_blank" class="preview-card">
+                    <img src="assets/preview-safe-2.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </a>
+                <a href="https://pay.kiwify.com.br/OCvaqhO" target="_blank" class="preview-card">
+                    <img src="assets/preview-safe-3.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </a>
+                <a href="https://pay.kiwify.com.br/OCvaqhO" target="_blank" class="preview-card">
+                    <img src="assets/preview-safe-4.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </a>
+            </div>
         </section>
     </main>
 </body>
