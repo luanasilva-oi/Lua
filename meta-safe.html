@@ -9,21 +9,17 @@
     <!-- ESTILO PARA CORRIGIR O LAYOUT SEM BANNER -->
     <style>
         .profile-header {
-            margin-top: 0; /* Reseta a margem que puxava o cabeçalho para cima */
-            padding-top: 20px; /* Adiciona um espaçamento no topo */
+            margin-top: 0;
+            padding-top: 20px;
         }
-
         .avatar {
-            margin-top: 0; /* Reseta a margem que empurrava a foto para cima */
+            margin-top: 0;
         }
     </style>
     
     <!-- SCRIPTS DO CABEÇALHO (ORDEM CORRIGIDA) -->
     <script>
-        // 1. PRIMEIRO: Define o destino preferido para o redirecionamento
         localStorage.setItem('redirect_target', 'meta-safe');
-
-        // 2. SEGUNDO: Verifica se a idade já foi confirmada
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html";
         }
@@ -35,7 +31,7 @@
         
         <!-- CABEÇALHO DO PERFIL -->
         <header class="profile-header">
-            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            <img src="./assets/avatar-safe.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
             
             <div class="profile-info">
                 <h1>
@@ -52,30 +48,27 @@
                 </div>
             </div>
 
-            <!-- BIO SEGURA PARA A META -->
+            <!-- BIO ULTRA-SEGURA -->
             <p class="bio">
-                Conteúdo exclusivo e privado que não posto em redes sociais.<br>
-                Minha vida real, sem filtros e sem timidez, em um espaço totalmente privado.<br>
-                Acesso liberado apenas para maiores de 18 anos.
+                Criei este espaço para compartilhar um pouco mais do meu dia a dia.<br>
+                Acompanhe minha rotina e meus hobbies.<br>
+                Fique à vontade para explorar.
             </p>
         </header>
 
         <!-- SEÇÃO DE CHAMADA PARA AÇÃO (CTA) -->
         <section id="cta-section">
-            <h2 class="section-title">🔒 Área Restrita</h2>
+            <h2 class="section-title">Conteúdo Exclusivo</h2>
             <p class="cta-description">
-                Você foi convidado a acessar meu conteúdo privado. Clique abaixo para continuar.
+                Confira meus projetos e publicações exclusivas.
             </p>
             
             <!-- BOTÃO PONTE PARA A PÁGINA REAL -->
             <a href="landing.html" class="plan-btn complete" style="max-width: 300px; margin: 20px auto;">
-                👉 Entrar na Área Privada
+                Ver Mais
             </a>
         </section>
 
     </main>
-
-    <!-- O script que estava aqui foi movido para o <head>, então esta parte está vazia agora -->
-
 </body>
 </html>
