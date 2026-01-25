@@ -1,5 +1,5 @@
 /* =================================================== */
-/* GLOBAL STYLES */
+/* GLOBAL STYLES & RESETS */
 /* =================================================== */
 body.dark {
     background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
@@ -52,7 +52,7 @@ body.dark {
     padding: 16px;
     font-size: 16px;
     font-weight: bold;
-    background: #ffb400; /* AMARELO */
+    background: #ffb400;
     color: #000;
     border: none;
     border-radius: 10px;
@@ -72,7 +72,7 @@ body.dark {
 }
 
 /* =================================================== */
-/* PROFILE PAGE (Página de Perfil) */
+/* PROFILE PAGE COMPONENTS */
 /* =================================================== */
 .profile-container {
     background: #0b0b0b;
@@ -82,11 +82,14 @@ body.dark {
 
 /* --- Banner & Header --- */
 .profile-banner {
-    background: url("../assets/banner.jpg") center/cover no-repeat;
-    height: 300px; /* <-- AUMENTAMOS A ALTURA */
+    /* A propriedade background foi removida para usar a tag <video> */
+    height: 300px;
     border-radius: 0 0 24px 24px;
     position: relative;
     margin: 0px -20px 0 -20px;
+    width: calc(100% + 40px); /* Garante que o vídeo preencha o espaço */
+    object-fit: cover;
+    display: block;
 }
 
 .profile-header {
@@ -101,28 +104,119 @@ body.dark {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #0b0b0b;
-    margin-top: -100px; /* <-- AUMENTAMOS O VALOR NEGATIVO PARA DESCER A FOTO */
+    margin-top: -100px;
     background: #000;
     position: relative;
     z-index: 10;
 }
 
-.status {
-    display: inline-block;
+/* --- Profile Info (Social Media Style) --- */
+.profile-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.profile-info h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 24px;
+    margin: 0;
+}
+
+.verified-badge {
+    width: 20px;
+    height: 20px;
+    color: #1DA1F2;
+    background-color: #1DA1F2;
+    border-radius: 50%;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.user-status-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
     margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.username {
+    font-size: 16px;
+    color: #aaa;
+}
+
+.status-indicator {
+    font-size: 14px;
     color: #4caf50;
     font-weight: bold;
 }
 
 .bio {
-    margin-top: 10px;
+    margin-top: 15px;
     color: #ccc;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
 }
 
-/* --- Previews --- */
+/* --- Social Links --- */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-links a {
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #fff;
+}
+
+.social-links svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+/* --- Status Counters --- */
+#status-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+#daily-access {
+    text-align: center;
+    font-size: 14px;
+    color: #ff5252;
+}
+
+#online-users {
+    text-align: center;
+    font-size: 13px;
+    color: #4caf50;
+}
+
+/* --- Previews (Click-to-Load) --- */
 .section-title {
     margin-top: 40px;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .preview-grid {
@@ -136,19 +230,22 @@ body.dark {
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .preview-card:hover {
-    transform: scale(1.02);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .preview-card video,
-.preview-card img {
+.preview-card img.preview-thumb {
     width: 100%;
     height: auto;
     display: block;
     filter: blur(6px) brightness(0.7);
+    aspect-ratio: 1 / 1; /* Mantém a proporção quadrada */
+    object-fit: cover;
 }
 
 .preview-card span {
@@ -165,7 +262,7 @@ body.dark {
     pointer-events: none;
 }
 
-/* --- Planos & Preços --- */
+/* --- Pricing Plans --- */
 .plans-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -183,15 +280,17 @@ body.dark {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
 .plan-card h3 {
     margin-bottom: 8px;
 }
 
-/* =================================================== */
-/* ESTILO DA LISTA DE DESCRIÇÃO DOS PLANOS (NOVO) */
-/* =================================================== */
 .plan-desc {
-    list-style: none; /* Remove as bolinhas da lista */
+    list-style: none;
     padding: 0;
     margin: 15px 0;
     text-align: left;
@@ -206,10 +305,9 @@ body.dark {
     position: relative;
 }
 
-/* Adiciona um marcador customizado (opcional) */
 .plan-desc li::before {
     content: '✓';
-    color: #ff9800; /* Cor do marcador (laranja) */
+    color: #ff9800;
     position: absolute;
     left: 0;
     top: 0;
@@ -230,16 +328,17 @@ body.dark {
     text-decoration: none;
     display: block;
     font-weight: bold;
-    transition: background 0.3s ease;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .plan-btn:hover {
+    transform: scale(1.05);
     filter: brightness(1.1);
 }
 
 .plan-card.featured {
     border: 2px solid #ffb400;
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 .badge {
@@ -262,45 +361,50 @@ body.dark {
     text-align: center;
 }
 
-/* --- Cores Específicas dos Planos --- */
-.plan-btn.basic, .plan-btn.vip {
-    background: #ff9800; /* LARANJA */
-    color: #000;
-}
-.plan-card.basic {
-    border: 1px solid #ff9800;
-}
+/* --- Plan Specific Colors --- */
+.plan-btn.basic { background: #ff9800; color: #000; }
+.plan-card.basic { border: 1px solid #ff9800; }
 
-.plan-btn.complete {
-    background: #e53935; /* VERMELHO */
-    color: #fff;
-}
-.plan-card.complete {
-    border: 2px solid #e53935;
-    transform: scale(1.04);
-}
+.plan-btn.complete { background: #e53935; color: #fff; }
+.plan-card.complete { border: 2px solid #e53935; }
 
-/* --- Contadores e Status --- */
-#daily-access {
-    margin: 14px auto;
+/* =================================================== */
+/* SPECIALIZED PAGE STYLES */
+/* =================================================== */
+/* --- Consentimento Page --- */
+#consent-box {
     text-align: center;
+    padding: 40px 20px;
+}
+#consent-box h2 { margin-bottom: 20px; }
+#consent-box p { color: #ccc; margin-bottom: 30px; line-height: 1.6; }
+.consent-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* --- Urgency Bar --- */
+.urgency-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    color: white;
+    text-align: center;
+    padding: 10px;
     font-size: 14px;
-    color: #ff5252;
-    background: rgba(255, 82, 82, 0.08);
-    padding: 8px 14px;
-    border-radius: 20px;
-    width: fit-content;
-}
-
-#online-users {
-    text-align: center;
-    font-size: 13px;
-    color: #4caf50;
-    margin-bottom: 10px;
+    font-weight: bold;
+    animation: pulseGlow 2s infinite;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* =================================================== */
-/* NOTIFICATIONS (Notificações de Compra) */
+/* NOTIFICATIONS & ANIMATIONS */
 /* =================================================== */
 #purchase-toast {
     position: fixed;
@@ -318,266 +422,39 @@ body.dark {
     transition: all 0.4s ease;
     z-index: 9999;
 }
+#purchase-toast.show { opacity: 1; transform: translateY(0); }
+#purchase-toast.basic { border-left: 5px solid #ff9800; }
+#purchase-toast.complete { border-left: 5px solid #e53935; }
+#purchase-toast span { font-weight: bold; }
 
-#purchase-toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-#purchase-toast.basic {
-    border-left: 5px solid #ff9800; /* LARANJA */
-}
-
-#purchase-toast.complete {
-    border-left: 5px solid #e53935; /* VERMELHO */
-}
-
-#purchase-toast span {
-    font-weight: bold;
-}
-
-/* =================================================== */
-/* ANIMATIONS */
-/* =================================================== */
 @keyframes pulseGlow {
     0% { box-shadow: 0 0 0 rgba(229, 57, 53, 0.4); }
     50% { box-shadow: 0 0 18px rgba(229, 57, 53, 0.7); }
     100% { box-shadow: 0 0 0 rgba(229, 57, 53, 0.4); }
 }
+.plan-card.complete { animation: pulseGlow 2.8s infinite; }
 
-.plan-card.complete {
-    animation: pulseGlow 2.8s infinite;
-}
-
-/* =================================================== */
-/* RESPONSIVE DESIGN (Dispositivos Móveis) */
-/* =================================================== */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .profile-container {
-        padding: 15px;
-        border-radius: 14px;
-    }
-
-    .profile-banner {
-        height: 180px;
-        margin-bottom: 60px;
-    }
-
-    .avatar {
-        width: 100px;
-        height: 100px;
-        margin-top: -80px;
-    }
-
-    .bio {
-        font-size: 14px;
-        line-height: 1.4;
-    }
-
-    .preview-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .preview-card span {
-        font-size: 12px;
-    }
-
-    .plans-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .plan-card {
-        padding: 20px;
-    }
-
-    .price {
-        font-size: 26px;
-    }
-/* --- AJUSTES FINOS DE ESPAÇAMENTO --- */
-.bio {
-    margin-bottom: 25px; /* Dá mais espaço após a bio */
-}
-
-#pricing-plans {
-    margin-top: 50px; /* Dá mais espaço antes dos planos */
-}
-    .plan-btn {
-        font-size: 16px;
-        padding: 16px;
-    }
-
-    #purchase-toast {
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        font-size: 13px;
-    }
-}
-/* =================================================== */
-/* NOVO ESTILO DO CABEÇALHO (ESTILO REDE SOCIAL) */
-/* =================================================== */
-
-.profile-info {
-    text-align: center;
-    margin-top: 10px;
-}
-
-/* Alinha o nome e o selo de verificado na mesma linha */
-.profile-info h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; /* Espaço entre o nome e o selo */
-    font-size: 24px;
-    margin: 0;
-}
-
-/* Estilo do selo de verificado */
-.verified-badge {
-    width: 20px;
-    height: 20px;
-    color: #1DA1F2; /* Azão do Twitter */
-    background-color: #1DA1F2;
-    border-radius: 50%;
-    padding: 2px;
-    box-sizing: border-box;
-}
-
-/* Linha do usuário e status */
-.user-status-line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px; /* Espaço entre o @ e o status */
-    margin-top: 5px;
-    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
-}
-
-.username {
-    font-size: 16px;
-    color: #aaa;
-}
-
-.status-indicator {
-    font-size: 14px;
-    color: #4caf50;
-    font-weight: bold;
-}
-
-/* Ajuste fino para a bio */
-.bio {
-    margin-top: 15px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-/* --- MELHORANDO OS EFEITOS DE INTERAÇÃO --- */
-.plan-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.plan-card:hover {
-    transform: translateY(-5px); /* Faz o card "subir" */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra */
-}
-
-.plan-btn {
-    transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-.plan-btn:hover {
-    transform: scale(1.05); /* Faz o botão crescer um pouco */
-}
-/* --- BARRA DE URGENCIA --- */
-.urgency-bar {
-    position: sticky; /* <-- FAZ A BARRA "GRUDAR" NO TOPO AO ROLAR */
-    top: 0; /* <-- Define que ela vai grudar no topo da tela */
-    z-index: 100; /* <-- Fica por cima do conteúdo ao rolar */
-
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    animation: pulseGlow 2s infinite;
-
-    margin-bottom: 20px; /* Espaço entre a barra e os planos */
-    border-radius: 8px; /* Deixa a barra com as bordas arredondadas */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-}
-
-/* Adiciona um espaço no topo da página para o conteúdo não ficar escondido atrás da barra */
-body {
-     /* Ajuste este valor se a barra for muito alta ou baixa */
-}
-/* --- ESTILO DE NAVEGAÇÃO POR TECLADO (FOCUS) --- */
+/* --- Focus State for Accessibility --- */
 .plan-btn:focus,
 .preview-card:focus {
-    outline: 2px solid #ff9800; /* Cor laranja do seu plano básico */
+    outline: 2px solid #ff9800;
     outline-offset: 2px;
 }
-/* =================================================== */
-/* REDES SOCIAIS NO PERFIL */
-/* =================================================== */
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Espaço entre os ícones */
-    margin-top: 10px;
-}
-
-.social-links a {
-    display: block;
-    width: 24px; /* Tamanho dos ícones */
-    height: 24px;
-    color: #aaa; /* Cor cinza padrão */
-    transition: color 0.3s ease; /* Animação suave ao passar o mouse */
-}
-
-.social-links a:hover {
-    color: #fff; /* Cor branca ao passar o mouse */
-}
-
-/* Faz o ícone SVG preencher com a cor definida no 'a' */
-.social-links svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-}
-/* =================================================== */
-/* PÁGINA DE CONSENTIMENTO */
-/* =================================================== */
-#consent-box {
-    text-align: center;
-    padding: 40px 20px;
-}
-#consent-box h2 {
-    margin-bottom: 20px;
-}
-#consent-box p {
-    color: #ccc;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-.consent-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
 
 /* =================================================== */
-/* ESTILO PARA PRÉVIAS COM CLICK-TO-LOAD */
+/* RESPONSIVE DESIGN (Mobile First) */
 /* =================================================== */
-.preview-thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(6px) brightness(0.7);
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    .profile-container { padding: 15px; border-radius: 14px; }
+    .profile-banner { height: 180px; }
+    .avatar { width: 100px; height: 100px; margin-top: -80px; }
+    .bio { font-size: 14px; line-height: 1.4; }
+    .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .preview-card span { font-size: 12px; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card { padding: 20px; }
+    .price { font-size: 26px; }
+    .plan-btn { font-size: 16px; padding: 16px; }
+    #purchase-toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
 }
