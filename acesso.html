@@ -5,63 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luana Silva | Perfil Privado</title>
     <link rel="stylesheet" href="css/style.css">
+    
     <script>
+        // Verifica se a idade foi confirmada
         if (localStorage.getItem('age_ok') !== '1') {
-            window.location.href = "index.html?go=bio";
+            window.location.href = "index.html";
         }
+        
+        // Detecta a versão solicitada
+        const urlParams = new URLSearchParams(window.location.search);
+        const version = urlParams.get('version') || 'explicit'; // Padrão: explícito
+        
+        // Define variáveis globais baseadas na versão
+        window.pageVersion = version;
     </script>
 </head>
 <body class="dark">
-
-    <!-- MODAL DE CONSENTIMENTO -->
-    <div id="consent-modal" class="modal">
-        <div class="modal-content">
-            <h2>Confirmação Final</h2>
-            <p>O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
-            <div class="modal-buttons">
-                <button id="consent-yes" class="plan-btn complete">Concordo e Prosseguir</button>
-                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Voltar</a>
-            </div>
-        </div>
-    </div>
-
-    <main class="profile-container" id="main-content">
-        
-        <!-- CABEÇALHO DO PERFIL -->
+    <!-- MODAL DE CONSENTIMENTO (igual para ambas versões) -->
+    
+    <main class="profile-container">
+        <!-- CABEÇALHO (condicional) -->
         <header class="profile-header">
-            <video class="profile-banner" autoplay loop muted playsinline><source src="assets/banner.mp4" type="video/mp4"></video>
-            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            <!-- Banner (condicional) -->
+            <video class="profile-banner" autoplay loop muted playsinline>
+                <source src="assets/banner-safe.mp4" data-version="safe">
+                <source src="assets/banner-explicit.mp4" data-version="explicit">
+            </video>
+            
+            <!-- Avatar (condicional) -->
+            <img src="assets/avatar-safe.jpg" 
+                 data-safe-src="assets/avatar-safe.jpg"
+                 data-explicit-src="assets/avatar-explicit.jpg"
+                 class="avatar" 
+                 alt="Foto de perfil de Luana Silva">
+            
             <div class="profile-info">
-                <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.01-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
-                <div class="user-status-line"><span class="username">@luanasilva.official</span><span class="status-indicator">🟢 Disponível agora</span></div>
+                <h1>Luana Silva <svg class="verified-badge">...</svg></h1>
+                <div class="user-status-line">
+                    <span class="username">@luanasilva.official</span>
+                    <span class="status-indicator">🟢 Disponível agora</span>
+                </div>
             </div>
-            <p class="bio">Bem-vindo ao meu mundo. Aqui não há filtros, apenas eu, 100% real e pronta para compartilhar meus momentos mais íntimos.<br>Este é o meu espaço para explorar o prazer sem julgamentos. Se prepare para uma experiência autêntica.<br>Escolha seu plano e entre na minha vida particular.</p>
+            
+            <!-- BIOGRAFIA (texto condicional via JS) -->
+            <p class="bio" id="bio-text">
+                <!-- Será preenchido pelo JavaScript -->
+            </p>
         </header>
-        <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">37</strong> acessos hoje</div>
-            <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
-        </section>
+        
+        <!-- SEÇÃO DE STATUS (igual para ambas) -->
+        
+        <!-- CONTEÚDO BLOQUEADO (thumbs condicionais) -->
         <section id="content-previews">
             <h2 class="section-title">Conteúdo Bloqueado 🔒</h2>
             <div class="preview-grid">
-                <div class="preview-card locked" data-src="assets/preview1.mp4"><img src="assets/preview1-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
-                <div class="preview-card locked" data-src="assets/preview2.mp4"><img src="assets/preview2-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
-                <div class="preview-card locked" data-src="assets/preview3.mp4"><img src="assets/preview3-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
-                <div class="preview-card locked" data-src="assets/preview4.mp4"><img src="assets/preview4-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
+                <!-- As thumbs serão carregadas pelo JavaScript -->
             </div>
         </section>
+        
+        <!-- PLANOS DE PREÇO (descrições condicionais) -->
         <section id="pricing-plans">
             <h2 class="section-title">Escolha seu acesso</h2>
             <div class="plans-grid">
                 <!-- PLANO BÁSICO -->
                 <div class="plan-card basic">
-                    <h3 id="plan-basic-title">Acesso Essencial</h3>
-                    <ul id="plan-basic-desc" class="plan-desc">
-                        <li>Seleção exclusiva de conteúdos</li>
-                        <li>Atualizações frequentes</li>
-                        <li>Experiência personalizada</li>
-                        <li>Área reservada para membros</li>
-                    </ul>
+                    <h3 id="plan-basic-title"></h3>
+                    <ul id="plan-basic-desc" class="plan-desc"></ul>
                     <div class="price">R$ 19,99</div>
                     <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
                 </div>
@@ -69,22 +78,16 @@
                 <!-- PLANO COMPLETO -->
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
-                    <h3 id="plan-complete-title">Acesso Completo ⭐</h3>
-                    <ul id="plan-complete-desc" class="plan-desc">
-                        <li>Biblioteca completa</li>
-                        <li>Conteúdo ilimitado</li>
-                        <li>Acesso premium</li>
-                        <li>Novidades diárias</li>
-                    </ul>
+                    <h3 id="plan-complete-title"></h3>
+                    <ul id="plan-complete-desc" class="plan-desc"></ul>
                     <div class="price">R$ 29,90</div>
                     <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">Acessar Agora</a>
                 </div>
             </div>
-            <p class="meta-note">A maioria dos usuários escolhe o acesso completo.</p>
+            <p class="meta-note" id="meta-note"></p>
         </section>
     </main>
 
-    <div id="purchase-toast"></div>
-    <script src="js/script.js" defer></script>
+    <script src="js/version-control.js" defer></script>
 </body>
 </html>
