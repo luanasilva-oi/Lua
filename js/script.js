@@ -1,4 +1,4 @@
-// COMBINED AND ROBUST script.js
+// COMBINED AND ROBUST script.js (VERSÃO OTIMIZADA)
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -23,50 +23,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Evento de clique no botão "Concordo e Prosseguir"
         consentYesBtn.addEventListener('click', (event) => {
-            event.preventDefault(); // Previne qualquer comportamento padrão do botão
+            event.preventDefault();
             console.log("Botão 'Concordo e Prosseguir' clicado.");
             closeModal();
         });
 
         // Evento de clique no fundo escuro do modal para fechar
         consentModal.addEventListener('click', (event) => {
-            // Verifica se o clique foi diretamente no fundo, e não no conteúdo do modal
             if (event.target === consentModal) {
                 console.log("Fundo do modal clicado.");
                 closeModal();
             }
         });
-    } else {
-        console.log("Modal não encontrado nesta página. Ignorando lógica do modal.");
     }
-
 
     // ==========================================================
     // 2. LÓGICA DAS PRÉVIAS CLIQUE (SÓ NA PÁGINA EXPLÍCITA)
     // ==========================================================
-    // Verificamos se a URL da página contém 'bio.html' para ativar a função
     if (window.location.pathname.includes('bio.html')) {
         console.log("Página explícita detectada. Ativando lógica de prévias com vídeo borrado PERMANENTE.");
         
         const previewCards = document.querySelectorAll('.preview-card.locked');
-
         previewCards.forEach(card => {
             card.addEventListener('click', function() {
-                // Evita múltiplos cliques
                 if (this.classList.contains('unlocked')) return;
-
                 const clickText = this.querySelector('span');
-
-                // Apenas remove o texto de clique
-                if (clickText) {
-                    clickText.remove();
-                }
-
-                // Atualiza as classes do card para evitar cliques duplicados
+                if (clickText) clickText.remove();
                 this.classList.remove('locked');
                 this.classList.add('unlocked');
-                
-                // IMPORTANTE: NÃO FAZEMOS NADA COM O VÍDEO. ELE CONTINUA BORRADO.
             });
         });
     }
@@ -108,65 +92,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(accessCountEl) accessCountEl.textContent = currentCount;
             }, 45000);
         }
-        // DENTRO DO document.addEventListener('DOMContentLoaded', () => { ... });
-        // LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
-function startPromoCountdown() {
-    const countdownEl = document.getElementById('countdown-timer');
-    if (!countdownEl) return;
-    let timeInSeconds = 2 * 60 * 60;
-    const interval = setInterval(() => {
-        const hours = Math.floor(timeInSeconds / 3600);
-        const minutes = Math.floor((timeInSeconds % 3600) / 60);
-        const seconds = timeInSeconds % 60;
-        const displayTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        countdownEl.textContent = displayTime;
-        if (timeInSeconds <= 0) {
-            clearInterval(interval);
-            countdownEl.textContent = "OFERTA ENCERRADA";
-            countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
-        }
-        timeInSeconds--;
-    }, 1000);
-}
-startPromoCountdown();
-
-// ==========================================================
-// 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
-// ==========================================================
-function startPromoCountdown() {
-    const countdownEl = document.getElementById('countdown-timer');
-    // Só executa se o elemento do timer existir na página
-    if (!countdownEl) return;
-
-    // Define o tempo em segundos (2 horas)
-    let timeInSeconds = 2 * 60 * 60;
-
-    const interval = setInterval(() => {
-        const hours = Math.floor(timeInSeconds / 3600);
-        const minutes = Math.floor((timeInSeconds % 3600) / 60);
-        const seconds = timeInSeconds % 60;
-
-        // Formata o tempo com zeros à esquerda (ex: 01:05:09)
-        const displayTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        
-        countdownEl.textContent = displayTime;
-
-        // Quando o tempo acabar
-        if (timeInSeconds <= 0) {
-            clearInterval(interval);
-            countdownEl.textContent = "OFERTA ENCERRADA";
-            countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
-        }
-        
-        // Diminui um segundo
-        timeInSeconds--;
-    }, 1000); // Executa a cada 1 segundo
-}
-
-// Inicia a contagem regressiva
-startPromoCountdown();
     }
     initializeDailyAccess();
 
-    // ... (adicione aqui as funções de notificação de compra, etc.)
+    // ==========================================================
+    // 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO (CORRIGIDA)
+    // ==========================================================
+    function startPromoCountdown() {
+        const countdownEl = document.getElementById('countdown-timer');
+        if (!countdownEl) return;
+        
+        let timeInSeconds = 2 * 60 * 60;
+        const interval = setInterval(() => {
+            const hours = Math.floor(timeInSeconds / 3600);
+            const minutes = Math.floor((timeInSeconds % 3600) / 60);
+            const seconds = timeInSeconds % 60;
+            const displayTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            countdownEl.textContent = displayTime;
+            
+            if (timeInSeconds <= 0) {
+                clearInterval(interval);
+                countdownEl.textContent = "OFERTA ENCERRADA";
+                countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
+            }
+            timeInSeconds--;
+        }, 1000);
+    }
+    startPromoCountdown();
 });
