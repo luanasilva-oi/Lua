@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luana Silva | Criadora de Conteúdo</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>.profile-header{margin-top:0;padding-top:20px;}.avatar{margin-top:0;}</style>
-    <script>localStorage.setItem('redirect_target','meta-safe');if(localStorage.getItem('age_ok')!=='1'){window.location.href='index.html';}</script>
+    <style>
+        .profile-header {
+            margin-top: 0;
+            padding-top: 20px;
+        }
+        .avatar {
+            margin-top: 0;
+        }
+    </style>
+    <script>
+        // 1. PRIMEIRO: Define o destino preferido ANTES de qualquer coisa
+        localStorage.setItem('redirect_target', 'meta-safe');
+
+        // 2. SEGUNDO: Verifica se a idade já foi confirmada
+        if (localStorage.getItem('age_ok') !== '1') {
+            window.location.href = "index.html?go=meta";
+        }
+    </script>
 </head>
 <body class="dark">
     <main class="profile-container">
@@ -19,16 +35,10 @@
             <p class="bio">Criei este espaço para compartilhar mais do meu dia a dia, projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
         </header>
         <section id="cta-section">
-    <h2 class="section-title">Publicações Exclusivas</h2>
-    <p class="cta-description">
-        Acesse meus projetos e publicações exclusivas, criadas com carinho para quem apoia meu trabalho online.
-    </p>
-    
-    <!-- BOTÃO PONTE NEUTRO E SEGURO (COM O PARÂMETRO CORRETO) -->
-    <a href="landing.html?from=meta" class="plan-btn complete" style="max-width: 300px; margin: 20px auto;">
-        Explorar Projetos
-    </a>
-</section>
+            <h2 class="section-title">Publicações Exclusivas</h2>
+            <p class="cta-description">Acesse meus projetos e publicações exclusivas, criadas com carinho para quem apoia meu trabalho online.</p>
+            <a href="landing.html" class="plan-btn complete" style="max-width: 300px; margin: 20px auto;">Explorar Projetos</a>
+        </section>
     </main>
 </body>
 </html>
