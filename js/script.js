@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================================================
-    // 2. LÓGICA DAS PRÉVIAS CLIQUE PARA CARREGAR (SÓ NA PÁGINA EXPLÍCITA)
+    // 2. LÓGICA DAS PRÉVIAS CLIQUE (SÓ NA PÁGINA EXPLÍCITA)
     // ==========================================================
     // Verificamos se a URL da página contém 'bio.html' para ativar a função
     if (window.location.pathname.includes('bio.html')) {
-        console.log("Página explícita detectada. Ativando lógica de prévias.");
+        console.log("Página explícita detectada. Ativando lógica de prévias com vídeo borrado PERMANENTE.");
         
         const previewCards = document.querySelectorAll('.preview-card.locked');
 
@@ -55,41 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Evita múltiplos cliques
                 if (this.classList.contains('unlocked')) return;
 
-                const videoSrc = this.dataset.src;
-                if (!videoSrc) {
-                    console.error("Atributo data-src não encontrado no card.");
-                    return;
-                }
-
-                const thumbImg = this.querySelector('.preview-thumb');
                 const clickText = this.querySelector('span');
 
-                // Cria o elemento de vídeo
-                const video = document.createElement('video');
-                video.autoplay = true;
-                video.loop = true;
-                video.muted = true;
-                video.playsinline = true;
-                video.style.width = '100%';
-                video.style.height = 'auto';
-                video.style.display = 'block';
-                video.style.aspectRatio = '1 / 1';
-                video.style.objectFit = 'cover';
-                video.style.filter = 'none'; // Remove o borrão do vídeo
-
-                video.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
-
-                // Remove o texto de clique
+                // Apenas remove o texto de clique
                 if (clickText) {
                     clickText.remove();
                 }
 
-                // Substitui a imagem pelo vídeo
-                this.replaceChild(video, thumbImg);
-
-                // Marca o card como desbloqueado para não ser clicado de novo
+                // Atualiza as classes do card para evitar cliques duplicados
                 this.classList.remove('locked');
                 this.classList.add('unlocked');
+                
+                // IMPORTANTE: NÃO FAZEMOS NADA COM O VÍDEO. ELE CONTINUA BORRADO.
             });
         });
     }
