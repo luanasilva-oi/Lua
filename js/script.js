@@ -108,6 +108,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(accessCountEl) accessCountEl.textContent = currentCount;
             }, 45000);
         }
+        // DENTRO DO document.addEventListener('DOMContentLoaded', () => { ... });
+
+// ==========================================================
+// 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
+// ==========================================================
+function startPromoCountdown() {
+    const countdownEl = document.getElementById('countdown-timer');
+    // Só executa se o elemento do timer existir na página
+    if (!countdownEl) return;
+
+    // Define o tempo em segundos (2 horas)
+    let timeInSeconds = 2 * 60 * 60;
+
+    const interval = setInterval(() => {
+        const hours = Math.floor(timeInSeconds / 3600);
+        const minutes = Math.floor((timeInSeconds % 3600) / 60);
+        const seconds = timeInSeconds % 60;
+
+        // Formata o tempo com zeros à esquerda (ex: 01:05:09)
+        const displayTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        
+        countdownEl.textContent = displayTime;
+
+        // Quando o tempo acabar
+        if (timeInSeconds <= 0) {
+            clearInterval(interval);
+            countdownEl.textContent = "OFERTA ENCERRADA";
+            countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
+        }
+        
+        // Diminui um segundo
+        timeInSeconds--;
+    }, 1000); // Executa a cada 1 segundo
+}
+
+// Inicia a contagem regressiva
+startPromoCountdown();
     }
     initializeDailyAccess();
 
