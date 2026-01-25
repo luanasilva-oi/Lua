@@ -6,47 +6,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body class="dark age-bg">
-
 <div class="age-container">
   <div class="age-box">
-
     <h1>Área de Acesso</h1>
-
-    <p class="age-text">
-      Este site contém conteúdo digital personalizado, destinado a um público específico.
-      Ao continuar, você confirma que deseja acessar este material.
-    </p>
-
-    <button class="age-btn" onclick="acceptAge()">
-      Continuar
-    </button>
-
-    <span class="age-note">
-      O acesso é destinado a pessoas que desejam conhecer mais sobre este projeto digital.
-    </span>
-
+    <p class="age-text">Este site contém conteúdo digital personalizado, destinado a um público específico. Ao continuar, você confirma que deseja acessar este material.</p>
+    <button class="age-btn" onclick="acceptAge()">Continuar</button>
+    <span class="age-note">O acesso é destinado a pessoas que desejam conhecer mais sobre este projeto digital.</span>
   </div>
 </div>
-
 <script>
 function acceptAge(){
   localStorage.setItem('age_ok','1');
-  
-  // Verifica se há um destino preferido no localStorage
   const preferredDestination = localStorage.getItem('redirect_target');
-  
   if (preferredDestination === 'meta-safe') {
-    // Se o destino for a página segura, vai para lá e limpa a preferência
     localStorage.removeItem('redirect_target');
     window.location.href = "meta-safe.html";
   } else {
-    // Padrão: vai para a página de vendas
     window.location.href = "landing.html";
   }
 }
 </script>
-
 </body>
 </html>
