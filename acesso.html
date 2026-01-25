@@ -6,9 +6,7 @@
     <title>Luana Silva | Projeto Exclusivo</title>
     <link rel="stylesheet" href="css/style.css">
     <script>
-        // Redireciona para a verificação de idade se o usuário não tiver confirmado
         if (localStorage.getItem('age_ok') !== '1') {
-            // Se vier da Meta, garante que o fluxo de redirecionamento volte para cá
             window.location.href = "index.html?go=meta";
         }
     </script>
@@ -31,17 +29,28 @@
         
         <!-- CABEÇALHO DO PERFIL COM BANNER SEGURO -->
         <header class="profile-header">
-            <!-- BANNER SEGURO AQUI -->
             <video class="profile-banner" autoplay loop muted playsinline>
                 <source src="assets/banner-safe.mp4" type="video/mp4">
             </video>
-            <!-- AVATAR SEGURO AQUI -->
             <img src="./assets/avatar-safe.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
             <div class="profile-info">
                 <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
-                <div class="user-status-line"><span class="username">@luanasilva.official</span><span class="status-indicator">🟢 Disponível agora</span></div>
+                <div class="user-status-line">
+                    <span class="username">@luanasilva.official</span>
+                    <span class="status-indicator">🟢 Disponível agora</span>
+                </div>
+
+                <!-- ÍCONE DAS REDES SOCIAIS (NOVO) -->
+                <div class="social-links">
+                    <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Meu Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
+                    </a>
+                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Meu X">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+
             </div>
-            <!-- BIO SEGURA AQUI -->
             <p class="bio">Criei este espaço para compartilhar meus projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
         </header>
 
@@ -69,11 +78,9 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DE PLANOS COM TEXTO SEGURO (A PARTE QUE FALTAVA!) -->
         <section id="pricing-plans">
             <h2 class="section-title">Escolha seu acesso</h2>
             <div class="plans-grid">
-                <!-- PLANO BÁSICO COM TEXTO SEGURO -->
                 <div class="plan-card basic">
                     <h3>Acesso Essencial</h3>
                     <ul class="plan-desc">
@@ -85,8 +92,6 @@
                     <div class="price">R$ 19,99</div>
                     <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
                 </div>
-                
-                <!-- PLANO COMPLETO COM TEXTO SEGURO -->
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
                     <h3>Acesso VIP ⭐</h3>
