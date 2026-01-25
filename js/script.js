@@ -115,4 +115,54 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.style.pointerEvents = 'auto';
         }
     });
-});
+    // --- LÓGICA INTELIGENTE DE CONTEÚDO E MODAL ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const isFromMeta = urlParams.get('from') === 'meta';
+
+        // Lógica para a landing.html
+        const metaContent = document.getElementById('meta-content');
+        const directContent = document.getElementById('direct-content');
+        if (metaContent && directContent) {
+            if (isFromMeta) {
+                metaContent.style.display = 'block';
+                directContent.style.display = 'none';
+            } else {
+                metaContent.style.display = 'none';
+                directContent.style.display = 'block';
+            }
+        }
+
+        // Lógica para a acesso.html
+        const consentModal = document.getElementById('consent-modal');
+        const consentYesBtn = document.getElementById('consent-yes');
+        const mainContent = document.getElementById('main-content');
+
+        if (consentModal && mainContent) {
+            if (isFromMeta) {
+                // Se vier da Meta, mostra o modal e esconde o conteúdo
+                mainContent.style.filter = 'blur(10px)';
+                mainContent.style.pointerEvents = 'none';
+            } else {
+                // Se vier do tráfego direto, esconde o modal e mostra o conteúdo
+                consentModal.style.display = 'none';
+                mainContent.style.filter = 'none';
+                mainContent.style.pointerEvents = 'auto';
+            }
+
+            // Ação do botão do modal
+            consentYesBtn.addEventListener('click', () => {
+                consentModal.style.display = 'none';
+                mainContent.style.filter = 'none';
+                mainContent.style.pointerEvents = 'auto';
+            });
+
+            consentModal.addEventListener('click', (event) => {
+                if (event.target === consentModal) {
+                    consentModal.style.display = 'none';
+                    mainContent.style.filter = 'none';
+                    mainContent.style.pointerEvents = 'auto';
+                }
+            });
+        }
+    });
