@@ -458,3 +458,50 @@ body.dark {
     .plan-btn { font-size: 16px; padding: 16px; }
     #purchase-toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
 }
+/* =================================================== */
+/* MODAL DE CONSENTIMENTO */
+/* =================================================== */
+.modal {
+    display: flex; /* Flexbox para centralizar */
+    position: fixed; /* Fica fixo na tela */
+    z-index: 1000; /* Acima de tudo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 14px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    color: #ccc;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Esconde o conteúdo principal enquanto o modal está ativo */
+#main-content {
+    filter: blur(10px);
+    pointer-events: none; /* Impede a interação com o conteúdo de fundo */
+}
