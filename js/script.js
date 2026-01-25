@@ -95,5 +95,24 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.remove('locked');
         });
     });
+    // --- LÓGICA DO MODAL DE CONSENTIMENTO ---
+    const consentModal = document.getElementById('consent-modal');
+    const consentYesBtn = document.getElementById('consent-yes');
+    const mainContent = document.getElementById('main-content');
 
+    // Fecha o modal e revela o conteúdo
+    consentYesBtn.addEventListener('click', () => {
+        consentModal.style.display = 'none';
+        mainContent.style.filter = 'none';
+        mainContent.style.pointerEvents = 'auto';
+    });
+
+    // Se o usuário clicar fora do modal, ele também fecha
+    consentModal.addEventListener('click', (event) => {
+        if (event.target === consentModal) {
+            consentModal.style.display = 'none';
+            mainContent.style.filter = 'none';
+            mainContent.style.pointerEvents = 'auto';
+        }
+    });
 });
