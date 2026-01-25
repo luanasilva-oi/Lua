@@ -234,14 +234,23 @@ body.dark {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.preview-card video,
+.blurred-preview-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    filter: blur(12px) brightness(0.6); /* Borrão só no vídeo */
+}
+
+/* ESTILO PARA IMAGENS ESTÁTICAS (só na página segura) */
 .preview-card img.preview-thumb {
     width: 100%;
     height: auto;
     display: block;
-    filter: blur(6px) brightness(0.7);
-    aspect-ratio: 1 / 1; /* Mantém a proporção quadrada */
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    /* SEM FILTRO AQUI */
 }
 
 .preview-card span {
