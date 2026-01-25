@@ -7,39 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const purchaseToastEl = document.getElementById("purchase-toast");
 
     // --- FUNCIONALIDADES DINÂMICAS ---
-
-    /**
-     * Atualiza o contador de usuários online com um valor aleatório.
-     */
     function updateOnlineUsers() {
-        const minUsers = 8;
-        const maxUsers = 14;
-        const randomUsers = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
-        onlineCountEl.innerText = randomUsers;
+        const minUsers = 8; const maxUsers = 14;
+        onlineCountEl.innerText = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
     }
-    setInterval(updateOnlineUsers, 6000);
-    updateOnlineUsers();
+    setInterval(updateOnlineUsers, 6000); updateOnlineUsers();
 
-    /**
-     * Inicializa o contador de acessos diários.
-     */
     function initializeDailyAccess() {
         const today = new Date().toDateString();
-        const storedDay = localStorage.getItem("access_day");
-        if (storedDay !== today) {
-            const minAccess = 25;
-            const maxAccess = 55;
+        if (localStorage.getItem("access_day") !== today) {
+            const minAccess = 25; const maxAccess = 55;
             const randomAccess = Math.floor(Math.random() * (maxAccess - minAccess + 1)) + minAccess;
-            localStorage.setItem("access_day", today);
-            localStorage.setItem("access_count", randomAccess);
+            localStorage.setItem("access_day", today); localStorage.setItem("access_count", randomAccess);
         }
         accessCountEl.innerText = localStorage.getItem("access_count");
     }
     initializeDailyAccess();
 
-    /**
-     * Exibe uma notificação toast de compra falsa.
-     */
     function showFakePurchase() {
         const names = ["Henrique", "Gustavo", "Mateus", "Lucas", "Rafael", "Bruno", "Diego", "Felipe"];
         const plans = [{ name: "Plano Essencial", type: "basic" }, { name: "Plano Completo", type: "complete" }];
@@ -49,22 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
         purchaseToastEl.innerHTML = `<strong>${randomName}</strong> comprou<br><span>${randomPlan.name}</span>`;
         setTimeout(() => { purchaseToastEl.className = ""; }, 4000);
     }
-
-    /**
-     * Inicia o loop de notificações de compra.
-     */
     function startFakePurchaseNotifications() {
         function scheduleNextNotification() {
-            const interval = Math.random() * 6000 + 7000;
-            setTimeout(() => { showFakePurchase(); scheduleNextNotification(); }, interval);
+            setTimeout(() => { showFakePurchase(); scheduleNextNotification(); }, Math.random() * 6000 + 7000);
         }
         scheduleNextNotification();
     }
     startFakePurchaseNotifications();
 
-    /**
-     * Inicializa o contador de visualizações pessoal.
-     */
     function initializePersonalCounter() {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('stats') === 'liberado123') {
@@ -79,71 +55,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initializePersonalCounter();
 
-    // --- CLICK-TO-LOAD PARA VÍDEOS (MÉTODO MAIS SEGURO) ---
+    // --- CLICK-TO-LOAD PARA VÍDEOS ---
     const previewCards = document.querySelectorAll('.preview-card.locked');
     previewCards.forEach(card => {
         card.addEventListener('click', function() {
             const videoSrc = this.dataset.src;
             const video = document.createElement('video');
-            video.autoplay = true;
-            video.loop = true;
-            video.muted = true;
-            video.playsinline = true;
+            video.autoplay = true; video.loop = true; video.muted = true; video.playsinline = true;
             video.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
-            this.innerHTML = '';
-            this.appendChild(video);
-            this.classList.remove('locked');
+            this.innerHTML = ''; this.appendChild(video); this.classList.remove('locked');
         });
     });
 
-    // --- LÓGICA INTELIGENTE DE CONTEÚDO E MODAL (AQUI ESTAVA O ERRO) ---
+    // --- LÓGICA DO MODAL (APENAS PARA O TRÁFEGO DA META) ---
     const urlParams = new URLSearchParams(window.location.search);
     const isFromMeta = urlParams.get('from') === 'meta';
 
-    // Lógica para a landing.html
-    const metaContent = document.getElementById('meta-content');
-    const directContent = document.getElementById('direct-content');
-    if (metaContent && directContent) {
-        if (isFromMeta) {
-            metaContent.style.display = 'block';
-            directContent.style.display = 'none';
-        } else {
-            metaContent.style.display = 'none';
-            directContent.style.display = 'block';
-        }
-    }
-
-    // Lógica para a acesso.html
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
     const mainContent = document.getElementById('main-content');
 
-    if (consentModal && mainContent) {
-        if (isFromMeta) {
-            // Se vier da Meta, mostra o modal e esconde o conteúdo
-            mainContent.style.filter = 'blur(10px)';
-            mainContent.style.pointerEvents = 'none';
-        } else {
-            // Se vier do tráfego direto, esconde o modal e mostra o conteúdo
-            consentModal.style.display = 'none';
-            mainContent.style.filter = 'none';
-            mainContent.style.pointerEvents = 'auto';
-        }
-
-        // Ação do botão do modal
+    if (consentModal && mainContent && isFromMeta) {
+        mainContent.style.filter = 'blur(10px)'; mainContent.style.pointerEvents = 'none';
         consentYesBtn.addEventListener('click', () => {
-            consentModal.style.display = 'none';
-            mainContent.style.filter = 'none';
-            mainContent.style.pointerEvents = 'auto';
+            consentModal.style.display = 'none'; mainContent.style.filter = 'none'; mainContent.style.pointerEvents = 'auto';
         });
-
         consentModal.addEventListener('click', (event) => {
             if (event.target === consentModal) {
-                consentModal.style.display = 'none';
-                mainContent.style.filter = 'none';
-                mainContent.style.pointerEvents = 'auto';
+                consentModal.style.display = 'none'; mainContent.style.filter = 'none'; mainContent.style.pointerEvents = 'auto';
             }
         });
     }
 
-}); // <-- FIM DO LISTENER ÚNICO
+});
