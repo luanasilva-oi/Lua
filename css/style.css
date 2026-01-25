@@ -550,3 +550,34 @@ body {
     height: 100%;
     fill: currentColor;
 }
+/* =================================================== */
+/* PÁGINA DE CONSENTIMENTO */
+/* =================================================== */
+#consent-box {
+    text-align: center;
+    padding: 40px 20px;
+}
+#consent-box h2 {
+    margin-bottom: 20px;
+}
+#consent-box p {
+    color: #ccc;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.consent-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* =================================================== */
+/* ESTILO PARA PRÉVIAS COM CLICK-TO-LOAD */
+/* =================================================== */
+.preview-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(6px) brightness(0.7);
+}
