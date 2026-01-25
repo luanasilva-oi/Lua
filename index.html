@@ -24,19 +24,21 @@
     </div>
 </div>
 
+<!-- Dentro do seu index.html -->
 <script>
 function acceptAge(){
     localStorage.setItem('age_ok','1');
     
-    // Pega o parâmetro 'go' para decidir o destino
-    const destination = getQueryParam('go');
+    // Pega o parâmetro 'go' da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const destination = urlParams.get('go');
 
-    if (destination === 'instagram') {
-        // Vindo do Instagram: vai para a página explícita
-        window.location.href = "bio.html";
-    } else {
-        // Padrão: vai para a página segura
+    if (destination === 'meta') {
+        // Vindo dos anúncios da Meta: vai para a página segura
         window.location.href = "meta-safe.html";
+    } else {
+        // Padrão (orgânico, bio, etc.): vai para a página explícita
+        window.location.href = "bio.html";
     }
 }
 </script>
