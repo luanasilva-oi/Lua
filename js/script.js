@@ -7,53 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const purchaseToastEl = document.getElementById("purchase-toast");
 
     // --- FUNCIONALIDADES DINÂMICAS ---
-    function updateOnlineUsers() {
-        const minUsers = 8; const maxUsers = 14;
-        onlineCountEl.innerText = Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers;
-    }
+    function updateOnlineUsers() { /* ... */ }
     setInterval(updateOnlineUsers, 6000); updateOnlineUsers();
-
-    function initializeDailyAccess() {
-        const today = new Date().toDateString();
-        if (localStorage.getItem("access_day") !== today) {
-            const minAccess = 25; const maxAccess = 55;
-            const randomAccess = Math.floor(Math.random() * (maxAccess - minAccess + 1)) + minAccess;
-            localStorage.setItem("access_day", today); localStorage.setItem("access_count", randomAccess);
-        }
-        accessCountEl.innerText = localStorage.getItem("access_count");
-    }
+    function initializeDailyAccess() { /* ... */ }
     initializeDailyAccess();
-
-    function showFakePurchase() {
-        const names = ["Henrique", "Gustavo", "Mateus", "Lucas", "Rafael", "Bruno", "Diego", "Felipe"];
-        const plans = [{ name: "Plano Essencial", type: "basic" }, { name: "Plano Completo", type: "complete" }];
-        const randomName = names[Math.floor(Math.random() * names.length)];
-        const randomPlan = plans[Math.floor(Math.random() * plans.length)];
-        purchaseToastEl.className = `show ${randomPlan.type}`;
-        purchaseToastEl.innerHTML = `<strong>${randomName}</strong> comprou<br><span>${randomPlan.name}</span>`;
-        setTimeout(() => { purchaseToastEl.className = ""; }, 4000);
-    }
-    function startFakePurchaseNotifications() {
-        function scheduleNextNotification() {
-            setTimeout(() => { showFakePurchase(); scheduleNextNotification(); }, Math.random() * 6000 + 7000);
-        }
-        scheduleNextNotification();
-    }
+    function showFakePurchase() { /* ... */ }
     startFakePurchaseNotifications();
-
-    function initializePersonalCounter() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('stats') === 'liberado123') {
-            const counterEl = document.getElementById('view-counter');
-            const countEl = document.getElementById('admin-view-count');
-            counterEl.style.display = 'block';
-            let currentCount = parseInt(localStorage.getItem('personal_page_views') || '0');
-            currentCount++;
-            localStorage.setItem('personal_page_views', currentCount);
-            countEl.innerText = currentCount;
-        }
-    }
-    initializePersonalCounter();
+    function initializePersonalCounter() { /* ... */ }
 
     // --- CLICK-TO-LOAD PARA VÍDEOS ---
     const previewCards = document.querySelectorAll('.preview-card.locked');
@@ -67,19 +27,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- LÓGICA DO MODAL (CORRIGIDA PARA FUNCIONAR EM AMBOS OS LINKS) ---
+    // --- LÓGICA DO MODAL E TROCA DE TEXTO ---
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
     const mainContent = document.getElementById('main-content');
 
-    // Verifica se os elementos do modal existem na página antes de continuar
     if (consentModal && consentYesBtn && mainContent) {
-
         // Adiciona o evento de clique ao botão
         consentYesBtn.addEventListener('click', () => {
+            // 1. Fecha o modal
             consentModal.style.display = 'none';
             mainContent.style.filter = 'none';
             mainContent.style.pointerEvents = 'auto';
+
+            // 2. TROCA O TEXTO DOS PLANOS
+            const basicTitle = document.getElementById('plan-basic-title');
+            const basicDesc = document.getElementById('plan-basic-desc');
+            const completeTitle = document.getElementById('plan-complete-title');
+            const completeDesc = document.getElementById('plan-complete-desc');
+
+            if (basicTitle) basicTitle.innerText = "Acesso Essencial";
+            if (basicDesc) {
+                basicDesc.innerHTML = `
+                    <li>Uma curadoria com meus 100 melhores momentos de autoexploração e sensualidade.</li>
+                    <li>Vídeos íntimos com brinquedos.</li>
+                    <li>Momentos puros de prazer e descoberta.</li>
+                    <li>Uma introdução ao meu universo mais pessoal.</li>
+                `;
+            }
+            if (completeTitle) completeTitle.innerText = "Acesso Completo ⭐";
+            if (completeDesc) {
+                completeDesc.innerHTML = `
+                    <li>Acesso total à minha biblioteca com mais de 600 vídeos. Sem censura, sem limites.</li>
+                    <li>Cenas explícitas de masturbação e êxtase.</li>
+                    <li>Close-ups íntimos e sons de prazer autênticos.</li>
+                    <li>Posando e me exibindo completamente nua para você.</li>
+                    <li>Galeria com mais de 500 imagens privadas e exclusivas.</li>
+                `;
+            }
         });
 
         // Fecha o modal se o usuário clicar no fundo
@@ -90,16 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainContent.style.pointerEvents = 'auto';
             }
         });
-
-        // LÓGICA PARA MOSTRAR O MODAL (SE NECESSÁRIO)
-        const urlParams = new URLSearchParams(window.location.search);
-        const isFromMeta = urlParams.get('from') === 'meta';
-
-        // Mostra o modal se vier da meta OU se for a página bio.html
-        if (isFromMeta || window.location.pathname.endsWith('/bio.html')) {
-            mainContent.style.filter = 'blur(10px)';
-            mainContent.style.pointerEvents = 'none';
-        }
     }
 
 });
