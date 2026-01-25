@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luana Silva | Perfil Privado</title>
+    <title>Luana Silva | Projeto Exclusivo</title>
     <link rel="stylesheet" href="css/style.css">
     <script>
+        // Redireciona para a verificação de idade se o usuário não tiver confirmado
         if (localStorage.getItem('age_ok') !== '1') {
-            window.location.href = "index.html?go=bio";
+            // Se vier da Meta, garante que o fluxo de redirecionamento volte para cá
+            window.location.href = "index.html?go=meta";
         }
     </script>
 </head>
@@ -27,54 +29,71 @@
 
     <main class="profile-container" id="main-content">
         
-        <!-- CABEÇALHO DO PERFIL -->
+        <!-- CABEÇALHO DO PERFIL COM BANNER SEGURO -->
         <header class="profile-header">
-            <video class="profile-banner" autoplay loop muted playsinline><source src="assets/banner.mp4" type="video/mp4"></video>
-            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            <!-- BANNER SEGURO AQUI -->
+            <video class="profile-banner" autoplay loop muted playsinline>
+                <source src="assets/banner-safe.mp4" type="video/mp4">
+            </video>
+            <!-- AVATAR SEGURO AQUI -->
+            <img src="./assets/avatar-safe.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
             <div class="profile-info">
-                <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.01-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
+                <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
                 <div class="user-status-line"><span class="username">@luanasilva.official</span><span class="status-indicator">🟢 Disponível agora</span></div>
             </div>
-            <p class="bio">Bem-vindo ao meu mundo. Aqui não há filtros, apenas eu, 100% real e pronta para compartilhar meus momentos mais íntimos.<br>Este é o meu espaço para explorar o prazer sem julgamentos. Se prepare para uma experiência autêntica.<br>Escolha seu plano e entre na minha vida particular.</p>
+            <!-- BIO SEGURA AQUI -->
+            <p class="bio">Criei este espaço para compartilhar meus projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
         </header>
+
         <section id="status-section">
             <div id="daily-access">🔥 <strong id="access-count">37</strong> acessos hoje</div>
             <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
         </section>
+
+        <!-- SEÇÃO DE PRÉVIAS ESTÁTICAS E SEGURAS -->
         <section id="content-previews">
-            <h2 class="section-title">Conteúdo Bloqueado 🔒</h2>
+            <h2 class="section-title">Meus Projetos</h2>
             <div class="preview-grid">
-                <div class="preview-card locked" data-src="assets/preview1.mp4"><img src="assets/preview1-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
-                <div class="preview-card locked" data-src="assets/preview2.mp4"><img src="assets/preview2-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
-                <div class="preview-card locked" data-src="assets/preview3.mp4"><img src="assets/preview3-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
-                <div class="preview-card locked" data-src="assets/preview4.mp4"><img src="assets/preview4-thumb.jpg" alt="Prévia do conteúdo" class="preview-thumb"><span>👉 Ver prévia 👈</span></div>
+                <div class="preview-card">
+                    <img src="assets/preview-safe-1.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
+                <div class="preview-card">
+                    <img src="assets/preview-safe-2.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
+                <div class="preview-card">
+                    <img src="assets/preview-safe-3.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
+                <div class="preview-card">
+                    <img src="assets/preview-safe-4.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
             </div>
         </section>
+
         <section id="pricing-plans">
             <h2 class="section-title">Escolha seu acesso</h2>
             <div class="plans-grid">
-                <!-- PLANO BÁSICO -->
+                <!-- PLANO BÁSICO COM TEXTO SEGURO -->
                 <div class="plan-card basic">
-                    <h3 id="plan-basic-title">Acesso Essencial</h3>
-                    <ul id="plan-basic-desc" class="plan-desc">
-                        <li>Seleção exclusiva de conteúdos</li>
-                        <li>Atualizações frequentes</li>
-                        <li>Experiência personalizada</li>
-                        <li>Área reservada para membros</li>
+                    <h3>Acesso Essencial</h3>
+                    <ul class="plan-desc">
+                        <li>Seleção com meus melhores conteúdos.</li>
+                        <li>Acesso à área reservada.</li>
+                        <li>Publicações exclusivas.</li>
+                        <li>Interação personalizada.</li>
                     </ul>
                     <div class="price">R$ 19,99</div>
                     <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
                 </div>
                 
-                <!-- PLANO COMPLETO -->
+                <!-- PLANO COMPLETO COM TEXTO SEGURO -->
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
-                    <h3 id="plan-complete-title">Acesso Completo ⭐</h3>
-                    <ul id="plan-complete-desc" class="plan-desc">
-                        <li>Biblioteca completa</li>
-                        <li>Conteúdo ilimitado</li>
-                        <li>Acesso premium</li>
-                        <li>Novidades diárias</li>
+                    <h3>Acesso VIP ⭐</h3>
+                    <ul class="plan-desc">
+                        <li>Biblioteca completa de projetos.</li>
+                        <li>Conteúdos inéditos e frequentes.</li>
+                        <li>Acesso total à área de membros.</li>
+                        <li>Prioridade no suporte.</li>
                     </ul>
                     <div class="price">R$ 29,90</div>
                     <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">Acessar Agora</a>
