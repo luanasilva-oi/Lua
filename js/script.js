@@ -109,3 +109,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Chama a função quando a página carrega
     initializePersonalCounter();
 });
+// ... (todo o seu script existente até o final) ...
+
+    // --- CLICK-TO-LOAD PARA VÍDEOS (MÉTODO MAIS SEGURO) ---
+    const previewCards = document.querySelectorAll('.preview-card.locked');
+
+    previewCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const videoSrc = this.dataset.src;
+
+            // Cria o elemento de vídeo dinamicamente
+            const video = document.createElement('video');
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.playsinline = true;
+            video.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
+
+            // Substitui o conteúdo do card pelo vídeo
+            this.innerHTML = '';
+            this.appendChild(video);
+
+            // Remove a classe 'locked' para que não possa ser clicado novamente
+            this.classList.remove('locked');
+        });
+    });
+
+}); // <-- Garanta que este }); seja o final do arquivo
