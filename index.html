@@ -11,20 +11,23 @@
         const params = new URLSearchParams(window.location.search);
         return params.get(param);
     }
-</script>
-</head>
-<body class="dark age-bg">
-
-<div class="age-container">
-    <div class="age-box">
-        <h1>🔞 Conteúdo Adulto</h1>
-        <p class="age-text">Este site contém conteúdo exclusivo destinado apenas a maiores de 18 anos. Ao continuar, você confirma que tem idade legal para acessar este material.</p>
-        <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
-        <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
-    </div>
-</div>
-
+<!-- index.html - Após aceitar idade -->
 <script>
+function acceptAge() {
+    localStorage.setItem('age_ok', '1');
+    
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('source'); // Parâmetro que define a origem
+    
+    if (source === 'meta') {
+        // Vindo de anúncio da Meta → versão SAFE
+        window.location.href = "acesso.html?version=safe";
+    } else {
+        // Vindo de outras fontes (Instagram, Twitter, etc) → versão EXPLÍCITA
+        window.location.href = "acesso.html?version=explicit";
+    }
+}
+</script>
 function acceptAge(){
     localStorage.setItem('age_ok','1');
     
