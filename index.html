@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Confirmação de Idade</title>
+<title>Área de Acesso</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,19 +12,19 @@
 <div class="age-container">
   <div class="age-box">
 
-    <h1>🔞 Conteúdo Adulto</h1>
+    <h1>Área de Acesso</h1>
 
     <p class="age-text">
-      Este site contém conteúdo exclusivo destinado apenas a maiores de 18 anos.
-      Ao continuar, você confirma que tem idade legal para acessar este material.
+      Este site contém conteúdo digital personalizado, destinado a um público específico.
+      Ao continuar, você confirma que deseja acessar este material.
     </p>
 
     <button class="age-btn" onclick="acceptAge()">
-      CONFIRMAR IDADE
+      Continuar
     </button>
 
     <span class="age-note">
-      Acesso permitido somente para maiores de 18 anos.
+      O acesso é destinado a pessoas que desejam conhecer mais sobre este projeto digital.
     </span>
 
   </div>
@@ -34,8 +34,7 @@
 function acceptAge(){
   localStorage.setItem('age_ok','1');
   
-  // SEMPRE redireciona para a página de vendas após confirmar a idade.
-  // A página 'meta-safe' será usada apenas se o usuário acessar o link dela diretamente.
+  // Lógica simples: sempre leva para a página de vendas após a confirmação.
   window.location.href = "landing.html";
 }
 </script>
