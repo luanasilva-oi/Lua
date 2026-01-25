@@ -5,84 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luana Silva | Criadora de Conteúdo</title>
     <link rel="stylesheet" href="css/style.css">
-    
-    <!-- ESTILO PARA CORRIGIR O LAYOUT SEM BANNER -->
-    <style>
-        .profile-header {
-            margin-top: 0;
-            padding-top: 20px;
-        }
-        .avatar {
-            margin-top: 0;
-        }
-    </style>
-    
-    <!-- SCRIPT ÚNICO E CORRIGIDO -->
-    <script>
-        // 1. PRIMEIRO: Define o destino preferido ANTES de qualquer coisa
-        localStorage.setItem('redirect_target', 'meta-safe');
-
-        // 2. SEGUNDO: Verifica se a idade já foi confirmada
-        if (localStorage.getItem('age_ok') !== '1') {
-            window.location.href = "index.html";
-        }
-    </script>
+    <style>.profile-header{margin-top:0;padding-top:20px;}.avatar{margin-top:0;}</style>
+    <script>localStorage.setItem('redirect_target','meta-safe');if(localStorage.getItem('age_ok')!=='1'){window.location.href='index.html';}</script>
 </head>
 <body class="dark">
-    <!-- SCRIPT DE VERIFICAÇÃO DE IDADE -->
-<script>
-    // 1. PRIMEIRO: Define o destino preferido para o redirecionamento
-    localStorage.setItem('redirect_target', 'meta-safe');
-
-    // 2. SEGUNDO: Verifica se a idade já foi confirmada
-    if (localStorage.getItem('age_ok') !== '1') {
-        window.location.href = "index.html";
-    }
-</script>
-
     <main class="profile-container">
-        
-        <!-- CABEÇALHO DO PERFIL -->
         <header class="profile-header">
             <img src="./assets/avatar-safe.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
-            
             <div class="profile-info">
-                <h1>
-                    Luana Silva 
-                    <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                        <path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-                    </svg>
-                </h1>
-                
-                <div class="user-status-line">
-                    <span class="username">@luanasilva.official</span>
-                    <span class="status-indicator">🟢 Disponível agora</span>
-                </div>
+                <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
+                <div class="user-status-line"><span class="username">@luanasilva.official</span><span class="status-indicator">🟢 Disponível agora</span></div>
             </div>
-
-            <!-- BIO 100% SEGURA (RECOMENDADA) -->
-            <p class="bio">
-                Criei este espaço para compartilhar mais do meu dia a dia, projetos pessoais e conteúdos digitais que não publico em outras redes.<br>
-                Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>
-                Fique à vontade para explorar 💫
-            </p>
+            <p class="bio">Criei este espaço para compartilhar mais do meu dia a dia, projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
         </header>
-
-        <!-- SEÇÃO DE CHAMADA PARA AÇÃO (CTA) -->
         <section id="cta-section">
             <h2 class="section-title">Publicações Exclusivas</h2>
-            <p class="cta-description">
-                Acesse meus projetos e publicações exclusivas, criadas com carinho para quem apoia meu trabalho online.
-            </p>
-            
-            <!-- BOTÃO PONTE NEUTRO E SEGURO -->
-            <a href="landing.html" class="plan-btn complete" style="max-width: 300px; margin: 20px auto;">
-                Explorar Projetos
-            </a>
+            <p class="cta-description">Acesse meus projetos e publicações exclusivas, criadas com carinho para quem apoia meu trabalho online.</p>
+            <a href="landing.html" class="plan-btn complete" style="max-width: 300px; margin: 20px auto;">Explorar Projetos</a>
         </section>
-
     </main>
-
 </body>
 </html>
