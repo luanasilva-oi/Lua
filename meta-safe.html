@@ -17,9 +17,8 @@
         }
     </style>
     
-    <!-- SCRIPTS DO CABEÇALHO (ORDEM CORRIGIDA) -->
+    <!-- SCRIPT DE VERIFICAÇÃO DE IDADE (LINHA PROBLEMÁTICA REMOVIDA) -->
     <script>
-        localStorage.setItem('redirect_target', 'meta-safe');
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html";
         }
@@ -70,5 +69,6 @@
         </section>
 
     </main>
+
 </body>
 </html>
