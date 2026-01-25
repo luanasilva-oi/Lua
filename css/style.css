@@ -83,7 +83,7 @@ body.dark {
 /* --- Banner & Header --- */
 .profile-header {
     text-align: center;
-    position: relative; /* Contexto para o avatar */
+    position: relative;
 }
 
 .profile-banner {
@@ -91,7 +91,7 @@ body.dark {
     height: 300px;
     object-fit: cover;
     display: block;
-    border-radius: 16px 16px 0 0; /* Borda arredondada só no topo */
+    border-radius: 16px 16px 0 0;
 }
 
 .avatar {
@@ -99,14 +99,14 @@ body.dark {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #0b0b0b; /* Cor da borda igual ao fundo */
-    margin-top: -60px; /* Puxa o avatar para cima, sobrepondo o banner */
+    border: 4px solid #0b0b0b;
+    margin-top: -60px;
     background: #000;
     position: relative;
     z-index: 10;
 }
 
-/* --- Profile Info (Social Media Style) --- */
+/* --- Profile Info --- */
 .profile-info {
     text-align: center;
     margin-top: 10px;
@@ -208,7 +208,7 @@ body.dark {
     color: #4caf50;
 }
 
-/* --- Previews (Click-to-Load) --- */
+/* --- Previews --- */
 .section-title {
     margin-top: 40px;
     margin-bottom: 15px;
@@ -240,17 +240,15 @@ body.dark {
     display: block;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    filter: blur(12px) brightness(0.6); /* Borrão só no vídeo */
+    filter: blur(12px) brightness(0.6);
 }
 
-/* ESTILO PARA IMAGENS ESTÁTICAS (só na página segura) */
 .preview-card img.preview-thumb {
     width: 100%;
     height: auto;
     display: block;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    /* SEM FILTRO AQUI */
 }
 
 .preview-card span {
@@ -408,6 +406,41 @@ body.dark {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* --- Promo Banner --- */
+.promo-banner {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+    border-radius: 14px;
+    margin: 30px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: pulseGlow 2s infinite;
+}
+
+.promo-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+
+.promo-content p {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+}
+
+.countdown-container {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#countdown-timer {
+    background: rgba(0,0,0,0.2);
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-left: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 /* =================================================== */
 /* NOTIFICATIONS & ANIMATIONS */
 /* =================================================== */
@@ -447,34 +480,17 @@ body.dark {
 }
 
 /* =================================================== */
-/* RESPONSIVE DESIGN (Mobile First) */
-/* =================================================== */
-@media (max-width: 768px) {
-    body { padding: 10px; }
-    .profile-container { padding: 15px; border-radius: 14px; }
-    .profile-banner { height: 180px; }
-    .avatar { width: 100px; height: 100px; margin-top: -80px; }
-    .bio { font-size: 14px; line-height: 1.4; }
-    .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .preview-card span { font-size: 12px; }
-    .plans-grid { grid-template-columns: 1fr; }
-    .plan-card { padding: 20px; }
-    .price { font-size: 26px; }
-    .plan-btn { font-size: 16px; padding: 16px; }
-    #purchase-toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
-}
-/* =================================================== */
 /* MODAL DE CONSENTIMENTO */
 /* =================================================== */
 .modal {
-    display: flex; /* Flexbox para centralizar */
-    position: fixed; /* Fica fixo na tela */
-    z-index: 1000; /* Acima de tudo */
+    display: flex;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.8);
     align-items: center;
     justify-content: center;
 }
@@ -505,65 +521,25 @@ body.dark {
     gap: 15px;
 }
 
-/* Esconde o conteúdo principal enquanto o modal está ativo */
 #main-content {
     filter: blur(10px);
-    pointer-events: none; /* Impede a interação com o conteúdo de fundo */
+    pointer-events: none;
 }
+
 /* =================================================== */
-/* PROMO BANNER WITH COUNTDOWN */
+/* RESPONSIVE DESIGN (Mobile First) */
 /* =================================================== */
-.promo-banner {
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
-    color: white;
-    text-align: center;
-    padding: 25px 20px;
-    border-radius: 14px;
-    margin: 30px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    animation: pulseGlow 2s infinite;
-}
-
-.promo-content h3 {
-    margin: 0 0 10px 0;
-    font-size: 24px;
-}
-
-.promo-content p {
-    margin: 0 0 15px 0;
-    font-size: 16px;
-}
-
-.countdown-container {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#countdown-timer {
-    background: rgba(0,0,0,0.2);
-    padding: 5px 10px;
-    border-radius: 8px;
-    margin-left: 10px;
-    font-family: 'Courier New', Courier, monospace;
-}
-/* PROMO BANNER WITH COUNTDOWN */
-.promo-banner {
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
-    color: white;
-    text-align: center;
-    padding: 25px 20px;
-    border-radius: 14px;
-    margin: 30px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    animation: pulseGlow 2s infinite;
-}
-.promo-content h3 { margin: 0 0 10px 0; font-size: 24px; }
-.promo-content p { margin: 0 0 15px 0; font-size: 16px; }
-.countdown-container { font-size: 18px; font-weight: bold; }
-#countdown-timer {
-    background: rgba(0,0,0,0.2);
-    padding: 5px 10px;
-    border-radius: 8px;
-    margin-left: 10px;
-    font-family: 'Courier New', Courier, monospace;
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    .profile-container { padding: 15px; border-radius: 14px; }
+    .profile-banner { height: 180px; }
+    .avatar { width: 100px; height: 100px; margin-top: -80px; }
+    .bio { font-size: 14px; line-height: 1.4; }
+    .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .preview-card span { font-size: 12px; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card { padding: 20px; }
+    .price { font-size: 26px; }
+    .plan-btn { font-size: 16px; padding: 16px; }
+    #purchase-toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
 }
