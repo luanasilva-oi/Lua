@@ -31,10 +31,7 @@ function acceptAge(){
     // Pega o parâmetro 'go' para decidir o destino
     const destination = getQueryParam('go');
 
-    if (destination === 'meta') {
-        // Vindo da Meta: vai para a página segura
-        window.location.href = "meta-safe.html";
-    } else if (destination === 'instagram') {
+    if (destination === 'instagram') {
         // Vindo do Instagram: vai para a página explícita
         window.location.href = "bio.html";
     } else {
