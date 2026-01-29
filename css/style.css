@@ -366,7 +366,7 @@ body.dark {
 
 /* --- Plan Specific Colors --- */
 .plan-btn.basic { background: #ff9800; color: #000; }
-.plan-card.basic { border: 1px solid #ff9800; }
+.plan-card.basic { border: 2px solid #ff9800; }
 
 .plan-btn.complete { background: #e53935; color: #fff; }
 .plan-card.complete { border: 2px solid #e53935; }
@@ -485,7 +485,7 @@ body.dark {
 .modal {
     display: flex;
     position: fixed;
-    z-index: 10000; /* Aumentado para ficar acima do contador */
+    z-index: 10000;
     left: 0;
     top: 0;
     width: 100%;
@@ -527,77 +527,133 @@ body.dark {
 }
 
 /* =================================================== */
-/* CONTADOR DE COMPRAS E EFEITOS VISUAIS */
+/* CONTADOR DE COMPRAS PROFISSIONAL */
 /* =================================================== */
-
-/* Animação do contador */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.purchase-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1a1a1a;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    max-width: 280px;
+    display: none;
+    animation: slideIn 0.5s ease;
+    border: 2px solid;
+    transition: all 0.3s ease;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+.purchase-notification.basic {
+    border-color: #ff9800;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a1f0f 100%);
+    box-shadow: 0 4px 20px rgba(255, 152, 0, 0.2);
 }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0px); }
+.purchase-notification.complete {
+    border-color: #e53935;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a0f0f 100%);
+    box-shadow: 0 4px 20px rgba(229, 57, 53, 0.2);
 }
 
-/* Efeitos nos botões de plano */
-.plan-card:hover .plan-btn {
-    animation: pulse 1s infinite;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-/* Badge flutuante para o plano mais vendido */
-.plan-card.featured .badge {
-    animation: float 3s ease-in-out infinite;
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
 }
 
-/* Efeito de brilho nos vídeos de preview */
-.preview-card:hover .blurred-preview-video,
-.preview-card:hover .preview-thumb {
-    filter: blur(2px) brightness(1.1);
-    transition: filter 0.3s ease;
+.purchase-notification .notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* Contador flutuante de vendas */
-.floating-sales {
+.purchase-notification .icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.purchase-notification .text-content {
+    flex-grow: 1;
+}
+
+.purchase-notification .purchase-text {
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #fff;
+}
+
+.purchase-notification .plan-info {
+    font-size: 13px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.purchase-notification .plan-type {
+    font-weight: bold;
+}
+
+.purchase-notification .time-ago {
+    font-size: 11px;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* Contador de vendas total */
+.sales-counter {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(229, 57, 53, 0.9);
     color: white;
-    padding: 8px 15px;
+    padding: 8px 20px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     z-index: 9998;
-    animation: fadeIn 0.5s ease;
     display: none;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+    animation: fadeIn 0.5s ease;
 }
 
-/* Efeito de confete (simples) */
-.confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: var(--color);
-    border-radius: 50%;
-    animation: fall linear forwards;
-    z-index: 9997;
+.sales-counter .fire-icon {
+    animation: flame 1.5s infinite;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
+@keyframes flame {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* =================================================== */
@@ -617,12 +673,18 @@ body.dark {
     .plan-btn { font-size: 16px; padding: 16px; }
     #purchase-toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
     
-    /* Ajuste para contador em mobile */
-    .purchase-counter {
+    /* Ajuste para notificações em mobile */
+    .purchase-notification {
         bottom: 10px;
         right: 10px;
         left: 10px;
+        max-width: none;
+        font-size: 13px;
+    }
+    
+    .sales-counter {
+        top: 10px;
         font-size: 12px;
-        padding: 10px 15px;
+        padding: 6px 15px;
     }
 }
