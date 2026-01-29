@@ -1,9 +1,9 @@
-// COMBINED AND ROBUST script.js (VERSÃO OTIMIZADA)
+// COMBINED AND ROBUST script.js (VERSÃO CORRIGIDA)
 
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================================
-    // 1. LÓGICA DO MODAL DE CONSENTIMENTO (RODA EM TODAS AS PÁGINAS QUE O TÊM)
+    // 1. LÓGICA DO MODAL DE CONSENTIMENTO (CORRIGIDA)
     // ==========================================================
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
@@ -11,7 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Só executa se os elementos do modal existirem na página
     if (consentModal && consentYesBtn && mainContent) {
-        console.log("Elementos do modal encontrados. Adicionando listeners...");
+        console.log("Elementos do modal encontrados.");
+        
+        // Garantir que o modal esteja visível inicialmente
+        consentModal.style.display = 'flex';
+        mainContent.style.filter = 'blur(10px)';
+        mainContent.style.pointerEvents = 'none';
 
         // Função para fechar o modal
         function closeModal() {
@@ -41,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. LÓGICA DAS PRÉVIAS CLIQUE (SÓ NA PÁGINA EXPLÍCITA)
     // ==========================================================
     if (window.location.pathname.includes('bio.html')) {
-        console.log("Página explícita detectada. Ativando lógica de prévias com vídeo borrado PERMANENTE.");
+        console.log("Página explícita detectada. Ativando lógica de prévias.");
         
         const previewCards = document.querySelectorAll('.preview-card.locked');
         previewCards.forEach(card => {
@@ -56,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // 3. OUTRAS FUNCIONALIDADES DINÂMICAS (RODAM EM TODAS AS PÁGINAS)
+    // 3. OUTRAS FUNCIONALIDADES DINÂMICAS
     // ==========================================================
     const onlineCountEl = document.getElementById("online-count");
     const accessCountEl = document.getElementById("access-count");
@@ -96,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeDailyAccess();
 
     // ==========================================================
-    // 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO (CORRIGIDA)
+    // 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
     // ==========================================================
     function startPromoCountdown() {
         const countdownEl = document.getElementById('countdown-timer');
@@ -119,111 +124,105 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
     startPromoCountdown();
+
     // ==========================================================
-// 5. CONTADOR DE COMPRAS FALSO E EFEITOS VISUAIS
-// ==========================================================
-
-function initializePurchaseCounter() {
-    // Elementos do contador
-    const counter = document.querySelector('.purchase-counter');
-    const totalEl = document.getElementById('total-purchases');
-    const floatingSales = document.querySelector('.floating-sales');
-    
-    // Criar elemento flutuante se não existir
-    if (!floatingSales && document.querySelector('.plans-grid')) {
-        const floatDiv = document.createElement('div');
-        floatDiv.className = 'floating-sales';
-        floatDiv.innerHTML = '🔥 <span id="floating-count">0</span> vendas hoje';
-        document.body.appendChild(floatDiv);
-    }
-    
-    if (!counter || !totalEl) return;
-    
-    // Inicializar contador
-    let purchaseCount = localStorage.getItem('purchase_count') || 0;
-    totalEl.textContent = purchaseCount;
-    if (document.getElementById('floating-count')) {
-        document.getElementById('floating-count').textContent = purchaseCount;
-    }
-    
-    // Simular compras aleatórias
-    function simulatePurchase() {
-        // Tempo aleatório entre 30 segundos e 2 minutos
-        const randomTime = Math.random() * (120000 - 30000) + 30000;
+    // 5. CONTADOR DE COMPRAS FALSO E EFEITOS VISUAIS
+    // ==========================================================
+    function initializePurchaseCounter() {
+        // Elementos do contador
+        const counter = document.querySelector('.purchase-counter');
+        const totalEl = document.getElementById('total-purchases');
         
-        setTimeout(() => {
-            // Incrementar contador
-            purchaseCount++;
-            localStorage.setItem('purchase_count', purchaseCount);
-            
-            // Atualizar display
-            totalEl.textContent = purchaseCount;
-            if (document.getElementById('floating-count')) {
-                document.getElementById('floating-count').textContent = purchaseCount;
-                document.querySelector('.floating-sales').style.display = 'block';
-            }
-            
-            // Mostrar notificação
-            counter.style.display = 'block';
-            counter.querySelector('.counter-text').innerHTML = 
-                `Total hoje: <strong>${purchaseCount}</strong>`;
-            
-            // Gerar nome aleatório
-            const names = ['João', 'Maria', 'Pedro', 'Ana', 'Carlos', 'Julia', 'Lucas', 'Fernanda'];
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            
-            // Criar confetes
-            createConfetti();
-            
-            // Esconder notificação após 5 segundos
-            setTimeout(() => {
-                counter.style.display = 'none';
-            }, 5000);
-            
-            // Próxima simulação
-            simulatePurchase();
-        }, randomTime);
-    }
-    
-    // Iniciar simulação
-    simulatePurchase();
-    
-    // Mostrar contador flutuante ao rolar
-    window.addEventListener('scroll', () => {
-        const floatSales = document.querySelector('.floating-sales');
-        if (floatSales && purchaseCount > 0) {
-            floatSales.style.display = 'block';
+        if (!counter || !totalEl) {
+            console.log("Contador não encontrado nesta página.");
+            return;
         }
-    });
-}
-
-// Função para criar confetes
-function createConfetti() {
-    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
-    
-    for (let i = 0; i < 20; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.top = '-10px';
-        confetti.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
-        confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
         
-        document.body.appendChild(confetti);
+        // Inicializar contador
+        let purchaseCount = parseInt(localStorage.getItem('purchase_count')) || 0;
+        totalEl.textContent = purchaseCount;
         
-        // Remover após animação
-        setTimeout(() => {
-            confetti.remove();
-        }, 3000);
+        // Criar elemento flutuante se não existir
+        if (!document.querySelector('.floating-sales') && document.querySelector('.plans-grid')) {
+            const floatDiv = document.createElement('div');
+            floatDiv.className = 'floating-sales';
+            floatDiv.innerHTML = '🔥 <span id="floating-count">' + purchaseCount + '</span> vendas hoje';
+            document.body.appendChild(floatDiv);
+        }
+        
+        // Simular compras aleatórias
+        function simulatePurchase() {
+            // Tempo aleatório entre 30 segundos e 2 minutos
+            const randomTime = Math.random() * (120000 - 30000) + 30000;
+            
+            setTimeout(() => {
+                // Incrementar contador
+                purchaseCount++;
+                localStorage.setItem('purchase_count', purchaseCount);
+                
+                // Atualizar display
+                totalEl.textContent = purchaseCount;
+                const floatingCountEl = document.getElementById('floating-count');
+                if (floatingCountEl) {
+                    floatingCountEl.textContent = purchaseCount;
+                    document.querySelector('.floating-sales').style.display = 'block';
+                }
+                
+                // Mostrar notificação
+                counter.style.display = 'block';
+                counter.querySelector('.counter-text').innerHTML = 
+                    `Total hoje: <strong>${purchaseCount}</strong>`;
+                
+                // Criar confetes
+                createConfetti();
+                
+                // Esconder notificação após 5 segundos
+                setTimeout(() => {
+                    counter.style.display = 'none';
+                }, 5000);
+                
+                // Próxima simulação
+                simulatePurchase();
+            }, randomTime);
+        }
+        
+        // Iniciar simulação após 10 segundos
+        setTimeout(simulatePurchase, 10000);
+        
+        // Mostrar contador flutuante ao rolar
+        window.addEventListener('scroll', () => {
+            const floatSales = document.querySelector('.floating-sales');
+            if (floatSales && purchaseCount > 0) {
+                floatSales.style.display = 'block';
+            }
+        });
     }
-}
 
-// Adicionar ao DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    // ... seu código existente ...
-    
+    // Função para criar confetes
+    function createConfetti() {
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        
+        for (let i = 0; i < 15; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+            confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            
+            document.body.appendChild(confetti);
+            
+            // Remover após animação
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.remove();
+                }
+            }, 3000);
+        }
+    }
+
     // Inicializar contador de compras
-    initializePurchaseCounter();
+    setTimeout(initializePurchaseCounter, 3000);
     
     // Efeito de clique nos botões de plano
     document.querySelectorAll('.plan-btn').forEach(btn => {
@@ -233,9 +232,17 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 this.style.transform = '';
             }, 200);
-            
-            // Criar confetes ao clicar
-            createConfetti();
+        });
+    });
+
+    // Efeito hover nos cards de plano
+    document.querySelectorAll('.plan-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
         });
     });
 });
