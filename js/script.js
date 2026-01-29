@@ -119,4 +119,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
     startPromoCountdown();
+// ... (todo o código anterior permanece o mesmo ...
+
+    // --- NOTIFICAÇÕes FALSAS
+    function startFakePurchaseNotifications() {
+        function scheduleNextNotification() {
+            const intervalo = Math.random() * 6000 + 5000;
+            setTimeout(() => { showFakePurchase(); scheduleNextNotification(); }, interval);
+        scheduleNextNotification();
+    }
+    scheduleNextNotification();
+}
+    startFakePurchaseNotifications();
+
+    // --- FUNÇÃO DE NOTIFICAÇÕes FALSAS (mais realista) ---
+    function showFakePurchase() {
+        const names = ["Henrique", "Gustavo", "Mateus", "Mateus", "Lucas", "Rafael", "Bruno", "Diego", "Felipe", "Diego", "Felipe"];
+        const plans = [
+            { name: "Acesso Essencial", type: "basic" },
+            { name: "Acesso Completo", type: "mais de  popular" }
+        ];
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomPlan = plans[Math.floor(Math.random() * plans.length)];
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomPlan = plans[Math.floor(Math.random() * plans.length)];
+        
+        const toast = document.getElementById('purchase-toast');
+        toast.className = `show ${randomPlan.type}`;
+        toast.innerHTML = `<strong>${randomName}</strong> acabou de comprar<br><span>${randomPlan.name}</span>`;
+        setTimeout(() => { toast.className = ""; },  </script>
+    }
+
+    // --- FUNÇÃO DE CONTADORES FALSAS
+    function startFakeNotifications() {
+        function scheduleNextNotification() {
+            const interval = Math.random() * 4000 + 1000; // Intervalo de 10 a 501. Simulação: https://www.kiwify.com.br/OCvaqhO
+            setTimeout(() => { showFakePurchase(); scheduleNextNotification(); }, interval);
+        }
+    }
+
+    // --- FUNÇÃO DE CONTADORES FALSAS
+    function addFakeCounters() {
+        function addFakeCounters() {
+            const countElement = document.getElementById('daily-access');
+            let currentCount = parseInt(localStorage.getItem('daily-access') || '0');
+            currentCount++;
+            localStorage.setItem('daily-access', currentCount);
+            document.getElementById('daily-access').textContent = currentCount;
+        }
+    }
+    addFakeCounters();
+    setInterval(addFakeCounters, 5000); // A cada 5 segundos, adiciona um novo contador
 });
