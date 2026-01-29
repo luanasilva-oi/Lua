@@ -1,9 +1,9 @@
-// COMBINED AND ROBUST script.js (VERSÃO CORRIGIDA)
+// COMBINED AND ROBUST script.js (VERSÃO ATUALIZADA)
 
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================================
-    // 1. LÓGICA DO MODAL DE CONSENTIMENTO (CORRIGIDA)
+    // 1. LÓGICA DO MODAL DE CONSENTIMENTO
     // ==========================================================
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
@@ -126,103 +126,143 @@ document.addEventListener('DOMContentLoaded', () => {
     startPromoCountdown();
 
     // ==========================================================
-    // 5. CONTADOR DE COMPRAS FALSO E EFEITOS VISUAIS
+    // 5. CONTADOR DE COMPRAS PROFISSIONAL (ATUALIZADO)
     // ==========================================================
-    function initializePurchaseCounter() {
-        // Elementos do contador
-        const counter = document.querySelector('.purchase-counter');
-        const totalEl = document.getElementById('total-purchases');
+    function initializeProfessionalPurchaseCounter() {
+        // Lista de nomes brasileiros
+        const brazilianNames = [
+            'Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel',
+            'Marcos', 'Thiago', 'Carlos', 'Eduardo', 'Bruno', 'Leonardo', 'André',
+            'Robson', 'Mario', 'Miguel', 'Bejamim', 'Arthur', 'izaque', 'Israel', 'Victor',
+            'Julio', 'Tico', 'Vitor', 'Alex', 'Adriano', 'Chico', 'Daniel'
+        ];
         
-        if (!counter || !totalEl) {
-            console.log("Contador não encontrado nesta página.");
-            return;
+        // Criar contador de vendas total
+        let totalSales = parseInt(localStorage.getItem('total_sales')) || 0;
+        
+        // Criar elemento do contador de vendas
+        if (!document.querySelector('.sales-counter')) {
+            const salesCounter = document.createElement('div');
+            salesCounter.className = 'sales-counter';
+            salesCounter.innerHTML = `
+                <span class="fire-icon">🔥</span>
+                <span id="total-sales-count">${totalSales}</span> vendas hoje
+            `;
+            document.body.appendChild(salesCounter);
         }
         
-        // Inicializar contador
-        let purchaseCount = parseInt(localStorage.getItem('purchase_count')) || 0;
-        totalEl.textContent = purchaseCount;
+        // Atualizar contador de vendas
+        function updateSalesCounter() {
+            const salesCountEl = document.getElementById('total-sales-count');
+            if (salesCountEl) {
+                salesCountEl.textContent = totalSales;
+            }
+            const salesCounter = document.querySelector('.sales-counter');
+            if (salesCounter && totalSales > 0) {
+                salesCounter.style.display = 'flex';
+            }
+        }
         
-        // Criar elemento flutuante se não existir
-        if (!document.querySelector('.floating-sales') && document.querySelector('.plans-grid')) {
-            const floatDiv = document.createElement('div');
-            floatDiv.className = 'floating-sales';
-            floatDiv.innerHTML = '🔥 <span id="floating-count">' + purchaseCount + '</span> vendas hoje';
-            document.body.appendChild(floatDiv);
+        // Função para mostrar notificação de compra
+        function showPurchaseNotification(planType) {
+            // Remover notificação anterior se existir
+            const oldNotification = document.querySelector('.purchase-notification');
+            if (oldNotification) {
+                oldNotification.style.animation = 'slideOut 0.5s ease forwards';
+                setTimeout(() => {
+                    if (oldNotification.parentNode) {
+                        oldNotification.remove();
+                    }
+                }, 500);
+            }
+            
+            // Escolher nome aleatório
+            const randomName = brazilianNames[Math.floor(Math.random() * brazilianNames.length)];
+            
+            // Determinar plano e cores
+            const planName = planType === 'basic' ? 'Acesso Básico 🛡️' : 'Acesso Completo ⭐';
+            const planClass = planType === 'basic' ? 'basic' : 'complete';
+            const planIcon = planType === 'basic' ? '🛡️' : '⭐';
+            
+            // Criar nova notificação
+            const notification = document.createElement('div');
+            notification.className = `purchase-notification ${planClass}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <div class="icon">${planIcon}</div>
+                    <div class="text-content">
+                        <div class="purchase-text">Compra realizada!</div>
+                        <div class="plan-info">
+                            <span class="plan-type">${planName}</span>
+                        </div>
+                        <div class="time-ago">Agora mesmo</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Mostrar notificação
+            setTimeout(() => {
+                notification.style.display = 'block';
+            }, 50);
+            
+            // Incrementar vendas totais
+            totalSales++;
+            localStorage.setItem('total_sales', totalSales);
+            updateSalesCounter();
+            
+            // Remover notificação após 6 segundos
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 500);
+                }
+            }, 6000);
         }
         
         // Simular compras aleatórias
-        function simulatePurchase() {
-            // Tempo aleatório entre 30 segundos e 2 minutos
-            const randomTime = Math.random() * (120000 - 30000) + 30000;
+        function simulateRandomPurchase() {
+            // Tempo aleatório entre 25 e 60 segundos
+            const randomTime = Math.random() * (60000 - 25000) + 25000;
             
             setTimeout(() => {
-                // Incrementar contador
-                purchaseCount++;
-                localStorage.setItem('purchase_count', purchaseCount);
-                
-                // Atualizar display
-                totalEl.textContent = purchaseCount;
-                const floatingCountEl = document.getElementById('floating-count');
-                if (floatingCountEl) {
-                    floatingCountEl.textContent = purchaseCount;
-                    document.querySelector('.floating-sales').style.display = 'block';
-                }
+                // Escolher plano aleatório (60% chance de completo, 40% básico)
+                const randomPlan = Math.random() < 0.6 ? 'complete' : 'basic';
                 
                 // Mostrar notificação
-                counter.style.display = 'block';
-                counter.querySelector('.counter-text').innerHTML = 
-                    `Total hoje: <strong>${purchaseCount}</strong>`;
-                
-                // Criar confetes
-                createConfetti();
-                
-                // Esconder notificação após 5 segundos
-                setTimeout(() => {
-                    counter.style.display = 'none';
-                }, 5000);
+                showPurchaseNotification(randomPlan);
                 
                 // Próxima simulação
-                simulatePurchase();
+                simulateRandomPurchase();
             }, randomTime);
         }
         
-        // Iniciar simulação após 10 segundos
-        setTimeout(simulatePurchase, 10000);
+        // Inicializar contador de vendas
+        updateSalesCounter();
         
-        // Mostrar contador flutuante ao rolar
+        // Mostrar contador ao rolar
         window.addEventListener('scroll', () => {
-            const floatSales = document.querySelector('.floating-sales');
-            if (floatSales && purchaseCount > 0) {
-                floatSales.style.display = 'block';
+            const salesCounter = document.querySelector('.sales-counter');
+            if (salesCounter && totalSales > 0) {
+                salesCounter.style.display = 'flex';
             }
         });
-    }
-
-    // Função para criar confetes
-    function createConfetti() {
-        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
         
-        for (let i = 0; i < 15; i++) {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.top = '-10px';
-            confetti.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
-            confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
-            
-            document.body.appendChild(confetti);
-            
-            // Remover após animação
-            setTimeout(() => {
-                if (confetti.parentNode) {
-                    confetti.remove();
-                }
-            }, 3000);
-        }
+        // Iniciar simulação após 5 segundos
+        setTimeout(simulateRandomPurchase, 5000);
     }
 
-    // Inicializar contador de compras
-    setTimeout(initializePurchaseCounter, 3000);
+    // ==========================================================
+    // 6. INICIALIZAÇÃO DOS SISTEMAS
+    // ==========================================================
+    
+    // Inicializar contador de compras profissional
+    setTimeout(initializeProfessionalPurchaseCounter, 3000);
     
     // Efeito de clique nos botões de plano
     document.querySelectorAll('.plan-btn').forEach(btn => {
