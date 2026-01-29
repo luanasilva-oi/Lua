@@ -485,7 +485,7 @@ body.dark {
 .modal {
     display: flex;
     position: fixed;
-    z-index: 1000;
+    z-index: 10000; /* Aumentado para ficar acima do contador */
     left: 0;
     top: 0;
     width: 100%;
@@ -526,23 +526,6 @@ body.dark {
     pointer-events: none;
 }
 
-/* =================================================== */
-/* RESPONSIVE DESIGN (Mobile First) */
-/* =================================================== */
-@media (max-width: 768px) {
-    body { padding: 10px; }
-    .profile-container { padding: 15px; border-radius: 14px; }
-    .profile-banner { height: 180px; }
-    .avatar { width: 100px; height: 100px; margin-top: -80px; }
-    .bio { font-size: 14px; line-height: 1.4; }
-    .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .preview-card span { font-size: 12px; }
-    .plans-grid { grid-template-columns: 1fr; }
-    .plan-card { padding: 20px; }
-    .price { font-size: 26px; }
-    .plan-btn { font-size: 16px; padding: 16px; }
-    #purchase-toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
-}
 /* =================================================== */
 /* CONTADOR DE COMPRAS E EFEITOS VISUAIS */
 /* =================================================== */
@@ -614,5 +597,32 @@ body.dark {
     to {
         transform: translateY(100vh) rotate(360deg);
         opacity: 0;
+    }
+}
+
+/* =================================================== */
+/* RESPONSIVE DESIGN (Mobile First) */
+/* =================================================== */
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    .profile-container { padding: 15px; border-radius: 14px; }
+    .profile-banner { height: 180px; }
+    .avatar { width: 100px; height: 100px; margin-top: -80px; }
+    .bio { font-size: 14px; line-height: 1.4; }
+    .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .preview-card span { font-size: 12px; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card { padding: 20px; }
+    .price { font-size: 26px; }
+    .plan-btn { font-size: 16px; padding: 16px; }
+    #purchase-toast { left: 10px; right: 10px; bottom: 10px; font-size: 13px; }
+    
+    /* Ajuste para contador em mobile */
+    .purchase-counter {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        font-size: 12px;
+        padding: 10px 15px;
     }
 }
