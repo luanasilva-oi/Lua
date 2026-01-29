@@ -119,16 +119,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
     startPromoCountdown();
-// ... (todo o código anterior permanece o mesmo ...
-
-    // --- NOTIFICAÇÕes FALSAS
-    function startFakePurchaseNotifications() {
-        function scheduleNextNotification() {
-            const intervalo = Math.random() * 6000 + 5000;
-            setTimeout(() => { showFakePurchase(); scheduleNextNotification(); }, interval);
-        scheduleNextNotification();
-    }
-    scheduleNextNotification();
-}
-    startFakePurchaseNotifications();
 });
