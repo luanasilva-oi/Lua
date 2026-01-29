@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. CONTADOR DE COMPRAS PROFISSIONAL (ATUALIZADO)
     // ==========================================================
     function initializeProfessionalPurchaseCounter() {
-        // Lista de nomes brasileiros
+        // Lista de nomes masculinos brasileiros
         const brazilianNames = [
             'Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel',
             'Marcos', 'Thiago', 'Carlos', 'Eduardo', 'Bruno', 'Leonardo', 'André',
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="notification-content">
                     <div class="icon">${planIcon}</div>
                     <div class="text-content">
-                        <div class="purchase-text">Compra realizada!</div>
+                        <div class="purchase-text">${randomName} comprou</div>
                         <div class="plan-info">
                             <span class="plan-type">${planName}</span>
                         </div>
