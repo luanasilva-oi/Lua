@@ -26,32 +26,6 @@
     </div>
 
     <main class="profile-container" id="main-content">
-        <!-- Contador de Compras Falso -->
-<div class="purchase-counter" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 9999;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    display: none;
-    animation: fadeIn 0.5s ease;
-">
-    <div class="counter-content">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 20px;">🛒</span>
-            <div>
-                <div style="font-weight: bold;">Compra realizada!</div>
-                <div class="counter-text">Total hoje: <span id="total-purchases">0</span></div>
-            </div>
-        </div>
-    </div>
-</div>
         
         <header class="profile-header">
             <video class="profile-banner" autoplay loop muted playsinline><source src="assets/banner.mp4" type="video/mp4"></video>
@@ -114,6 +88,32 @@
             <p class="meta-note">A maioria dos usuários escolhe o acesso completo.</p>
         </section>
     </main>
+        <!-- CONTADOR DE COMPRAS FALSO (COLOQUE AQUI, FORA DO MAIN) -->
+    <div class="purchase-counter" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 9999;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        display: none;
+        animation: fadeIn 0.5s ease;
+    ">
+        <div class="counter-content">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 20px;">🛒</span>
+                <div>
+                    <div style="font-weight: bold;">Compra realizada!</div>
+                    <div class="counter-text">Total hoje: <span id="total-purchases">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="purchase-toast"></div>
     <script src="js/script.js" defer></script>
