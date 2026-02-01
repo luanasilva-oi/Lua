@@ -143,6 +143,53 @@
             text-align: right;
         }
         
+        /* Garantia de Entrega */
+        .delivery-guarantee {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(33, 150, 243, 0.15));
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .delivery-guarantee h3 {
+            color: #4caf50;
+            margin: 0 0 10px 0;
+            font-size: 22px;
+        }
+        
+        .delivery-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .delivery-step {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        
+        .delivery-step-number {
+            font-size: 30px;
+            color: #4caf50;
+            margin-bottom: 10px;
+        }
+        
+        .delivery-step-title {
+            color: #fff;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .delivery-step-desc {
+            color: #aaa;
+            font-size: 13px;
+        }
+        
         /* FAQ */
         .faq {
             margin: 50px 0;
@@ -284,6 +331,11 @@
                 font-size: 16px;
                 padding: 18px;
             }
+            
+            .delivery-steps {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -405,6 +457,46 @@
                 </div>
             </div>
         </section>
+
+        <!-- GARANTIA DE ENTREGA IMEDIATA -->
+        <div class="delivery-guarantee">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px;">
+                <span style="font-size: 40px;">⚡</span>
+                <div>
+                    <h3 style="color: #4caf50; margin: 0; font-size: 22px;">ENTREGA IMEDIATA GARANTIDA</h3>
+                    <p style="color: #ccc; margin: 5px 0 0; font-size: 16px;">
+                        Acesso liberado em <strong>ATÉ 2 MINUTOS</strong> após pagamento
+                    </p>
+                </div>
+            </div>
+            
+            <div class="delivery-steps">
+                <div class="delivery-step">
+                    <div class="delivery-step-number">1️⃣</div>
+                    <div class="delivery-step-title">Compra Aprovada</div>
+                    <div class="delivery-step-desc">Pagamento confirmado</div>
+                </div>
+                
+                <div class="delivery-step">
+                    <div class="delivery-step-number">2️⃣</div>
+                    <div class="delivery-step-title">Redirecionamento</div>
+                    <div class="delivery-step-desc">Para página de acesso</div>
+                </div>
+                
+                <div class="delivery-step">
+                    <div class="delivery-step-number">3️⃣</div>
+                    <div class="delivery-step-title">Acesso Liberado</div>
+                    <div class="delivery-step-desc">Clique e aproveite</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                <p style="color: #fff; margin: 0; font-size: 14px;">
+                    <strong>✅ 100% dos clientes recebem acesso em até 2 minutos</strong><br>
+                    <span style="color: #aaa; font-size: 13px;">Problemas? Entre em contato pelo e-mail: <strong style="color: #4caf50;">seuemail@gmail.com</strong></span>
+                </p>
+            </div>
+        </div>
 
         <section id="pricing-plans">
             <h2 class="section-title">Escolha seu acesso</h2>
