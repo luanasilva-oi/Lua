@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 Seu Acesso Foi Liberado! | Luana Silva</title>
     <style>
-        /* MANTENHA TODO O CSS QUE JÁ TEM */
         * {
             margin: 0;
             padding: 0;
@@ -86,33 +85,50 @@
             text-align: left;
         }
         
-        .plan-selector {
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
+        .steps {
+            margin: 30px 0;
         }
         
-        .plan-btn {
-            background: #333;
-            color: white;
-            border: 2px solid #ff9800;
-            padding: 12px 25px;
-            margin: 0 10px;
-            border-radius: 8px;
-            cursor: pointer;
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        .step-number {
+            background: #ff9800;
+            color: black;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            transition: all 0.3s;
+            flex-shrink: 0;
         }
         
-        .plan-btn:hover {
-            background: #ff9800;
-            color: black;
+        .support {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
         
-        .plan-btn.active {
-            background: #ff9800;
-            color: black;
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .access-link {
+                padding: 15px 25px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -120,29 +136,20 @@
     <div class="container">
         <div class="success-icon">🎉</div>
         
-        <h1 id="page-title">PARABÉNS! SEU ACESSO FOI LIBERADO! 🔥</h1>
+        <h1>PARABÉNS! SEU ACESSO FOI LIBERADO! 🔥</h1>
         
         <p style="color: #ccc; margin-bottom: 20px; font-size: 18px;">
             Seu pagamento foi aprovado com sucesso!
         </p>
         
         <div class="access-box">
-            <h2 style="color: white; margin-bottom: 15px;">👉 SELECIONE SEU PLANO:</h2>
-            
-            <div class="plan-selector">
-                <button class="plan-btn active" onclick="selectPlan('basic')" id="btn-basic">
-                    🔓 PLANO BÁSICO
-                </button>
-                <button class="plan-btn" onclick="selectPlan('complete')" id="btn-complete">
-                    ⭐ PLANO COMPLETO
-                </button>
-            </div>
+            <h2 style="color: white; margin-bottom: 15px;">👉 CLIQUE NO BOTÃO ABAIXO PARA ACESSAR:</h2>
             
             <!-- LINK DO PLANO BÁSICO -->
             <a href="https://drive.google.com/drive/folders/1Fwqr1jW8OEA8d0VstIR_JwcJptG_Dn9K?usp=sharing" 
                class="access-link"
                id="basic-link"
-               target="_blank">
+               style="display: none;">
                 🔓 ACESSAR PLANO BÁSICO
             </a>
             
@@ -150,7 +157,6 @@
             <a href="https://drive.google.com/drive/folders/1CT5-n5tsO7M4Ftyu-h0XEb0bOm4J5lXQ?usp=sharing" 
                class="access-link"
                id="complete-link"
-               target="_blank"
                style="display: none;">
                 ⭐ ACESSAR PLANO COMPLETO
             </a>
@@ -203,7 +209,7 @@
             </p>
             <a href="mailto:seuemail@gmail.com" 
                style="color: #ff9800; font-weight: bold; font-size: 18px;">
-                seuemail@gmail.com
+                luanasilvahott@gmail.com
             </a>
             <p style="color: #666; font-size: 14px; margin-top: 10px;">
                 Informe seu nome e data da compra
@@ -212,103 +218,42 @@
     </div>
     
     <script>
-        // Sistema inteligente que detecta automaticamente
-        function detectPlanoAuto() {
+        // Detecta qual plano foi comprado pela URL
+        function detectPlano() {
             const urlParams = new URLSearchParams(window.location.search);
-            let planoDetectado = null;
+            const plano = urlParams.get('plano'); // "basic" ou "complete"
             
-            // Tenta detectar pelo URL
-            const urlString = window.location.search.toLowerCase();
-            
-            if (urlString.includes('plano=basic') || urlString.includes('basic')) {
-                planoDetectado = 'basic';
-            } else if (urlString.includes('plano=complete') || urlString.includes('complete') || urlString.includes('completo')) {
-                planoDetectado = 'complete';
-            }
-            
-            // Se detectou automaticamente
-            if (planoDetectado) {
-                selectPlan(planoDetectado);
-                document.getElementById('page-title').innerHTML = 
-                    `🎉 ACESSO ${planoDetectado === 'basic' ? 'BÁSICO' : 'COMPLETO'} LIBERADO! 🔥`;
-                
-                // Limpa URL (remove parâmetros desnecessários)
-                const cleanUrl = `${window.location.pathname}?plano=${planoDetectado}`;
-                window.history.replaceState({}, document.title, cleanUrl);
-                
-                console.log('✅ Plano detectado automaticamente:', planoDetectado);
-            } else {
-                // Se não detectou, deixa usuário escolher
-                console.log('⚠️ Não detectei o plano. Usuário deve escolher.');
-            }
-        }
-        
-        // Usuário seleciona plano manualmente
-        function selectPlan(plano) {
-            // Ativa botão correto
-            document.getElementById('btn-basic').classList.remove('active');
-            document.getElementById('btn-complete').classList.remove('active');
-            document.getElementById(`btn-${plano}`).classList.add('active');
-            
-            // Mostra link correto
             if (plano === 'basic') {
+                // Mostra link do plano básico
                 document.getElementById('basic-link').style.display = 'inline-block';
-                document.getElementById('complete-link').style.display = 'none';
-                document.getElementById('page-title').innerHTML = '🎉 ACESSO BÁSICO LIBERADO! 🔓';
-                document.title = 'Acesso Básico Liberado! | Luana Silva';
+                document.title = '🎉 Acesso Básico Liberado! | Luana Silva';
+                document.querySelector('h1').innerHTML = 'ACESSO BÁSICO LIBERADO! 🔓';
             } else {
-                document.getElementById('basic-link').style.display = 'none';
+                // Default: mostra link do plano completo (mais comum)
                 document.getElementById('complete-link').style.display = 'inline-block';
-                document.getElementById('page-title').innerHTML = '🎉 ACESSO COMPLETO LIBERADO! ⭐';
-                document.title = 'Acesso Completo Liberado! | Luana Silva';
-            }
-            
-            // Atualiza URL
-            const newUrl = `${window.location.pathname}?plano=${plano}`;
-            window.history.replaceState({}, document.title, newUrl);
-        }
-        
-        // Copiar link
-        function copyLink() {
-            const activeLink = document.querySelector('.access-link[style*="inline-block"]');
-            if (activeLink) {
-                navigator.clipboard.writeText(activeLink.href).then(() => {
-                    alert('✅ Link copiado! Agora salve nos favoritos.');
-                });
+                document.title = '🎉 Acesso Completo Liberado! | Luana Silva';
+                document.querySelector('h1').innerHTML = 'ACESSO COMPLETO LIBERADO! ⭐';
             }
         }
         
-        // Quando carrega a página
-        window.onload = function() {
-            // 1. Tenta detectar automaticamente
-            detectPlanoAuto();
-            
-            // 2. Adiciona botão de copiar
-            const links = document.querySelectorAll('.access-link');
-            links.forEach(link => {
-                link.onclick = function(e) {
-                    e.preventDefault();
-                    copyLink();
-                    // Depois de copiar, abre o link
-                    setTimeout(() => {
-                        window.open(this.href, '_blank');
-                    }, 500);
-                };
+        // Copiar URL atual para área de transferência
+        function copyPageUrl() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link desta página copiado! Salve em um lugar seguro.');
             });
+        }
+        
+        // Executa quando a página carrega
+        window.onload = function() {
+            detectPlano();
             
-            // 3. Aviso para salvar
+            // Mostra alerta para salvar a página
             setTimeout(() => {
-                if (!localStorage.getItem('alreadySaved')) {
-                    if (confirm('💾 SALVAR ESTA PÁGINA\n\nRecomendamos salvar nos favoritos para acessar sempre.\nDeseja copiar o link?')) {
-                        copyLink();
-                    }
-                    localStorage.setItem('alreadySaved', 'true');
+                if(confirm('💾 SALVAR ESTA PÁGINA\n\nRecomendamos salvar nos favoritos para acessar sempre.\nDeseja copiar o link?')) {
+                    copyPageUrl();
                 }
             }, 3000);
         };
-        
-        // Debug: mostra parâmetros da URL
-        console.log('🔍 Parâmetros da URL:', Object.fromEntries(new URLSearchParams(window.location.search)));
     </script>
 </body>
 </html>
