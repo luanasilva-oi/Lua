@@ -1,0 +1,98 @@
+<!-- Componente de Seletor de Idiomas -->
+<div class="language-switcher" id="language-switcher">
+    <div class="language-selector" id="language-selector">
+        <div class="current-language">
+            <div class="flag">
+                <span>🇧🇷</span>
+            </div>
+            <span>PT</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="language-dropdown">
+            <a href="#" class="language-option active" data-lang="pt">
+                <div class="flag">
+                    <span>🇧🇷</span>
+                </div>
+                <span>Português</span>
+            </a>
+            <a href="#" class="language-option" data-lang="en">
+                <div class="flag">
+                    <span>🇺🇸</span>
+                </div>
+                <span>English</span>
+            </a>
+            <a href="#" class="language-option" data-lang="es">
+                <div class="flag">
+                    <span>🇪🇸</span>
+                </div>
+                <span>Español</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Script para o seletor de idiomas
+document.addEventListener('DOMContentLoaded', function() {
+    const languageSelector = document.getElementById('language-selector');
+    const languageOptions = document.querySelectorAll('.language-option');
+    
+    if (!languageSelector) return;
+    
+    // Abrir/fechar dropdown
+    languageSelector.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('open');
+    });
+    
+    // Fechar dropdown ao clicar fora
+    document.addEventListener('click', function() {
+        languageSelector.classList.remove('open');
+    });
+    
+    // Mudar idioma
+    languageOptions.forEach(option => {
+        option.addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            const lang = this.getAttribute('data-lang');
+            
+            // Remover classe active de todas as opções
+            languageOptions.forEach(opt => opt.classList.remove('active'));
+            
+            // Adicionar classe active à opção selecionada
+            this.classList.add('active');
+            
+            // Mudar idioma
+            await languageManager.changeLanguage(lang);
+            
+            // Fechar dropdown
+            languageSelector.classList.remove('open');
+        });
+    });
+    
+    // Atualizar seletor quando o idioma mudar
+    window.addEventListener('languageChanged', function(e) {
+        const lang = e.detail.language;
+        const currentFlag = document.querySelector('.current-language .flag span');
+        const currentText = document.querySelector('.current-language span:not(.arrow)');
+        
+        const flags = {
+            'pt': '🇧🇷',
+            'en': '🇺🇸',
+            'es': '🇪🇸'
+        };
+        
+        const names = {
+            'pt': 'PT',
+            'en': 'EN',
+            'es': 'ES'
+        };
+        
+        if (currentFlag) currentFlag.textContent = flags[lang] || '🇧🇷';
+        if (currentText && currentText.classList.contains('arrow') === false) {
+            currentText.textContent = names[lang] || 'PT';
+        }
+    });
+});
+</script>
