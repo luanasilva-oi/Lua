@@ -13,189 +13,112 @@
 </head>
 <body class="dark">
 
-<!-- PRIMEIRO: Telegram Fix -->
-<script src="js/telegram-fix.js"></script>
-
-<!-- Container para o seletor de idiomas -->
-<div id="language-switcher-container"></div>
-
-<!-- MODAL DE CONSENTIMENTO -->
-<div id="consent-modal" class="modal">
-    <div class="modal-content">
-        <h2>Confirmação Final</h2>
-        <p>O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
-        <div class="modal-buttons">
-            <button id="consent-yes" class="plan-btn complete">Concordo e Prosseguir</button>
-            <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Voltar</a>
+    <!-- MODAL DE CONSENTIMENTO -->
+    <div id="consent-modal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmação Final</h2>
+            <p>O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
+            <div class="modal-buttons">
+                <button id="consent-yes" class="plan-btn complete">Concordo e Prosseguir</button>
+                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Voltar</a>
+            </div>
         </div>
     </div>
-</div>
 
-<main class="profile-container" id="main-content">
-    
-    <!-- CABEÇALHO DO PERFIL COM BANNER SEGURO -->
-    <header class="profile-header">
-        <video class="profile-banner" autoplay loop muted playsinline>
-            <source src="assets/banner-safe.mp4" type="video/mp4">
-        </video>
-        <img src="./assets/avatar-safe.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
-        <div class="profile-info">
-            <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
-            <div class="user-status-line">
-                <span class="username">@luanasilva.official</span>
-                <span class="status-indicator">🟢 Disponível agora</span>
-            </div>
-            <div class="social-links">
-                <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Meu Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
-                </a>
-                <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Meu X">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </a>
-            </div>
-        </div>
-        <p class="bio">Criei este espaço para compartilhar meus projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
-    </header>
-
-    <section id="status-section">
-        <div id="daily-access">🔥 <strong id="access-count">37</strong> acessos hoje</div>
-        <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
-    </section>
-
-    <!-- SEÇÃO DE PRÉVIAS ESTÁTICAS E SEGURAS -->
-    <section id="content-previews">
-        <h2 class="section-title">Meus Projetos</h2>
-        <div class="preview-grid">
-            <div class="preview-card">
-                <img src="assets/preview-safe-1.jpg" alt="Prévia do projeto" class="preview-thumb">
-            </div>
-            <div class="preview-card">
-                <img src="assets/preview-safe-2.jpg" alt="Prévia do projeto" class="preview-thumb">
-            </div>
-            <div class="preview-card">
-                <img src="assets/preview-safe-3.jpg" alt="Prévia do projeto" class="preview-thumb">
-            </div>
-            <div class="preview-card">
-                <img src="assets/preview-safe-4.jpg" alt="Prévia do projeto" class="preview-thumb">
-            </div>
-        </div>
-    </section>
-
-    <!-- BARRA DE PROMOÇÃO -->
-    <section class="promo-banner">
-        <div class="promo-content">
-            <h3>🔥 OFERTA IMPERDÍVEL 🔥</h3>
-            <p>Desconto de <strong>30%</strong> em todos os planos por tempo limitado!</p>
-            <div class="countdown-container">
-                <span>A oferta termina em:</span>
-                <span id="countdown-timer">02:00:00</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing-plans">
-        <h2 class="section-title">Escolha seu acesso</h2>
-        <div class="plans-grid">
-            <div class="plan-card basic">
-                <h3>Acesso Básico 🛡️</h3>
-                <ul class="plan-desc">
-                    <li>Seleção com meus melhores conteúdos.</li>
-                    <li>Acesso à área reservada.</li>
-                    <li>Publicações exclusivas.</li>
-                    <li>Interação personalizada.</li>
-                </ul>
-                <div class="price">R$ 19,99</div>
-                <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
-            </div>
-            <div class="plan-card complete featured">
-                <div class="badge">Mais escolhido</div>
-                <h3>Acesso Completo ⭐</h3>
-                <ul class="plan-desc">
-                    <li>Biblioteca completa de projetos.</li>
-                    <li>Conteúdos inéditos e frequentes.</li>
-                    <li>Acesso total à área de membros.</li>
-                    <li>Prioridade no suporte.</li>
-                </ul>
-                <div class="price">R$ 29,90</div>
-                <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">Acessar Agora</a>
-            </div>
-        </div>
-        <p class="meta-note">A maioria dos usuários escolhe o acesso completo.</p>
-    </section>
-</main>
-
-<div id="purchase-toast"></div>
-
-<!-- SEGUNDO: Script principal -->
-<script src="js/script.js" defer></script>
-
-<script>
-// Script para o seletor de idiomas
-document.addEventListener('DOMContentLoaded', function() {
-    const languageSwitcherHTML = `
-        <div class="language-switcher">
-            <div class="language-selector">
-                <div class="current-language">
-                    <div class="flag">🇧🇷</div>
-                    <span>PT</span>
-                    <span class="arrow">▼</span>
+    <main class="profile-container" id="main-content">
+        
+        <!-- CABEÇALHO DO PERFIL COM BANNER SEGURO -->
+        <header class="profile-header">
+            <video class="profile-banner" autoplay loop muted playsinline>
+                <source src="assets/banner-safe.mp4" type="video/mp4">
+            </video>
+            <img src="./assets/avatar-safe.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            <div class="profile-info">
+                <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
+                <div class="user-status-line">
+                    <span class="username">@luanasilva.official</span>
+                    <span class="status-indicator">🟢 Disponível agora</span>
                 </div>
-                <div class="language-dropdown">
-                    <a href="#" class="language-option active" data-lang="pt">
-                        <div class="flag">🇧🇷</div>
-                        <span>Português</span>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Meu Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
                     </a>
-                    <a href="#" class="language-option" data-lang="en">
-                        <div class="flag">🇺🇸</div>
-                        <span>English</span>
-                    </a>
-                    <a href="#" class="language-option" data-lang="es">
-                        <div class="flag">🇪🇸</div>
-                        <span>Español</span>
+                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Meu X">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
                 </div>
             </div>
-        </div>
-    `;
-    
-    document.getElementById('language-switcher-container').innerHTML = languageSwitcherHTML;
-    
-    // Configurar eventos
-    const languageSelector = document.querySelector('.language-selector');
-    const languageOptions = document.querySelectorAll('.language-option');
-    
-    if (languageSelector) {
-        languageSelector.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('open');
-        });
-        
-        document.addEventListener('click', function() {
-            languageSelector.classList.remove('open');
-        });
-        
-        languageOptions.forEach(option => {
-            option.addEventListener('click', function(e) {
-                e.preventDefault();
-                const lang = this.getAttribute('data-lang');
-                localStorage.setItem('selectedLanguage', lang);
-                location.reload();
-            });
-        });
-        
-        // Carregar idioma salvo
-        const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
-        const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
-        const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
-        
-        const currentFlag = document.querySelector('.current-language .flag');
-        const currentText = document.querySelector('.current-language span:not(.arrow)');
-        
-        if (currentFlag) currentFlag.textContent = flags[savedLang];
-        if (currentText) currentText.textContent = names[savedLang];
-    }
-});
-</script>
+            <p class="bio">Criei este espaço para compartilhar meus projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
+        </header>
 
+        <section id="status-section">
+            <div id="daily-access">🔥 <strong id="access-count">37</strong> acessos hoje</div>
+            <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
+        </section>
+
+        <!-- SEÇÃO DE PRÉVIAS ESTÁTICAS E SEGURAS -->
+        <section id="content-previews">
+            <h2 class="section-title">Meus Projetos</h2>
+            <div class="preview-grid">
+                <div class="preview-card">
+                    <img src="assets/preview-safe-1.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
+                <div class="preview-card">
+                    <img src="assets/preview-safe-2.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
+                <div class="preview-card">
+                    <img src="assets/preview-safe-3.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
+                <div class="preview-card">
+                    <img src="assets/preview-safe-4.jpg" alt="Prévia do projeto" class="preview-thumb">
+                </div>
+            </div>
+        </section>
+
+        <!-- BARRA DE PROMOÇÃO -->
+        <section class="promo-banner">
+            <div class="promo-content">
+                <h3>🔥 OFERTA IMPERDÍVEL 🔥</h3>
+                <p>Desconto de <strong>30%</strong> em todos os planos por tempo limitado!</p>
+                <div class="countdown-container">
+                    <span>A oferta termina em:</span>
+                    <span id="countdown-timer">02:00:00</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing-plans">
+            <h2 class="section-title">Escolha seu acesso</h2>
+            <div class="plans-grid">
+                <div class="plan-card basic">
+                    <h3>Acesso Básico 🛡️</h3>
+                    <ul class="plan-desc">
+                        <li>Seleção com meus melhores conteúdos.</li>
+                        <li>Acesso à área reservada.</li>
+                        <li>Publicações exclusivas.</li>
+                        <li>Interação personalizada.</li>
+                    </ul>
+                    <div class="price">R$ 19,99</div>
+                    <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
+                </div>
+                <div class="plan-card complete featured">
+                    <div class="badge">Mais escolhido</div>
+                    <h3>Acesso Completo ⭐</h3>
+                    <ul class="plan-desc">
+                        <li>Biblioteca completa de projetos.</li>
+                        <li>Conteúdos inéditos e frequentes.</li>
+                        <li>Acesso total à área de membros.</li>
+                        <li>Prioridade no suporte.</li>
+                    </ul>
+                    <div class="price">R$ 29,90</div>
+                    <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">Acessar Agora</a>
+                </div>
+            </div>
+            <p class="meta-note">A maioria dos usuários escolhe o acesso completo.</p>
+        </section>
+    </main>
+
+    <div id="purchase-toast"></div>
+    <script src="js/script.js" defer></script>
 </body>
 </html>
