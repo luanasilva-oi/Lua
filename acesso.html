@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luana Silva | Projeto Exclusivo</title>
+    <title data-i18n="profileTitle">Luana Silva | Projeto Exclusivo</title>
     <link rel="stylesheet" href="css/style.css">
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
@@ -13,14 +13,17 @@
 </head>
 <body class="dark">
 
+    <!-- Container para o seletor de idiomas -->
+    <div id="language-switcher-container"></div>
+
     <!-- MODAL DE CONSENTIMENTO -->
     <div id="consent-modal" class="modal">
         <div class="modal-content">
-            <h2>Confirmação Final</h2>
-            <p>O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
+            <h2 data-i18n="consentTitle">Confirmação Final</h2>
+            <p data-i18n="consentText">O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
             <div class="modal-buttons">
-                <button id="consent-yes" class="plan-btn complete">Concordo e Prosseguir</button>
-                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Voltar</a>
+                <button id="consent-yes" class="plan-btn complete" data-i18n="consentYes">Concordo e Prosseguir</button>
+                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic" data-i18n="consentNo">Voltar</a>
             </div>
         </div>
     </div>
@@ -37,7 +40,7 @@
                 <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
                 <div class="user-status-line">
                     <span class="username">@luanasilva.official</span>
-                    <span class="status-indicator">🟢 Disponível agora</span>
+                    <span class="status-indicator" data-i18n="availableNow">🟢 Disponível agora</span>
                 </div>
                 <div class="social-links">
                     <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Meu Instagram">
@@ -48,17 +51,17 @@
                     </a>
                 </div>
             </div>
-            <p class="bio">Criei este espaço para compartilhar meus projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
+            <p class="bio" data-i18n-html="bioText">Criei este espaço para compartilhar meus projetos pessoais e conteúdos digitais que não publico em outras redes.<br>Aqui você acompanha bastidores, novidades e publicações exclusivas para quem quer estar mais perto do meu trabalho.<br>Fique à vontade para explorar 💫</p>
         </header>
 
         <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">37</strong> acessos hoje</div>
-            <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
+            <div id="daily-access">🔥 <strong id="access-count">37</strong> <span data-i18n="dailyAccess">acessos hoje</span></div>
+            <div id="online-users">🟢 <strong id="online-count">12</strong> <span data-i18n="onlineUsers">pessoas online agora</span></div>
         </section>
 
         <!-- SEÇÃO DE PRÉVIAS ESTÁTICAS E SEGURAS -->
         <section id="content-previews">
-            <h2 class="section-title">Meus Projetos</h2>
+            <h2 class="section-title" data-i18n="projectsTitle">Meus Projetos</h2>
             <div class="preview-grid">
                 <div class="preview-card">
                     <img src="assets/preview-safe-1.jpg" alt="Prévia do projeto" class="preview-thumb">
@@ -78,47 +81,150 @@
         <!-- BARRA DE PROMOÇÃO -->
         <section class="promo-banner">
             <div class="promo-content">
-                <h3>🔥 OFERTA IMPERDÍVEL 🔥</h3>
-                <p>Desconto de <strong>30%</strong> em todos os planos por tempo limitado!</p>
+                <h3 data-i18n="offerTitle">🔥 OFERTA IMPERDÍVEL 🔥</h3>
+                <p data-i18n-html="offerText">Desconto de <strong>30%</strong> em todos os planos por tempo limitado!</p>
                 <div class="countdown-container">
-                    <span>A oferta termina em:</span>
+                    <span data-i18n="offerEnds">A oferta termina em:</span>
                     <span id="countdown-timer">02:00:00</span>
                 </div>
             </div>
         </section>
 
         <section id="pricing-plans">
-            <h2 class="section-title">Escolha seu acesso</h2>
+            <h2 class="section-title" data-i18n="chooseAccess">Escolha seu acesso</h2>
             <div class="plans-grid">
                 <div class="plan-card basic">
-                    <h3>Acesso Básico 🛡️</h3>
+                    <h3 data-i18n="basicTitle">Acesso Básico 🛡️</h3>
                     <ul class="plan-desc">
-                        <li>Seleção com meus melhores conteúdos.</li>
-                        <li>Acesso à área reservada.</li>
-                        <li>Publicações exclusivas.</li>
-                        <li>Interação personalizada.</li>
+                        <!-- As features serão preenchidas automaticamente pelo JavaScript -->
                     </ul>
-                    <div class="price">R$ 19,99</div>
-                    <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX">Liberar Acesso</a>
+                    <div class="price" data-i18n="basicPrice">R$ 19,99</div>
+                    <a class="plan-btn basic" href="https://pay.kiwify.com.br/LZ692NX" data-i18n="basicButton">Liberar Acesso</a>
                 </div>
                 <div class="plan-card complete featured">
-                    <div class="badge">Mais escolhido</div>
-                    <h3>Acesso Completo ⭐</h3>
+                    <div class="badge" data-i18n="popularChoice">Mais escolhido</div>
+                    <h3 data-i18n="completeTitle">Acesso Completo ⭐</h3>
                     <ul class="plan-desc">
-                        <li>Biblioteca completa de projetos.</li>
-                        <li>Conteúdos inéditos e frequentes.</li>
-                        <li>Acesso total à área de membros.</li>
-                        <li>Prioridade no suporte.</li>
+                        <!-- As features serão preenchidas automaticamente pelo JavaScript -->
                     </ul>
-                    <div class="price">R$ 29,90</div>
-                    <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO">Acessar Agora</a>
+                    <div class="price" data-i18n="completePrice">R$ 29,90</div>
+                    <a class="plan-btn complete" href="https://pay.kiwify.com.br/OCvaqhO" data-i18n="completeButton">Acessar Agora</a>
                 </div>
             </div>
-            <p class="meta-note">A maioria dos usuários escolhe o acesso completo.</p>
+            <p class="meta-note" data-i18n="mostUsers">A maioria dos usuários escolhe o acesso completo.</p>
         </section>
     </main>
 
     <div id="purchase-toast"></div>
+    
+    <!-- Incluir gerenciador de idiomas -->
+    <script src="js/lang.js"></script>
     <script src="js/script.js" defer></script>
+    
+    <script>
+    // Script para carregar o seletor de idiomas
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageSwitcherContainer = document.getElementById('language-switcher-container');
+        if (languageSwitcherContainer) {
+            // Criar seletor de idiomas dinamicamente
+            const languageSwitcherHTML = `
+                <div class="language-switcher">
+                    <div class="language-selector" id="language-selector">
+                        <div class="current-language">
+                            <div class="flag">
+                                <span>🇧🇷</span>
+                            </div>
+                            <span>PT</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="language-dropdown">
+                            <a href="#" class="language-option active" data-lang="pt">
+                                <div class="flag">
+                                    <span>🇧🇷</span>
+                                </div>
+                                <span>Português</span>
+                            </a>
+                            <a href="#" class="language-option" data-lang="en">
+                                <div class="flag">
+                                    <span>🇺🇸</span>
+                                </div>
+                                <span>English</span>
+                            </a>
+                            <a href="#" class="language-option" data-lang="es">
+                                <div class="flag">
+                                    <span>🇪🇸</span>
+                                </div>
+                                <span>Español</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            languageSwitcherContainer.innerHTML = languageSwitcherHTML;
+            
+            // Configurar eventos do seletor
+            const languageSelector = document.getElementById('language-selector');
+            const languageOptions = document.querySelectorAll('.language-option');
+            
+            if (languageSelector) {
+                // Carregar idioma salvo
+                const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
+                
+                // Atualizar visualização inicial
+                const updateLanguageDisplay = (lang) => {
+                    const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
+                    const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
+                    
+                    const currentFlag = document.querySelector('.current-language .flag span');
+                    const currentText = document.querySelector('.current-language span:not(.arrow)');
+                    
+                    if (currentFlag) currentFlag.textContent = flags[lang] || '🇧🇷';
+                    if (currentText) currentText.textContent = names[lang] || 'PT';
+                    
+                    // Atualizar classes active
+                    languageOptions.forEach(opt => opt.classList.remove('active'));
+                    document.querySelector(`.language-option[data-lang="${lang}"]`)?.classList.add('active');
+                };
+                
+                updateLanguageDisplay(savedLang);
+                
+                // Abrir/fechar dropdown
+                languageSelector.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('open');
+                });
+                
+                // Fechar dropdown ao clicar fora
+                document.addEventListener('click', function() {
+                    languageSelector.classList.remove('open');
+                });
+                
+                // Mudar idioma
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', async function(e) {
+                        e.preventDefault();
+                        
+                        const lang = this.getAttribute('data-lang');
+                        
+                        // Salvar preferência
+                        localStorage.setItem('selectedLanguage', lang);
+                        
+                        // Atualizar display
+                        updateLanguageDisplay(lang);
+                        
+                        // Fechar dropdown
+                        languageSelector.classList.remove('open');
+                        
+                        // Recarregar a página para aplicar o idioma
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 300);
+                    });
+                });
+            }
+        }
+    });
+    </script>
 </body>
 </html>
