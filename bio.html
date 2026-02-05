@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="profileTitle">Luana Silva | Conteúdo Adulto Exclusivo 18+</title>
+    <title>Luana Silva | Conteúdo Adulto Exclusivo 18+</title>
     <link rel="stylesheet" href="css/style.css">
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
@@ -341,352 +341,377 @@
 </head>
 <body class="dark">
 
-    <!-- Container para o seletor de idiomas -->
-    <div id="language-switcher-container"></div>
+<!-- PRIMEIRO: Telegram Fix -->
+<script src="js/telegram-fix.js"></script>
 
-    <!-- MODAL DE CONSENTIMENTO -->
-    <div id="consent-modal" class="modal">
-        <div class="modal-content">
-            <h2 data-i18n="consentTitle">Confirmação Final</h2>
-            <p data-i18n="consentText">O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
-            <div class="modal-buttons">
-                <button id="consent-yes" class="plan-btn complete" data-i18n="consentYes">Concordo e Prosseguir</button>
-                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic" data-i18n="consentNo">Voltar</a>
-            </div>
+<!-- Container para o seletor de idiomas -->
+<div id="language-switcher-container"></div>
+
+<!-- MODAL DE CONSENTIMENTO -->
+<div id="consent-modal" class="modal">
+    <div class="modal-content">
+        <h2>Confirmação Final</h2>
+        <p>O conteúdo a seguir é de natureza pessoal e de acesso restrito. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso deste projeto digital.</p>
+        <div class="modal-buttons">
+            <button id="consent-yes" class="plan-btn complete">Concordo e Prosseguir</button>
+            <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Voltar</a>
         </div>
     </div>
+</div>
 
-    <main class="profile-container" id="main-content">
-        
-        <!-- HEADLINE FORTE -->
-        <div class="headline">
-            <h1 style="color: #fff; font-size: 28px; margin-bottom: 15px;" data-i18n="intimateHeadline">
-                🚨 ACESSO VITALÍCIO AO MEU CONTEÚDO MAIS ÍNTIMO
-            </h1>
-            <p style="color: #ccc; font-size: 18px; line-height: 1.6;" data-i18n-html="intimateSubtitle">
-                <strong>600+ VÍDEOS SEM CENSURA</strong> • <strong>GEMIDOS REAIS</strong> • <strong>CORPO 100% À MOSTRA</strong><br>
-                <span style="color: #ff9800; font-size: 24px; font-weight: bold;">APENAS R$ 29,90</span> • <strong>GARANTIA DE 7 DIAS</strong>
-            </p>
-            <div class="guarantee-badge" data-i18n="guaranteeBadge">✅ GARANTIA DE REEMBOLSO</div>
+<main class="profile-container" id="main-content">
+    
+    <!-- HEADLINE FORTE -->
+    <div class="headline">
+        <h1 style="color: #fff; font-size: 28px; margin-bottom: 15px;">
+            🚨 ACESSO VITALÍCIO AO MEU CONTEÚDO MAIS ÍNTIMO
+        </h1>
+        <p style="color: #ccc; font-size: 18px; line-height: 1.6;">
+            <strong>600+ VÍDEOS SEM CENSURA</strong> • <strong>GEMIDOS REAIS</strong> • <strong>CORPO 100% À MOSTRA</strong><br>
+            <span style="color: #ff9800; font-size: 24px; font-weight: bold;">APENAS R$ 29,90</span> • <strong>GARANTIA DE 7 DIAS</strong>
+        </p>
+        <div class="guarantee-badge">✅ GARANTIA DE REEMBOLSO</div>
+    </div>
+    
+    <header class="profile-header">
+        <video class="profile-banner" autoplay loop muted playsinline><source src="assets/banner.mp4" type="video/mp4"></video>
+        <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+        <div class="profile-info">
+            <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
+            <div class="user-status-line">
+                <span class="username">@luanasilva.official</span>
+                <span class="status-indicator">🟢 Disponível agora</span>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Meu Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg></a>
+                <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Meu X"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            </div>
         </div>
-        
-        <header class="profile-header">
-            <video class="profile-banner" autoplay loop muted playsinline><source src="assets/banner.mp4" type="video/mp4"></video>
-            <img src="./assets/avatar.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
-            <div class="profile-info">
-                <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
-                <div class="user-status-line">
-                    <span class="username">@luanasilva.official</span>
-                    <span class="status-indicator" data-i18n="availableNow">🟢 Disponível agora</span>
-                </div>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Meu Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg></a>
-                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Meu X"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                </div>
+        <p class="bio">Prazer, eu sou a Luana, tenho 22 anos — esse é meu espaço privado, onde me mostro sem máscaras, mais próxima e intensa; se você entrou aqui, é porque quer ver além… e eu adoro mostrar.<br>Escolha seu plano e entre na minha vida particular.</p>
+    </header>
+
+    <section id="status-section">
+        <div id="daily-access">🔥 <strong id="access-count">37</strong> acessos hoje</div>
+        <div id="online-users">🟢 <strong id="online-count">12</strong> pessoas online agora</div>
+    </section>
+
+    <!-- URGÊNCIA EXTREMA -->
+    <div class="urgency-extreme" id="urgency-section">
+        ⚠️ <strong>ÚLTIMAS VAGAS DISPONÍVEIS!</strong> 
+        Apenas <span id="remaining-spots">3</span> pessoas podem entrar hoje!
+    </div>
+
+    <section id="content-previews">
+        <h2 class="section-title">Conteúdo Bloqueado 🔒</h2>
+        <div class="preview-grid">
+            <div class="preview-card locked">
+                <video class="blurred-preview-video" src="assets/preview1.mp4" autoplay loop muted playsinline preload="auto"></video>
             </div>
-            <p class="bio">Prazer, eu sou a Luana, tenho 22 anos — esse é meu espaço privado, onde me mostro sem máscaras, mais próxima e intensa; se você entrou aqui, é porque quer ver além… e eu adoro mostrar.<br>Escolha seu plano e entre na minha vida particular.</p>
-        </header>
-
-        <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">37</strong> <span data-i18n="dailyAccess">acessos hoje</span></div>
-            <div id="online-users">🟢 <strong id="online-count">12</strong> <span data-i18n="onlineUsers">pessoas online agora</span></div>
-        </section>
-
-        <!-- URGÊNCIA EXTREMA -->
-        <div class="urgency-extreme" id="urgency-section" data-i18n="urgencyText" data-i18n-params='{"spots": "3"}'>
-            ⚠️ <strong>ÚLTIMAS VAGAS DISPONÍVEIS!</strong> 
-            Apenas <span id="remaining-spots">3</span> pessoas podem entrar hoje!
+            <div class="preview-card locked">
+                <video class="blurred-preview-video" src="assets/preview2.mp4" autoplay loop muted playsinline preload="auto"></video>
+            </div>
+            <div class="preview-card locked">
+                <video class="blurred-preview-video" src="assets/preview3.mp4" autoplay loop muted playsinline preload="auto"></video>
+            </div>
+            <div class="preview-card locked">
+                <video class="blurred-preview-video" src="assets/preview4.mp4" autoplay loop muted playsinline preload="auto"></video>
+            </div>
         </div>
+    </section>
 
-        <section id="content-previews">
-            <h2 class="section-title" data-i18n="lockedContent">Conteúdo Bloqueado 🔒</h2>
-            <div class="preview-grid">
-                <div class="preview-card locked">
-                    <video class="blurred-preview-video" src="assets/preview1.mp4" autoplay loop muted playsinline preload="auto"></video>
-                </div>
-                <div class="preview-card locked">
-                    <video class="blurred-preview-video" src="assets/preview2.mp4" autoplay loop muted playsinline preload="auto"></video>
-                </div>
-                <div class="preview-card locked">
-                    <video class="blurred-preview-video" src="assets/preview3.mp4" autoplay loop muted playsinline preload="auto"></video>
-                </div>
-                <div class="preview-card locked">
-                    <video class="blurred-preview-video" src="assets/preview4.mp4" autoplay loop muted playsinline preload="auto"></video>
-                </div>
+    <!-- BARRA DE PROMOÇÃO -->
+    <section class="promo-banner">
+        <div class="promo-content">
+            <h3>🔥 OFERTA IMPERDÍVEL 🔥</h3>
+            <p>Desconto de <strong>30%</strong> em todos os planos por tempo limitado!</p>
+            <div class="countdown-container">
+                <span>A oferta termina em:</span>
+                <span id="countdown-timer">02:00:00</span>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- BARRA DE PROMOÇÃO -->
-        <section class="promo-banner">
-            <div class="promo-content">
-                <h3 data-i18n="offerTitle">🔥 OFERTA IMPERDÍVEL 🔥</h3>
-                <p data-i18n-html="offerText">Desconto de <strong>30%</strong> em todos os planos por tempo limitado!</p>
-                <div class="countdown-container">
-                    <span data-i18n="offerEnds">A oferta termina em:</span>
-                    <span id="countdown-timer">02:00:00</span>
+    <!-- DEPOIMENTOS FALSOS -->
+    <section class="testimonials">
+        <h2 class="section-title">O que dizem quem já comprou 🔥</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <span class="testimonial-name">Carlos, 28 anos</span>
+                    <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- DEPOIMENTOS FALSOS -->
-        <section class="testimonials">
-            <h2 class="section-title" data-i18n="whatTheySay">O que dizem quem já comprou 🔥</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <span class="testimonial-name">Carlos, 28 anos</span>
-                        <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-                    </div>
-                    <p class="testimonial-text">"Comprei semana passada e já vi mais de 100 vídeos. Vale cada centavo! Conteúdo real e muito explícito, exatamente como promete."</p>
-                    <span class="testimonial-time">Comprou há 2 dias</span>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <span class="testimonial-name">Pedro, 32 anos</span>
-                        <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-                    </div>
-                    <p class="testimonial-text">"Já comprei vários conteúdos, mas esse é o mais autêntico. Os gemidos são reais, e ela não tem medo de mostrar tudo. Recomendo!"</p>
-                    <span class="testimonial-time">Comprou há 5 dias</span>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <span class="testimonial-name">Bruno, 25 anos</span>
-                        <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
-                    </div>
-                    <p class="testimonial-text">"Pensei que era exagero, mas são mais de 600 vídeos mesmo! A qualidade é incrível. Melhor investimento que fiz."</p>
-                    <span class="testimonial-time">Comprou hoje</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- GARANTIA DE ENTREGA IMEDIATA -->
-        <div class="delivery-guarantee">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px;">
-                <span style="font-size: 40px;">⚡</span>
-                <div>
-                    <h3 style="color: #4caf50; margin: 0; font-size: 22px;" data-i18n="deliveryTitle">ENTREGA IMEDIATA GARANTIDA</h3>
-                    <p style="color: #ccc; margin: 5px 0 0; font-size: 16px;" data-i18n-html="deliverySubtitle">
-                        Acesso liberado em <strong>ATÉ 2 MINUTOS</strong> após pagamento
-                    </p>
-                </div>
+                <p class="testimonial-text">"Comprei semana passada e já vi mais de 100 vídeos. Vale cada centavo! Conteúdo real e muito explícito, exatamente como promete."</p>
+                <span class="testimonial-time">Comprou há 2 dias</span>
             </div>
             
-            <div class="delivery-steps">
-                <div class="delivery-step">
-                    <div class="delivery-step-number">1️⃣</div>
-                    <div class="delivery-step-title" data-i18n="step1">Compra Aprovada</div>
-                    <div class="delivery-step-desc" data-i18n="step1Desc">Pagamento confirmado</div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <span class="testimonial-name">Pedro, 32 anos</span>
+                    <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
                 </div>
-                
-                <div class="delivery-step">
-                    <div class="delivery-step-number">2️⃣</div>
-                    <div class="delivery-step-title" data-i18n="step2">Redirecionamento</div>
-                    <div class="delivery-step-desc" data-i18n="step2Desc">Para página de acesso</div>
-                </div>
-                
-                <div class="delivery-step">
-                    <div class="delivery-step-number">3️⃣</div>
-                    <div class="delivery-step-title" data-i18n="step3">Acesso Liberado</div>
-                    <div class="delivery-step-desc" data-i18n="step3Desc">Clique e aproveite</div>
-                </div>
+                <p class="testimonial-text">"Já comprei vários conteúdos, mas esse é o mais autêntico. Os gemidos são reais, e ela não tem medo de mostrar tudo. Recomendo!"</p>
+                <span class="testimonial-time">Comprou há 5 dias</span>
             </div>
             
-            <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                <p style="color: #fff; margin: 0; font-size: 14px;">
-                    <strong>✅ 100% dos clientes recebem acesso em até 2 minutos</strong><br>
-                    <span style="color: #aaa; font-size: 13px;">Problemas? Entre em contato pelo e-mail: <strong style="color: #4caf50;">luanasilvahott@gmail.com</strong></span>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <span class="testimonial-name">Bruno, 25 anos</span>
+                    <span class="testimonial-rating">⭐⭐⭐⭐⭐</span>
+                </div>
+                <p class="testimonial-text">"Pensei que era exagero, mas são mais de 600 vídeos mesmo! A qualidade é incrível. Melhor investimento que fiz."</p>
+                <span class="testimonial-time">Comprou hoje</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GARANTIA DE ENTREGA IMEDIATA -->
+    <div class="delivery-guarantee">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px;">
+            <span style="font-size: 40px;">⚡</span>
+            <div>
+                <h3 style="color: #4caf50; margin: 0; font-size: 22px;">ENTREGA IMEDIATA GARANTIDA</h3>
+                <p style="color: #ccc; margin: 5px 0 0; font-size: 16px;">
+                    Acesso liberado em <strong>ATÉ 2 MINUTOS</strong> após pagamento
                 </p>
             </div>
         </div>
+        
+        <div class="delivery-steps">
+            <div class="delivery-step">
+                <div class="delivery-step-number">1️⃣</div>
+                <div class="delivery-step-title">Compra Aprovada</div>
+                <div class="delivery-step-desc">Pagamento confirmado</div>
+            </div>
+            
+            <div class="delivery-step">
+                <div class="delivery-step-number">2️⃣</div>
+                <div class="delivery-step-title">Redirecionamento</div>
+                <div class="delivery-step-desc">Para página de acesso</div>
+            </div>
+            
+            <div class="delivery-step">
+                <div class="delivery-step-number">3️⃣</div>
+                <div class="delivery-step-title">Acesso Liberado</div>
+                <div class="delivery-step-desc">Clique e aproveite</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <p style="color: #fff; margin: 0; font-size: 14px;">
+                <strong>✅ 100% dos clientes recebem acesso em até 2 minutos</strong><br>
+                <span style="color: #aaa; font-size: 13px;">Problemas? Entre em contato pelo e-mail: <strong style="color: #4caf50;">luanasilvahott@gmail.com</strong></span>
+            </p>
+        </div>
+    </div>
 
-        <section id="pricing-plans">
-            <h2 class="section-title" data-i18n="chooseAccess">Escolha seu acesso</h2>
-            <div class="plans-grid">
-                <div class="plan-card basic">
-                    <h3 data-i18n="basicTitle">🔓 Acesso Básico 🛡️</h3>
-                    <ul class="plan-desc">
-                        <!-- Carregado dinamicamente pelo JavaScript -->
-                    </ul>
-                    <div class="price" data-i18n="basicPrice">R$ 19,99</div>
-                    <a class="plan-btn basic enhanced" href="https://pay.kiwify.com.br/LZ692NX" data-i18n="basicPlanEnhanced">
-                        🔥 QUERO MEU ACESSO BÁSICO AGORA!
+    <section id="pricing-plans">
+        <h2 class="section-title">Escolha seu acesso</h2>
+        <div class="plans-grid">
+            <div class="plan-card basic">
+                <h3>🔓 Acesso Básico 🛡️</h3>
+                <ul class="plan-desc">
+                    <li><strong>Meu Conteúdo adulto explícito</strong> com foco em te fazer G0Z4R!!</li>
+                    <li>Vídeos reais de <strong>masturbação intensa</strong></li>
+                    <li>Usando <strong>brinquedos íntimos</strong> bem gostoso</li>
+                    <li>Corpo à mostra, <strong>sem censura</strong> ou cortes</li>
+                    <li>Sensualidade direta, <strong>sem enrolação</strong></li>
+                    <li>Prazer real / <strong>Vem ver minha BUC3TlNH4 Amor.</strong></li>
+                </ul>
+                <div class="price">R$ 19,99</div>
+                <a class="plan-btn basic enhanced" href="https://pay.kiwify.com.br/LZ692NX">
+                    🔥 QUERO MEU ACESSO BÁSICO AGORA!
+                </a>
+            </div>
+            <div class="plan-card complete featured">
+                <div class="badge">Mais escolhido</div>
+                <h3>⭐ Acesso Completo</h3>
+                <ul class="plan-desc">
+                    <li><strong>Acesso TOTAL</strong> ao meu conteúdo adulto mais explícito</li>
+                    <li>Mais de <strong>600 VÍDEOS sem censura</strong></li>
+                    <li>Transando Gostoso, <strong>ATÉ G0Z4R!!!</strong></li>
+                    <li>Masturbação intensa e <strong>prazer real</strong></li>
+                    <li>Close íntimo do corpo e <strong>dos detalhes</strong></li>
+                    <li>Sons reais, <strong>gemidos e entrega total</strong></li>
+                    <li>Conteúdo <strong>totalmente nua</strong>, sem cortes</li>
+                    <li>Conteúdo direto ao ponto, <strong>sem enrolação</strong></li>
+                    <li>Galeria exclusiva com <strong>500+ FOTOS privadas</strong></li>
+                </ul>
+                <div class="price">R$ 29,90</div>
+                <a class="plan-btn complete enhanced" href="https://pay.kiwify.com.br/OCvaqhO">
+                    ⭐ SIM, QUERO ACESSO COMPLETO E VER TUDO!
+                </a>
+            </div>
+        </div>
+        <p class="meta-note">Para quem quer ver tudo, sem limites e sem versões leves.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <h2 class="section-title">Perguntas Frequentes ❓</h2>
+        
+        <div class="faq-item">
+            <button class="faq-question">É seguro comprar?</button>
+            <div class="faq-answer">
+                <p>Sim! Usamos plataforma segura com criptografia. Seu pagamento está 100% protegido e seu acesso é totalmente discreto.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Como recebo o acesso?</button>
+            <div class="faq-answer">
+                <p>Imediatamente após o pagamento! Você recebe acesso instantâneo à área de membros. Basta clicar no botão e seguir os passos.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Posso cancelar depois?</button>
+            <div class="faq-answer">
+                <p>É acesso vitalício! Paga uma vez e tem acesso para sempre, sem mensalidade. E ainda tem garantia de 7 dias se não gostar.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">O conteúdo é realmente explícito?</button>
+            <div class="faq-answer">
+                <p>SIM! Conteúdo 100% sem censura. Vídeos reais de masturbação, gemidos autênticos, corpo totalmente à mostra e cenas íntimas sem cortes.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Qual a diferença entre os planos?</button>
+            <div class="faq-answer">
+                <p>Básico: seleção dos melhores vídeos. Completo: TODOS os 600+ vídeos + 500+ fotos + conteúdo extra + atualizações futuras.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <button class="faq-question">Tem reembolso?</button>
+            <div class="faq-answer">
+                <p>SIM! Garantia de 7 dias. Se em 7 dias você não gostar, devolvemos 100% do seu dinheiro sem perguntas.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="purchase-toast"></div>
+
+<!-- SEGUNDO: Script principal -->
+<script src="js/script.js" defer></script>
+
+<script>
+// Script para o seletor de idiomas
+document.addEventListener('DOMContentLoaded', function() {
+    const languageSwitcherHTML = `
+        <div class="language-switcher">
+            <div class="language-selector">
+                <div class="current-language">
+                    <div class="flag">🇧🇷</div>
+                    <span>PT</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="language-dropdown">
+                    <a href="#" class="language-option active" data-lang="pt">
+                        <div class="flag">🇧🇷</div>
+                        <span>Português</span>
+                    </a>
+                    <a href="#" class="language-option" data-lang="en">
+                        <div class="flag">🇺🇸</div>
+                        <span>English</span>
+                    </a>
+                    <a href="#" class="language-option" data-lang="es">
+                        <div class="flag">🇪🇸</div>
+                        <span>Español</span>
                     </a>
                 </div>
-                <div class="plan-card complete featured">
-                    <div class="badge" data-i18n="popularChoice">Mais escolhido</div>
-                    <h3 data-i18n="completeTitle">⭐ Acesso Completo</h3>
-                    <ul class="plan-desc">
-                        <!-- Carregado dinamicamente pelo JavaScript -->
-                    </ul>
-                    <div class="price" data-i18n="completePrice">R$ 29,90</div>
-                    <a class="plan-btn complete enhanced" href="https://pay.kiwify.com.br/OCvaqhO" data-i18n="completePlanEnhanced">
-                        ⭐ SIM, QUERO ACESSO COMPLETO E VER TUDO!
-                    </a>
-                </div>
             </div>
-            <p class="meta-note" data-i18n="mostUsers">Para quem quer ver tudo, sem limites e sem versões leves.</p>
-        </section>
-
-        <!-- FAQ -->
-        <section class="faq">
-            <h2 class="section-title" data-i18n="faqTitle">Perguntas Frequentes ❓</h2>
-            
-            <div class="faq-item">
-                <button class="faq-question" data-i18n="faqQuestions.0">É seguro comprar?</button>
-                <div class="faq-answer">
-                    <p data-i18n="faqAnswers.0">Sim! Usamos plataforma segura com criptografia. Seu pagamento está 100% protegido e seu acesso é totalmente discreto.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question" data-i18n="faqQuestions.1">Como recebo o acesso?</button>
-                <div class="faq-answer">
-                    <p data-i18n="faqAnswers.1">Imediatamente após o pagamento! Você recebe acesso instantâneo à área de membros. Basta clicar no botão e seguir os passos.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question" data-i18n="faqQuestions.2">Posso cancelar depois?</button>
-                <div class="faq-answer">
-                    <p data-i18n="faqAnswers.2">É acesso vitalício! Paga uma vez e tem acesso para sempre, sem mensalidade. E ainda tem garantia de 7 dias se não gostar.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question" data-i18n="faqQuestions.3">O conteúdo é realmente explícito?</button>
-                <div class="faq-answer">
-                    <p data-i18n="faqAnswers.3">SIM! Conteúdo 100% sem censura. Vídeos reais de masturbação, gemidos autênticos, corpo totalmente à mostra e cenas íntimas sem cortes.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question" data-i18n="faqQuestions.4">Qual a diferença entre os planos?</button>
-                <div class="faq-answer">
-                    <p data-i18n="faqAnswers.4">Básico: seleção dos melhores vídeos. Completo: TODOS os 600+ vídeos + 500+ fotos + conteúdo extra + atualizações futuras.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question" data-i18n="faqQuestions.5">Tem reembolso?</button>
-                <div class="faq-answer">
-                    <p data-i18n="faqAnswers.5">SIM! Garantia de 7 dias. Se em 7 dias você não gostar, devolvemos 100% do seu dinheiro sem perguntas.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="purchase-toast"></div>
+        </div>
+    `;
     
-    <!-- Incluir gerenciador de idiomas -->
-    <script src="js/lang.js"></script>
-    <script src="js/script.js" defer></script>
+    document.getElementById('language-switcher-container').innerHTML = languageSwitcherHTML;
     
-    <script>
-    // Script para carregar o seletor de idiomas
-    document.addEventListener('DOMContentLoaded', function() {
-        const languageSwitcherContainer = document.getElementById('language-switcher-container');
-        if (languageSwitcherContainer) {
-            // Criar seletor de idiomas dinamicamente
-            const languageSwitcherHTML = `
-                <div class="language-switcher">
-                    <div class="language-selector" id="language-selector">
-                        <div class="current-language">
-                            <div class="flag">
-                                <span>🇧🇷</span>
-                            </div>
-                            <span>PT</span>
-                            <span class="arrow">▼</span>
-                        </div>
-                        <div class="language-dropdown">
-                            <a href="#" class="language-option active" data-lang="pt">
-                                <div class="flag">
-                                    <span>🇧🇷</span>
-                                </div>
-                                <span>Português</span>
-                            </a>
-                            <a href="#" class="language-option" data-lang="en">
-                                <div class="flag">
-                                    <span>🇺🇸</span>
-                                </div>
-                                <span>English</span>
-                            </a>
-                            <a href="#" class="language-option" data-lang="es">
-                                <div class="flag">
-                                    <span>🇪🇸</span>
-                                </div>
-                                <span>Español</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            languageSwitcherContainer.innerHTML = languageSwitcherHTML;
-            
-            // Configurar eventos do seletor
-            const languageSelector = document.getElementById('language-selector');
-            const languageOptions = document.querySelectorAll('.language-option');
-            
-            if (languageSelector) {
-                // Carregar idioma salvo
-                const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
+    // Configurar eventos
+    const languageSelector = document.querySelector('.language-selector');
+    const languageOptions = document.querySelectorAll('.language-option');
+    
+    if (languageSelector) {
+        languageSelector.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('open');
+        });
+        
+        document.addEventListener('click', function() {
+            languageSelector.classList.remove('open');
+        });
+        
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                localStorage.setItem('selectedLanguage', lang);
+                location.reload();
+            });
+        });
+        
+        // Carregar idioma salvo
+        const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
+        const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
+        const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
+        
+        const currentFlag = document.querySelector('.current-language .flag');
+        const currentText = document.querySelector('.current-language span:not(.arrow)');
+        
+        if (currentFlag) currentFlag.textContent = flags[savedLang];
+        if (currentText) currentText.textContent = names[savedLang];
+    }
+    
+    // Funcionalidades específicas da página bio
+    let spots = 3;
+    const spotsElement = document.getElementById('remaining-spots');
+    const urgencySection = document.getElementById('urgency-section');
+    
+    if (spotsElement && urgencySection) {
+        setInterval(() => {
+            if (spots > 0) {
+                spots--;
+                spotsElement.textContent = spots;
                 
-                // Atualizar visualização inicial
-                const updateLanguageDisplay = (lang) => {
-                    const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
-                    const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
-                    
-                    const currentFlag = document.querySelector('.current-language .flag span');
-                    const currentText = document.querySelector('.current-language span:not(.arrow)');
-                    
-                    if (currentFlag) currentFlag.textContent = flags[lang] || '🇧🇷';
-                    if (currentText) currentText.textContent = names[lang] || 'PT';
-                    
-                    // Atualizar classes active
-                    languageOptions.forEach(opt => opt.classList.remove('active'));
-                    document.querySelector(`.language-option[data-lang="${lang}"]`)?.classList.add('active');
-                };
-                
-                updateLanguageDisplay(savedLang);
-                
-                // Abrir/fechar dropdown
-                languageSelector.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    this.classList.toggle('open');
-                });
-                
-                // Fechar dropdown ao clicar fora
-                document.addEventListener('click', function() {
-                    languageSelector.classList.remove('open');
-                });
-                
-                // Mudar idioma
-                languageOptions.forEach(option => {
-                    option.addEventListener('click', async function(e) {
-                        e.preventDefault();
-                        
-                        const lang = this.getAttribute('data-lang');
-                        
-                        // Salvar preferência
-                        localStorage.setItem('selectedLanguage', lang);
-                        
-                        // Atualizar display
-                        updateLanguageDisplay(lang);
-                        
-                        // Fechar dropdown
-                        languageSelector.classList.remove('open');
-                        
-                        // Recarregar a página para aplicar o idioma
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 300);
-                    });
-                });
+                if (spots === 1) {
+                    urgencySection.innerHTML = '🚨 <strong>ÚLTIMA VAGA!</strong> Essa é sua última chance! 🔥';
+                    urgencySection.style.background = 'linear-gradient(90deg, #ff0000, #ff0000)';
+                } else if (spots === 0) {
+                    urgencySection.innerHTML = '⛔ <strong>VAGAS ESGOTADAS!</strong> Volte amanhã!';
+                    urgencySection.style.background = 'linear-gradient(90deg, #333, #555)';
+                    urgencySection.style.animation = 'none';
+                }
             }
-        }
+        }, 90000);
+    }
+    
+    // FAQ
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const answer = this.nextElementSibling;
+            answer.classList.toggle('show');
+        });
     });
-    </script>
+    
+    // Efeito nos botões
+    document.querySelectorAll('.plan-btn.enhanced').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+            
+            if (spots > 0 && spotsElement) {
+                spots--;
+                spotsElement.textContent = spots;
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
