@@ -1,4 +1,4 @@
-// COMBINED AND ROBUST script.js
+// COMBINED AND ROBUST script.js (VERSÃO ATUALIZADA)
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -11,46 +11,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Só executa se os elementos do modal existirem na página
     if (consentModal && consentYesBtn && mainContent) {
+        console.log("Elementos do modal encontrados.");
         
-        // Verificar se já consentiu (exceto se for Telegram)
-        const isTelegram = /telegram|webview/i.test(navigator.userAgent.toLowerCase());
-        const hasConsented = sessionStorage.getItem('telegram_consent');
-        
-        if (!isTelegram || hasConsented !== 'true') {
-            // Mostrar modal
-            consentModal.style.display = 'flex';
-            mainContent.classList.add('blurred');
-            
-            // Função para fechar o modal
-            function closeModal() {
-                consentModal.style.display = 'none';
-                mainContent.classList.remove('blurred');
-                sessionStorage.setItem('telegram_consent', 'true');
-            }
+        // Garantir que o modal esteja visível inicialmente
+        consentModal.style.display = 'flex';
+        mainContent.style.filter = 'blur(10px)';
+        mainContent.style.pointerEvents = 'none';
 
-            // Evento de clique no botão "Concordo e Prosseguir"
-            consentYesBtn.addEventListener('click', (event) => {
-                event.preventDefault();
-                closeModal();
-            });
-
-            // Evento de clique no fundo escuro do modal para fechar
-            consentModal.addEventListener('click', (event) => {
-                if (event.target === consentModal) {
-                    closeModal();
-                }
-            });
-        } else {
-            // Já consentiu, não mostrar modal
+        // Função para fechar o modal
+        function closeModal() {
+            console.log("Fechando o modal.");
             consentModal.style.display = 'none';
-            mainContent.classList.remove('blurred');
+            mainContent.style.filter = 'none';
+            mainContent.style.pointerEvents = 'auto';
         }
+
+        // Evento de clique no botão "Concordo e Prosseguir"
+        consentYesBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log("Botão 'Concordo e Prosseguir' clicado.");
+            closeModal();
+        });
+
+        // Evento de clique no fundo escuro do modal para fechar
+        consentModal.addEventListener('click', (event) => {
+            if (event.target === consentModal) {
+                console.log("Fundo do modal clicado.");
+                closeModal();
+            }
+        });
     }
 
     // ==========================================================
     // 2. LÓGICA DAS PRÉVIAS CLIQUE (SÓ NA PÁGINA EXPLÍCITA)
     // ==========================================================
     if (window.location.pathname.includes('bio.html')) {
+        console.log("Página explícita detectada. Ativando lógica de prévias.");
         
         const previewCards = document.querySelectorAll('.preview-card.locked');
         previewCards.forEach(card => {
