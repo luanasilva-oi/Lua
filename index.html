@@ -2,43 +2,20 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Aviso de Idade | Luana Silva</title>
+<title>Área de Acesso</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
-<style>
-    /* Estilos críticos inline para carregamento rápido */
-    .age-bg { background: #000; position: fixed; width: 100%; height: 100%; }
-    .age-container { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-    .age-box { background: #0f0f0f; max-width: 480px; width: 100%; padding: 30px; border-radius: 14px; text-align: center; }
-    .age-btn { width: 100%; padding: 16px; background: #ffb400; color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 20px; -webkit-appearance: none; }
-</style>
+<script>
+    function getQueryParam(param) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(param);
+    }
+</script>
 </head>
 <body class="dark age-bg">
 
-<!-- Seletor de idiomas simples -->
-<div class="language-switcher">
-    <div class="language-selector">
-        <div class="current-language">
-            <div class="flag">🇧🇷</div>
-            <span>PT</span>
-            <span class="arrow">▼</span>
-        </div>
-        <div class="language-dropdown">
-            <a href="#" class="language-option active" data-lang="pt">
-                <div class="flag">🇧🇷</div>
-                <span>Português</span>
-            </a>
-            <a href="#" class="language-option" data-lang="en">
-                <div class="flag">🇺🇸</div>
-                <span>English</span>
-            </a>
-            <a href="#" class="language-option" data-lang="es">
-                <div class="flag">🇪🇸</div>
-                <span>Español</span>
-            </a>
-        </div>
-    </div>
-</div>
+<!-- PRIMEIRO: Telegram Fix -->
+<script src="js/telegram-fix.js"></script>
 
 <div class="age-container">
     <div class="age-box">
@@ -48,62 +25,25 @@
         <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
     </div>
 </div>
-    <script src="js/script.js"></script>
 
 <script>
-// Script otimizado para Telegram
-function getQueryParam(param) {
-    return new URLSearchParams(window.location.search).get(param);
-}
-
-function acceptAge() {
-    localStorage.setItem('age_ok', '1');
+function acceptAge(){
+    localStorage.setItem('age_ok','1');
     
     const destination = getQueryParam('go');
+
     if (destination === 'meta') {
-        window.location.href = "acesso.html";
+        // Vindo de Anúncios: vai para a PÁGINA DE ACESSO segura
+        window.location.href = "acesso.html"; // <--- REDIRECIONAMENTO CORRIGIDO
     } else {
+        // Padrão: vai para a página explícita
         window.location.href = "bio.html";
     }
 }
-   
-// Configurar seletor de idiomas
-document.addEventListener('DOMContentLoaded', function() {
-    const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
-    const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
-    const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
-    
-    // Atualizar display
-    const flagElement = document.querySelector('.current-language .flag');
-    const textElement = document.querySelector('.current-language span:not(.arrow)');
-    
-    if (flagElement) flagElement.textContent = flags[savedLang];
-    if (textElement) textElement.textContent = names[savedLang];
-    
-    // Configurar dropdown
-    const languageSelector = document.querySelector('.language-selector');
-    if (languageSelector) {
-        languageSelector.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('open');
-        });
-        
-        document.addEventListener('click', () => {
-            languageSelector.classList.remove('open');
-        });
-        
-        // Mudar idioma
-        document.querySelectorAll('.language-option').forEach(option => {
-            option.addEventListener('click', function(e) {
-                e.preventDefault();
-                const lang = this.getAttribute('data-lang');
-                localStorage.setItem('selectedLanguage', lang);
-                location.reload();
-            });
-        });
-    }
-});
 </script>
+
+<!-- SEGUNDO: Script principal -->
+<script src="js/script.js"></script>
 
 </body>
 </html>
