@@ -1,0 +1,101 @@
+{
+    "ageTitle": "Advertencia",
+    "ageText": "Contenido destinado exclusivamente a mayores de 18 años.<br>Al proceder, confirmas que cumples con este requisito.",
+    "ageButton": "CONFIRMAR EDAD",
+    "ageNote": "Acceso permitido solo para mayores de 18 años.",
+    
+    "consentTitle": "Confirmación Final",
+    "consentText": "El contenido siguiente es de naturaleza personal y de acceso restringido. Al proceder, confirmas que tienes edad legal y aceptas los términos de acceso de este proyecto digital.",
+    "consentYes": "Acepto y Continuar",
+    "consentNo": "Volver",
+    
+    "verified": "Verificado",
+    "availableNow": "Disponible ahora",
+    "dailyAccess": "accesos hoy",
+    "onlineUsers": "personas en línea ahora",
+    
+    "profileTitle": "Luana Silva | Proyecto Exclusivo",
+    "bioText": "Creé este espacio para compartir mis proyectos personales y contenidos digitales que no publico en otras redes.<br>Aquí puedes seguir detrás de escenas, novedades y publicaciones exclusivas para quienes quieren estar más cerca de mi trabajo.<br>Siéntete libre de explorar 💫",
+    
+    "projectsTitle": "Mis Proyectos",
+    "offerTitle": "🔥 OFERTA IMPERDIBLE 🔥",
+    "offerText": "¡Descuento del <strong>30%</strong> en todos los planes por tiempo limitado!",
+    "offerEnds": "La oferta termina en:",
+    "offerEnded": "OFERTA FINALIZADA",
+    
+    "chooseAccess": "Elige tu acceso",
+    "basicTitle": "Acceso Básico 🛡️",
+    "basicFeatures": [
+        "Selección de mis mejores contenidos.",
+        "Acceso al área reservada.",
+        "Publicaciones exclusivas.",
+        "Interacción personalizada."
+    ],
+    "basicPrice": "$ 19,99",
+    "basicButton": "Liberar Acceso",
+    
+    "completeTitle": "Acceso Completo ⭐",
+    "completeFeatures": [
+        "Biblioteca completa de proyectos.",
+        "Contenidos inéditos y frecuentes.",
+        "Acceso total al área de miembros.",
+        "Soporte prioritario."
+    ],
+    "completePrice": "$ 29,90",
+    "completeButton": "Acceder Ahora",
+    
+    "popularChoice": "Más elegido",
+    "mostUsers": "La mayoría de los usuarios elige el acceso completo.",
+    
+    "intimateHeadline": "🚨 ACCESO VITALICIO A MI CONTENIDO MÁS ÍNTIMO",
+    "intimateSubtitle": "<strong>600+ VÍDEOS SIN CENSURA</strong> • <strong>GEMIDOS REALES</strong> • <strong>CUERPO 100% A LA VISTA</strong><br><span style='color: #ff9800; font-size: 24px; font-weight: bold;'>SOLO $ 29,90</span> • <strong>GARANTÍA DE 7 DÍAS</strong>",
+    "guaranteeBadge": "✅ GARANTÍA DE REEMBOLSO",
+    
+    "urgencyText": "⚠️ <strong>¡ÚLTIMAS PLAZAS DISPONIBLES!</strong> ¡Solo {spots} personas pueden entrar hoy!",
+    "lastSpot": "🚨 <strong>¡ÚLTIMA PLAZA!</strong> ¡Esta es tu última oportunidad! 🔥",
+    "spotsEnded": "⛔ <strong>¡PLAZAS AGOTADAS!</strong> ¡Vuelve mañana!",
+    
+    "lockedContent": "Contenido Bloqueado 🔒",
+    "whatTheySay": "Lo que dicen quienes ya compraron 🔥",
+    "deliveryTitle": "ENTREGA INMEDIATA GARANTIZADA",
+    "deliverySubtitle": "Acceso liberado en <strong>HASTA 2 MINUTOS</strong> después del pago",
+    "step1": "Compra Aprobada",
+    "step1Desc": "Pago confirmado",
+    "step2": "Redireccionando",
+    "step2Desc": "A la página de acceso",
+    "step3": "Acceso Liberado",
+    "step3Desc": "Haz clic y disfruta",
+    
+    "faqTitle": "Preguntas Frecuentes ❓",
+    "faqQuestions": [
+        "¿Es seguro comprar?",
+        "¿Cómo recibo el acceso?",
+        "¿Puedo cancelar después?",
+        "¿El contenido es realmente explícito?",
+        "¿Cuál es la diferencia entre los planes?",
+        "¿Hay reembolso?"
+    ],
+    "faqAnswers": [
+        "¡Sí! Usamos plataforma segura con cifrado. Tu pago está 100% protegido y tu acceso es totalmente discreto.",
+        "¡Inmediatamente después del pago! Recibes acceso instantáneo al área de miembros. Solo haz clic en el botón y sigue los pasos.",
+        "¡Es acceso vitalicio! Paga una vez y tendrás acceso para siempre, sin cuotas mensuales. Y aún tienes garantía de 7 días si no te gusta.",
+        "¡SÍ! Contenido 100% sin censura. Videos reales de masturbación, gemidos auténticos, cuerpo totalmente a la vista y escenas íntimas sin cortes.",
+        "Básico: selección de los mejores videos. Completo: TODOS los 600+ videos + 500+ fotos + contenido extra + actualizaciones futuras.",
+        "¡SÍ! Garantía de 7 días. Si dentro de 7 días no te gusta, devolvemos el 100% de tu dinero sin preguntas."
+    ],
+    
+    "basicPlanEnhanced": "🔥 ¡QUIERO MI ACCESO BÁSICO AHORA!",
+    "completePlanEnhanced": "⭐ ¡SÍ, QUIERO ACCESO COMPLETO Y VER TODO!",
+    
+    "successTitle": "¡FELICIDADES! ¡TU ACCESO HA SIDO LIBERADO! 🔥",
+    "successText": "¡Tu pago ha sido aprobado exitosamente!",
+    "accessBasic": "🔓 ACCEDER PLAN BÁSICO",
+    "accessComplete": "⭐ ACCEDER PLAN COMPLETO",
+    "importantNote": "⚠️ IMPORTANTE:",
+    "importantPoints": [
+        "Guarda esta página en favoritos (Ctrl+D)",
+        "Revisa la carpeta de SPAM de tu correo",
+        "Este enlace NO expira - acceso vitalicio",
+        "¿Problemas? Contáctanos por el correo abajo"
+    ]
+}
