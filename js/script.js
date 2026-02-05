@@ -1,422 +1,292 @@
-// COMBINED AND ROBUST script.js (VERSÃO OTIMIZADA PARA TELEGRAM)
+// COMBINED AND ROBUST script.js
 
-// Detectar Telegram WebView
-const isTelegram = navigator.userAgent.includes('Telegram') || 
-                   navigator.userAgent.includes('WebView') ||
-                   window.TelegramWebviewProxy;
+document.addEventListener('DOMContentLoaded', () => {
 
-// Adicionar classe ao body se for Telegram
-if (isTelegram) {
-    document.body.classList.add('telegram-webview');
-    console.log('Telegram WebView detectado - otimizando...');
-}
-
-// Função principal otimizada
-function initApp() {
-    console.log('Inicializando aplicação...');
-    
-    // 1. Configurar modal (PRIMEIRO E MAIS IMPORTANTE)
-    setupConsentModal();
-    
-    // 2. Configurar funcionalidades com delay
-    setTimeout(() => {
-        setupPreviewCards();
-        setupDynamicCounters();
-        setupPromoCountdown();
-        setupPurchaseCounter();
-        setupBioPageFeatures();
-        setupLanguageSwitcher();
-    }, 300);
-    
-    // 3. Configurar eventos leves
-    setTimeout(() => {
-        setupCardHoverEffects();
-        setupButtonEffects();
-    }, 500);
-    
-    console.log('Aplicação inicializada com sucesso!');
-}
-
-// ==========================================================
-// 1. CONFIGURAÇÃO DO MODAL (OTIMIZADA PARA TELEGRAM)
-// ==========================================================
-function setupConsentModal() {
+    // ==========================================================
+    // 1. LÓGICA DO MODAL DE CONSENTIMENTO
+    // ==========================================================
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
     const mainContent = document.getElementById('main-content');
-    
-    if (!consentModal || !consentYesBtn || !mainContent) {
-        console.log('Elementos do modal não encontrados');
-        return;
-    }
-    
-    console.log('Configurando modal...');
-    
-    // Verificar se já consentiu anteriormente
-    const hasConsented = sessionStorage.getItem('consentGiven');
-    if (hasConsented === 'true') {
-        console.log('Consentimento já dado anteriormente');
-        consentModal.style.display = 'none';
-        mainContent.classList.remove('blurred');
-        return;
-    }
-    
-    // Garantir que o modal esteja visível
-    setTimeout(() => {
-        consentModal.style.display = 'flex';
-        mainContent.classList.add('blurred');
+
+    // Só executa se os elementos do modal existirem na página
+    if (consentModal && consentYesBtn && mainContent) {
         
-        // Auto-fechamento de segurança (8 segundos)
-        setTimeout(() => {
-            if (consentModal.style.display === 'flex') {
-                closeModal();
-                console.log('Modal auto-fechado por segurança');
-            }
-        }, 8000);
-    }, 100);
-    
-    // Função para fechar modal
-    function closeModal() {
-        console.log('Fechando modal...');
+        // Verificar se já consentiu (exceto se for Telegram)
+        const isTelegram = /telegram|webview/i.test(navigator.userAgent.toLowerCase());
+        const hasConsented = sessionStorage.getItem('telegram_consent');
         
-        // Fechamento IMEDIATO (sem transições no Telegram)
-        if (isTelegram) {
-            consentModal.style.display = 'none';
-            mainContent.classList.remove('blurred');
-        } else {
-            // Fechamento suave para outros navegadores
-            consentModal.style.opacity = '0';
-            setTimeout(() => {
+        if (!isTelegram || hasConsented !== 'true') {
+            // Mostrar modal
+            consentModal.style.display = 'flex';
+            mainContent.classList.add('blurred');
+            
+            // Função para fechar o modal
+            function closeModal() {
                 consentModal.style.display = 'none';
                 mainContent.classList.remove('blurred');
-            }, 300);
-        }
-        
-        // Marcar como consentido
-        sessionStorage.setItem('consentGiven', 'true');
-        
-        // Forçar redraw
-        void consentModal.offsetHeight;
-    }
-    
-    // Configurar botão de consentimento (OTIMIZADO)
-    const originalBtn = consentYesBtn.cloneNode(true);
-    consentYesBtn.parentNode.replaceChild(originalBtn, consentYesBtn);
-    
-    // Novo listener SIMPLES
-    document.getElementById('consent-yes').onclick = function(e) {
-        if (e.preventDefault) e.preventDefault();
-        if (e.stopPropagation) e.stopPropagation();
-        
-        console.log('Botão de consentimento clicado');
-        closeModal();
-        
-        // Prevenir qualquer ação adicional
-        return false;
-    };
-    
-    // Configurar botão "Voltar"
-    const backBtn = document.querySelector('.modal-buttons .plan-btn.basic');
-    if (backBtn) {
-        backBtn.onclick = function(e) {
-            e.preventDefault();
-            window.location.href = this.href;
-            return false;
-        };
-    }
-    
-    // Configurar clique no fundo (apenas para não-Telegram)
-    if (!isTelegram) {
-        consentModal.onclick = function(e) {
-            if (e.target === this) {
+                sessionStorage.setItem('telegram_consent', 'true');
+            }
+
+            // Evento de clique no botão "Concordo e Prosseguir"
+            consentYesBtn.addEventListener('click', (event) => {
+                event.preventDefault();
                 closeModal();
-            }
-        };
+            });
+
+            // Evento de clique no fundo escuro do modal para fechar
+            consentModal.addEventListener('click', (event) => {
+                if (event.target === consentModal) {
+                    closeModal();
+                }
+            });
+        } else {
+            // Já consentiu, não mostrar modal
+            consentModal.style.display = 'none';
+            mainContent.classList.remove('blurred');
+        }
     }
-}
 
-// ==========================================================
-// 2. CONFIGURAÇÃO DAS PRÉVIAS
-// ==========================================================
-function setupPreviewCards() {
-    if (!window.location.pathname.includes('bio.html')) return;
-    
-    const previewCards = document.querySelectorAll('.preview-card.locked');
-    if (previewCards.length === 0) return;
-    
-    previewCards.forEach(card => {
-        card.addEventListener('click', function() {
-            if (this.classList.contains('unlocked')) return;
-            
-            const clickText = this.querySelector('span');
-            if (clickText) {
-                clickText.style.transition = 'opacity 0.3s';
-                clickText.style.opacity = '0';
-                setTimeout(() => clickText.remove(), 300);
-            }
-            
-            this.classList.remove('locked');
-            this.classList.add('unlocked');
+    // ==========================================================
+    // 2. LÓGICA DAS PRÉVIAS CLIQUE (SÓ NA PÁGINA EXPLÍCITA)
+    // ==========================================================
+    if (window.location.pathname.includes('bio.html')) {
+        
+        const previewCards = document.querySelectorAll('.preview-card.locked');
+        previewCards.forEach(card => {
+            card.addEventListener('click', function() {
+                if (this.classList.contains('unlocked')) return;
+                const clickText = this.querySelector('span');
+                if (clickText) clickText.remove();
+                this.classList.remove('locked');
+                this.classList.add('unlocked');
+            });
         });
-    });
-}
+    }
 
-// ==========================================================
-// 3. CONTADORES DINÂMICOS
-// ==========================================================
-function setupDynamicCounters() {
+    // ==========================================================
+    // 3. OUTRAS FUNCIONALIDADES DINÂMICAS
+    // ==========================================================
     const onlineCountEl = document.getElementById("online-count");
     const accessCountEl = document.getElementById("access-count");
-    
-    if (onlineCountEl) {
-        function updateOnlineUsers() {
+
+    function updateOnlineUsers() {
+        if (onlineCountEl) {
             const count = Math.floor(Math.random() * (25 - 8 + 1)) + 8;
             onlineCountEl.textContent = count;
         }
-        
-        updateOnlineUsers();
-        setInterval(updateOnlineUsers, 10000); // A cada 10 segundos
     }
-    
-    if (accessCountEl) {
-        let count = localStorage.getItem('daily_access_count');
-        const today = new Date().toDateString();
-        
-        if (!localStorage.getItem('last_access_date') || localStorage.getItem('last_access_date') !== today) {
-            count = Math.floor(Math.random() * (50 - 30 + 1)) + 30;
-            localStorage.setItem('daily_access_count', count);
-            localStorage.setItem('last_access_date', today);
-        } else {
-            count = parseInt(count) || 30;
-        }
-        
-        accessCountEl.textContent = count;
-        
-        // Incrementar periodicamente
-        setInterval(() => {
-            let currentCount = parseInt(localStorage.getItem('daily_access_count')) || 30;
-            currentCount++;
-            localStorage.setItem('daily_access_count', currentCount);
-            accessCountEl.textContent = currentCount;
-        }, 45000);
-    }
-}
+    setInterval(updateOnlineUsers, 8000);
+    updateOnlineUsers();
 
-// ==========================================================
-// 4. CONTAGEM REGRESSIVA
-// ==========================================================
-function setupPromoCountdown() {
-    const countdownEl = document.getElementById('countdown-timer');
-    if (!countdownEl) return;
-    
-    let timeInSeconds = 2 * 60 * 60;
-    
-    function updateCountdown() {
-        if (timeInSeconds <= 0) {
-            countdownEl.textContent = "OFERTA ENCERRADA";
-            countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
-            return;
-        }
-        
-        const hours = Math.floor(timeInSeconds / 3600);
-        const minutes = Math.floor((timeInSeconds % 3600) / 60);
-        const seconds = timeInSeconds % 60;
-        
-        countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        timeInSeconds--;
-    }
-    
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
+    function initializeDailyAccess() {
+        if (accessCountEl) {
+            let count = localStorage.getItem('daily_access_count');
+            const today = new Date().toDateString();
 
-// ==========================================================
-// 5. CONTADOR DE COMPRAS
-// ==========================================================
-function setupPurchaseCounter() {
-    // Lista de nomes
-    const names = ['Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel'];
-    
-    // Criar contador de vendas
-    let totalSales = parseInt(localStorage.getItem('total_sales')) || 0;
-    
-    if (!document.querySelector('.sales-counter') && totalSales > 0) {
-        const salesCounter = document.createElement('div');
-        salesCounter.className = 'sales-counter';
-        salesCounter.innerHTML = `
-            <span class="fire-icon">🔥</span>
-            <span id="total-sales-count">${totalSales}</span> vendas hoje
-        `;
-        document.body.appendChild(salesCounter);
-    }
-    
-    // Simular compras aleatórias
-    function simulatePurchase() {
-        const randomTime = Math.random() * (60000 - 30000) + 30000;
-        
-        setTimeout(() => {
-            totalSales++;
-            localStorage.setItem('total_sales', totalSales);
+            if (!localStorage.getItem('last_access_date') || localStorage.getItem('last_access_date') !== today) {
+                count = Math.floor(Math.random() * (50 - 30 + 1)) + 30;
+                localStorage.setItem('daily_access_count', count);
+                localStorage.setItem('last_access_date', today);
+            } else {
+                count = parseInt(count) || 30;
+            }
             
+            accessCountEl.textContent = count;
+
+            setInterval(() => {
+                let currentCount = parseInt(localStorage.getItem('daily_access_count'));
+                currentCount++;
+                localStorage.setItem('daily_access_count', currentCount);
+                if(accessCountEl) accessCountEl.textContent = currentCount;
+            }, 45000);
+        }
+    }
+    initializeDailyAccess();
+
+    // ==========================================================
+    // 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
+    // ==========================================================
+    function startPromoCountdown() {
+        const countdownEl = document.getElementById('countdown-timer');
+        if (!countdownEl) return;
+        
+        let timeInSeconds = 2 * 60 * 60;
+        const interval = setInterval(() => {
+            const hours = Math.floor(timeInSeconds / 3600);
+            const minutes = Math.floor((timeInSeconds % 3600) / 60);
+            const seconds = timeInSeconds % 60;
+            const displayTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            countdownEl.textContent = displayTime;
+            
+            if (timeInSeconds <= 0) {
+                clearInterval(interval);
+                countdownEl.textContent = "OFERTA ENCERRADA";
+                countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
+            }
+            timeInSeconds--;
+        }, 1000);
+    }
+    startPromoCountdown();
+
+    // ==========================================================
+    // 5. CONTADOR DE COMPRAS PROFISSIONAL (ATUALIZADO)
+    // ==========================================================
+    function initializeProfessionalPurchaseCounter() {
+        // Lista de nomes masculinos brasileiros
+        const brazilianNames = [
+            'Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel',
+            'Marcos', 'Thiago', 'Carlos', 'Eduardo', 'Bruno', 'Leonardo', 'André',
+            'Robson', 'Mario', 'Miguel', 'Bejamim', 'Arthur', 'izaque', 'Israel', 'Victor',
+            'Julio', 'Tico', 'Vitor', 'Alex', 'Adriano', 'Chico', 'Daniel'
+        ];
+        
+        // Criar contador de vendas total
+        let totalSales = parseInt(localStorage.getItem('total_sales')) || 0;
+        
+        // Criar elemento do contador de vendas
+        if (!document.querySelector('.sales-counter')) {
+            const salesCounter = document.createElement('div');
+            salesCounter.className = 'sales-counter';
+            salesCounter.innerHTML = `
+                <span class="fire-icon">🔥</span>
+                <span id="total-sales-count">${totalSales}</span> vendas hoje
+            `;
+            document.body.appendChild(salesCounter);
+        }
+        
+        // Atualizar contador de vendas
+        function updateSalesCounter() {
             const salesCountEl = document.getElementById('total-sales-count');
             if (salesCountEl) {
                 salesCountEl.textContent = totalSales;
             }
-            
-            simulatePurchase();
-        }, randomTime);
-    }
-    
-    // Iniciar após 10 segundos
-    setTimeout(simulatePurchase, 10000);
-}
-
-// ==========================================================
-// 6. FUNCIONALIDADES DA PÁGINA BIO
-// ==========================================================
-function setupBioPageFeatures() {
-    if (!window.location.pathname.includes('bio.html')) return;
-    
-    // Vagas decrescentes
-    let spots = 3;
-    const spotsElement = document.getElementById('remaining-spots');
-    const urgencySection = document.getElementById('urgency-section');
-    
-    if (spotsElement && urgencySection) {
-        setInterval(() => {
-            if (spots > 0) {
-                spots--;
-                spotsElement.textContent = spots;
-                
-                if (spots === 1) {
-                    urgencySection.innerHTML = '🚨 <strong>ÚLTIMA VAGA!</strong> Essa é sua última chance! 🔥';
-                    urgencySection.style.background = 'linear-gradient(90deg, #ff0000, #ff0000)';
-                } else if (spots === 0) {
-                    urgencySection.innerHTML = '⛔ <strong>VAGAS ESGOTADAS!</strong> Volte amanhã!';
-                    urgencySection.style.background = 'linear-gradient(90deg, #333, #555)';
-                }
+            const salesCounter = document.querySelector('.sales-counter');
+            if (salesCounter && totalSales > 0) {
+                salesCounter.style.display = 'flex';
             }
-        }, 120000); // A cada 2 minutos
-    }
-    
-    // FAQ
-    document.querySelectorAll('.faq-question').forEach(button => {
-        button.addEventListener('click', function() {
-            this.classList.toggle('active');
-            const answer = this.nextElementSibling;
-            answer.classList.toggle('show');
-        });
-    });
-}
-
-// ==========================================================
-// 7. SELETOR DE IDIOMAS
-// ==========================================================
-function setupLanguageSwitcher() {
-    const languageSelector = document.querySelector('.language-selector');
-    if (!languageSelector) return;
-    
-    // Carregar idioma salvo
-    const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
-    updateLanguageDisplay(savedLang);
-    
-    // Abrir/fechar dropdown
-    languageSelector.addEventListener('click', function(e) {
-        e.stopPropagation();
-        this.classList.toggle('open');
-    });
-    
-    // Fechar ao clicar fora
-    document.addEventListener('click', () => {
-        languageSelector.classList.remove('open');
-    });
-    
-    // Mudar idioma
-    document.querySelectorAll('.language-option').forEach(option => {
-        option.addEventListener('click', function(e) {
-            e.preventDefault();
-            const lang = this.getAttribute('data-lang');
+        }
+        
+        // Função para mostrar notificação de compra
+        function showPurchaseNotification(planType) {
+            // Remover notificação anterior se existir
+            const oldNotification = document.querySelector('.purchase-notification');
+            if (oldNotification) {
+                oldNotification.style.animation = 'slideOut 0.5s ease forwards';
+                setTimeout(() => {
+                    if (oldNotification.parentNode) {
+                        oldNotification.remove();
+                    }
+                }, 500);
+            }
             
-            // Salvar preferência
-            localStorage.setItem('selectedLanguage', lang);
+            // Escolher nome aleatório
+            const randomName = brazilianNames[Math.floor(Math.random() * brazilianNames.length)];
             
-            // Atualizar display
-            updateLanguageDisplay(lang);
+            // Determinar plano e cores
+            const planName = planType === 'basic' ? 'Acesso Básico 🛡️' : 'Acesso Completo ⭐';
+            const planClass = planType === 'basic' ? 'basic' : 'complete';
+            const planIcon = planType === 'basic' ? '🛡️' : '⭐';
             
-            // Fechar dropdown
-            languageSelector.classList.remove('open');
+            // Criar nova notificação
+            const notification = document.createElement('div');
+            notification.className = `purchase-notification ${planClass}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <div class="icon">${planIcon}</div>
+                    <div class="text-content">
+                        <div class="purchase-text">${randomName} comprou</div>
+                        <div class="plan-info">
+                            <span class="plan-type">${planName}</span>
+                        </div>
+                        <div class="time-ago">Agora mesmo</div>
+                    </div>
+                </div>
+            `;
             
-            // Recarregar página
-            setTimeout(() => location.reload(), 300);
-        });
-    });
-    
-    function updateLanguageDisplay(lang) {
-        const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
-        const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
-        
-        const currentFlag = document.querySelector('.current-language .flag');
-        const currentText = document.querySelector('.current-language span:not(.arrow)');
-        
-        if (currentFlag) currentFlag.textContent = flags[lang];
-        if (currentText) currentText.textContent = names[lang];
-        
-        // Atualizar opção ativa
-        document.querySelectorAll('.language-option').forEach(opt => {
-            opt.classList.remove('active');
-        });
-        document.querySelector(`.language-option[data-lang="${lang}"]`)?.classList.add('active');
-    }
-}
-
-// ==========================================================
-// 8. EFEITOS VISUAIS LEVES
-// ==========================================================
-function setupCardHoverEffects() {
-    document.querySelectorAll('.plan-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            if (!isTelegram) card.style.transform = 'translateY(-5px)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            if (!isTelegram) card.style.transform = 'translateY(0)';
-        });
-        
-        card.addEventListener('touchstart', () => {
-            card.style.transform = 'translateY(-2px)';
-        });
-        
-        card.addEventListener('touchend', () => {
+            document.body.appendChild(notification);
+            
+            // Mostrar notificação
             setTimeout(() => {
-                card.style.transform = 'translateY(0)';
-            }, 150);
+                notification.style.display = 'block';
+            }, 50);
+            
+            // Incrementar vendas totais
+            totalSales++;
+            localStorage.setItem('total_sales', totalSales);
+            updateSalesCounter();
+            
+            // Remover notificação após 6 segundos
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 500);
+                }
+            }, 6000);
+        }
+        
+        // Simular compras aleatórias
+        function simulateRandomPurchase() {
+            // Tempo aleatório entre 25 e 60 segundos
+            const randomTime = Math.random() * (60000 - 25000) + 25000;
+            
+            setTimeout(() => {
+                // Escolher plano aleatório (60% chance de completo, 40% básico)
+                const randomPlan = Math.random() < 0.6 ? 'complete' : 'basic';
+                
+                // Mostrar notificação
+                showPurchaseNotification(randomPlan);
+                
+                // Próxima simulação
+                simulateRandomPurchase();
+            }, randomTime);
+        }
+        
+        // Inicializar contador de vendas
+        updateSalesCounter();
+        
+        // Mostrar contador ao rolar
+        window.addEventListener('scroll', () => {
+            const salesCounter = document.querySelector('.sales-counter');
+            if (salesCounter && totalSales > 0) {
+                salesCounter.style.display = 'flex';
+            }
         });
-    });
-}
+        
+        // Iniciar simulação após 5 segundos
+        setTimeout(simulateRandomPurchase, 5000);
+    }
 
-function setupButtonEffects() {
+    // ==========================================================
+    // 6. INICIALIZAÇÃO DOS SISTEMAS
+    // ==========================================================
+    
+    // Inicializar contador de compras profissional
+    setTimeout(initializeProfessionalPurchaseCounter, 3000);
+    
+    // Efeito de clique nos botões de plano
     document.querySelectorAll('.plan-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.style.transform = 'scale(0.98)';
+        btn.addEventListener('click', function(e) {
+            // Pequeno feedback visual
+            this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 200);
         });
     });
-}
 
-// ==========================================================
-// 9. INICIALIZAÇÃO SEGURA
-// ==========================================================
-// Aguardar DOM completamente carregado
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    // DOM já carregado
-    setTimeout(initApp, 100);
-}
-
-// Funções auxiliares globais
-window.getQueryParam = function(param) {
-    return new URLSearchParams(window.location.search).get(param);
-};
+    // Efeito hover nos cards de plano
+    document.querySelectorAll('.plan-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
