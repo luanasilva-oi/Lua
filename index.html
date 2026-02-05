@@ -2,84 +2,57 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Aviso de Idade</title>
+<title>Aviso de Idade | Luana Silva</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
 <style>
-    /* Estilos inline para carregamento rápido */
-    .age-bg {
-        background: #000;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-    }
-    
-    .age-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 20px;
-    }
-    
-    .age-box {
-        background: #0f0f0f;
-        max-width: 480px;
-        width: 100%;
-        padding: 30px;
-        border-radius: 14px;
-        text-align: center;
-    }
-    
-    .age-btn {
-        width: 100%;
-        padding: 15px;
-        background: #ffb400;
-        color: #000;
-        border: none;
-        border-radius: 10px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 20px;
-    }
+    /* Estilos críticos inline para carregamento rápido */
+    .age-bg { background: #000; position: fixed; width: 100%; height: 100%; }
+    .age-container { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+    .age-box { background: #0f0f0f; max-width: 480px; width: 100%; padding: 30px; border-radius: 14px; text-align: center; }
+    .age-btn { width: 100%; padding: 16px; background: #ffb400; color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 20px; -webkit-appearance: none; }
 </style>
 </head>
 <body class="dark age-bg">
 
-<!-- Seletor de idiomas SIMPLES -->
-<div class="language-switcher-simple">
-    <select id="lang-select" onchange="changeLang(this.value)" style="
-        background: rgba(0,0,0,0.8);
-        color: white;
-        border: 1px solid #444;
-        padding: 8px 12px;
-        border-radius: 20px;
-        font-size: 14px;
-    ">
-        <option value="pt">🇧🇷 PT</option>
-        <option value="en">🇺🇸 EN</option>
-        <option value="es">🇪🇸 ES</option>
-    </select>
+<!-- Seletor de idiomas simples -->
+<div class="language-switcher">
+    <div class="language-selector">
+        <div class="current-language">
+            <div class="flag">🇧🇷</div>
+            <span>PT</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="language-dropdown">
+            <a href="#" class="language-option active" data-lang="pt">
+                <div class="flag">🇧🇷</div>
+                <span>Português</span>
+            </a>
+            <a href="#" class="language-option" data-lang="en">
+                <div class="flag">🇺🇸</div>
+                <span>English</span>
+            </a>
+            <a href="#" class="language-option" data-lang="es">
+                <div class="flag">🇪🇸</div>
+                <span>Español</span>
+            </a>
+        </div>
+    </div>
 </div>
 
 <div class="age-container">
     <div class="age-box">
         <h1>Aviso</h1>
-        <p>Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
+        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
         <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
-        <p style="margin-top: 15px; font-size: 12px; color: #888;">
-            Acesso permitido somente para maiores de 18 anos.
-        </p>
+        <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
     </div>
 </div>
 
 <script>
-// SCRIPT LEVE E DIRETO
+// Script otimizado para Telegram
 function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
+    return new URLSearchParams(window.location.search).get(param);
 }
 
 function acceptAge() {
@@ -93,16 +66,42 @@ function acceptAge() {
     }
 }
 
-function changeLang(lang) {
-    localStorage.setItem('selectedLanguage', lang);
-    // Apenas salva a preferência, a página será recarregada
-}
-
-// Carregar idioma salvo
-window.onload = function() {
+// Configurar seletor de idiomas
+document.addEventListener('DOMContentLoaded', function() {
     const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
-    document.getElementById('lang-select').value = savedLang;
-};
+    const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
+    const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
+    
+    // Atualizar display
+    const flagElement = document.querySelector('.current-language .flag');
+    const textElement = document.querySelector('.current-language span:not(.arrow)');
+    
+    if (flagElement) flagElement.textContent = flags[savedLang];
+    if (textElement) textElement.textContent = names[savedLang];
+    
+    // Configurar dropdown
+    const languageSelector = document.querySelector('.language-selector');
+    if (languageSelector) {
+        languageSelector.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('open');
+        });
+        
+        document.addEventListener('click', () => {
+            languageSelector.classList.remove('open');
+        });
+        
+        // Mudar idioma
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                localStorage.setItem('selectedLanguage', lang);
+                location.reload();
+            });
+        });
+    }
+});
 </script>
 
 </body>
