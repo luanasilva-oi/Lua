@@ -1,9 +1,13 @@
-// COMBINED AND ROBUST script.js (VERSÃO ATUALIZADA)
+// COMBINED AND ROBUST script.js (VERSÃO ATUALIZADA COM IDIOMAS)
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Aguardar inicialização do gerenciador de idiomas
+    if (window.languageManager) {
+        await languageManager.init();
+    }
 
     // ==========================================================
-    // 1. LÓGICA DO MODAL DE CONSENTIMENTO
+    // 1. LÓGICA DO MODAL DE CONSENTIMENTO (COM IDIOMA)
     // ==========================================================
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
@@ -117,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (timeInSeconds <= 0) {
                 clearInterval(interval);
-                countdownEl.textContent = "OFERTA ENCERRADA";
+                const endedText = languageManager ? languageManager.get('offerEnded') : 'OFERTA ENCERRADA';
+                countdownEl.textContent = endedText;
                 countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
             }
             timeInSeconds--;
@@ -129,13 +134,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. CONTADOR DE COMPRAS PROFISSIONAL (ATUALIZADO)
     // ==========================================================
     function initializeProfessionalPurchaseCounter() {
-        // Lista de nomes masculinos brasileiros
-        const brazilianNames = [
-            'Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel',
-            'Marcos', 'Thiago', 'Carlos', 'Eduardo', 'Bruno', 'Leonardo', 'André',
-            'Robson', 'Mario', 'Miguel', 'Bejamim', 'Arthur', 'izaque', 'Israel', 'Victor',
-            'Julio', 'Tico', 'Vitor', 'Alex', 'Adriano', 'Chico', 'Daniel'
-        ];
+        // Lista de nomes baseados no idioma
+        const getNamesByLanguage = () => {
+            const currentLang = languageManager?.currentLang || 'pt';
+            
+            if (currentLang === 'pt') {
+                return [
+                    'Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel',
+                    'Marcos', 'Thiago', 'Carlos', 'Eduardo', 'Bruno', 'Leonardo', 'André',
+                    'Robson', 'Mario', 'Miguel', 'Bejamim', 'Arthur', 'Izaque', 'Israel', 'Victor',
+                    'Julio', 'Tico', 'Vitor', 'Alex', 'Adriano', 'Chico', 'Daniel'
+                ];
+            } else if (currentLang === 'es') {
+                return [
+                    'Carlos', 'Juan', 'Luis', 'Miguel', 'José', 'Javier', 'Francisco', 'David',
+                    'Antonio', 'Manuel', 'Pedro', 'Jorge', 'Sergio', 'Fernando', 'Diego',
+                    'Alejandro', 'Raúl', 'Pablo', 'Ángel', 'Rubén', 'Ricardo', 'Roberto', 'Alberto',
+                    'Eduardo', 'Víctor', 'Mario', 'Jesús', 'Óscar', 'Andrés', 'Alfonso'
+                ];
+            } else {
+                return [
+                    'John', 'Michael', 'David', 'James', 'Robert', 'William', 'Joseph', 'Richard',
+                    'Thomas', 'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul',
+                    'Steven', 'Andrew', 'Kenneth', 'Joshua', 'George', 'Kevin', 'Brian', 'Edward',
+                    'Ronald', 'Timothy', 'Jason', 'Jeffrey', 'Ryan', 'Jacob'
+                ];
+            }
+        };
         
         // Criar contador de vendas total
         let totalSales = parseInt(localStorage.getItem('total_sales')) || 0;
@@ -146,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             salesCounter.className = 'sales-counter';
             salesCounter.innerHTML = `
                 <span class="fire-icon">🔥</span>
-                <span id="total-sales-count">${totalSales}</span> vendas hoje
+                <span id="total-sales-count">${totalSales}</span> ${languageManager ? languageManager.get('dailyAccess').replace('acessos hoje', 'vendas hoje') : 'vendas hoje'}
             `;
             document.body.appendChild(salesCounter);
         }
@@ -176,11 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 500);
             }
             
-            // Escolher nome aleatório
-            const randomName = brazilianNames[Math.floor(Math.random() * brazilianNames.length)];
+            // Escolher nome aleatório baseado no idioma
+            const names = getNamesByLanguage();
+            const randomName = names[Math.floor(Math.random() * names.length)];
             
             // Determinar plano e cores
-            const planName = planType === 'basic' ? 'Acesso Básico 🛡️' : 'Acesso Completo ⭐';
+            const planName = planType === 'basic' ? 
+                (languageManager ? languageManager.get('basicTitle') : 'Acesso Básico 🛡️') : 
+                (languageManager ? languageManager.get('completeTitle') : 'Acesso Completo ⭐');
             const planClass = planType === 'basic' ? 'basic' : 'complete';
             const planIcon = planType === 'basic' ? '🛡️' : '⭐';
             
@@ -191,11 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="notification-content">
                     <div class="icon">${planIcon}</div>
                     <div class="text-content">
-                        <div class="purchase-text">${randomName} comprou</div>
+                        <div class="purchase-text">${randomName} ${languageManager ? languageManager.get('dailyAccess').includes('acesso') ? 'comprou' : 'purchased' : 'comprou'}</div>
                         <div class="plan-info">
                             <span class="plan-type">${planName}</span>
                         </div>
-                        <div class="time-ago">Agora mesmo</div>
+                        <div class="time-ago">${languageManager ? languageManager.get('mostUsers').includes('agora') ? 'Agora mesmo' : 'Just now' : 'Agora mesmo'}</div>
                     </div>
                 </div>
             `;
@@ -285,4 +313,139 @@ document.addEventListener('DOMContentLoaded', () => {
             this.style.transform = 'translateY(0)';
         });
     });
+
+    // ==========================================================
+    // 7. FUNCIONALIDADES ESPECÍFICAS DA PÁGINA BIO
+    // ==========================================================
+    if (window.location.pathname.includes('bio.html')) {
+        // Contador de vagas decrescente
+        let spots = 3;
+        const spotsElement = document.getElementById('remaining-spots');
+        const urgencySection = document.getElementById('urgency-section');
+        
+        if (spotsElement && urgencySection) {
+            // Atualizar texto de urgência com tradução
+            const updateUrgencyText = () => {
+                if (spots > 1) {
+                    const text = languageManager ? 
+                        languageManager.get('urgencyText', { spots }) : 
+                        `⚠️ <strong>ÚLTIMAS VAGAS DISPONÍVEIS!</strong> Apenas ${spots} pessoas podem entrar hoje!`;
+                    urgencySection.innerHTML = text;
+                } else if (spots === 1) {
+                    const text = languageManager ? 
+                        languageManager.get('lastSpot') : 
+                        '🚨 <strong>ÚLTIMA VAGA!</strong> Essa é sua última chance! 🔥';
+                    urgencySection.innerHTML = text;
+                    urgencySection.style.background = 'linear-gradient(90deg, #ff0000, #ff0000)';
+                } else if (spots === 0) {
+                    const text = languageManager ? 
+                        languageManager.get('spotsEnded') : 
+                        '⛔ <strong>VAGAS ESGOTADAS!</strong> Volte amanhã!';
+                    urgencySection.innerHTML = text;
+                    urgencySection.style.background = 'linear-gradient(90deg, #333, #555)';
+                    urgencySection.style.animation = 'none';
+                }
+            };
+            
+            // Inicializar texto
+            updateUrgencyText();
+            
+            // Diminuir vagas a cada 90 segundos
+            setInterval(() => {
+                if(spots > 0) {
+                    spots--;
+                    spotsElement.textContent = spots;
+                    updateUrgencyText();
+                }
+            }, 90000);
+        }
+        
+        // FAQ
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+                const answer = button.nextElementSibling;
+                answer.classList.toggle('show');
+            });
+        });
+        
+        // Efeito de clique nos botões aprimorados
+        document.querySelectorAll('.plan-btn.enhanced').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Feedback visual
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+                
+                // Atualizar contador de vagas imediatamente
+                if(spots > 0) {
+                    spots--;
+                    if (spotsElement) spotsElement.textContent = spots;
+                    if (urgencySection) updateUrgencyText();
+                }
+            });
+        });
+        
+        // Simular atualização de vendas
+        setInterval(() => {
+            const accessCount = document.getElementById('access-count');
+            const onlineCount = document.getElementById('online-count');
+            
+            if(accessCount) {
+                let current = parseInt(accessCount.textContent);
+                if(current < 100) {
+                    accessCount.textContent = current + Math.floor(Math.random() * 3);
+                }
+            }
+            
+            if(onlineCount) {
+                let current = parseInt(onlineCount.textContent);
+                onlineCount.textContent = Math.floor(Math.random() * (25 - 15 + 1)) + 15;
+            }
+        }, 30000);
+    }
+
+    // ==========================================================
+    // 8. ATUALIZAR TEXTO DINÂMICO AO MUDAR IDIOMA
+    // ==========================================================
+    window.addEventListener('languageChanged', function() {
+        // Atualizar contador regressivo se a oferta terminou
+        const countdownEl = document.getElementById('countdown-timer');
+        if (countdownEl && countdownEl.textContent.includes('ENCERRADA') || countdownEl.textContent.includes('ENDED') || countdownEl.textContent.includes('FINALIZADA')) {
+            countdownEl.textContent = languageManager ? languageManager.get('offerEnded') : 'OFERTA ENCERRADA';
+        }
+        
+        // Atualizar notificações de vendas se existirem
+        const salesCounter = document.querySelector('.sales-counter');
+        if (salesCounter) {
+            const salesCount = document.getElementById('total-sales-count');
+            const count = salesCount ? salesCount.textContent : '0';
+            salesCounter.innerHTML = `
+                <span class="fire-icon">🔥</span>
+                <span id="total-sales-count">${count}</span> ${languageManager ? languageManager.get('dailyAccess').replace('acessos hoje', 'vendas hoje') : 'vendas hoje'}
+            `;
+        }
+        
+        // Atualizar texto de urgência na página bio
+        if (window.location.pathname.includes('bio.html')) {
+            const spotsElement = document.getElementById('remaining-spots');
+            const urgencySection = document.getElementById('urgency-section');
+            
+            if (spotsElement && urgencySection) {
+                const spots = parseInt(spotsElement.textContent);
+                if (spots > 1) {
+                    urgencySection.innerHTML = languageManager ? 
+                        languageManager.get('urgencyText', { spots }) : 
+                        `⚠️ <strong>ÚLTIMAS VAGAS DISPONÍVEIS!</strong> Apenas ${spots} pessoas podem entrar hoje!`;
+                }
+            }
+        }
+    });
 });
+
+// Funções auxiliares globais
+function getQueryParam(param) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(param);
+}
