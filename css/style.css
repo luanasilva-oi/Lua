@@ -837,3 +837,79 @@ body.dark {
         min-width: 130px;
     }
 }
+/* =================================================== */
+/* CORREÇÕES PARA CONGELAMENTO */
+/* =================================================== */
+
+/* Modal otimizado */
+#consent-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#consent-modal[style*="display: flex"] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+#consent-modal[style*="display: flex"] .modal-content {
+    transform: scale(1);
+}
+
+/* Desabilitar blur se causar problemas */
+@media (max-width: 768px) {
+    #main-content {
+        filter: none !important;
+    }
+}
+
+/* Otimizar animações */
+.preview-card, .plan-card {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Otimizar vídeos */
+video {
+    pointer-events: none;
+}
+
+/* Remover animações pesadas se necessário */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Seletor de idiomas fixo */
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9998; /* Abaixo do modal */
+}
