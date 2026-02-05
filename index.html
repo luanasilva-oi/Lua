@@ -2,141 +2,108 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title data-i18n="ageTitle">Aviso</title>
+<title>Aviso de Idade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/style.css">
-<script>
-    function getQueryParam(param) {
-        const params = new URLSearchParams(window.location.search);
-        return params.get(param);
+<style>
+    /* Estilos inline para carregamento rápido */
+    .age-bg {
+        background: #000;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
     }
-</script>
+    
+    .age-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    
+    .age-box {
+        background: #0f0f0f;
+        max-width: 480px;
+        width: 100%;
+        padding: 30px;
+        border-radius: 14px;
+        text-align: center;
+    }
+    
+    .age-btn {
+        width: 100%;
+        padding: 15px;
+        background: #ffb400;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>
 </head>
 <body class="dark age-bg">
 
-<!-- Container para o seletor de idiomas -->
-<div id="language-switcher-container"></div>
+<!-- Seletor de idiomas SIMPLES -->
+<div class="language-switcher-simple">
+    <select id="lang-select" onchange="changeLang(this.value)" style="
+        background: rgba(0,0,0,0.8);
+        color: white;
+        border: 1px solid #444;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+    ">
+        <option value="pt">🇧🇷 PT</option>
+        <option value="en">🇺🇸 EN</option>
+        <option value="es">🇪🇸 ES</option>
+    </select>
+</div>
 
 <div class="age-container">
     <div class="age-box">
-        <h1 data-i18n="ageTitle">Aviso</h1>
-        <p class="age-text" data-i18n-html="ageText">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
-        <button class="age-btn" onclick="acceptAge()" data-i18n="ageButton">CONFIRMAR IDADE</button>
-        <span class="age-note" data-i18n="ageNote">Acesso permitido somente para maiores de 18 anos.</span>
+        <h1>Aviso</h1>
+        <p>Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
+        <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
+        <p style="margin-top: 15px; font-size: 12px; color: #888;">
+            Acesso permitido somente para maiores de 18 anos.
+        </p>
     </div>
 </div>
 
 <script>
-// Carregar seletor de idiomas
-document.addEventListener('DOMContentLoaded', function() {
-    const languageSwitcherContainer = document.getElementById('language-switcher-container');
-    if (languageSwitcherContainer) {
-        // Criar seletor de idiomas dinamicamente
-        const languageSwitcherHTML = `
-            <div class="language-switcher">
-                <div class="language-selector" id="language-selector">
-                    <div class="current-language">
-                        <div class="flag">
-                            <span>🇧🇷</span>
-                        </div>
-                        <span>PT</span>
-                        <span class="arrow">▼</span>
-                    </div>
-                    <div class="language-dropdown">
-                        <a href="#" class="language-option active" data-lang="pt">
-                            <div class="flag">
-                                <span>🇧🇷</span>
-                            </div>
-                            <span>Português</span>
-                        </a>
-                        <a href="#" class="language-option" data-lang="en">
-                            <div class="flag">
-                                <span>🇺🇸</span>
-                            </div>
-                            <span>English</span>
-                        </a>
-                        <a href="#" class="language-option" data-lang="es">
-                            <div class="flag">
-                                <span>🇪🇸</span>
-                            </div>
-                            <span>Español</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        languageSwitcherContainer.innerHTML = languageSwitcherHTML;
-        
-        // Configurar eventos do seletor
-        const languageSelector = document.getElementById('language-selector');
-        const languageOptions = document.querySelectorAll('.language-option');
-        
-        if (languageSelector) {
-            // Abrir/fechar dropdown
-            languageSelector.addEventListener('click', function(e) {
-                e.stopPropagation();
-                this.classList.toggle('open');
-            });
-            
-            // Fechar dropdown ao clicar fora
-            document.addEventListener('click', function() {
-                languageSelector.classList.remove('open');
-            });
-            
-            // Mudar idioma
-            languageOptions.forEach(option => {
-                option.addEventListener('click', async function(e) {
-                    e.preventDefault();
-                    
-                    const lang = this.getAttribute('data-lang');
-                    
-                    // Remover classe active de todas as opções
-                    languageOptions.forEach(opt => opt.classList.remove('active'));
-                    
-                    // Adicionar classe active à opção selecionada
-                    this.classList.add('active');
-                    
-                    // Mudar bandeira e texto
-                    const currentFlag = document.querySelector('.current-language .flag span');
-                    const currentText = document.querySelector('.current-language span:not(.arrow)');
-                    
-                    const flags = {'pt': '🇧🇷', 'en': '🇺🇸', 'es': '🇪🇸'};
-                    const names = {'pt': 'PT', 'en': 'EN', 'es': 'ES'};
-                    
-                    if (currentFlag) currentFlag.textContent = flags[lang] || '🇧🇷';
-                    if (currentText) currentText.textContent = names[lang] || 'PT';
-                    
-                    // Salvar preferência
-                    localStorage.setItem('selectedLanguage', lang);
-                    
-                    // Fechar dropdown
-                    languageSelector.classList.remove('open');
-                    
-                    // Recarregar a página para aplicar o idioma
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 300);
-                });
-            });
-        }
-    }
-});
+// SCRIPT LEVE E DIRETO
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 
-function acceptAge(){
-    localStorage.setItem('age_ok','1');
+function acceptAge() {
+    localStorage.setItem('age_ok', '1');
     
     const destination = getQueryParam('go');
-
     if (destination === 'meta') {
         window.location.href = "acesso.html";
     } else {
         window.location.href = "bio.html";
     }
 }
+
+function changeLang(lang) {
+    localStorage.setItem('selectedLanguage', lang);
+    // Apenas salva a preferência, a página será recarregada
+}
+
+// Carregar idioma salvo
+window.onload = function() {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'pt';
+    document.getElementById('lang-select').value = savedLang;
+};
 </script>
 
-<!-- Incluir gerenciador de idiomas -->
-<script src="js/lang.js"></script>
 </body>
 </html>
