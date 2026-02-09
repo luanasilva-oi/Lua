@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Liberado | Luana Silva</title>
+    <style>
+        body {
+            background: #0f0f0f;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        
+        .status-box {
+            background: rgba(255, 152, 0, 0.1);
+            border: 2px solid #ff9800;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .countdown {
+            font-size: 24px;
+            color: #ff9800;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .secret-link {
+            display: none;
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            color: black;
+            padding: 18px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .warning {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid #ff4444;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        .loader {
+            border: 4px solid rgba(255, 152, 0, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #ff9800;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">🎉</div>
+        
+        <h1 id="title">VERIFICANDO PAGAMENTO...</h1>
+        
+        <div class="status-box">
+            <div class="loader" id="loader"></div>
+            
+            <p id="status-text">Confirmando sua compra...</p>
+            
+            <div class="countdown" id="countdown" style="display: none;">
+                Acesso liberado em: <span id="timer">10</span> segundos
+            </div>
+            
+            <button onclick="liberarAcesso()" id="secret-link" class="secret-link">
+                🔓 CLIQUE AQUI PARA ACESSAR
+            </button>
+            
+            <div id="whatsapp-section" style="display: none; margin-top: 20px;">
+                <p style="color: #ccc; margin-bottom: 10px;">
+                    Problemas com o acesso? 
+                </p>
+                <a href="https://wa.me/5511999999999?text=Olá!%20Comprei%20o%20plano%20[PLANO]%20e%20preciso%20de%20ajuda%20com%20o%20acesso."
+                   class="whatsapp-btn" target="_blank">
+                    📱 FALAR NO WHATSAPP
+                </a>
+            </div>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ IMPORTANTE:</strong>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>Esta página é pessoal e intransferível</li>
+                <li>Salve nos favoritos (Ctrl+D)</li>
+                <li>Não compartilhe seu acesso</li>
+                <li>Problemas? Contato: luanasilvahott@gmail.com</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // ==============================
+        // CONFIGURAÇÃO DOS LINKS
+        // ==============================
+        const DRIVE_LINKS = {
+            'basico': 'https://drive.google.com/drive/folders/1Fwqr1jW8OEA8d0VstIR_JwcJptG_Dn9K?usp=sharing',
+            'completo': 'https://drive.google.com/drive/folders/1CT5-n5tsO7M4Ftyu-h0XEb0bOm4J5lXQ?usp=sharing'
+        };
+        
+        // ==============================
+        // DETECTA SE VEIO DO SYNCPAY
+        // ==============================
+        const urlParams = new URLSearchParams(window.location.search);
+        const plano = urlParams.get('plano') || 'completo';
+        const pago = urlParams.get('pago') === 'true';
+        const transactionId = urlParams.get('transaction_id') || Date.now().toString();
+        
+        // ==============================
+        // VERIFICAÇÃO INICIAL
+        // ==============================
+        function verificarPagamento() {
+            const title = document.getElementById('title');
+            const statusText = document.getElementById('status-text');
+            const loader = document.getElementById('loader');
+            const countdown = document.getElementById('countdown');
+            const whatsappSection = document.getElementById('whatsapp-section');
+            
+            // Se veio com parâmetro pago=true (do SyncPay)
+            if (pago) {
+                title.textContent = 'PAGAMENTO CONFIRMADO! ✅';
+                statusText.textContent = 'Pagamento aprovado com sucesso!';
+                loader.style.display = 'none';
+                countdown.style.display = 'block';
+                whatsappSection.style.display = 'block';
+                
+                // Inicia contador
+                iniciarContador();
+                
+                // Salva no localStorage
+                localStorage.setItem(`luana_pago_${plano}`, 'true');
+                localStorage.setItem(`luana_transaction_${plano}`, transactionId);
+                
+            } else {
+                // Verifica se já pagou antes
+                const jaPagou = localStorage.getItem(`luana_pago_${plano}`) === 'true';
+                
+                if (jaPagou) {
+                    title.textContent = 'BEM-VINDO(A) DE VOLTA! 👋';
+                    statusText.textContent = 'Seu acesso já está liberado!';
+                    loader.style.display = 'none';
+                    liberarAcesso();
+                } else {
+                    // Não pagou - redireciona para página de vendas
+                    setTimeout(() => {
+                        window.location.href = 'vendas.html';
+                    }, 3000);
+                }
+            }
+        }
+        
+        // ==============================
+        // CONTADOR REGRESSIVO
+        // ==============================
+        function iniciarContador() {
+            let seconds = 10;
+            const timerElement = document.getElementById('timer');
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                timerElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    liberarAcesso();
+                }
+            }, 1000);
+        }
+        
+        // ==============================
+        // LIBERAR ACESSO
+        // ==============================
+        function liberarAcesso() {
+            const title = document.getElementById('title');
+            const statusText = document.getElementById('status-text');
+            const countdown = document.getElementById('countdown');
+            const secretLink = document.getElementById('secret-link');
+            const whatsappLink = document.querySelector('.whatsapp-btn');
+            
+            // Atualiza WhatsApp link
+            const whatsappText = `Olá! Comprei o plano ${plano.toUpperCase()} e preciso de ajuda com o acesso. Transaction: ${transactionId}`;
+            whatsappLink.href = `https://wa.me/56974783157?text=${encodeURIComponent(whatsappText)}`;
+            
+            // Esconde contador
+            countdown.style.display = 'none';
+            
+            // Mostra link secreto
+            secretLink.style.display = 'block';
+            secretLink.innerHTML = `🔓 ACESSO ${plano.toUpperCase()} - CLIQUE AQUI`;
+            
+            // Configura clique no botão
+            secretLink.onclick = function() {
+                // Redireciona para o Drive
+                window.location.href = DRIVE_LINKS[plano];
+                
+                // Log (simulado)
+                console.log(`Acesso utilizado: ${plano} - ${new Date().toLocaleString()}`);
+                
+                // Impede múltiplos cliques
+                this.disabled = true;
+                this.innerHTML = '✅ ACESSANDO...';
+            };
+            
+            // Auto-redireciona após 30 segundos
+            setTimeout(() => {
+                if (!secretLink.disabled) {
+                    window.location.href = DRIVE_LINKS[plano];
+                }
+            }, 30000);
+        }
+        
+        // ==============================
+        // BLOQUEIO DE SEGURANÇA
+        // ==============================
+        function configurarSeguranca() {
+            // Impede clique direito
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                alert('⚠️ Esta página é protegida!');
+            });
+            
+            // Impede cópia do texto
+            document.addEventListener('copy', (e) => {
+                e.preventDefault();
+                alert('⚠️ O conteúdo desta página é pessoal!');
+            });
+            
+            // Esconde URL na barra de endereço
+            setTimeout(() => {
+                history.replaceState({}, '', '/acesso-exclusivo');
+            }, 2000);
+            
+            // Detecta se tentam inspecionar elemento
+            setInterval(() => {
+                if (document.documentElement.getAttribute('inspected') === 'true') {
+                    document.body.innerHTML = '<h1 style="color: red;">⚠️ ACESSO BLOQUEADO ⚠️</h1>';
+                }
+            }, 1000);
+        }
+        
+        // ==============================
+        // INICIALIZAÇÃO
+        // ==============================
+        window.onload = function() {
+            verificarPagamento();
+            configurarSeguranca();
+            
+            // Botão de emergência
+            setTimeout(() => {
+                const emergencyBtn = document.createElement('button');
+                emergencyBtn.innerHTML = '⏰ LIBERAR AGORA';
+                emergencyBtn.style = `
+                    background: #ff4444;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    margin-top: 10px;
+                    cursor: pointer;
+                `;
+                emergencyBtn.onclick = liberarAcesso;
+                document.querySelector('.status-box').appendChild(emergencyBtn);
+            }, 5000);
+        };
+        
+        // ==============================
+        // SIMULAÇÃO DE WEBSOCKET (para atualizações)
+        // ==============================
+        function simularConexao() {
+            // Simula verificação periódica
+            setInterval(() => {
+                if (pago) {
+                    // Atualiza status
+                    document.getElementById('status-text').textContent = 
+                        `✅ Pagamento confirmado - ID: ${transactionId.slice(-8)}`;
+                }
+            }, 5000);
+        }
+        
+        // Inicia simulação
+        simularConexao();
+    </script>
+</body>
+</html>
