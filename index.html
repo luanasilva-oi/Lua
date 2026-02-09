@@ -1,41 +1,385 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Área de Acesso</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
-<script>
-    function getQueryParam(param) {
-        const params = new URLSearchParams(window.location.search);
-        return params.get(param);
-    }
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteúdo Exclusivo +18</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* OVERLAY DE BLOQUEIO (sempre por cima até confirmação) */
+        #ageVerificationOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .age-verification-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.7s ease;
+        }
+        
+        h1 {
+            color: #ff4081;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(255, 64, 129, 0.5);
+        }
+        
+        .warning-text {
+            background: rgba(255, 64, 129, 0.15);
+            border-left: 4px solid #ff4081;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 18px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-enter {
+            background: linear-gradient(90deg, #ff4081, #ff6b6b);
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 64, 129, 0.4);
+        }
+        
+        .btn-enter:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 64, 129, 0.6);
+        }
+        
+        .btn-exit {
+            background: transparent;
+            color: #aaa;
+            border: 2px solid #555;
+        }
+        
+        .btn-exit:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        
+        /* CONTEÚDO PRINCIPAL (inicialmente escondido) */
+        #mainContent {
+            display: none;
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 1s ease;
+        }
+        
+        .content-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sales-counter {
+            background: linear-gradient(90deg, rgba(255, 64, 129, 0.2), rgba(102, 126, 234, 0.2));
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .sales-number {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff4081, #667eea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 10px 0;
+        }
+        
+        .sales-text {
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-top: 10px;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(90deg, #25D366, #128C7E);
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-icon {
+            font-size: 1.8rem;
+        }
+        
+        .footer-note {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9rem;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dark age-bg">
-
-<div class="age-container">
-    <div class="age-box">
-        <h1>Acesso Exclusivo</h1>
-        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que tem idade legal para acesso.</p>
-        <button class="age-btn" onclick="acceptAge()">CONFIRMAR E ACESSAR</button>
-        <span class="age-note">Acesso restrito a maiores de 18 anos.</span>
+<body>
+    <!-- OVERLAY DE VERIFICAÇÃO DE IDADE (SEMPRE VISÍVEL NO INÍCIO) -->
+    <div id="ageVerificationOverlay">
+        <div class="age-verification-box">
+            <h1><i class="fas fa-exclamation-triangle"></i> CONFIRMAÇÃO DE ACESSO</h1>
+            
+            <div class="warning-text">
+                <p><strong>ESTE ESPAÇO CONTÉM CONTEÚDO ADULTO EXCLUSIVO PARA MAIORES DE 18 ANOS.</strong></p>
+                <p>Ao prosseguir, você confirma que tem idade legal para visualizar este conteúdo.</p>
+            </div>
+            
+            <div class="buttons-container">
+                <button id="confirmAgeBtn" class="btn btn-enter">
+                    <i class="fas fa-check-circle"></i> TENHO 18+ E QUERO ENTRAR
+                </button>
+                
+                <a href="https://instagram.com" class="btn btn-exit">
+                    <i class="fas fa-arrow-left"></i> VOLTAR PARA INSTAGRAM
+                </a>
+            </div>
+            
+            <div class="footer-note">
+                <p><i class="fas fa-shield-alt"></i> Sua segurança e conformidade legal são importantes para nós.</p>
+            </div>
+        </div>
     </div>
-</div>
-
-<script>
-function acceptAge(){
-    localStorage.setItem('age_ok','1');
     
-    const destination = getQueryParam('go');
+    <!-- CONTEÚDO PRINCIPAL (APÓS CONFIRMAÇÃO) -->
+    <div id="mainContent">
+        <div class="content-box">
+            <h1 style="color: #25D366;">CONTEÚDO LIBERADO <i class="fas fa-lock-open"></i></h1>
+            <p>Seja bem-vindo(a) ao conteúdo exclusivo. Aqui você encontrará material especializado para maiores de 18 anos.</p>
+            
+            <div class="sales-counter pulse">
+                <h3><i class="fas fa-bolt"></i> VENDAS REALIZADAS HOJE</h3>
+                <div class="sales-number" id="salesCounter">10</div>
+                <p class="sales-text">Pessoas já adquiriram este conteúdo exclusivo</p>
+                <p><small><i class="fas fa-info-circle"></i> Este número aumenta automaticamente</small></p>
+            </div>
+            
+            <h2 style="margin-top: 40px;">FALE DIRETAMENTE COM LUANA</h2>
+            <p>Clique no botão abaixo para conversar no WhatsApp e obter informações exclusivas:</p>
+            
+            <a href="https://wa.me/5511999999999?text=Olá%20Luana,%20vim%20do%20site%20e%20quero%20saber%20mais%20sobre%20o%20conteúdo%20exclusivo!" 
+               class="whatsapp-btn" 
+               id="whatsappBtn"
+               target="_blank">
+                <i class="fab fa-whatsapp whatsapp-icon"></i> FALAR COM LUANA NO WHATSAPP
+            </a>
+            
+            <div class="footer-note">
+                <p><i class="fas fa-clock"></i> Atendimento disponível das 9h às 23h</p>
+                <p><i class="fas fa-star"></i> Resposta em até 5 minutos durante o horário comercial</p>
+            </div>
+        </div>
+    </div>
 
-    if (destination === 'safe') {
-        window.location.href = "acesso.html";
-    } else {
-        window.location.href = "bio.html";
-    }
-}
-</script>
-
+    <script>
+        // Configurações iniciais
+        let salesCount = 10; // Começa com 10 vendas
+        let isAgeConfirmed = false;
+        
+        // Elementos DOM
+        const ageOverlay = document.getElementById('ageVerificationOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const salesCounter = document.getElementById('salesCounter');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const confirmBtn = document.getElementById('confirmAgeBtn');
+        
+        // Função para confirmar idade e mostrar conteúdo
+        function confirmAge() {
+            isAgeConfirmed = true;
+            
+            // Esconde o overlay com animação
+            ageOverlay.style.opacity = '0';
+            ageOverlay.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                ageOverlay.style.display = 'none';
+                // Mostra o conteúdo principal
+                mainContent.style.display = 'block';
+                
+                // Inicia o contador de vendas
+                startSalesCounter();
+            }, 500);
+            
+            // Impede que a página feche sozinha
+            setupPageProtection();
+        }
+        
+        // Função para aumentar o contador de vendas automaticamente
+        function startSalesCounter() {
+            // Atualiza a cada 30-90 segundos aleatoriamente
+            setInterval(() => {
+                // Aumenta entre 1 e 3 vendas
+                const increase = Math.floor(Math.random() * 3) + 1;
+                salesCount += increase;
+                
+                // Anima a mudança no contador
+                salesCounter.style.transform = 'scale(1.1)';
+                salesCounter.style.color = '#ff4081';
+                salesCounter.textContent = salesCount;
+                
+                setTimeout(() => {
+                    salesCounter.style.transform = 'scale(1)';
+                    salesCounter.style.color = '';
+                }, 300);
+                
+            }, Math.random() * 60000 + 30000); // Entre 30 e 90 segundos
+        }
+        
+        // Proteção contra fechamento automático da página
+        function setupPageProtection() {
+            // Remove comportamentos indesejados
+            document.addEventListener('click', (e) => {
+                e.stopPropagation();
+            }, true);
+            
+            // Previne comportamentos padrão
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+            
+            // Impede fechamento acidental
+            window.addEventListener('beforeunload', (e) => {
+                if (isAgeConfirmed) {
+                    // Não faz nada, permite fechar normalmente
+                    return undefined;
+                }
+            });
+        }
+        
+        // Event Listeners
+        confirmBtn.addEventListener('click', confirmAge);
+        
+        // Botão de voltar para Instagram já está com link
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Garante que o overlay está visível inicialmente
+            ageOverlay.style.display = 'flex';
+            mainContent.style.display = 'none';
+            
+            // Previne que o botão do WhatsApp seja clicado antes da confirmação
+            whatsappBtn.addEventListener('click', (e) => {
+                if (!isAgeConfirmed) {
+                    e.preventDefault();
+                    alert('Por favor, confirme que tem 18+ antes de continuar.');
+                }
+            });
+            
+            // Adiciona um pequeno delay para garantir que tudo carregou
+            setTimeout(() => {
+                console.log('Página de verificação de idade carregada com sucesso.');
+            }, 1000);
+        });
+        
+        // Adiciona efeito visual no contador periodicamente
+        setInterval(() => {
+            if (isAgeConfirmed) {
+                salesCounter.classList.add('pulse');
+                setTimeout(() => {
+                    salesCounter.classList.remove('pulse');
+                }, 2000);
+            }
+        }, 15000);
+    </script>
 </body>
 </html>
