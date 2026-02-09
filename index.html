@@ -1,253 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conteúdo Exclusivo +18</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            background: #0a0a0a;
-            color: white;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        /* TELA DE CONFIRMAÇÃO (VISÍVEL NO INÍCIO) */
-        #ageCheck {
-            background: #111;
-            border: 2px solid #ff0055;
-            border-radius: 10px;
-            padding: 30px;
-            max-width: 500px;
-            margin: 50px auto;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
-        }
-        
-        #ageCheck h1 {
-            color: #ff0055;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
-        .warning {
-            background: rgba(255, 0, 85, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #ff0055;
-        }
-        
-        .buttons {
-            margin-top: 30px;
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            display: inline-block;
-            text-decoration: none;
-            width: 90%;
-            max-width: 300px;
-        }
-        
-        .enter {
-            background: #ff0055;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .enter:hover {
-            background: #ff3377;
-            transform: scale(1.05);
-        }
-        
-        .exit {
-            background: transparent;
-            color: #ccc;
-            border: 1px solid #555;
-        }
-        
-        /* CONTEÚDO PRINCIPAL (ESCONDIDO NO INÍCIO) */
-        #mainContent {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .content-box {
-            background: #111;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-        
-        .sales-box {
-            background: #1a1a1a;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 25px 0;
-            border-left: 5px solid #ff0055;
-            text-align: center;
-        }
-        
-        .sales-number {
-            font-size: 48px;
-            font-weight: bold;
-            color: #ff0055;
-            margin: 10px 0;
-            text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
-        }
-        
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            margin: 30px 0;
-            transition: 0.3s;
-        }
-        
-        .whatsapp-btn:hover {
-            background: #1da851;
-            transform: scale(1.02);
-        }
-        
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #888;
-            font-size: 14px;
-            text-align: center;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Área de Acesso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<script>
+    function getQueryParam(param) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(param);
+    }
+</script>
 </head>
-<body>
-    <!-- TELA DE VERIFICAÇÃO DE IDADE -->
-    <div id="ageCheck">
-        <h1>🔞 CONFIRMAÇÃO DE ACESSO</h1>
-        
-        <div class="warning">
-            <p><strong>ESTE ESPAÇO CONTÉM CONTEÚDO ADULTO</strong></p>
-            <p>Exclusivo para maiores de 18 anos.</p>
-            <p>Ao prosseguir, você confirma que tem idade legal.</p>
-        </div>
-        
-        <div class="buttons">
-            <button id="confirmBtn" class="btn enter">
-                ✅ TENHO 18+ E QUERO ENTRAR
-            </button>
-            <br><br>
-            <a href="https://instagram.com" class="btn exit">
-                ↩ VOLTAR PARA INSTAGRAM
-            </a>
-        </div>
-    </div>
-    
-    <!-- CONTEÚDO PRINCIPAL (aparece depois de confirmar) -->
-    <div id="mainContent">
-        <div class="content-box">
-            <h1 style="color: #25D366;">✅ CONTEÚDO LIBERADO</h1>
-            <p>Seja bem-vindo(a) ao conteúdo exclusivo. Aqui você encontrará material especializado para maiores de 18 anos.</p>
-            
-            <div class="sales-box">
-                <h3>🔍 VENDAS REALIZADAS HOJE</h3>
-                <div class="sales-number" id="salesCounter">10</div>
-                <p>Pessoas já adquiriram este conteúdo exclusivo</p>
-                <p><small>Este número aumenta automaticamente</small></p>
-            </div>
-            
-            <h2>📞 FALE DIRETAMENTE COM LUANA</h2>
-            <p>Clique no botão abaixo para conversar no WhatsApp e obter informações exclusivas:</p>
-            
-            <a href="https://wa.me/5511999999999?text=Olá%20Luana,%20vim%20do%20site%20e%20quero%20saber%20mais!" 
-               class="whatsapp-btn"
-               id="whatsappLink"
-               target="_blank">
-                💬 FALAR COM LUANA NO WHATSAPP
-            </a>
-            
-            <div class="footer">
-                <p>⏰ Atendimento disponível das 9h às 23h</p>
-                <p>⭐ Resposta em até 5 minutos durante o horário comercial</p>
-            </div>
-        </div>
-    </div>
+<body class="dark age-bg">
 
-    <script>
-        // Elementos
-        const ageCheck = document.getElementById('ageCheck');
-        const mainContent = document.getElementById('mainContent');
-        const confirmBtn = document.getElementById('confirmBtn');
-        const salesCounter = document.getElementById('salesCounter');
-        const whatsappLink = document.getElementById('whatsappLink');
-        
-        // Inicia com 10 vendas
-        let salesCount = 10;
-        
-        // FUNÇÃO PRINCIPAL: Confirma idade e mostra conteúdo
-        function confirmAge() {
-            console.log("Botão clicado - Confirmando idade...");
-            
-            // 1. Esconde a tela de confirmação
-            ageCheck.style.display = 'none';
-            
-            // 2. Mostra o conteúdo principal
-            mainContent.style.display = 'block';
-            
-            // 3. Inicia o contador de vendas
-            startCounter();
-            
-            console.log("Conteúdo liberado com sucesso!");
-        }
-        
-        // Contador de vendas que aumenta automaticamente
-        function startCounter() {
-            // Aumenta o contador a cada 45 segundos
-            setInterval(() => {
-                salesCount += Math.floor(Math.random() * 3) + 1; // Aumenta 1-3
-                salesCounter.textContent = salesCount;
-                
-                // Efeito visual
-                salesCounter.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    salesCounter.style.transform = 'scale(1)';
-                }, 300);
-            }, 45000); // 45 segundos
-        }
-        
-        // EVENT LISTENER SIMPLES
-        confirmBtn.addEventListener('click', confirmAge);
-        
-        // Previne que o WhatsApp seja clicado antes da confirmação
-        whatsappLink.addEventListener('click', function(e) {
-            if (ageCheck.style.display !== 'none') {
-                e.preventDefault();
-                alert("Por favor, confirme que tem 18+ antes de continuar.");
-            }
-        });
-        
-        // Inicialização
-        console.log("Página carregada. Aguardando confirmação de idade...");
-    </script>
+<div class="age-container">
+    <div class="age-box">
+        <h1>Aviso</h1>
+        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
+        <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
+        <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
+    </div>
+</div>
+
+<script>
+function acceptAge(){
+    localStorage.setItem('age_ok','1');
+    
+    const destination = getQueryParam('go');
+
+    if (destination === 'meta') {
+        // Vindo de Anúncios: vai para a PÁGINA DE ACESSO segura
+        window.location.href = "acesso.html"; // <--- REDIRECIONAMENTO CORRIGIDO
+    } else {
+        // Padrão: vai para a página explícita
+        window.location.href = "bio.html";
+    }
+}
+</script>
+
 </body>
 </html>
