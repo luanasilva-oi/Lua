@@ -1,41 +1,355 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Área de Acesso</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
-<script>
-    function getQueryParam(param) {
-        const params = new URLSearchParams(window.location.search);
-        return params.get(param);
-    }
-</script>
-</head>
-<body class="dark age-bg">
-
-<div class="age-container">
-    <div class="age-box">
-        <h1>Acesso Exclusivo</h1>
-        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que tem idade legal para acesso.</p>
-        <button class="age-btn" onclick="acceptAge()">CONFIRMAR E ACESSAR</button>
-        <span class="age-note">Acesso restrito a maiores de 18 anos.</span>
-    </div>
-</div>
-
-<script>
-function acceptAge(){
-    localStorage.setItem('age_ok','1');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    const destination = getQueryParam('go');
-
-    if (destination === 'safe') {
-        window.location.href = "acesso.html";
-    } else {
-        window.location.href = "bio.html";
-    }
-}
-</script>
-
+    <!-- META TAGS PARA BLOQUEAR TUDO -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noydir">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, noarchive">
+    <meta name="slurp" content="noindex, nofollow, noarchive">
+    <meta name="facebook-domain-verification" content="">
+    <meta name="facebook-crawler" content="noindex, nofollow">
+    <meta name="pinterest" content="nopin">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Verificação de Idade">
+    <meta name="twitter:description" content="Confirmação de acesso">
+    <meta name="twitter:image" content="">
+    
+    <!-- OPEN GRAPH SEGURO -->
+    <meta property="og:title" content="Verificação de Idade">
+    <meta property="og:description" content="Confirmação de acesso necessário">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta property="og:image:alt" content="">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Verificação">
+    
+    <title>Verificação de Idade</title>
+    <style>
+        /* CSS INLINE - Não carrega externo */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .age-container {
+            max-width: 500px;
+            width: 100%;
+            background: #111;
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 2px solid #333;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        
+        .age-logo {
+            font-size: 50px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .age-text {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .age-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .age-btn {
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .age-btn.yes {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            color: #000;
+        }
+        
+        .age-btn.yes:hover {
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            transform: translateY(-2px);
+        }
+        
+        .age-btn.no {
+            background: #333;
+            color: #fff;
+            border: 2px solid #555;
+        }
+        
+        .age-btn.no:hover {
+            background: #444;
+        }
+        
+        .age-warning {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        /* HONEYPOT INVISÍVEL PARA BOTS */
+        .bot-trap {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            opacity: 0;
+            height: 0;
+            width: 0;
+            overflow: hidden;
+        }
+        
+        .bot-trap-link {
+            color: #000;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- ARMADILHA PARA BOTS (invisível para humanos) -->
+    <div class="bot-trap" aria-hidden="true">
+        <a href="honeypot.html" class="bot-trap-link">
+            conteúdo adulto explícito vídeos fotos nua masturbação gemidos
+        </a>
+        <div style="display:none;">
+            luana silva conteúdo premium adulto onlyfans privacy exclusivo
+        </div>
+    </div>
+    
+    <div class="age-container">
+        <div class="age-logo">🔞</div>
+        <h1>Verificação de Idade</h1>
+        
+        <p class="age-text">
+            Este site contém material restrito para maiores de 18 anos.
+            <br><br>
+            Ao prosseguir, você confirma que tem idade legal para acessar
+            conteúdo adulto em sua jurisdição.
+        </p>
+        
+        <div class="age-buttons">
+            <button class="age-btn yes" id="age-yes">
+                TENHO 18+ ANOS E CONCORDO
+            </button>
+            <button class="age-btn no" id="age-no">
+                NÃO TENHO 18 ANOS
+            </button>
+        </div>
+        
+        <p class="age-warning">
+            ⚠️ O acesso é registrado e monitorado. <br>
+            Compartilhar conteúdo com menores é crime.
+        </p>
+    </div>
+    
+    <!-- CARREGAMENTO DINÂMICO DO SISTEMA DE PROTEÇÃO -->
+    <script>
+        // ============================================
+        // SISTEMA DE PROTEÇÃO ANTI-BOT - CARGA INICIAL
+        // ============================================
+        
+        // 1. BLOQUEIO DE FERRAMENTAS DE DESENVOLVEDOR
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+                showDevToolsWarning();
+                return false;
+            }
+            
+            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+            if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'i', 'j', 'c'].includes(e.key)) {
+                e.preventDefault();
+                showDevToolsWarning();
+                return false;
+            }
+            
+            // Ctrl+U (View Source)
+            if (e.ctrlKey && ['U', 'u'].includes(e.key)) {
+                e.preventDefault();
+                showDevToolsWarning();
+                return false;
+            }
+        });
+        
+        // 2. BLOQUEIO DE CLIQUE DIREITO
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showContextMenuWarning();
+            return false;
+        });
+        
+        // 3. DETECTA SE É HUMANO OU BOT
+        let isHuman = false;
+        let mouseMovement = 0;
+        let keyboardActivity = 0;
+        
+        document.addEventListener('mousemove', function() {
+            mouseMovement++;
+            if (mouseMovement > 2) isHuman = true;
+        });
+        
+        document.addEventListener('keydown', function() {
+            keyboardActivity++;
+            if (keyboardActivity > 1) isHuman = true;
+        });
+        
+        // 4. FUNÇÃO PARA ACEITAR IDADE
+        document.getElementById('age-yes').addEventListener('click', function() {
+            if (!isHuman) {
+                // Se não detectou movimento humano, pode ser bot
+                setTimeout(() => {
+                    window.location.href = 'honeypot.html';
+                }, 1000);
+                return;
+            }
+            
+            // Salva aceitação
+            localStorage.setItem('age_verified', 'true');
+            localStorage.setItem('verification_timestamp', Date.now());
+            
+            // Carrega sistema de proteção completo
+            loadProtectionSystem();
+        });
+        
+        document.getElementById('age-no').addEventListener('click', function() {
+            window.location.href = 'https://www.google.com';
+        });
+        
+        // 5. FUNÇÕES DE ALERTA
+        function showDevToolsWarning() {
+            document.body.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: #000;
+                    color: red;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 24px;
+                    font-weight: bold;
+                    text-align: center;
+                    padding: 20px;
+                    z-index: 99999;
+                ">
+                    ⚠️ ACESSO NÃO AUTORIZADO ⚠️<br><br>
+                    Ferramentas de desenvolvedor detectadas.<br>
+                    Esta ação foi registrada.
+                </div>
+            `;
+        }
+        
+        function showContextMenuWarning() {
+            const warning = document.createElement('div');
+            warning.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255,0,0,0.9);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                font-weight: bold;
+                z-index: 99999;
+                box-shadow: 0 0 20px rgba(255,0,0,0.5);
+                animation: fadeInOut 2s ease;
+            `;
+            warning.textContent = '⚠️ Ação bloqueada';
+            document.body.appendChild(warning);
+            
+            setTimeout(() => warning.remove(), 2000);
+        }
+        
+        // 6. CARREGA SISTEMA DE PROTEÇÃO COMPLETO
+        function loadProtectionSystem() {
+            // Remove tudo da página atual
+            document.body.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: #000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #ff9800;
+                    font-size: 20px;
+                    font-weight: bold;
+                ">
+                    🔒 CARREGANDO CONTEÚDO SEGURO...
+                </div>
+            `;
+            
+            // Carrega CSS de proteção
+            const cssLink = document.createElement('link');
+            cssLink.rel = 'stylesheet';
+            cssLink.href = 'css/anti-bot.css';
+            document.head.appendChild(cssLink);
+            
+            // Carrega sistema JS
+            const script = document.createElement('script');
+            script.src = 'js/anti-bot-system.js';
+            script.onload = function() {
+                console.log('✅ Sistema anti-bot carregado');
+            };
+            document.head.appendChild(script);
+        }
+        
+        // 7. VERIFICA SE JÁ ESTÁ VERIFICADO
+        if (localStorage.getItem('age_verified') === 'true') {
+            const verifyTime = parseInt(localStorage.getItem('verification_timestamp'));
+            const currentTime = Date.now();
+            const hoursPassed = (currentTime - verifyTime) / (1000 * 60 * 60);
+            
+            // Revalida a cada 6 horas
+            if (hoursPassed < 6) {
+                loadProtectionSystem();
+            }
+        }
+    </script>
 </body>
 </html>
