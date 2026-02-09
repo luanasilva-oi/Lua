@@ -1,312 +1,288 @@
-// ==========================================================
-// SCRIPT OTIMIZADO E CORRIGIDO
-// ==========================================================
+// COMBINED AND ROBUST script.js (VERSÃO ATUALIZADA)
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("🔒 Site Luana Silva - Carregando...");
 
     // ==========================================================
-    // 1. REMOVER NOTIFICAÇÕES BUGADAS DE VENDAS
-    // ==========================================================
-    // Removemos o sistema bugado de notificações fixas
-    
-    // ==========================================================
-    // 2. LÓGICA DO MODAL DE CONSENTIMENTO
+    // 1. LÓGICA DO MODAL DE CONSENTIMENTO
     // ==========================================================
     const consentModal = document.getElementById('consent-modal');
     const consentYesBtn = document.getElementById('consent-yes');
     const mainContent = document.getElementById('main-content');
 
+    // Só executa se os elementos do modal existirem na página
     if (consentModal && consentYesBtn && mainContent) {
-        console.log("🎯 Modal de consentimento ativado.");
+        console.log("Elementos do modal encontrados.");
         
-        // Verifica se já aceitou antes
-        if (localStorage.getItem('terms_accepted') === 'true') {
-            consentModal.style.display = 'none';
-            mainContent.style.filter = 'none';
-            mainContent.style.pointerEvents = 'auto';
-        } else {
-            consentModal.style.display = 'flex';
-            mainContent.style.filter = 'blur(10px)';
-            mainContent.style.pointerEvents = 'none';
-        }
+        // Garantir que o modal esteja visível inicialmente
+        consentModal.style.display = 'flex';
+        mainContent.style.filter = 'blur(10px)';
+        mainContent.style.pointerEvents = 'none';
 
+        // Função para fechar o modal
         function closeModal() {
-            console.log("✅ Modal fechado.");
+            console.log("Fechando o modal.");
             consentModal.style.display = 'none';
             mainContent.style.filter = 'none';
             mainContent.style.pointerEvents = 'auto';
-            localStorage.setItem('terms_accepted', 'true');
         }
 
+        // Evento de clique no botão "Concordo e Prosseguir"
         consentYesBtn.addEventListener('click', (event) => {
             event.preventDefault();
+            console.log("Botão 'Concordo e Prosseguir' clicado.");
             closeModal();
         });
 
+        // Evento de clique no fundo escuro do modal para fechar
         consentModal.addEventListener('click', (event) => {
             if (event.target === consentModal) {
+                console.log("Fundo do modal clicado.");
                 closeModal();
             }
         });
     }
 
     // ==========================================================
-    // 3. SISTEMA DE ESTATÍSTICAS DINÂMICAS (CORRIGIDO)
+    // 2. LÓGICA DAS PRÉVIAS CLIQUE (SÓ NA PÁGINA EXPLÍCITA)
+    // ==========================================================
+    if (window.location.pathname.includes('bio.html')) {
+        console.log("Página explícita detectada. Ativando lógica de prévias.");
+        
+        const previewCards = document.querySelectorAll('.preview-card.locked');
+        previewCards.forEach(card => {
+            card.addEventListener('click', function() {
+                if (this.classList.contains('unlocked')) return;
+                const clickText = this.querySelector('span');
+                if (clickText) clickText.remove();
+                this.classList.remove('locked');
+                this.classList.add('unlocked');
+            });
+        });
+    }
+
+    // ==========================================================
+    // 3. OUTRAS FUNCIONALIDADES DINÂMICAS
     // ==========================================================
     const onlineCountEl = document.getElementById("online-count");
     const accessCountEl = document.getElementById("access-count");
 
     function updateOnlineUsers() {
         if (onlineCountEl) {
-            // Números mais realistas: 15-35 online
-            const minOnline = 15;
-            const maxOnline = 35;
-            const count = Math.floor(Math.random() * (maxOnline - minOnline + 1)) + minOnline;
+            const count = Math.floor(Math.random() * (25 - 8 + 1)) + 8;
             onlineCountEl.textContent = count;
-            
-            // Atualiza a cada 45-90 segundos
-            const nextUpdate = Math.random() * (90000 - 45000) + 45000;
-            setTimeout(updateOnlineUsers, nextUpdate);
         }
     }
-    
+    setInterval(updateOnlineUsers, 8000);
+    updateOnlineUsers();
+
     function initializeDailyAccess() {
         if (accessCountEl) {
+            let count = localStorage.getItem('daily_access_count');
             const today = new Date().toDateString();
-            const lastAccess = localStorage.getItem('last_access_date');
-            
-            // Se é um novo dia, reseta o contador
-            if (!lastAccess || lastAccess !== today) {
-                // Começa com 40-60 acessos
-                const initialCount = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
-                localStorage.setItem('daily_access_count', initialCount);
-                localStorage.setItem('last_access_date', today);
-                accessCountEl.textContent = initialCount;
-            } else {
-                // Pega o valor atual
-                let count = parseInt(localStorage.getItem('daily_access_count')) || 40;
-                accessCountEl.textContent = count;
-            }
 
-            // Incrementa a cada 1-2 minutos de forma mais lenta
+            if (!localStorage.getItem('last_access_date') || localStorage.getItem('last_access_date') !== today) {
+                count = Math.floor(Math.random() * (50 - 30 + 1)) + 30;
+                localStorage.setItem('daily_access_count', count);
+                localStorage.setItem('last_access_date', today);
+            } else {
+                count = parseInt(count) || 30;
+            }
+            
+            accessCountEl.textContent = count;
+
             setInterval(() => {
                 let currentCount = parseInt(localStorage.getItem('daily_access_count'));
-                if (currentCount < 150) { // Limite máximo razoável
-                    // Incrementa 1-2 a cada vez
-                    currentCount += Math.floor(Math.random() * 2) + 1;
-                    localStorage.setItem('daily_access_count', currentCount);
-                    if(accessCountEl) accessCountEl.textContent = currentCount;
-                }
-            }, Math.random() * (120000 - 60000) + 60000);
+                currentCount++;
+                localStorage.setItem('daily_access_count', currentCount);
+                if(accessCountEl) accessCountEl.textContent = currentCount;
+            }, 45000);
         }
     }
+    initializeDailyAccess();
 
     // ==========================================================
-    // 4. CONTADOR PROMOCIONAL SIMPLES
+    // 4. LÓGICA DA CONTAGEM REGRESSIVA DA PROMOÇÃO
     // ==========================================================
     function startPromoCountdown() {
         const countdownEl = document.getElementById('countdown-timer');
         if (!countdownEl) return;
         
-        // 2 horas a partir do acesso
         let timeInSeconds = 2 * 60 * 60;
-        
-        // Atualiza imediatamente
-        updateCountdown();
-        
         const interval = setInterval(() => {
-            timeInSeconds--;
-            updateCountdown();
-            
-            if (timeInSeconds <= 0) {
-                clearInterval(interval);
-                countdownEl.textContent = "OFERTA ENCERRADA";
-                countdownEl.style.background = "rgba(255, 0, 0, 0.3)";
-            }
-        }, 1000);
-        
-        function updateCountdown() {
             const hours = Math.floor(timeInSeconds / 3600);
             const minutes = Math.floor((timeInSeconds % 3600) / 60);
             const seconds = timeInSeconds % 60;
             const displayTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             countdownEl.textContent = displayTime;
-        }
+            
+            if (timeInSeconds <= 0) {
+                clearInterval(interval);
+                countdownEl.textContent = "OFERTA ENCERRADA";
+                countdownEl.style.background = "rgba(255, 0, 0, 0.5)";
+            }
+            timeInSeconds--;
+        }, 1000);
     }
+    startPromoCountdown();
 
     // ==========================================================
-    // 5. SISTEMA DE VENDAS SIMPLES (SEM BUG)
+    // 5. CONTADOR DE COMPRAS PROFISSIONAL (ATUALIZADO)
     // ==========================================================
-    function initSimpleSalesCounter() {
-        // Remove qualquer contador bugado existente
-        const buggedCounter = document.querySelector('.sales-counter');
-        if (buggedCounter) {
-            buggedCounter.remove();
+    function initializeProfessionalPurchaseCounter() {
+        // Lista de nomes masculinos brasileiros
+        const brazilianNames = [
+            'Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel',
+            'Marcos', 'Thiago', 'Carlos', 'Eduardo', 'Bruno', 'Leonardo', 'André',
+            'Robson', 'Mario', 'Miguel', 'Bejamim', 'Arthur', 'izaque', 'Israel', 'Victor',
+            'Julio', 'Tico', 'Vitor', 'Alex', 'Adriano', 'Chico', 'Daniel'
+        ];
+        
+        // Criar contador de vendas total
+        let totalSales = parseInt(localStorage.getItem('total_sales')) || 0;
+        
+        // Criar elemento do contador de vendas
+        if (!document.querySelector('.sales-counter')) {
+            const salesCounter = document.createElement('div');
+            salesCounter.className = 'sales-counter';
+            salesCounter.innerHTML = `
+                <span class="fire-icon">🔥</span>
+                <span id="total-sales-count">${totalSales}</span> vendas hoje
+            `;
+            document.body.appendChild(salesCounter);
         }
         
-        // Remove notificações bugadas
-        const buggedNotifications = document.querySelectorAll('.purchase-notification');
-        buggedNotifications.forEach(el => el.remove());
+        // Atualizar contador de vendas
+        function updateSalesCounter() {
+            const salesCountEl = document.getElementById('total-sales-count');
+            if (salesCountEl) {
+                salesCountEl.textContent = totalSales;
+            }
+            const salesCounter = document.querySelector('.sales-counter');
+            if (salesCounter && totalSales > 0) {
+                salesCounter.style.display = 'flex';
+            }
+        }
         
-        console.log("✅ Sistema de vendas bugado removido.");
-    }
-
-    // ==========================================================
-    // 6. OTIMIZAÇÃO DE PERFORMANCE
-    // ==========================================================
-    function optimizePerformance() {
-        // Lazy loading para imagens
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            img.loading = 'lazy';
-        });
-        
-        // Otimiza vídeos
-        const videos = document.querySelectorAll('video');
-        videos.forEach(video => {
-            video.preload = 'metadata';
-        });
-        
-        // Feedback visual para botões
-        document.querySelectorAll('.plan-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                // Pequeno feedback visual
-                this.style.transform = 'scale(0.97)';
+        // Função para mostrar notificação de compra
+        function showPurchaseNotification(planType) {
+            // Remover notificação anterior se existir
+            const oldNotification = document.querySelector('.purchase-notification');
+            if (oldNotification) {
+                oldNotification.style.animation = 'slideOut 0.5s ease forwards';
                 setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-                
-                // Log para analytics
-                const planType = this.classList.contains('basic') ? 'Básico' : 'Completo';
-                console.log(`📱 WhatsApp clicado - Plano: ${planType}`);
-            });
-        });
-    }
-
-    // ==========================================================
-    // 7. PROTEÇÃO ANTI-BOT LEVE (NÃO INTERFERE)
-    // ==========================================================
-    function initLightBotProtection() {
-        // Apenas detecta, não bloqueia
-        const userAgent = navigator.userAgent.toLowerCase();
-        const isKnownBot = userAgent.includes('instagram') || 
-                          userAgent.includes('facebookexternalhit') ||
-                          userAgent.includes('whatsapp');
-        
-        if (isKnownBot) {
-            console.log("🤖 Bot detectado (não bloqueado para evitar problemas)");
-            // Não faz nada, apenas log
-        }
-        
-        // Proteção simples contra inspeção (não atrapalha usuários)
-        document.addEventListener('contextmenu', (e) => {
-            // Permite clique direito normalmente
-            return true;
-        });
-    }
-
-    // ==========================================================
-    // 8. SISTEMA DE INTERAÇÃO COM PREVIEWS
-    // ==========================================================
-    function initPreviewInteractions() {
-        // Apenas se estiver na página bio.html
-        if (!window.location.pathname.includes('bio.html')) return;
-        
-        const previewCards = document.querySelectorAll('.preview-card.locked');
-        previewCards.forEach(card => {
-            card.addEventListener('click', function() {
-                // Efeito visual
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-                
-                // Muda o texto
-                const lockedText = this.querySelector('.locked-text');
-                if (lockedText) {
-                    const originalText = lockedText.innerHTML;
-                    lockedText.innerHTML = '💋 ABRINDO WHATSAPP...';
-                    lockedText.style.background = 'rgba(37, 211, 102, 0.9)';
-                    
+                    if (oldNotification.parentNode) {
+                        oldNotification.remove();
+                    }
+                }, 500);
+            }
+            
+            // Escolher nome aleatório
+            const randomName = brazilianNames[Math.floor(Math.random() * brazilianNames.length)];
+            
+            // Determinar plano e cores
+            const planName = planType === 'basic' ? 'Acesso Básico 🛡️' : 'Acesso Completo ⭐';
+            const planClass = planType === 'basic' ? 'basic' : 'complete';
+            const planIcon = planType === 'basic' ? '🛡️' : '⭐';
+            
+            // Criar nova notificação
+            const notification = document.createElement('div');
+            notification.className = `purchase-notification ${planClass}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <div class="icon">${planIcon}</div>
+                    <div class="text-content">
+                        <div class="purchase-text">${randomName} comprou</div>
+                        <div class="plan-info">
+                            <span class="plan-type">${planName}</span>
+                        </div>
+                        <div class="time-ago">Agora mesmo</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Mostrar notificação
+            setTimeout(() => {
+                notification.style.display = 'block';
+            }, 50);
+            
+            // Incrementar vendas totais
+            totalSales++;
+            localStorage.setItem('total_sales', totalSales);
+            updateSalesCounter();
+            
+            // Remover notificação após 6 segundos
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.5s ease forwards';
                     setTimeout(() => {
-                        lockedText.innerHTML = originalText;
-                        lockedText.style.background = '';
-                    }, 1500);
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 500);
                 }
-            });
+            }, 6000);
+        }
+        
+        // Simular compras aleatórias
+        function simulateRandomPurchase() {
+            // Tempo aleatório entre 25 e 60 segundos
+            const randomTime = Math.random() * (60000 - 25000) + 25000;
+            
+            setTimeout(() => {
+                // Escolher plano aleatório (60% chance de completo, 40% básico)
+                const randomPlan = Math.random() < 0.6 ? 'complete' : 'basic';
+                
+                // Mostrar notificação
+                showPurchaseNotification(randomPlan);
+                
+                // Próxima simulação
+                simulateRandomPurchase();
+            }, randomTime);
+        }
+        
+        // Inicializar contador de vendas
+        updateSalesCounter();
+        
+        // Mostrar contador ao rolar
+        window.addEventListener('scroll', () => {
+            const salesCounter = document.querySelector('.sales-counter');
+            if (salesCounter && totalSales > 0) {
+                salesCounter.style.display = 'flex';
+            }
         });
+        
+        // Iniciar simulação após 5 segundos
+        setTimeout(simulateRandomPurchase, 5000);
     }
 
     // ==========================================================
-    // 9. INICIALIZAÇÃO DE TODOS OS SISTEMAS
+    // 6. INICIALIZAÇÃO DOS SISTEMAS
     // ==========================================================
-    function initializeAllSystems() {
-        console.log("🚀 Inicializando sistemas...");
-        
-        // 1. Remove sistema bugado
-        initSimpleSalesCounter();
-        
-        // 2. Inicia estatísticas
-        updateOnlineUsers();
-        initializeDailyAccess();
-        
-        // 3. Contador promocional
-        startPromoCountdown();
-        
-        // 4. Otimizações
-        optimizePerformance();
-        
-        // 5. Proteção leve
-        initLightBotProtection();
-        
-        // 6. Interações
-        initPreviewInteractions();
-        
-        console.log("✅ Todos os sistemas inicializados!");
-    }
-
-    // ==========================================================
-    // 10. EVENT LISTENERS ADICIONAIS
-    // ==========================================================
-    // Feedback para WhatsApp
-    document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-        link.addEventListener('click', function() {
-            // Pequena animação
+    
+    // Inicializar contador de compras profissional
+    setTimeout(initializeProfessionalPurchaseCounter, 3000);
+    
+    // Efeito de clique nos botões de plano
+    document.querySelectorAll('.plan-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Pequeno feedback visual
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 200);
-            
-            // Analytics simples
-            console.log("💬 WhatsApp aberto:", this.href);
         });
     });
-    
-    // Previne duplo clique rápido
-    let lastClickTime = 0;
-    document.addEventListener('click', (e) => {
-        const currentTime = new Date().getTime();
-        if (currentTime - lastClickTime < 300) { // 300ms
-            e.preventDefault();
-        }
-        lastClickTime = currentTime;
-    }, true);
 
-    // ==========================================================
-    // INICIALIZAÇÃO FINAL
-    // ==========================================================
-    // Aguarda 500ms para carregar tudo
-    setTimeout(initializeAllSystems, 500);
-    
-    // Adiciona classe de carregamento
-    document.body.classList.add('loaded');
+    // Efeito hover nos cards de plano
+    document.querySelectorAll('.plan-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
 });
-
-// Função global para WhatsApp (opcional)
-function contactWhatsApp(plan = 'exclusivo') {
-    const message = `Olá Luana! Quero conhecer seu conteúdo ${plan.toUpperCase()}! Me envie as informações por favor 😊`;
-    const url = `https://wa.me/56974783157?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-    return true;
-}
