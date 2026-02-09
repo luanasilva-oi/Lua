@@ -1,145 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Meta tags normais -->
-    <title>Luana Silva | Conteúdo Exclusivo</title>
-    <meta name="description" content="Bem-vindo ao meu espaço digital exclusivo">
-    
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- CSS anti-bot (leve) -->
-    <link rel="stylesheet" href="css/anti-bot-human.css">
+<meta charset="UTF-8">
+<title>Área de Acesso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<script>
+    function getQueryParam(param) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(param);
+    }
+</script>
 </head>
-<body class="dark">
+<body class="dark age-bg">
+
+<div class="age-container">
+    <div class="age-box">
+        <h1>Aviso</h1>
+        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
+        <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
+        <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
+    </div>
+</div>
+
+<script>
+function acceptAge(){
+    localStorage.setItem('age_ok','1');
     
-    <!-- CONTEÚDO VISÍVEL APENAS PARA HUMANOS -->
-    <main class="profile-container protected-content">
-        
-        <!-- Banner normal (sem canvas complicado) -->
-        <header class="profile-header">
-            <img src="assets/banner-safe.jpg" 
-                 class="profile-banner" 
-                 alt="Luana Silva"
-                 loading="lazy">
-            
-            <img src="assets/avatar-safe.jpg" 
-                 class="avatar" 
-                 alt="Foto de perfil"
-                 loading="lazy">
-            
-            <div class="profile-info">
-                <h1>Luana Silva <span class="verified">✓</span></h1>
-                
-                <p class="bio">
-                    Espaço exclusivo para conteúdo especial e pessoal.
-                    Aqui você encontra material que não compartilho em outras redes.
-                </p>
-                
-                <!-- WhatsApp PROTEGIDO mas funcional -->
-                <a href="#" 
-                   class="whatsapp-button"
-                   data-whatsapp="true"
-                   data-phone="56974783157"
-                   data-message="Olá Luana! Vim do seu site 😊">
-                    📲 FALE COMIGO NO WHATSAPP
-                </a>
-            </div>
-        </header>
-        
-        <!-- Previews normais (sem blur excessivo) -->
-        <section class="content-previews">
-            <h2>Conteúdo Exclusivo</h2>
-            
-            <div class="preview-grid">
-                <div class="preview-card">
-                    <img src="assets/preview1.jpg" 
-                         alt="Preview 1"
-                         loading="lazy"
-                         class="preview-img">
-                    <div class="preview-overlay">
-                        <span>👀 Ver mais</span>
-                    </div>
-                </div>
-                
-                <div class="preview-card">
-                    <img src="assets/preview2.jpg" 
-                         alt="Preview 2"
-                         loading="lazy"
-                         class="preview-img">
-                    <div class="preview-overlay">
-                        <span>👀 Ver mais</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-    </main>
-    
-    <!-- SISTEMA ANTI-BOT INTELIGENTE -->
-    <script src="js/anti-bot-v2.js" defer></script>
-    
-    <!-- Script normal do site -->
-    <script src="js/script.js" defer></script>
-    
-    <!-- Script para humanos -->
-    <script>
-        // Funções que só rodam para humanos
-        document.addEventListener('DOMContentLoaded', function() {
-            // Se for humano (verificação simples)
-            if (navigator.userAgent && !navigator.userAgent.includes('bot')) {
-                // Carrega contadores
-                initCounters();
-                
-                // Carrega interações
-                initInteractions();
-                
-                // Marca como humano
-                document.body.classList.add('human-verified');
-                
-                console.log('👋 Bem-vindo humano!');
-            }
-        });
-        
-        function initCounters() {
-            // Seus contadores normais aqui
-            const accessCount = document.getElementById('access-count');
-            if (accessCount) {
-                let count = 42;
-                setInterval(() => {
-                    count += Math.random() > 0.5 ? 1 : 0;
-                    if (count > 100) count = 42;
-                    accessCount.textContent = count;
-                }, 30000);
-            }
-        }
-        
-        function initInteractions() {
-            // Previews clicáveis
-            document.querySelectorAll('.preview-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    // Abre WhatsApp
-                    const btn = document.querySelector('.whatsapp-button');
-                    if (btn) btn.click();
-                });
-            });
-            
-            // WhatsApp funcional
-            document.querySelectorAll('[data-whatsapp]').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const phone = this.getAttribute('data-phone');
-                    const message = this.getAttribute('data-message');
-                    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-                    
-                    window.open(url, '_blank');
-                });
-            });
-        }
-    </script>
+    const destination = getQueryParam('go');
+
+    if (destination === 'meta') {
+        // Vindo de Anúncios: vai para a PÁGINA DE ACESSO segura
+        window.location.href = "acesso.html"; // <--- REDIRECIONAMENTO CORRIGIDO
+    } else {
+        // Padrão: vai para a página explícita
+        window.location.href = "bio.html";
+    }
+}
+</script>
+
 </body>
 </html>
