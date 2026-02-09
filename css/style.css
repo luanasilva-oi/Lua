@@ -795,97 +795,6 @@ body.dark {
 }
 
 /* =================================================== */
-/* RESPONSIVE DESIGN */
-/* =================================================== */
-@media (max-width: 768px) {
-    body { padding: 10px; }
-    .profile-container { 
-        padding: 15px; 
-        border-radius: 14px;
-        margin: 10px auto;
-    }
-    .profile-banner { height: 200px; }
-    .avatar { 
-        width: 100px; 
-        height: 100px; 
-        margin-top: -50px; 
-    }
-    .bio { font-size: 14px; line-height: 1.4; max-width: 100%; }
-    .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .preview-container { padding-top: 100%; }
-    .locked-text { 
-        font-size: 12px; 
-        padding: 10px 15px; 
-        min-width: 120px; 
-    }
-    .plans-grid { grid-template-columns: 1fr; }
-    .plan-card { padding: 20px; }
-    .plan-card.featured { transform: scale(1); }
-    .price { font-size: 32px; }
-    .plan-btn { font-size: 16px; padding: 16px; }
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        left: 20px;
-    }
-    .whatsapp-button {
-        justify-content: center;
-        padding: 14px 22px;
-        font-size: 15px;
-    }
-    .social-links {
-        gap: 20px;
-    }
-    .social-links a {
-        width: 32px;
-        height: 32px;
-    }
-    .modal-content {
-        padding: 25px 20px;
-    }
-    .section-title {
-        font-size: 22px;
-    }
-    .promo-content h3 {
-        font-size: 22px;
-    }
-    #countdown-timer {
-        font-size: 16px;
-        padding: 6px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .profile-banner { height: 180px; }
-    .avatar { 
-        width: 90px; 
-        height: 90px; 
-        margin-top: -45px; 
-    }
-    .plan-card h3 { font-size: 20px; }
-    .plan-desc { font-size: 14px; }
-    .plan-desc li { 
-        padding-left: 24px;
-        margin-bottom: 10px;
-    }
-    .section-title { font-size: 20px; }
-    .promo-content h3 { font-size: 20px; }
-    .whatsapp-button {
-        font-size: 14px;
-        padding: 12px 18px;
-    }
-    .whatsapp-button svg {
-        width: 22px;
-        height: 22px;
-    }
-    .headline h1 {
-        font-size: 20px;
-    }
-    .guarantee-simple p {
-        font-size: 16px;
-    }
-}
-/* =================================================== */
 /* NOTIFICAÇÕES DE VENDA FIX */
 /* =================================================== */
 
@@ -985,7 +894,65 @@ body.dark {
     }
 }
 
+/* =================================================== */
+/* RESPONSIVE DESIGN */
+/* =================================================== */
 @media (max-width: 768px) {
+    body { padding: 10px; }
+    .profile-container { 
+        padding: 15px; 
+        border-radius: 14px;
+        margin: 10px auto;
+    }
+    .profile-banner { height: 200px; }
+    .avatar { 
+        width: 100px; 
+        height: 100px; 
+        margin-top: -50px; 
+    }
+    .bio { font-size: 14px; line-height: 1.4; max-width: 100%; }
+    .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .preview-container { padding-top: 100%; }
+    .locked-text { 
+        font-size: 12px; 
+        padding: 10px 15px; 
+        min-width: 120px; 
+    }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card { padding: 20px; }
+    .plan-card.featured { transform: scale(1); }
+    .price { font-size: 32px; }
+    .plan-btn { font-size: 16px; padding: 16px; }
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+    }
+    .whatsapp-button {
+        justify-content: center;
+        padding: 14px 22px;
+        font-size: 15px;
+    }
+    .social-links {
+        gap: 20px;
+    }
+    .social-links a {
+        width: 32px;
+        height: 32px;
+    }
+    .modal-content {
+        padding: 25px 20px;
+    }
+    .section-title {
+        font-size: 22px;
+    }
+    .promo-content h3 {
+        font-size: 22px;
+    }
+    #countdown-timer {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
     .sales-notification {
         bottom: 80px;
         right: 20px;
@@ -997,5 +964,36 @@ body.dark {
         top: 10px;
         font-size: 13px;
         padding: 8px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-banner { height: 180px; }
+    .avatar { 
+        width: 90px; 
+        height: 90px; 
+        margin-top: -45px; 
+    }
+    .plan-card h3 { font-size: 20px; }
+    .plan-desc { font-size: 14px; }
+    .plan-desc li { 
+        padding-left: 24px;
+        margin-bottom: 10px;
+    }
+    .section-title { font-size: 20px; }
+    .promo-content h3 { font-size: 20px; }
+    .whatsapp-button {
+        font-size: 14px;
+        padding: 12px 18px;
+    }
+    .whatsapp-button svg {
+        width: 22px;
+        height: 22px;
+    }
+    .headline h1 {
+        font-size: 20px;
+    }
+    .guarantee-simple p {
+        font-size: 16px;
     }
 }
