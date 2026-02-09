@@ -16,10 +16,10 @@
 
 <div class="age-container">
     <div class="age-box">
-        <h1>Aviso</h1>
-        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
-        <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
-        <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
+        <h1>Acesso Exclusivo</h1>
+        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que tem idade legal para acesso.</p>
+        <button class="age-btn" onclick="acceptAge()">CONFIRMAR E ACESSAR</button>
+        <span class="age-note">Acesso restrito a maiores de 18 anos.</span>
     </div>
 </div>
 
@@ -29,11 +29,9 @@ function acceptAge(){
     
     const destination = getQueryParam('go');
 
-    if (destination === 'meta') {
-        // Vindo de Anúncios: vai para a PÁGINA DE ACESSO segura
-        window.location.href = "acesso.html"; // <--- REDIRECIONAMENTO CORRIGIDO
+    if (destination === 'safe') {
+        window.location.href = "acesso.html";
     } else {
-        // Padrão: vai para a página explícita
         window.location.href = "bio.html";
     }
 }
