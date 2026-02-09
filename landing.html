@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luana Silva | Projeto Exclusivo</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Meta Pixel Code -->
-    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1265319012144215');fbq('track', 'PageView');</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1265319012144215&ev=PageView&noscript=1"/></noscript>
-    <script>
-        if (localStorage.getItem('age_ok') !== '1') {
-            window.location.href = "index.html";
-        }
-    </script>
+<meta charset="UTF-8">
+<title>Área de Acesso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<script>
+    function getQueryParam(param) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(param);
+    }
+</script>
 </head>
-<body class="dark">
+<body class="dark age-bg">
 
-    <main class="profile-container">
-        
-        <div class="urgency-bar">
-            <p>🔥 Vagas limitadas para o novo ciclo de acesso ao projeto.</p>
-        </div>
-        <section class="lead-content">
-            <h1>Conteúdo que você não vê em lugar nenhum.</h1>
-            <p>Criei um espaço digital para compartilhar meu universo mais autêntico. Um projeto pessoal com bastidores, rotina e publicações exclusivas para quem realmente quer me acompanhar de perto.</p>
-            <p>Se você busca uma conexão real e sem filtros, está no lugar certo. O acesso é restrito para garantir a privacidade e a qualidade da nossa comunidade.</p>
-            <a href="acesso.html?from=meta" class="plan-btn complete">Solicitar Acesso ao Projeto</a>
-            <p class="meta-note">Junte-se a centenas de pessoas que já fazem parte deste universo.</p>
-        </section>
-    </main>
+<div class="age-container">
+    <div class="age-box">
+        <h1>Aviso</h1>
+        <p class="age-text">Conteúdo destinado exclusivamente a maiores de 18 anos.<br>Ao prosseguir, você confirma que atende a esse requisito.</p>
+        <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
+        <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
+    </div>
+</div>
 
-    <script src="js/script.js" defer></script>
+<script>
+function acceptAge(){
+    localStorage.setItem('age_ok','1');
+    
+    const destination = getQueryParam('go');
+
+    if (destination === 'meta') {
+        // Vindo de Anúncios: vai para a PÁGINA DE ACESSO segura
+        window.location.href = "acesso.html"; // <--- REDIRECIONAMENTO CORRIGIDO
+    } else {
+        // Padrão: vai para a página explícita
+        window.location.href = "bio.html";
+    }
+}
+</script>
+
 </body>
 </html>
