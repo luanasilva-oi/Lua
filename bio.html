@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luana Silva | Conteúdo Adulto Exclusivo</title>
+    
+    <!-- META TAGS SEGURAS (Anti-Robô) -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="description" content="Espaço pessoal e exclusivo">
+    <meta property="og:title" content="Luana Silva | Conteúdo Exclusivo">
+    <meta property="og:description" content="Espaço pessoal digital">
+    <meta property="og:type" content="website">
+    
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* ESTILOS ESPECÍFICOS PARA BIO.HTML */
+        /* ESTILOS ESPECÍFICOS COM PROTEÇÃO ANTI-ROBÔ */
         
-        /* Blur suave para GIFs */
+        /* Esconde texto real, mostra apenas para humanos via JS */
+        .protected-text {
+            opacity: 0;
+            position: absolute;
+            left: -9999px;
+        }
+        
+        /* Texto que aparece apenas após JS carregar */
+        .js-text {
+            display: none;
+        }
+        
+        /* Blur suave nos GIFs */
         .blurred-preview-video {
-            filter: blur(2px) brightness(0.8);
+            filter: blur(2px) brightness(0.7);
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -20,11 +41,11 @@
             transition: filter 0.5s ease;
         }
         
-        .preview-card.locked:hover .blurred-preview-video {
-            filter: blur(1px) brightness(0.9);
+        .preview-card:hover .blurred-preview-video {
+            filter: blur(1px) brightness(0.8);
         }
         
-        /* Container dos previews */
+        /* Preview container */
         .preview-container {
             position: relative;
             width: 100%;
@@ -40,21 +61,27 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(229, 57, 53, 0.9);
+            background: rgba(229, 57, 53, 0.95);
             color: white;
-            padding: 12px 20px;
-            border-radius: 20px;
+            padding: 14px 22px;
+            border-radius: 25px;
             font-size: 14px;
             font-weight: bold;
             z-index: 3;
-            border: 2px solid #ff9800;
+            border: 3px solid #ff9800;
             pointer-events: none;
             text-align: center;
-            min-width: 140px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            min-width: 150px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            animation: pulseText 2s infinite;
         }
         
-        /* Ícones sociais com cores originais */
+        @keyframes pulseText {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* Ícones sociais */
         .social-links a.instagram {
             color: #E4405F;
         }
@@ -67,263 +94,282 @@
             color: #25D366;
         }
         
-        .social-links a:hover {
-            transform: translateY(-3px) scale(1.1);
-        }
-        
-        /* Headline picante */
+        /* Headline com proteção */
         .headline {
             text-align: center;
             margin: 30px 0;
             padding: 25px;
             background: linear-gradient(135deg, rgba(229, 57, 53, 0.15), rgba(255, 152, 0, 0.15));
             border-radius: 15px;
-            border: 2px solid rgba(229, 57, 53, 0.3);
+            border: 3px solid rgba(229, 57, 53, 0.4);
             position: relative;
             overflow: hidden;
-        }
-        
-        .headline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
         }
         
         /* Urgência */
         .urgency-bar {
             background: linear-gradient(90deg, #e53935, #ff5722);
             color: white;
-            padding: 15px;
+            padding: 16px;
             text-align: center;
             margin: 25px 0;
             border-radius: 12px;
             font-weight: bold;
-            font-size: 16px;
-            border: 2px solid #ff9800;
-            animation: pulse 2s infinite;
+            font-size: 17px;
+            border: 3px solid #ff9800;
+            animation: pulse 1.5s infinite;
+            position: relative;
+            overflow: hidden;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.9; }
+        .urgency-bar::before {
+            content: '🔥';
+            position: absolute;
+            left: 20px;
+            animation: fire 1s infinite;
         }
         
-        /* Botões picantes */
+        .urgency-bar::after {
+            content: '🔥';
+            position: absolute;
+            right: 20px;
+            animation: fire 1s infinite alternate;
+        }
+        
+        @keyframes fire {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        /* Botões */
         .plan-btn.enhanced {
             background: linear-gradient(135deg, #e53935, #d32f2f);
             color: white;
             font-size: 18px;
             padding: 18px;
             font-weight: bold;
-            border: 2px solid #ff9800;
+            border: 3px solid #ff9800;
             margin-top: 15px;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+            box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
         }
         
         .plan-btn.enhanced:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(229, 57, 53, 0.5);
+            box-shadow: 0 8px 25px rgba(229, 57, 53, 0.6);
             background: linear-gradient(135deg, #d32f2f, #c62828);
         }
         
-        .plan-btn.enhanced::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .plan-btn.enhanced:hover::before {
-            left: 100%;
-        }
-        
-        /* Garantia simples */
+        /* Garantia */
         .guarantee-simple {
             text-align: center;
             margin: 25px 0;
             padding: 20px;
             border-radius: 12px;
-            background: rgba(76, 175, 80, 0.1);
-            border: 2px solid #4caf50;
+            background: rgba(76, 175, 80, 0.15);
+            border: 3px solid #4caf50;
+            position: relative;
         }
         
-        .guarantee-simple p {
-            color: #fff;
-            font-size: 18px;
-            margin: 0;
-        }
-        
-        .guarantee-simple .heart {
-            color: #e53935;
+        .guarantee-simple::before {
+            content: '✅';
+            position: absolute;
+            left: 20px;
             font-size: 24px;
-            margin: 0 5px;
         }
         
-        /* FAQ */
-        .faq-item {
-            margin-bottom: 15px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
+        .guarantee-simple::after {
+            content: '💋';
+            position: absolute;
+            right: 20px;
+            font-size: 24px;
+            animation: heartbeat 1.5s infinite;
         }
         
-        .faq-question {
-            width: 100%;
-            padding: 18px 20px;
-            background: none;
-            border: none;
-            color: white;
-            text-align: left;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        
+        /* Testemunhos Fake */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .testimonial-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 4px solid #ff9800;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 40px;
+            color: #ff9800;
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        .testimonial-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.3s;
+            margin-bottom: 15px;
         }
         
-        .faq-question:hover {
-            background: rgba(255,255,255,0.05);
+        .testimonial-name {
+            font-weight: bold;
+            color: #fff;
+            font-size: 16px;
         }
         
-        .faq-question::after {
-            content: '▼';
-            font-size: 12px;
-            transition: transform 0.3s;
+        .testimonial-rating {
+            color: #ffb400;
+            font-size: 18px;
         }
         
-        .faq-question.active::after {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s, padding 0.3s;
-        }
-        
-        .faq-answer.show {
-            padding: 20px;
-            max-height: 500px;
-        }
-        
-        .faq-answer p {
-            color: #ccc;
+        .testimonial-text {
+            color: #ddd;
+            font-style: italic;
             line-height: 1.6;
-            margin: 0;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
         
-        /* WhatsApp Float melhorado */
-        .whatsapp-float {
+        .testimonial-time {
+            font-size: 12px;
+            color: #888;
+            display: block;
+            text-align: right;
+        }
+        
+        /* Vendas Fake */
+        .sales-notification {
             position: fixed;
-            bottom: 30px;
+            bottom: 100px;
             right: 30px;
-            z-index: 1000;
+            background: rgba(25, 25, 25, 0.95);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            z-index: 9998;
+            max-width: 280px;
+            display: none;
+            border: 2px solid #ff9800;
+            animation: slideInRight 0.5s ease;
+            backdrop-filter: blur(10px);
         }
         
-        .whatsapp-button {
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        .sales-content {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: #25D366;
-            color: white;
-            padding: 16px 28px;
-            border-radius: 50px;
-            text-decoration: none;
+        }
+        
+        .sales-icon {
+            font-size: 24px;
+            color: #ff9800;
+        }
+        
+        .sales-text {
+            flex-grow: 1;
+        }
+        
+        .sales-name {
             font-weight: bold;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            font-size: 16px;
-            border: 2px solid #1da851;
+            color: #fff;
+            margin-bottom: 3px;
         }
         
-        .whatsapp-button:hover {
-            background: #1da851;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        .sales-plan {
+            font-size: 13px;
+            color: #ccc;
         }
         
-        .whatsapp-button svg {
-            width: 26px;
-            height: 26px;
-            fill: white;
+        .sales-time {
+            font-size: 11px;
+            color: #888;
+            margin-top: 5px;
+            text-align: right;
         }
         
-        /* Preview hover effect */
-        .preview-card {
-            transition: transform 0.3s ease;
+        /* Contador de vendas */
+        .sales-counter {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #e53935, #ff5722);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 9997;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+            border: 2px solid #ff9800;
+            animation: fadeInDown 0.5s ease;
         }
         
-        .preview-card:hover {
-            transform: translateY(-5px);
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        
+        .sales-counter .fire-icon {
+            animation: flame 1s infinite;
+        }
+        
+        @keyframes flame {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
         
         /* Responsividade */
         @media (max-width: 768px) {
-            .preview-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            .locked-text {
-                font-size: 12px;
-                padding: 10px 15px;
-                min-width: 120px;
-            }
-            
-            .headline h1 {
-                font-size: 22px;
-            }
-            
-            .plan-btn.enhanced {
-                font-size: 16px;
-                padding: 16px;
-            }
-            
-            .whatsapp-button {
-                padding: 14px 22px;
-                font-size: 14px;
-            }
-            
-            .whatsapp-float {
-                bottom: 20px;
+            .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .locked-text { font-size: 12px; padding: 10px 15px; min-width: 130px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .sales-notification {
+                bottom: 80px;
                 right: 20px;
                 left: 20px;
+                max-width: none;
             }
-            
-            .whatsapp-button {
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .social-links {
-                gap: 15px;
-            }
-            
-            .social-links a {
-                width: 26px;
-                height: 26px;
+            .sales-counter {
+                top: 10px;
+                font-size: 13px;
+                padding: 8px 20px;
             }
         }
     </style>
@@ -349,15 +395,19 @@
 
     <main class="profile-container" id="main-content">
         
-        <!-- HEADLINE PICANTE -->
+        <!-- HEADLINE COM PROTEÇÃO ANTI-ROBÔ -->
         <div class="headline">
-            <h1 style="color: #fff; font-size: 28px; margin-bottom: 15px;">
+            <!-- Texto oculto para robôs -->
+            <span class="protected-text">Espaço pessoal digital Luana Silva conteúdo exclusivo</span>
+            
+            <!-- Texto real (aparece via JS) -->
+            <h1 id="headline-title" class="js-text" style="color: #fff; font-size: 28px; margin-bottom: 15px;">
                 🚨 MEU CONTEÚDO MAIS ÍNTIMO 🚨
             </h1>
-            <p style="color: #ff9800; font-size: 18px; line-height: 1.6; font-weight: bold;">
+            <p id="headline-subtitle" class="js-text" style="color: #ff9800; font-size: 18px; line-height: 1.6; font-weight: bold;">
                 Videos reais • Gemidos autênticos • Corpo à mostra
             </p>
-            <p style="color: #ccc; font-size: 16px; margin-top: 10px;">
+            <p id="headline-desc" class="js-text" style="color: #ccc; font-size: 16px; margin-top: 10px;">
                 Acesso vitalício • Garantia de satisfação
             </p>
         </div>
@@ -388,7 +438,6 @@
                        class="twitter">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
-                    <!-- WHATSAPP COM COR ORIGINAL -->
                     <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" 
                        target="_blank" 
                        rel="noopener noreferrer" 
@@ -401,20 +450,21 @@
             <p class="bio">Meu espaço mais íntimo e exclusivo... aqui compartilho tudo que você não vê em nenhum outro lugar. Conteúdo real, gemidos autênticos, momentos especiais. Venha conhecer de perto! 💋</p>
         </header>
 
+        <!-- CONTADORES DINÂMICOS -->
         <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">52</strong> acessos hoje</div>
-            <div id="online-users">🟢 <strong id="online-count">28</strong> pessoas online agora</div>
+            <div id="daily-access">🔥 <strong id="access-count">44</strong> acessos hoje</div>
+            <div id="online-users">🟢 <strong id="online-count">30</strong> pessoas online agora</div>
         </section>
 
         <!-- BARRA DE URGÊNCIA -->
         <div class="urgency-bar" id="urgency-section">
-            ⚡ <strong>ÚLTIMAS VAGAS!</strong> Entre em contato agora para garantir seu acesso!
+            <span id="urgency-text">⚡ <strong>ÚLTIMAS VAGAS!</strong> Entre em contato agora para garantir seu acesso!</span>
         </div>
 
+        <!-- PREVIEWS -->
         <section id="content-previews">
             <h2 class="section-title">Prévia do Conteúdo 🔥</h2>
             <div class="preview-grid">
-                <!-- PREVIEW 1 -->
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview1.mp4" autoplay loop muted playsinline preload="auto"></video>
@@ -422,7 +472,6 @@
                     </div>
                 </div>
                 
-                <!-- PREVIEW 2 -->
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview2.mp4" autoplay loop muted playsinline preload="auto"></video>
@@ -430,7 +479,6 @@
                     </div>
                 </div>
                 
-                <!-- PREVIEW 3 -->
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview3.mp4" autoplay loop muted playsinline preload="auto"></video>
@@ -438,7 +486,6 @@
                     </div>
                 </div>
                 
-                <!-- PREVIEW 4 -->
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview4.mp4" autoplay loop muted playsinline preload="auto"></video>
@@ -460,22 +507,27 @@
             </div>
         </section>
 
-        <!-- GARANTIA SIMPLES -->
+        <!-- GARANTIA -->
         <div class="guarantee-simple">
             <p>
-                <span class="heart">💋</span>
                 <strong>✅ GARANTIA DE SATISFAÇÃO</strong>
                 <br>
-                Vem conhecer meu conteúdo, amor!
-                <span class="heart">💋</span>
+                Vem conhecer meu conteúdo, amor 💋!
             </p>
         </div>
 
-        <!-- PLANOS ATUALIZADOS -->
+        <!-- TESTEMUNHOS FAKE -->
+        <section class="testimonials">
+            <h2 class="section-title">O Que Dizem Quem Já Comprou 💬</h2>
+            <div class="testimonials-grid" id="testimonials-container">
+                <!-- Testemunhos serão adicionados via JavaScript -->
+            </div>
+        </section>
+
+        <!-- PLANOS -->
         <section id="pricing-plans">
             <h2 class="section-title">Escolha Seu Acesso</h2>
             <div class="plans-grid">
-                <!-- PLANO BÁSICO ATUALIZADO -->
                 <div class="plan-card basic">
                     <h3>🔓 Acesso Básico</h3>
                     <ul class="plan-desc">
@@ -492,7 +544,6 @@
                     </a>
                 </div>
                 
-                <!-- PLANO COMPLETO ATUALIZADO -->
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
                     <h3>⭐ Acesso Completo</h3>
@@ -549,7 +600,7 @@
             </div>
         </section>
         
-        <!-- WHATSAPP FLOAT BONITO -->
+        <!-- WHATSAPP FLOAT -->
         <div class="whatsapp-float">
             <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" 
                target="_blank" 
@@ -561,29 +612,36 @@
         </div>
     </main>
 
+    <!-- NOTIFICAÇÕES DE VENDA -->
+    <div id="sales-notification" class="sales-notification"></div>
+    
+    <!-- CONTADOR DE VENDAS -->
+    <div class="sales-counter" id="sales-counter">
+        <span class="fire-icon">🔥</span>
+        <span id="total-sales">0</span> vendas hoje
+    </div>
+
     <div id="purchase-toast"></div>
     <script src="js/script.js" defer></script>
     
     <script>
         // Script específico para bio.html
-        
         function showLockedPreview(element) {
             const lockedText = element.querySelector('.locked-text');
             if (lockedText) {
-                lockedText.innerHTML = '💋 CLIQUE NO WHATSAPP<br>PARA VER TUDO!';
-                lockedText.style.background = 'rgba(229, 57, 53, 0.95)';
-                lockedText.style.fontSize = '13px';
+                lockedText.innerHTML = '💋 ABRINDO WHATSAPP...';
+                lockedText.style.background = 'rgba(37, 211, 102, 0.95)';
                 
                 // Efeito visual
                 element.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    element.style.transform = '';
-                }, 200);
+                setTimeout(() => element.style.transform = '', 200);
                 
-                // Abre WhatsApp após 1.5 segundos
+                // Abre WhatsApp
                 setTimeout(() => {
                     window.open('https://wa.me/56974783157?text=Olá%20Luana!%20Vi%20as%20prévias%20e%20quero%20ver%20todo%20o%20conteúdo!%20Me%20envie%20as%20informações%20💋', '_blank');
-                }, 1500);
+                    lockedText.innerHTML = '🔒 CLIQUE PARA VER MAIS';
+                    lockedText.style.background = '';
+                }, 1000);
             }
         }
         
@@ -596,31 +654,7 @@
                     answer.classList.toggle('show');
                 });
             });
-            
-            // Atualiza contador de vagas
-            updateRemainingSpots();
         });
-        
-        function updateRemainingSpots() {
-            const spots = [5, 4, 3, 2, 1];
-            let currentIndex = 0;
-            const urgencyElement = document.getElementById('urgency-section');
-            
-            // Atualiza a cada 2-4 minutos
-            setInterval(() => {
-                if (currentIndex < spots.length) {
-                    const spot = spots[currentIndex];
-                    urgencyElement.innerHTML = 
-                        `⚡ <strong>APENAS ${spot} VAGA${spot > 1 ? 'S' : ''} RESTANTE${spot > 1 ? 'S' : ''}!</strong> Entre em contato agora!`;
-                    
-                    currentIndex++;
-                    
-                    if (spot === 1) {
-                        urgencyElement.style.animation = 'pulse 1s infinite';
-                    }
-                }
-            }, Math.random() * (240000 - 120000) + 120000); // 2-4 minutos
-        }
     </script>
 </body>
 </html>
