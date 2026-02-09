@@ -265,6 +265,95 @@
             .locked-text { font-size: 12px; padding: 10px 15px; min-width: 130px; }
             .testimonials-grid { grid-template-columns: 1fr; }
         }
+        /* MODAL FIX - Bloqueia WhatsApp até aceitar */
+#consent-modal {
+    display: none; /* Inicia oculto, JS controla */
+}
+
+.whatsapp-float {
+    display: none; /* Começa oculto até aceitar */
+}
+
+/* Quando aceitar, mostra com animação */
+.whatsapp-float.show {
+    display: block;
+    animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CONTADOR DE VENDAS fixo no topo */
+.sales-counter {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #e53935, #ff5722);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 9997;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+    border: 2px solid #ff9800;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    backdrop-filter: blur(10px);
+}
+
+/* CONTADORES aumentados */
+#access-count, #online-count {
+    font-size: 22px;
+    color: #ff9800;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* MODAL mais visível */
+.modal-content {
+    background: linear-gradient(145deg, #1a1a1a, #222);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    border: 3px solid #ff9800;
+    animation: slideUp 0.3s ease;
+    position: relative;
+    z-index: 10001;
+}
+
+/* BLOQUEIO DO CONTEÚDO */
+#main-content.blocked {
+    filter: blur(15px) brightness(0.7);
+    pointer-events: none;
+    user-select: none;
+    position: relative;
+}
+
+#main-content.blocked::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 10000;
+}
     </style>
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
