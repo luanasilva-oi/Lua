@@ -726,3 +726,185 @@ body.dark {
     .section-title { font-size: 20px; }
     .promo-content h3 { font-size: 20px; }
 }
+/* =================================================== */
+/* ESTILOS ESPECÍFICOS PARA BIO.HTML */
+/* =================================================== */
+
+/* Blur para GIFs na bio.html */
+.blurred-preview-video {
+    filter: blur(8px) brightness(0.6);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: filter 0.3s ease;
+}
+
+.preview-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Aspect ratio 1:1 */
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.locked-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 3;
+    border: 2px solid #ff9800;
+    pointer-events: none;
+    text-align: center;
+    min-width: 140px;
+}
+
+/* Efeito mosaico */
+.preview-card.locked::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(0,0,0,0.3) 25%, 
+        transparent 25%, 
+        transparent 50%, 
+        rgba(0,0,0,0.3) 50%, 
+        rgba(0,0,0,0.3) 75%, 
+        transparent 75%, 
+        transparent);
+    background-size: 10px 10px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Headline bio.html */
+.headline {
+    text-align: center;
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(229, 57, 53, 0.1), rgba(255, 152, 0, 0.1));
+    border-radius: 15px;
+    border: 2px solid rgba(229, 57, 53, 0.2);
+}
+
+/* Urgência bio.html */
+.urgency-safe {
+    background: linear-gradient(90deg, rgba(255, 87, 34, 0.2), rgba(255, 152, 0, 0.2));
+    color: #ff9800;
+    padding: 15px;
+    text-align: center;
+    margin: 25px 0;
+    border-radius: 12px;
+    font-weight: bold;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    font-size: 16px;
+}
+
+/* Botões bio.html */
+.plan-btn.enhanced {
+    background: linear-gradient(135deg, #e53935, #d32f2f);
+    animation: pulseSafe 1.5s infinite;
+    font-size: 18px;
+    padding: 18px;
+    font-weight: bold;
+    border: 2px solid #ff9800;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes pulseSafe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* FAQ bio.html */
+.faq-item {
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 18px 20px;
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.faq-question:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.faq-question::after {
+    content: '▼';
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+
+.faq-question.active::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s, padding 0.3s;
+}
+
+.faq-answer.show {
+    padding: 20px;
+    max-height: 500px;
+}
+
+.faq-answer p {
+    color: #ccc;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Garantia bio.html */
+.guarantee-safe {
+    background: rgba(76, 175, 80, 0.1);
+    border: 2px solid #4caf50;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.guarantee-badge {
+    display: inline-block;
+    background: #4caf50;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0;
+}
