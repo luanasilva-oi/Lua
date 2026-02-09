@@ -1,0 +1,297 @@
+/* ============================================
+   SISTEMA ANTI-ROBÔ - ESTILOS DE PROTEÇÃO
+   ============================================ */
+
+/* RESET E CONFIGURAÇÕES GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* CONTAINER PRINCIPAL (invisível inicialmente) */
+#protected-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+#protected-content.loaded {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* LAYER DE PROTEÇÃO (sobrepõe tudo) */
+.protection-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+}
+
+.protection-message {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    max-width: 500px;
+    margin: 20px;
+}
+
+.protection-message h2 {
+    color: #ff9800;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.protection-loader {
+    border: 4px solid rgba(255, 152, 0, 0.1);
+    border-top: 4px solid #ff9800;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: protectionSpin 1.5s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes protectionSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* CANVAS PARA IMAGENS PROTEGIDAS */
+.protected-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #1a1a1a;
+}
+
+.canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.canvas-overlay:hover {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.canvas-overlay span {
+    background: rgba(229, 57, 53, 0.9);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #ff9800;
+    text-align: center;
+}
+
+/* BOTÕES DE CONTATO PROTEGIDOS */
+.protected-button {
+    background: linear-gradient(135deg, #25D366, #1da851);
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+    margin: 10px;
+}
+
+.protected-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.protected-button:hover::before {
+    left: 100%;
+}
+
+.protected-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+}
+
+/* TEXTO OFUSCADO (aparece apenas após decodificação) */
+.obfuscated-text {
+    color: transparent;
+    background: linear-gradient(90deg, #666, #888, #666);
+    background-size: 200% 100%;
+    animation: textShimmer 3s infinite linear;
+    -webkit-background-clip: text;
+    background-clip: text;
+    user-select: none;
+}
+
+@keyframes textShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* CONTADORES DINÂMICOS */
+.dynamic-counter {
+    display: inline-block;
+    min-width: 40px;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    padding: 0 5px;
+}
+
+.counter-animation {
+    animation: counterPulse 0.3s ease;
+}
+
+@keyframes counterPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* ANIMAÇÕES SUAVES PARA EMOJIS */
+.emoji-smooth {
+    display: inline-block;
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-3px) scale(1.05); 
+        opacity: 0.9;
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .protection-message {
+        padding: 20px;
+        margin: 15px;
+    }
+    
+    .protection-message h2 {
+        font-size: 20px;
+    }
+    
+    .protected-button {
+        padding: 14px 25px;
+        font-size: 15px;
+    }
+    
+    .protected-canvas {
+        height: 250px;
+    }
+}
+
+/* ANIMAÇÃO DE ENTRADA */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* PREVENÇÃO DE SELEÇÃO DE TEXTO */
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* ESTILOS PARA MENSAGENS DE ERRO/ALERTA */
+.protection-alert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(229, 57, 53, 0.9);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(229, 57, 53, 0.3);
+    z-index: 10000;
+    display: none;
+    animation: slideInRight 0.3s ease;
+    border-left: 4px solid #ff9800;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
