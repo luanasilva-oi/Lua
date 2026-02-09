@@ -8,16 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================
     // 1. CONFIGURAÇÃO DE VENDAS FAKE OTIMIZADA
     // ==========================================================
-    let totalSales = 0;
+    let totalSales = 10; // COMEÇA COM 10 VENDAS
     let salesTimer = null;
     let isFirstSaleShown = false;
+    let isSalesSystemStarted = false;
 
     function initOptimizedFakeSales() {
         console.log("💰 Iniciando sistema de vendas otimizado...");
         
         // Dados para vendas fake
-        const names = ['Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael'];
-        const cities = ['SP', 'RJ', 'MG', 'RS', 'PR', 'SC'];
+        const names = ['Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Diego', 'Marcos', 'André', 'Felipe'];
+        const cities = ['SP', 'RJ', 'MG', 'RS', 'PR', 'SC', 'BA', 'PE', 'CE', 'GO'];
         
         // Cria elementos se não existirem
         if (!document.getElementById('sales-notification')) {
@@ -31,8 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const counter = document.createElement('div');
             counter.id = 'sales-counter';
             counter.className = 'sales-counter';
-            counter.innerHTML = '<span>🔥</span> <span id="total-sales">0</span> vendas hoje';
+            counter.innerHTML = '<span>🔥</span> <span id="total-sales">10</span> vendas hoje';
             document.body.appendChild(counter);
+            
+            // Mostra contador imediatamente (já começa com 10)
+            setTimeout(() => {
+                counter.style.display = 'flex';
+                setTimeout(() => {
+                    counter.style.opacity = '1';
+                }, 100);
+            }, 1000);
         }
 
         // Função para mostrar UMA venda
@@ -46,14 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Incrementa vendas
             totalSales++;
             totalSalesEl.textContent = totalSales;
-
-            // Mostra contador após primeira venda
-            if (totalSales === 1) {
-                counter.style.display = 'flex';
-                setTimeout(() => {
-                    counter.style.opacity = '1';
-                }, 100);
-            }
 
             // Dados aleatórios
             const randomName = names[Math.floor(Math.random() * names.length)];
@@ -97,9 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // INICIA O SISTEMA DE VENDAS
         function startSalesSystem() {
-            // 1. PRIMEIRA VENDA (2 segundos após carregar)
+            if (isSalesSystemStarted) return;
+            isSalesSystemStarted = true;
+            
+            console.log("🔄 Sistema de vendas iniciado...");
+            
+            // 1. PRIMEIRA VENDA (3 segundos após aceitar)
             setTimeout(() => {
-                console.log("🔄 Gerando primeira venda fake...");
+                console.log("💰 Gerando primeira venda após aceite...");
                 showSingleSale();
                 isFirstSaleShown = true;
                 
@@ -122,18 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Inicia o ciclo
                 scheduleNextSale();
-            }, 2000); // 2 segundos para a primeira venda
+            }, 3000); // 3 segundos para a primeira venda
         }
-
-        // Inicia o sistema
-        startSalesSystem();
 
         // Pausa vendas quando página não está visível
         document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 console.log("⏸️ Vendas pausadas (página oculta)");
                 if (salesTimer) clearTimeout(salesTimer);
-            } else if (isFirstSaleShown) {
+            } else if (isFirstSaleShown && isSalesSystemStarted) {
                 console.log("▶️ Vendas retomadas (página visível)");
                 // Agenda próxima venda após voltar
                 const nextSaleTime = Math.random() * (40000 - 20000) + 20000;
@@ -143,13 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, nextSaleTime);
             }
         });
+
+        // Retorna a função para iniciar quando aceitar
+        return startSalesSystem;
     }
 
     // ==========================================================
     // 2. CONTADORES DINÂMICOS
     // ==========================================================
-    let accessCount = 44;
-    let onlineCount = 30;
+    let accessCount = 54; // Aumentado
+    let onlineCount = 36; // Aumentado
 
     function initDynamicCounters() {
         console.log("📊 Iniciando contadores dinâmicos...");
@@ -163,41 +169,39 @@ document.addEventListener('DOMContentLoaded', () => {
         // Atualiza contador de acessos
         function updateAccessCounter() {
             if (accessEl) {
-                const increment = Math.floor(Math.random() * 2) + 1;
+                const increment = Math.floor(Math.random() * 3) + 1; // +1 a +3
                 accessCount += increment;
                 
-                if (accessCount > 180) {
-                    accessCount = Math.floor(Math.random() * (100 - 70 + 1)) + 70;
+                if (accessCount > 250) {
+                    accessCount = Math.floor(Math.random() * (150 - 100 + 1)) + 100;
                 }
                 
                 accessEl.textContent = accessCount;
                 localStorage.setItem('daily_access_count', accessCount);
                 
-                setTimeout(updateAccessCounter, Math.random() * (80000 - 40000) + 40000);
+                setTimeout(updateAccessCounter, Math.random() * (60000 - 30000) + 30000); // 30-60 segundos
             }
         }
 
         // Atualiza contador online
         function updateOnlineCounter() {
             if (onlineEl && urgencyEl) {
-                const change = Math.floor(Math.random() * 5) - 2;
+                const change = Math.floor(Math.random() * 7) - 3; // -3 a +3
                 onlineCount += change;
                 
-                if (onlineCount < 25) onlineCount = 25 + Math.floor(Math.random() * 5);
-                if (onlineCount > 42) onlineCount = 42 - Math.floor(Math.random() * 5);
+                if (onlineCount < 30) onlineCount = 30 + Math.floor(Math.random() * 10);
+                if (onlineCount > 60) onlineCount = 60 - Math.floor(Math.random() * 10);
                 
                 onlineEl.textContent = onlineCount;
                 urgencyEl.innerHTML = `⚡ <strong>${onlineCount} PESSOAS ONLINE AGORA!</strong> Vagas limitadas!`;
                 
-                setTimeout(updateOnlineCounter, Math.random() * (25000 - 15000) + 15000);
+                setTimeout(updateOnlineCounter, Math.random() * (20000 - 10000) + 10000); // 10-20 segundos
             }
         }
 
-        // Inicia os contadores
-        setTimeout(() => {
-            updateAccessCounter();
-            updateOnlineCounter();
-        }, 3000);
+        // Inicia os contadores IMEDIATAMENTE
+        updateAccessCounter();
+        updateOnlineCounter();
     }
 
     // ==========================================================
@@ -220,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const src = img.getAttribute('data-real-src');
                 if (src) img.setAttribute('src', src);
             });
-        }, 1500);
+        }, 1000);
     }
 
     // ==========================================================
@@ -247,6 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 rating: '⭐⭐⭐⭐⭐',
                 text: 'Pensei que era exagero, mas são mais de 600 vídeos mesmo! A qualidade é incrível. Melhor investimento.',
                 time: 'Comprou hoje'
+            },
+            {
+                name: 'Rafael, 30 anos • RS',
+                rating: '⭐⭐⭐⭐⭐',
+                text: 'Conteúdo 100% real! Não tem comparação com outros sites. Os vídeos são muito autênticos.',
+                time: 'Comprou ontem'
             }
         ];
 
@@ -277,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const countdownEl = document.getElementById('countdown-timer');
         if (!countdownEl) return;
 
-        let timeInSeconds = 2 * 60 * 60; // 2 horas
+        let timeInSeconds = 1.5 * 60 * 60; // 1.5 horas
         
         const savedTime = localStorage.getItem('promo_end_time');
         if (savedTime) {
@@ -298,11 +308,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (timeInSeconds <= 600) {
                 countdownEl.style.color = '#ff4444';
+                countdownEl.style.animation = 'pulse 1s infinite';
             }
             
             if (timeInSeconds <= 0) {
                 clearInterval(interval);
-                countdownEl.textContent = "OFERTA ENCERRADA";
+                countdownEl.textContent = "00:00:00";
                 countdownEl.style.background = "rgba(255, 0, 0, 0.3)";
                 localStorage.removeItem('promo_end_time');
             }
@@ -312,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // 6. MODAL DE CONSENTIMENTO
+    // 6. MODAL DE CONSENTIMENTO - CORRIGIDO
     // ==========================================================
     function initConsentModal() {
         console.log("✅ Configurando modal de consentimento...");
@@ -320,25 +331,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const consentModal = document.getElementById('consent-modal');
         const consentYesBtn = document.getElementById('consent-yes');
         const mainContent = document.getElementById('main-content');
+        const whatsappFloat = document.querySelector('.whatsapp-float');
 
         if (!consentModal || !consentYesBtn || !mainContent) return;
 
+        // Verifica se já aceitou
         if (localStorage.getItem('terms_accepted') === 'true') {
             consentModal.style.display = 'none';
             mainContent.style.filter = 'none';
             mainContent.style.pointerEvents = 'auto';
+            if (whatsappFloat) whatsappFloat.style.display = 'block';
             return;
         }
 
+        // Mostra modal e BLOQUEIA WhatsApp
         consentModal.style.display = 'flex';
         mainContent.style.filter = 'blur(10px)';
         mainContent.style.pointerEvents = 'none';
+        if (whatsappFloat) whatsappFloat.style.display = 'none';
 
         function closeModal() {
             consentModal.style.display = 'none';
             mainContent.style.filter = 'none';
             mainContent.style.pointerEvents = 'auto';
             localStorage.setItem('terms_accepted', 'true');
+            
+            // MOSTRA WhatsApp APÓS ACEITAR
+            if (whatsappFloat) {
+                whatsappFloat.style.display = 'block';
+                // Animação suave
+                setTimeout(() => {
+                    whatsappFloat.style.opacity = '0';
+                    whatsappFloat.style.transition = 'opacity 0.5s ease';
+                    whatsappFloat.style.opacity = '1';
+                }, 100);
+            }
+            
+            // INICIA VENDAS APÓS ACEITAR
+            if (window.startSalesAfterConsent) {
+                window.startSalesAfterConsent();
+            }
         }
 
         consentYesBtn.addEventListener('click', closeModal);
@@ -359,15 +391,31 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Feedback para botões
         document.querySelectorAll('.plan-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                // Verifica se já aceitou os termos
+                if (localStorage.getItem('terms_accepted') !== 'true') {
+                    e.preventDefault();
+                    alert('Por favor, confirme que tem 18+ anos primeiro!');
+                    document.getElementById('consent-modal').style.display = 'flex';
+                    return;
+                }
+                
                 this.style.transform = 'scale(0.97)';
                 setTimeout(() => this.style.transform = '', 200);
             });
         });
         
-        // Previews
+        // Previews - Abre WhatsApp após aceite
         document.querySelectorAll('.preview-card.locked').forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function(e) {
+                // Verifica se já aceitou os termos
+                if (localStorage.getItem('terms_accepted') !== 'true') {
+                    e.preventDefault();
+                    alert('Por favor, confirme que tem 18+ anos primeiro!');
+                    document.getElementById('consent-modal').style.display = 'flex';
+                    return;
+                }
+                
                 const text = this.querySelector('.locked-text');
                 if (text) {
                     const original = text.innerHTML;
@@ -385,47 +433,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // 8. VERIFICAÇÃO
-    // ==========================================================
-    function verifyProtection() {
-        console.log("🔍 Verificando proteção anti-robô...");
-        
-        setTimeout(() => {
-            const testElements = document.querySelectorAll('[data-real-src]');
-            console.log(`✅ Elementos protegidos encontrados: ${testElements.length}`);
-        }, 3000);
-    }
-
-    // ==========================================================
-    // 9. INICIALIZAÇÃO PRINCIPAL
+    // 8. INICIALIZAÇÃO PRINCIPAL
     // ==========================================================
     function initializeAllSystems() {
         console.log("🚀 INICIANDO TODOS OS SISTEMAS...");
         
-        // 1. Modal de consentimento
+        // 1. Sistemas que funcionam SEMPRE
+        initDynamicCounters();
+        initAntiBotProtection();
+        initTestimonials();
+        initCountdown();
+        initOptimizations();
+        
+        // 2. Modal de consentimento (BLOQUEIA WhatsApp até aceitar)
         initConsentModal();
         
-        // 2. Proteção anti-robô
-        initAntiBotProtection();
+        // 3. Sistema de vendas (mas só inicia DEPOIS de aceitar)
+        const startSalesFunction = initOptimizedFakeSales();
+        window.startSalesAfterConsent = startSalesFunction;
         
-        // 3. Sistemas visuais
+        // 4. Mostra conteúdo gradualmente
         setTimeout(() => {
-            initDynamicCounters();
-            initTestimonials();
-            initCountdown();
-            initOptimizations();
-            
-            // 4. SISTEMA DE VENDAS OTIMIZADO
-            // IMPORTANTE: Esta é a correção principal
-            initOptimizedFakeSales();
-            
-            // 5. Verificação
-            verifyProtection();
-            
-            // 6. Mostra conteúdo
             document.body.classList.add('loaded');
-            console.log("✅ TODOS OS SISTEMAS INICIALIZADOS COM SUCESSO!");
-            console.log("💰 Vendas fake: ATIVO (1 venda inicial + a cada 20-40s)");
+            console.log("✅ SISTEMAS BÁSICOS INICIALIZADOS!");
+            console.log("💰 Vendas: AGUARDANDO ACEITE (iniciarão após confirmação 18+)");
         }, 1000);
     }
 
@@ -435,8 +466,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initializeAllSystems, 500);
 });
 
-// Função global para WhatsApp
+// Função global para WhatsApp (verifica consentimento)
 function contactWhatsApp(plan = 'exclusivo') {
+    // Verifica se já aceitou os termos
+    if (localStorage.getItem('terms_accepted') !== 'true') {
+        alert('Por favor, confirme que tem 18+ anos primeiro!');
+        document.getElementById('consent-modal').style.display = 'flex';
+        return false;
+    }
+    
     const message = `Olá Luana! Quero conhecer seu conteúdo ${plan.toUpperCase()}! Me envie as informações por favor 😊`;
     const url = `https://wa.me/56974783157?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
