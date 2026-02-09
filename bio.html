@@ -259,212 +259,12 @@
             text-align: right;
         }
         
-        /* Vendas Fake */
-        .sales-notification {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            background: rgba(25, 25, 25, 0.95);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            z-index: 9998;
-            max-width: 280px;
-            display: none;
-            border: 2px solid #ff9800;
-            animation: slideInRight 0.5s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-        
-        .sales-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .sales-icon {
-            font-size: 24px;
-            color: #ff9800;
-        }
-        
-        .sales-text {
-            flex-grow: 1;
-        }
-        
-        .sales-name {
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 3px;
-        }
-        
-        .sales-plan {
-            font-size: 13px;
-            color: #ccc;
-        }
-        
-        .sales-time {
-            font-size: 11px;
-            color: #888;
-            margin-top: 5px;
-            text-align: right;
-        }
-        
-        /* Contador de vendas */
-        .sales-counter {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg, #e53935, #ff5722);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            z-index: 9997;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
-            border: 2px solid #ff9800;
-            animation: fadeInDown 0.5s ease;
-        }
-        
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translate(-50%, -20px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
-        }
-        
-        .sales-counter .fire-icon {
-            animation: flame 1s infinite;
-        }
-        
-        @keyframes flame {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        
         /* Responsividade */
         @media (max-width: 768px) {
             .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .locked-text { font-size: 12px; padding: 10px 15px; min-width: 130px; }
             .testimonials-grid { grid-template-columns: 1fr; }
-            .sales-notification {
-                bottom: 80px;
-                right: 20px;
-                left: 20px;
-                max-width: none;
-            }
-            .sales-counter {
-                top: 10px;
-                font-size: 13px;
-                padding: 8px 20px;
-            }
         }
-        /* NOTIFICAÇÕES DE VENDA - ESTILOS CORRIGIDOS */
-.sales-notification {
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
-    background: rgba(25, 25, 25, 0.95);
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    z-index: 9998;
-    max-width: 280px;
-    display: none;
-    border: 2px solid #ff9800;
-    backdrop-filter: blur(10px);
-}
-
-.sales-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.sales-icon {
-    font-size: 24px;
-    color: #ff9800;
-}
-
-.sales-text {
-    flex-grow: 1;
-}
-
-.sales-name {
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 3px;
-    font-size: 14px;
-}
-
-.sales-plan {
-    font-size: 13px;
-    color: #ccc;
-}
-
-.sales-time {
-    font-size: 11px;
-    color: #888;
-    margin-top: 5px;
-    text-align: right;
-}
-
-.sales-counter {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, #e53935, #ff5722);
-    color: white;
-    padding: 10px 25px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    z-index: 9997;
-    display: none;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
-    border: 2px solid #ff9800;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideOutRight {
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-}
     </style>
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
@@ -494,13 +294,13 @@
             <span class="protected-text">Espaço pessoal digital Luana Silva conteúdo exclusivo</span>
             
             <!-- Texto real (aparece via JS) -->
-            <h1 id="headline-title" class="js-text" style="color: #fff; font-size: 28px; margin-bottom: 15px;">
+            <h1 id="headline-title" style="color: #fff; font-size: 28px; margin-bottom: 15px;">
                 🚨 MEU CONTEÚDO MAIS ÍNTIMO 🚨
             </h1>
-            <p id="headline-subtitle" class="js-text" style="color: #ff9800; font-size: 18px; line-height: 1.6; font-weight: bold;">
+            <p id="headline-subtitle" style="color: #ff9800; font-size: 18px; line-height: 1.6; font-weight: bold;">
                 Videos reais • Gemidos autênticos • Corpo à mostra
             </p>
-            <p id="headline-desc" class="js-text" style="color: #ccc; font-size: 16px; margin-top: 10px;">
+            <p id="headline-desc" style="color: #ccc; font-size: 16px; margin-top: 10px;">
                 Acesso vitalício • Garantia de satisfação
             </p>
         </div>
@@ -705,31 +505,22 @@
         </div>
     </main>
 
-    <!-- NOTIFICAÇÕES DE VENDA -->
-    <div id="sales-notification" class="sales-notification"></div>
+    <!-- NOTIFICAÇÕES DE VENDA (serão criadas automaticamente) -->
     
-    <!-- CONTADOR DE VENDAS -->
-    <div class="sales-counter" id="sales-counter">
-        <span class="fire-icon">🔥</span>
-        <span id="total-sales">0</span> vendas hoje
-    </div>
-
     <div id="purchase-toast"></div>
     <script src="js/script.js" defer></script>
     
     <script>
-        // Script específico para bio.html
+        // Função para previews
         function showLockedPreview(element) {
             const lockedText = element.querySelector('.locked-text');
             if (lockedText) {
                 lockedText.innerHTML = '💋 ABRINDO WHATSAPP...';
                 lockedText.style.background = 'rgba(37, 211, 102, 0.95)';
                 
-                // Efeito visual
                 element.style.transform = 'scale(0.98)';
                 setTimeout(() => element.style.transform = '', 200);
                 
-                // Abre WhatsApp
                 setTimeout(() => {
                     window.open('https://wa.me/56974783157?text=Olá%20Luana!%20Vi%20as%20prévias%20e%20quero%20ver%20todo%20o%20conteúdo!%20Me%20envie%20as%20informações%20💋', '_blank');
                     lockedText.innerHTML = '🔒 CLIQUE PARA VER MAIS';
