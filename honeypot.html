@@ -3,90 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página não encontrada</title>
+    <title>Acesso Bloqueado</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            background: #f0f0f0;
-            color: #333;
+            background: #000;
+            color: #fff;
             font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 40px;
+            border: 2px solid #e53935;
+            box-shadow: 0 0 30px rgba(229, 57, 53, 0.3);
+        }
+        
+        .warning-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            animation: shake 0.5s ease infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
         
         h1 {
-            color: #666;
+            color: #e53935;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .message {
+            color: #ccc;
+            line-height: 1.6;
             margin-bottom: 30px;
         }
         
-        .redirect-notice {
-            background: #fff;
-            padding: 30px;
+        .details {
+            background: rgba(229, 57, 53, 0.1);
+            border: 1px solid rgba(229, 57, 53, 0.3);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin: 30px auto;
-            max-width: 500px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .redirect-notice {
+            color: #888;
+            font-size: 14px;
+            margin-top: 30px;
         }
         
         .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid #e53935;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-            margin: 30px auto;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
         
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        .warning {
-            color: #e74c3c;
-            font-weight: bold;
-            margin-top: 20px;
-        }
     </style>
+    
+    <!-- META TAGS PARA BOTS -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="description" content="Página de bloqueio de acesso">
 </head>
 <body>
-    <h1>⚠️ ACESSO REDIRECIONADO</h1>
-    
-    <div class="redirect-notice">
-        <p>Esta página foi movida ou não está mais disponível.</p>
-        <p>Você está sendo redirecionado para a página principal...</p>
+    <div class="container">
+        <div class="warning-icon">🚫</div>
+        <h1>ACESSO BLOQUEADO</h1>
+        
+        <div class="message">
+            <p><strong>Atividade suspeita detectada!</strong></p>
+            <p>Esta tentativa de acesso foi identificada como automatizada.</p>
+        </div>
+        
+        <div class="details">
+            <p><strong>Timestamp:</strong> <span id="timestamp"></span></p>
+            <p><strong>User Agent:</strong> <span id="useragent"></span></p>
+            <p><strong>Referrer:</strong> <span id="referrer"></span></p>
+            <p><strong>Tipo:</strong> Bot/Honeypot Triggered</p>
+        </div>
         
         <div class="loader"></div>
         
-        <p class="warning">
-            ATIVIDADE SUSPEITA DETECTADA<br>
-            Esta tentativa de acesso foi registrada.
-        </p>
+        <div class="redirect-notice">
+            <p>Redirecionando em <span id="countdown">10</span> segundos...</p>
+            <p>Esta ação foi registrada para análise de segurança.</p>
+        </div>
     </div>
-    
+
     <script>
-        // Redireciona após alguns segundos
-        setTimeout(() => {
-            window.location.href = 'https://www.google.com';
-        }, 5000);
+        // Preenche detalhes
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        document.getElementById('useragent').textContent = navigator.userAgent.substring(0, 100) + '...';
+        document.getElementById('referrer').textContent = document.referrer || 'Nenhum';
         
-        // Registra tentativa de acesso
-        try {
-            const botData = {
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                referrer: document.referrer,
-                url: window.location.href,
-                type: 'bot_trap_triggered'
-            };
+        // Contador regressivo
+        let seconds = 10;
+        const countdownEl = document.getElementById('countdown');
+        const countdown = setInterval(() => {
+            seconds--;
+            countdownEl.textContent = seconds;
             
-            // Tenta enviar para Analytics (se configurado)
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'bot_trap', botData);
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                // Redireciona para site genérico
+                window.location.href = 'https://www.google.com/search?q=bot+protection+honeypot';
             }
-            
-            // Log no console (apenas para debug)
-            console.log('🤖 Armadilha para bot ativada:', botData);
+        }, 1000);
+        
+        // Registra no console para debug
+        console.log('🚨 HONEYPOT ATIVADO - Bot detectado');
+        console.log('User Agent:', navigator.userAgent);
+        console.log('Referrer:', document.referrer);
+        console.log('Timestamp:', new Date().toISOString());
+        
+        // Tenta enviar para analytics se disponível
+        try {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'bot_trap_triggered', {
+                    'event_category': 'security',
+                    'event_label': 'honeypot'
+                });
+            }
         } catch(e) {}
     </script>
 </body>
