@@ -1,110 +1,145 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="anti-bot-reset">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- META TAGS PADRÃO -->
+    <!-- Meta tags normais -->
     <title>Luana Silva | Conteúdo Exclusivo</title>
+    <meta name="description" content="Bem-vindo ao meu espaço digital exclusivo">
     
-    <!-- CSS ANTI-BOT (Carrega primeiro) -->
-    <link rel="stylesheet" href="css/anti-bot.css">
+    <!-- CSS principal -->
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- SISTEMA ANTI-BOT (Carrega antes de tudo) -->
-    <script src="js/anti-bot-system.js" defer></script>
+    <!-- CSS anti-bot (leve) -->
+    <link rel="stylesheet" href="css/anti-bot-human.css">
 </head>
 <body class="dark">
-    <!-- OVERLAY DE SEGURANÇA (aparece até sistema carregar) -->
-    <div id="security-overlay" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        z-index: 99998;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #ff9800;
-        font-size: 18px;
-        font-weight: bold;
-    ">
-        🔒 CARREGANDO SISTEMA DE SEGURANÇA...
-    </div>
-
-    <!-- CONTEÚDO PRINCIPAL PROTEGIDO -->
-    <div id="protected-content" class="protected-content">
-        <!-- Seu conteúdo normal aqui -->
-        <main class="profile-container">
-            <!-- Banner com proteção canvas -->
-            <div class="profile-header">
-                <canvas class="protected-canvas" 
-                        width="1200" 
-                        height="300"
-                        data-protected-src="assets/banner-safe.mp4">
-                </canvas>
+    
+    <!-- CONTEÚDO VISÍVEL APENAS PARA HUMANOS -->
+    <main class="profile-container protected-content">
+        
+        <!-- Banner normal (sem canvas complicado) -->
+        <header class="profile-header">
+            <img src="assets/banner-safe.jpg" 
+                 class="profile-banner" 
+                 alt="Luana Silva"
+                 loading="lazy">
+            
+            <img src="assets/avatar-safe.jpg" 
+                 class="avatar" 
+                 alt="Foto de perfil"
+                 loading="lazy">
+            
+            <div class="profile-info">
+                <h1>Luana Silva <span class="verified">✓</span></h1>
                 
-                <img src="" 
-                     data-protected-src="./assets/avatar-safe.jpg" 
-                     class="avatar" 
-                     alt="Luana Silva">
+                <p class="bio">
+                    Espaço exclusivo para conteúdo especial e pessoal.
+                    Aqui você encontra material que não compartilho em outras redes.
+                </p>
                 
-                <div class="profile-info">
-                    <h1 data-obfuscated="true">Luana Silva <span class="verified-badge">✓</span></h1>
-                    <p class="bio" data-obfuscated="true">
-                        Espaço exclusivo com conteúdo pessoal e especial...
-                    </p>
-                </div>
-            </div>
-
-            <!-- Previews protegidos -->
-            <section id="content-previews">
-                <h2 class="section-title">Conteúdo Exclusivo</h2>
-                <div class="preview-grid">
-                    <div class="preview-card">
-                        <div class="preview-container-protected">
-                            <video class="blurred-preview-video" 
-                                   data-protected-src="assets/preview1.mp4"
-                                   muted 
-                                   playsinline 
-                                   preload="none">
-                            </video>
-                            <div class="canvas-overlay">
-                                <span>🔒 CLIQUE PARA VER</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mais previews... -->
-                </div>
-            </section>
-
-            <!-- Botão WhatsApp protegido -->
-            <div class="whatsapp-float">
+                <!-- WhatsApp PROTEGIDO mas funcional -->
                 <a href="#" 
-                   class="whatsapp-button protected-button"
-                   data-whatsapp-protected="true"
+                   class="whatsapp-button"
+                   data-whatsapp="true"
                    data-phone="56974783157"
-                   data-message="Olá Luana! Vim do seu site e quero conhecer seu conteúdo exclusivo! 😊">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
-                    FALE COMIGO NO WHATSAPP
+                   data-message="Olá Luana! Vim do seu site 😊">
+                    📲 FALE COMIGO NO WHATSAPP
                 </a>
             </div>
-        </main>
-    </div>
-
-    <!-- Remove overlay quando sistema carrega -->
+        </header>
+        
+        <!-- Previews normais (sem blur excessivo) -->
+        <section class="content-previews">
+            <h2>Conteúdo Exclusivo</h2>
+            
+            <div class="preview-grid">
+                <div class="preview-card">
+                    <img src="assets/preview1.jpg" 
+                         alt="Preview 1"
+                         loading="lazy"
+                         class="preview-img">
+                    <div class="preview-overlay">
+                        <span>👀 Ver mais</span>
+                    </div>
+                </div>
+                
+                <div class="preview-card">
+                    <img src="assets/preview2.jpg" 
+                         alt="Preview 2"
+                         loading="lazy"
+                         class="preview-img">
+                    <div class="preview-overlay">
+                        <span>👀 Ver mais</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- SISTEMA ANTI-BOT INTELIGENTE -->
+    <script src="js/anti-bot-v2.js" defer></script>
+    
+    <!-- Script normal do site -->
+    <script src="js/script.js" defer></script>
+    
+    <!-- Script para humanos -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const overlay = document.getElementById('security-overlay');
-                if (overlay) {
-                    overlay.style.opacity = '0';
-                    setTimeout(() => overlay.remove(), 500);
-                }
-            }, 1000);
+        // Funções que só rodam para humanos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Se for humano (verificação simples)
+            if (navigator.userAgent && !navigator.userAgent.includes('bot')) {
+                // Carrega contadores
+                initCounters();
+                
+                // Carrega interações
+                initInteractions();
+                
+                // Marca como humano
+                document.body.classList.add('human-verified');
+                
+                console.log('👋 Bem-vindo humano!');
+            }
         });
+        
+        function initCounters() {
+            // Seus contadores normais aqui
+            const accessCount = document.getElementById('access-count');
+            if (accessCount) {
+                let count = 42;
+                setInterval(() => {
+                    count += Math.random() > 0.5 ? 1 : 0;
+                    if (count > 100) count = 42;
+                    accessCount.textContent = count;
+                }, 30000);
+            }
+        }
+        
+        function initInteractions() {
+            // Previews clicáveis
+            document.querySelectorAll('.preview-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Abre WhatsApp
+                    const btn = document.querySelector('.whatsapp-button');
+                    if (btn) btn.click();
+                });
+            });
+            
+            // WhatsApp funcional
+            document.querySelectorAll('[data-whatsapp]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const phone = this.getAttribute('data-phone');
+                    const message = this.getAttribute('data-message');
+                    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+                    
+                    window.open(url, '_blank');
+                });
+            });
+        }
     </script>
 </body>
 </html>
