@@ -629,5 +629,182 @@
             });
         });
     </script>
+    <script>
+    // CORREÇÃO DO MODAL E WHATSAPP
+    
+    // Aguarda DOM carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🔧 Configurando proteção de idade...');
+        
+        // Verifica idade
+        if (localStorage.getItem('age_ok') !== '1') {
+            window.location.href = "index.html";
+            return;
+        }
+        
+        // Elementos
+        const consentModal = document.getElementById('consent-modal');
+        const mainContent = document.getElementById('main-content');
+        const whatsappFloat = document.querySelector('.whatsapp-float');
+        const consentYesBtn = document.getElementById('consent-yes');
+        
+        // Verifica se já aceitou os termos ADICIONAIS
+        if (localStorage.getItem('terms_accepted') === 'true') {
+            // Já aceitou, mostra tudo
+            if (consentModal) consentModal.style.display = 'none';
+            if (mainContent) {
+                mainContent.style.filter = 'none';
+                mainContent.style.pointerEvents = 'auto';
+            }
+            if (whatsappFloat) {
+                whatsappFloat.style.display = 'block';
+                setTimeout(() => {
+                    whatsappFloat.style.opacity = '1';
+                }, 100);
+            }
+        } else {
+            // PRIMEIRA VEZ - BLOQUEIA TUDO
+            console.log('🔒 Bloqueando conteúdo até confirmação 18+...');
+            
+            if (consentModal) consentModal.style.display = 'flex';
+            if (mainContent) {
+                mainContent.style.filter = 'blur(15px)';
+                mainContent.style.pointerEvents = 'none';
+                mainContent.classList.add('blocked');
+            }
+            if (whatsappFloat) whatsappFloat.style.display = 'none';
+            
+            // Configura botão de aceite
+            if (consentYesBtn) {
+                consentYesBtn.addEventListener('click', function() {
+                    console.log('✅ Usuário aceitou termos 18+');
+                    
+                    // Salva aceitação
+                    localStorage.setItem('terms_accepted', 'true');
+                    
+                    // Remove modal
+                    if (consentModal) {
+                        consentModal.style.opacity = '1';
+                        consentModal.style.transition = 'opacity 0.3s ease';
+                        consentModal.style.opacity = '0';
+                        setTimeout(() => {
+                            consentModal.style.display = 'none';
+                        }, 300);
+                    }
+                    
+                    // Desbloqueia conteúdo
+                    if (mainContent) {
+                        mainContent.style.transition = 'filter 0.5s ease';
+                        mainContent.style.filter = 'none';
+                        mainContent.style.pointerEvents = 'auto';
+                        mainContent.classList.remove('blocked');
+                    }
+                    
+                    // Mostra WhatsApp
+                    if (whatsappFloat) {
+                        whatsappFloat.style.display = 'block';
+                        whatsappFloat.style.opacity = '0';
+                        whatsappFloat.style.transition = 'opacity 0.8s ease';
+                        setTimeout(() => {
+                            whatsappFloat.style.opacity = '1';
+                        }, 100);
+                    }
+                    
+                    // Inicia vendas (se a função existir)
+                    if (window.startSalesAfterConsent && typeof window.startSalesAfterConsent === 'function') {
+                        setTimeout(() => {
+                            window.startSalesAfterConsent();
+                        }, 1000);
+                    }
+                    
+                    // Mostra mensagem de boas-vindas
+                    setTimeout(() => {
+                        const toast = document.createElement('div');
+                        toast.style.cssText = `
+                            position: fixed;
+                            top: 80px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(255, 152, 0, 0.9);
+                            color: black;
+                            padding: 15px 25px;
+                            border-radius: 10px;
+                            font-weight: bold;
+                            z-index: 9999;
+                            box-shadow: 0 5px 20px rgba(255, 152, 0, 0.3);
+                            animation: fadeInDown 0.5s ease;
+                        `;
+                        toast.textContent = '✅ Acesso liberado! Bem-vindo ao conteúdo exclusivo.';
+                        document.body.appendChild(toast);
+                        
+                        setTimeout(() => {
+                            toast.style.opacity = '0';
+                            toast.style.transition = 'opacity 0.5s ease';
+                            setTimeout(() => toast.remove(), 500);
+                        }, 3000);
+                    }, 500);
+                });
+            }
+        }
+        
+        // Configura FAQ
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                // Verifica se já aceitou
+                if (localStorage.getItem('terms_accepted') !== 'true') {
+                    alert('Por favor, confirme que tem 18+ anos primeiro!');
+                    if (consentModal) consentModal.style.display = 'flex';
+                    return;
+                }
+                
+                button.classList.toggle('active');
+                const answer = button.nextElementSibling;
+                answer.classList.toggle('show');
+            });
+        });
+        
+        // Configura previews
+        function showLockedPreview(element) {
+            // Verifica se já aceitou
+            if (localStorage.getItem('terms_accepted') !== 'true') {
+                alert('Por favor, confirme que tem 18+ anos primeiro!');
+                if (consentModal) consentModal.style.display = 'flex';
+                return;
+            }
+            
+            const lockedText = element.querySelector('.locked-text');
+            if (lockedText) {
+                lockedText.innerHTML = '💋 ABRINDO WHATSAPP...';
+                lockedText.style.background = 'rgba(37, 211, 102, 0.95)';
+                
+                element.style.transform = 'scale(0.98)';
+                setTimeout(() => element.style.transform = '', 200);
+                
+                setTimeout(() => {
+                    window.open('https://wa.me/56974783157?text=Olá%20Luana!%20Vi%20as%20prévias%20e%20quero%20ver%20todo%20o%20conteúdo!%20Me%20envie%20as%20informações%20💋', '_blank');
+                    lockedText.innerHTML = '🔒 CLIQUE PARA VER MAIS';
+                    lockedText.style.background = '';
+                }, 1000);
+            }
+        }
+        
+        // Torna a função global
+        window.showLockedPreview = showLockedPreview;
+    });
+    
+    // Função para WhatsApp com verificação
+    window.openWhatsApp = function(plan = 'exclusivo') {
+        if (localStorage.getItem('terms_accepted') !== 'true') {
+            alert('Por favor, confirme que tem 18+ anos primeiro!');
+            document.getElementById('consent-modal').style.display = 'flex';
+            return false;
+        }
+        
+        const message = `Olá Luana! Quero conhecer seu conteúdo ${plan.toUpperCase()}! Me envie as informações por favor 😊`;
+        const url = `https://wa.me/56974783157?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+        return true;
+    };
+</script>
 </body>
 </html>
