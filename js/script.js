@@ -1,182 +1,129 @@
 // ============================================
-// SCRIPT PRINCIPAL - INTEGRAÇÃO ANTI-BOT
+// SCRIPT PRINCIPAL - VERSÃO HUMANA
 // ============================================
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Site Luana Silva - Inicializando com proteção...');
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Site carregado para humano');
     
-    // Espera sistema anti-bot carregar
-    const waitForAntiBot = setInterval(() => {
-        if (window.antiBotSystem && window.antiBotSystem.initProtection) {
-            clearInterval(waitForAntiBot);
-            initSiteFunctions();
-        }
-    }, 100);
+    // VERIFICA SE É HUMANO
+    const isHuman = () => {
+        // Testes simples de humanidade
+        if (navigator.userAgent.includes('bot')) return false;
+        if (navigator.userAgent.includes('crawler')) return false;
+        if (navigator.userAgent.includes('spider')) return false;
+        
+        // Verifica interação básica
+        if (typeof document.addEventListener !== 'function') return false;
+        
+        return true;
+    };
     
-    function initSiteFunctions() {
-        console.log('✅ Sistema anti-bot detectado, iniciando funções...');
-        
-        // 1. CONTADORES DINÂMICOS (com proteção)
-        function initCounters() {
-            const accessEl = document.getElementById('access-count');
-            const onlineEl = document.getElementById('online-count');
-            
-            if (!accessEl || !onlineEl) return;
-            
-            // Valores iniciais aleatórios
-            let accessCount = Math.floor(Math.random() * (80 - 40 + 1)) + 40;
-            let onlineCount = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
-            
-            accessEl.textContent = accessCount;
-            onlineEl.textContent = onlineCount;
-            
-            // Atualiza periódicamente
-            setInterval(() => {
-                // Variação suave
-                accessCount += Math.random() > 0.5 ? 1 : -1;
-                onlineCount += Math.random() > 0.5 ? 1 : -1;
-                
-                // Mantém limites
-                if (accessCount < 30) accessCount = 30;
-                if (accessCount > 120) accessCount = 120;
-                if (onlineCount < 15) onlineCount = 15;
-                if (onlineCount > 45) onlineCount = 45;
-                
-                accessEl.textContent = accessCount;
-                onlineEl.textContent = onlineCount;
-                
-                // Atualiza barra de urgência
-                const urgencyEl = document.getElementById('urgency-text');
-                if (urgencyEl) {
-                    urgencyEl.innerHTML = `⚡ <strong>${onlineCount} PESSOAS ONLINE!</strong> Vagas limitadas!`;
-                }
-            }, 30000);
-        }
-        
-        // 2. VENDAS FAKE (protegidas)
-        function initFakeSales() {
-            // Aguarda 20 segundos para iniciar
-            setTimeout(() => {
-                const salesCounter = document.getElementById('sales-counter');
-                const salesNotification = document.getElementById('sales-notification');
-                
-                if (!salesCounter || !salesNotification) return;
-                
-                let totalSales = Math.floor(Math.random() * 15) + 8;
-                
-                // Atualiza contador
-                const updateSales = () => {
-                    totalSales += Math.random() > 0.6 ? 1 : 0;
-                    document.getElementById('total-sales').textContent = totalSales;
-                    
-                    // Mostra notificação ocasionalmente
-                    if (Math.random() > 0.7) {
-                        showSaleNotification();
-                    }
-                    
-                    // Próxima atualização
-                    setTimeout(updateSales, Math.random() * (60000 - 30000) + 30000);
-                };
-                
-                function showSaleNotification() {
-                    const names = ['Pedro', 'João', 'Lucas', 'Mateus'];
-                    const cities = ['SP', 'RJ', 'MG', 'RS'];
-                    
-                    const name = names[Math.floor(Math.random() * names.length)];
-                    const city = cities[Math.floor(Math.random() * cities.length)];
-                    const plan = Math.random() > 0.5 ? 'Completo ⭐' : 'Básico 🔓';
-                    
-                    salesNotification.innerHTML = `
-                        <div class="sales-content">
-                            <div class="sales-icon">${plan.includes('Completo') ? '⭐' : '🔓'}</div>
-                            <div class="sales-text">
-                                <div class="sales-name">${name} • ${city}</div>
-                                <div class="sales-plan">Comprou: ${plan}</div>
-                                <div class="sales-time">agora mesmo</div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    salesNotification.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        salesNotification.style.display = 'none';
-                    }, 5000);
-                }
-                
-                // Inicia
-                updateSales();
-            }, 20000);
-        }
-        
-        // 3. FUNÇÕES DE INTERAÇÃO
-        function initInteractions() {
-            // Previews
-            document.querySelectorAll('.preview-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const overlay = this.querySelector('.canvas-overlay span');
-                    if (overlay) {
-                        const original = overlay.textContent;
-                        overlay.textContent = '🔓 ABRINDO...';
-                        overlay.style.background = 'rgba(37, 211, 102, 0.95)';
-                        
-                        setTimeout(() => {
-                            overlay.textContent = original;
-                            overlay.style.background = '';
-                        }, 1500);
-                    }
-                });
-            });
-            
-            // FAQ
-            document.querySelectorAll('.faq-question').forEach(button => {
-                button.addEventListener('click', () => {
-                    button.classList.toggle('active');
-                    const answer = button.nextElementSibling;
-                    answer.classList.toggle('show');
-                });
-            });
-        }
-        
-        // 4. INICIALIZA TUDO
-        function initializeAll() {
-            console.log('🔄 Inicializando funções do site...');
-            
-            initCounters();
-            initInteractions();
-            
-            // Vendas fake com delay
-            setTimeout(initFakeSales, 5000);
-            
-            console.log('✅ Site completamente inicializado!');
-        }
-        
-        // Inicia
-        initializeAll();
-    }
-});
-
-// Função global para WhatsApp (com proteção)
-function contactWhatsApp(plan = 'exclusivo') {
-    // Se sistema anti-bot estiver ativo, usa método protegido
-    if (window.antiBotSystem && window.antiBotSystem.protectWhatsAppLinks) {
-        // Cria botão temporário para usar a proteção
-        const tempBtn = document.createElement('button');
-        tempBtn.setAttribute('data-whatsapp-protected', 'true');
-        tempBtn.setAttribute('data-phone', '56974783157');
-        tempBtn.setAttribute('data-message', `Olá Luana! Quero o conteúdo ${plan.toUpperCase()}! Me envie as informações por favor 😊`);
-        
-        window.antiBotSystem.protectWhatsAppLinks.call({
-            showWarning: (msg) => console.log(msg)
-        }, [tempBtn]);
-        
-        tempBtn.click();
+    if (!isHuman()) {
+        console.log('🤖 Robô detectado - Redirecionando...');
+        window.location.href = 'honeypot.html';
         return;
     }
     
-    // Fallback (sem proteção)
-    const message = `Olá Luana! Quero conhecer seu conteúdo ${plan.toUpperCase()}! Me envie as informações por favor 😊`;
-    const url = `https://wa.me/56974783157?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-    return true;
+    // SE FOR HUMANO, INICIA TUDO
+    initForHumans();
+});
+
+function initForHumans() {
+    console.log('👤 Iniciando sistema para humano');
+    
+    // 1. CARREGA MÍDIAS
+    loadMedia();
+    
+    // 2. INICIA CONTADORES
+    startCounters();
+    
+    // 3. INICIA INTERAÇÕES
+    setupInteractions();
+    
+    // 4. MOSTRA CONTEÚDO
+    showContent();
+}
+
+function loadMedia() {
+    // Carrega imagens com data-src
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        img.src = img.getAttribute('data-src');
+    });
+    
+    // Carrega vídeos
+    document.querySelectorAll('video source[data-src]').forEach(source => {
+        source.src = source.getAttribute('data-src');
+        source.parentElement.load();
+    });
+}
+
+function startCounters() {
+    // Contador de acessos
+    const accessEl = document.getElementById('access-count');
+    if (accessEl) {
+        let count = 45;
+        setInterval(() => {
+            count += Math.random() > 0.4 ? 1 : 0;
+            if (count > 85) count = 45;
+            accessEl.textContent = count;
+        }, 45000);
+    }
+    
+    // Contador online
+    const onlineEl = document.getElementById('online-count');
+    if (onlineEl) {
+        let count = 28;
+        setInterval(() => {
+            count += Math.random() > 0.5 ? 1 : -1;
+            if (count < 20) count = 25;
+            if (count > 40) count = 35;
+            onlineEl.textContent = count;
+        }, 30000);
+    }
+}
+
+function setupInteractions() {
+    // WhatsApp
+    document.querySelectorAll('[data-whatsapp]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const phone = this.getAttribute('data-phone') || '56974783157';
+            const message = this.getAttribute('data-message') || 'Olá!';
+            
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+        });
+    });
+    
+    // Previews
+    document.querySelectorAll('.preview-card').forEach(card => {
+        card.addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => this.style.transform = '', 200);
+        });
+    });
+}
+
+function showContent() {
+    // Remove proteções visuais
+    document.body.classList.add('content-visible');
+    
+    // Animação suave
+    const main = document.querySelector('main');
+    if (main) {
+        main.style.opacity = '0';
+        setTimeout(() => {
+            main.style.transition = 'opacity 0.5s ease';
+            main.style.opacity = '1';
+        }, 300);
+    }
+}
+
+// Função global para WhatsApp
+function contactWhatsApp(plan) {
+    const message = plan ? 
+        `Olá! Quero o plano ${plan}` : 
+        'Olá! Quero conhecer seu conteúdo';
+    
+    window.open(`https://wa.me/56974783157?text=${encodeURIComponent(message)}`, '_blank');
 }
