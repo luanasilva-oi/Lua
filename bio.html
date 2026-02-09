@@ -3,50 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luana Silva | Conteúdo Exclusivo 18+</title>
+    <title>Luana Silva | Conteúdo Adulto Exclusivo</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* ESTILOS ESPECÍFICOS PARA BIO.HTML */
         
-        /* Blur mais forte para GIFs */
+        /* Blur suave para GIFs */
         .blurred-preview-video {
-            filter: blur(8px) brightness(0.6);
+            filter: blur(2px) brightness(0.8);
             width: 100%;
             height: 100%;
             object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
+            transition: filter 0.5s ease;
         }
         
-        /* Mosaico effect */
-        .preview-card.locked::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, 
-                rgba(0,0,0,0.3) 25%, 
-                transparent 25%, 
-                transparent 50%, 
-                rgba(0,0,0,0.3) 50%, 
-                rgba(0,0,0,0.3) 75%, 
-                transparent 75%, 
-                transparent);
-            background-size: 10px 10px;
-            z-index: 2;
-            pointer-events: none;
+        .preview-card.locked:hover .blurred-preview-video {
+            filter: blur(1px) brightness(0.9);
         }
         
-        /* Preview card container */
+        /* Container dos previews */
         .preview-container {
             position: relative;
             width: 100%;
-            padding-top: 100%; /* Aspect ratio 1:1 */
+            padding-top: 100%;
             overflow: hidden;
             border-radius: 12px;
+            cursor: pointer;
         }
         
         /* Texto de bloqueio */
@@ -55,7 +40,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.85);
+            background: rgba(229, 57, 53, 0.9);
             color: white;
             padding: 12px 20px;
             border-radius: 20px;
@@ -66,42 +51,77 @@
             pointer-events: none;
             text-align: center;
             min-width: 140px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         
-        /* Efeito hover para previews */
-        .preview-card:hover .blurred-preview-video {
-            filter: blur(4px) brightness(0.7);
-            transform: scale(1.05);
-            transition: all 0.3s ease;
+        /* Ícones sociais com cores originais */
+        .social-links a.instagram {
+            color: #E4405F;
         }
         
-        /* Headline forte mas segura */
+        .social-links a.twitter {
+            color: #1DA1F2;
+        }
+        
+        .social-links a.whatsapp {
+            color: #25D366;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+        
+        /* Headline picante */
         .headline {
             text-align: center;
             margin: 30px 0;
             padding: 25px;
-            background: linear-gradient(135deg, rgba(229, 57, 53, 0.1), rgba(255, 152, 0, 0.1));
+            background: linear-gradient(135deg, rgba(229, 57, 53, 0.15), rgba(255, 152, 0, 0.15));
             border-radius: 15px;
-            border: 2px solid rgba(229, 57, 53, 0.2);
+            border: 2px solid rgba(229, 57, 53, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Urgência segura */
-        .urgency-safe {
-            background: linear-gradient(90deg, rgba(255, 87, 34, 0.2), rgba(255, 152, 0, 0.2));
-            color: #ff9800;
+        .headline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Urgência */
+        .urgency-bar {
+            background: linear-gradient(90deg, #e53935, #ff5722);
+            color: white;
             padding: 15px;
             text-align: center;
             margin: 25px 0;
             border-radius: 12px;
             font-weight: bold;
-            border: 2px solid rgba(255, 152, 0, 0.3);
             font-size: 16px;
+            border: 2px solid #ff9800;
+            animation: pulse 2s infinite;
         }
         
-        /* Botões melhorados */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        /* Botões picantes */
         .plan-btn.enhanced {
             background: linear-gradient(135deg, #e53935, #d32f2f);
-            animation: pulse 1.5s infinite;
+            color: white;
             font-size: 18px;
             padding: 18px;
             font-weight: bold;
@@ -109,20 +129,54 @@
             margin-top: 15px;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
         }
         
         .plan-btn.enhanced:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(229, 57, 53, 0.4);
+            box-shadow: 0 6px 25px rgba(229, 57, 53, 0.5);
+            background: linear-gradient(135deg, #d32f2f, #c62828);
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        .plan-btn.enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
         
-        /* FAQ seguro */
+        .plan-btn.enhanced:hover::before {
+            left: 100%;
+        }
+        
+        /* Garantia simples */
+        .guarantee-simple {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid #4caf50;
+        }
+        
+        .guarantee-simple p {
+            color: #fff;
+            font-size: 18px;
+            margin: 0;
+        }
+        
+        .guarantee-simple .heart {
+            color: #e53935;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+        
+        /* FAQ */
         .faq-item {
             margin-bottom: 15px;
             background: rgba(255,255,255,0.03);
@@ -179,28 +233,52 @@
             margin: 0;
         }
         
-        /* Garantia segura */
-        .guarantee-safe {
-            background: rgba(76, 175, 80, 0.1);
-            border: 2px solid #4caf50;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 25px 0;
-            text-align: center;
+        /* WhatsApp Float melhorado */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
         }
         
-        .guarantee-badge {
-            display: inline-block;
-            background: #4caf50;
+        .whatsapp-button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #25D366;
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 16px 28px;
+            border-radius: 50px;
+            text-decoration: none;
             font-weight: bold;
-            margin: 10px 0;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            font-size: 16px;
+            border: 2px solid #1da851;
         }
         
-        /* Responsividade para previews */
+        .whatsapp-button:hover {
+            background: #1da851;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-button svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+        
+        /* Preview hover effect */
+        .preview-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .preview-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Responsividade */
         @media (max-width: 768px) {
             .preview-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -209,28 +287,44 @@
             
             .locked-text {
                 font-size: 12px;
-                padding: 8px 12px;
+                padding: 10px 15px;
                 min-width: 120px;
             }
             
             .headline h1 {
-                font-size: 20px;
+                font-size: 22px;
             }
             
             .plan-btn.enhanced {
                 font-size: 16px;
                 padding: 16px;
             }
+            
+            .whatsapp-button {
+                padding: 14px 22px;
+                font-size: 14px;
+            }
+            
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+            }
+            
+            .whatsapp-button {
+                justify-content: center;
+            }
         }
         
-        /* Efeito de clique nos previews */
-        .preview-card {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .preview-card:active {
-            transform: scale(0.98);
+        @media (max-width: 480px) {
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-links a {
+                width: 26px;
+                height: 26px;
+            }
         }
     </style>
     <script>
@@ -245,26 +339,27 @@
     <div id="consent-modal" class="modal">
         <div class="modal-content">
             <h2>Confirmação de Acesso</h2>
-            <p>Este espaço contém conteúdo exclusivo para maiores de 18 anos. Ao prosseguir, você confirma que tem idade legal para acesso a material adulto.</p>
+            <p>Este espaço contém conteúdo adulto exclusivo para maiores de 18 anos. Ao prosseguir, você confirma que tem idade legal.</p>
             <div class="modal-buttons">
-                <button id="consent-yes" class="plan-btn complete">Tenho 18+ e Concordo</button>
-                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Não Tenho 18 Anos</a>
+                <button id="consent-yes" class="plan-btn complete">Tenho 18+ e Quero Entrar</button>
+                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Voltar para Instagram</a>
             </div>
         </div>
     </div>
 
     <main class="profile-container" id="main-content">
         
-        <!-- HEADLINE SEGURA -->
+        <!-- HEADLINE PICANTE -->
         <div class="headline">
-            <h1 style="color: #fff; font-size: 26px; margin-bottom: 15px;">
-                CONTEÚDO EXCLUSIVO LUANA SILVA
+            <h1 style="color: #fff; font-size: 28px; margin-bottom: 15px;">
+                🚨 MEU CONTEÚDO MAIS ÍNTIMO 🚨
             </h1>
-            <p style="color: #ccc; font-size: 16px; line-height: 1.6;">
-                <strong>Material pessoal e especial</strong> • <strong>Acesso restrito</strong> • <strong>Conteúdo 18+</strong><br>
-                <span style="color: #ff9800; font-size: 20px; font-weight: bold;">Entre em contato para conhecer</span>
+            <p style="color: #ff9800; font-size: 18px; line-height: 1.6; font-weight: bold;">
+                Videos reais • Gemidos autênticos • Corpo à mostra
             </p>
-            <div class="guarantee-badge">✅ ACESSO VITALÍCIO</div>
+            <p style="color: #ccc; font-size: 16px; margin-top: 10px;">
+                Acesso vitalício • Garantia de satisfação
+            </p>
         </div>
         
         <header class="profile-header">
@@ -276,43 +371,54 @@
                 <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
                 <div class="user-status-line">
                     <span class="username">@luanasilva.official</span>
-                    <span class="status-indicator">🟢 Disponível agora</span>
+                    <span class="status-indicator">🟢 Online agora</span>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       title="Instagram"
+                       class="instagram">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
                     </a>
-                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Twitter">
+                    <a href="https://x.com/LuanaSilva_ofc" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       title="Twitter"
+                       class="twitter">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
-                    <!-- WHATSAPP -->
-                    <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                    <!-- WHATSAPP COM COR ORIGINAL -->
+                    <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       title="WhatsApp"
+                       class="whatsapp">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
                     </a>
                 </div>
             </div>
-            <p class="bio">Espaço exclusivo para conteúdo adulto. Material pessoal e restrito para maiores de 18 anos. Entre em contato para conhecer todos os detalhes.</p>
+            <p class="bio">Meu espaço mais íntimo e exclusivo... aqui compartilho tudo que você não vê em nenhum outro lugar. Conteúdo real, gemidos autênticos, momentos especiais. Venha conhecer de perto! 💋</p>
         </header>
 
         <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">48</strong> acessos hoje</div>
-            <div id="online-users">🟢 <strong id="online-count">22</strong> pessoas online agora</div>
+            <div id="daily-access">🔥 <strong id="access-count">52</strong> acessos hoje</div>
+            <div id="online-users">🟢 <strong id="online-count">28</strong> pessoas online agora</div>
         </section>
 
-        <!-- URGÊNCIA SEGURA -->
-        <div class="urgency-safe" id="urgency-section">
-            ⏰ <strong>VAGAS LIMITADAS DISPONÍVEIS!</strong> 
-            Entre em contato agora para garantir seu acesso.
+        <!-- BARRA DE URGÊNCIA -->
+        <div class="urgency-bar" id="urgency-section">
+            ⚡ <strong>ÚLTIMAS VAGAS!</strong> Entre em contato agora para garantir seu acesso!
         </div>
 
         <section id="content-previews">
-            <h2 class="section-title">Prévia do Conteúdo 🔒</h2>
+            <h2 class="section-title">Prévia do Conteúdo 🔥</h2>
             <div class="preview-grid">
                 <!-- PREVIEW 1 -->
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview1.mp4" autoplay loop muted playsinline preload="auto"></video>
-                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                        <div class="locked-text">🔒 CLIQUE PARA VER MAIS</div>
                     </div>
                 </div>
                 
@@ -320,7 +426,7 @@
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview2.mp4" autoplay loop muted playsinline preload="auto"></video>
-                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                        <div class="locked-text">🔒 CLIQUE PARA VER MAIS</div>
                     </div>
                 </div>
                 
@@ -328,7 +434,7 @@
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview3.mp4" autoplay loop muted playsinline preload="auto"></video>
-                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                        <div class="locked-text">🔒 CLIQUE PARA VER MAIS</div>
                     </div>
                 </div>
                 
@@ -336,109 +442,121 @@
                 <div class="preview-card locked" onclick="showLockedPreview(this)">
                     <div class="preview-container">
                         <video class="blurred-preview-video" src="assets/preview4.mp4" autoplay loop muted playsinline preload="auto"></video>
-                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                        <div class="locked-text">🔒 CLIQUE PARA VER MAIS</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- BARRA DE PROMOÇÃO -->
+        <!-- PROMO BANNER -->
         <section class="promo-banner">
             <div class="promo-content">
-                <h3>🌟 OFERTA ESPECIAL 🌟</h3>
-                <p>Acesso a conteúdo exclusivo com <strong>condições especiais!</strong></p>
+                <h3>🔥 OFERTA ESPECIAL 🔥</h3>
+                <p>Conteúdo exclusivo com <strong>acesso vitalício!</strong></p>
                 <div class="countdown-container">
-                    <span>Oferta por tempo limitado:</span>
+                    <span>Promoção por tempo limitado:</span>
                     <span id="countdown-timer">02:00:00</span>
                 </div>
             </div>
         </section>
 
-        <!-- GARANTIA SEGURA -->
-        <div class="guarantee-safe">
-            <h3 style="color: #4caf50; margin: 0 0 15px 0;">✅ GARANTIA DE SATISFAÇÃO</h3>
-            <p style="color: #ccc; margin: 0;">
-                7 dias de garantia para você conhecer o conteúdo.<br>
-                Se não gostar, devolução do valor.
+        <!-- GARANTIA SIMPLES -->
+        <div class="guarantee-simple">
+            <p>
+                <span class="heart">💋</span>
+                <strong>✅ GARANTIA DE SATISFAÇÃO</strong>
+                <br>
+                Vem conhecer meu conteúdo, amor!
+                <span class="heart">💋</span>
             </p>
         </div>
 
+        <!-- PLANOS ATUALIZADOS -->
         <section id="pricing-plans">
             <h2 class="section-title">Escolha Seu Acesso</h2>
             <div class="plans-grid">
+                <!-- PLANO BÁSICO ATUALIZADO -->
                 <div class="plan-card basic">
-                    <h3>Acesso Básico</h3>
+                    <h3>🔓 Acesso Básico</h3>
                     <ul class="plan-desc">
-                        <li>Seleção de conteúdo exclusivo</li>
-                        <li>Material pessoal e especial</li>
-                        <li>Acesso à área restrita</li>
-                        <li>Conteúdo selecionado</li>
+                        <li><strong>100+ vídeos de masturbação</strong> com gemidos reais</li>
+                        <li>Corpo à mostra, <strong>sem censura</strong></li>
+                        <li>Vídeos reais e <strong>autênticos</strong></li>
+                        <li>Conteúdo <strong>explícito e direto</strong></li>
+                        <li>Acesso <strong>vitalício</strong></li>
+                        <li>Prazer real e intenso</li>
                     </ul>
-                    <div class="price">Acesso Especial</div>
-                    <a class="plan-btn basic enhanced" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20o%20ACESSO%20BÁSICO%20ao%20seu%20conteúdo%20exclusivo!%20Me%20envie%20as%20informações%20🔓">
-                        🔓 QUERO ACESSO BÁSICO
+                    <div class="price">R$ 19,99</div>
+                    <a class="plan-btn basic enhanced" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20o%20ACESSO%20BÁSICO%20com%20100%2B%20vídeos!%20Me%20envie%20as%20informações%20🔓">
+                        🔥 QUERO 100+ VÍDEOS
                     </a>
                 </div>
+                
+                <!-- PLANO COMPLETO ATUALIZADO -->
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
-                    <h3>Acesso Completo</h3>
+                    <h3>⭐ Acesso Completo</h3>
                     <ul class="plan-desc">
-                        <li>Toda biblioteca de conteúdo</li>
-                        <li>Material completo e irrestrito</li>
-                        <li>Acesso total à área exclusiva</li>
-                        <li>Prioridade no atendimento</li>
-                        <li>Conteúdo constante e atualizado</li>
+                        <li><strong>600+ vídeos</strong> sem censura</li>
+                        <li><strong>500+ fotos</strong> exclusivas</li>
+                        <li>Masturbação intensa com <strong>gemidos reais</strong></li>
+                        <li>Corpo <strong>100% à mostra</strong></li>
+                        <li>Conteúdo <strong>totalmente explícito</strong></li>
+                        <li>Vídeos reais de <strong>prazer autêntico</strong></li>
+                        <li>Close-ups íntimos</li>
+                        <li>Acesso <strong>vitalício</strong></li>
+                        <li>Atualizações constantes</li>
                     </ul>
-                    <div class="price">Acesso Total</div>
-                    <a class="plan-btn complete enhanced" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20o%20ACESSO%20COMPLETO%20ao%20seu%20conteúdo%20exclusivo!%20Me%20envie%20todas%20as%20informações%20⭐">
-                        ⭐ QUERO ACESSO COMPLETO
+                    <div class="price">R$ 29,90</div>
+                    <a class="plan-btn complete enhanced" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20o%20ACESSO%20COMPLETO%20com%20600%2B%20vídeos%20e%20500%2B%20fotos!%20Me%20envie%20os%20detalhes%20⭐">
+                        ⭐ QUERO VER TUDO (600+ VÍDEOS)
                     </a>
                 </div>
             </div>
-            <p class="meta-note">Entre em contato direto para conhecer todos os detalhes!</p>
+            <p class="meta-note">A maioria escolhe o acesso completo para ver tudo sem limites!</p>
         </section>
 
-        <!-- FAQ SEGURO -->
-        <section class="faq" style="margin-top: 50px;">
+        <!-- FAQ -->
+        <section class="faq">
             <h2 class="section-title">Perguntas Frequentes</h2>
             
             <div class="faq-item">
-                <button class="faq-question">Como funciona o acesso?</button>
+                <button class="faq-question">Como faço para comprar?</button>
                 <div class="faq-answer">
-                    <p>Entre em contato pelo WhatsApp, escolha seu plano e receba acesso imediato ao conteúdo exclusivo.</p>
+                    <p>Clique em qualquer botão verde acima para falar comigo no WhatsApp! Te explico tudo e envio o acesso.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">Qual a diferença entre os planos?</button>
+                <div class="faq-answer">
+                    <p><strong>Básico:</strong> 100+ vídeos selecionados<br><strong>Completo:</strong> 600+ vídeos + 500+ fotos - TUDO que tenho!</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">O conteúdo é real mesmo?</button>
+                <div class="faq-answer">
+                    <p>SIM! São vídeos reais meus, gemidos autênticos, corpo totalmente à mostra. Conteúdo 100% real!</p>
                 </div>
             </div>
             
             <div class="faq-item">
                 <button class="faq-question">Tem garantia?</button>
                 <div class="faq-answer">
-                    <p>Sim! 7 dias de garantia. Se não gostar do conteúdo, devolvemos seu investimento.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">É conteúdo adulto?</button>
-                <div class="faq-answer">
-                    <p>Sim, é conteúdo exclusivo para maiores de 18 anos. Material pessoal e restrito.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">Como é o pagamento?</button>
-                <div class="faq-answer">
-                    <p>Pagamento via PIX. Rápido, seguro e você recebe acesso imediato após confirmação.</p>
+                    <p>Sim! Garantia de satisfação. Se não gostar, te explico como funciona!</p>
                 </div>
             </div>
         </section>
         
-        <!-- WHATSAPP FLOAT -->
+        <!-- WHATSAPP FLOAT BONITO -->
         <div class="whatsapp-float">
             <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" 
                target="_blank" 
                rel="noopener noreferrer"
                class="whatsapp-button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
-                FALE COMIGO NO WHATSAPP
+                FALAR COM LUANA NO WHATSAPP
             </a>
         </div>
     </main>
@@ -452,13 +570,20 @@
         function showLockedPreview(element) {
             const lockedText = element.querySelector('.locked-text');
             if (lockedText) {
-                lockedText.innerHTML = '🔒 ENTRE EM CONTATO<br>PARA ACESSAR';
-                lockedText.style.background = 'rgba(229, 57, 53, 0.9)';
+                lockedText.innerHTML = '💋 CLIQUE NO WHATSAPP<br>PARA VER TUDO!';
+                lockedText.style.background = 'rgba(229, 57, 53, 0.95)';
+                lockedText.style.fontSize = '13px';
                 
-                // Redireciona para WhatsApp após 2 segundos
+                // Efeito visual
+                element.style.transform = 'scale(0.98)';
                 setTimeout(() => {
-                    window.open('https://wa.me/56974783157?text=Olá%20Luana!%20Vi%20as%20prévias%20no%20seu%20site%20e%20quero%20conhecer%20o%20conteúdo%20completo!%20😊', '_blank');
-                }, 2000);
+                    element.style.transform = '';
+                }, 200);
+                
+                // Abre WhatsApp após 1.5 segundos
+                setTimeout(() => {
+                    window.open('https://wa.me/56974783157?text=Olá%20Luana!%20Vi%20as%20prévias%20e%20quero%20ver%20todo%20o%20conteúdo!%20Me%20envie%20as%20informações%20💋', '_blank');
+                }, 1500);
             }
         }
         
@@ -472,24 +597,30 @@
                 });
             });
             
-            // Contador de vagas
-            let spots = 5;
+            // Atualiza contador de vagas
+            updateRemainingSpots();
+        });
+        
+        function updateRemainingSpots() {
+            const spots = [5, 4, 3, 2, 1];
+            let currentIndex = 0;
             const urgencyElement = document.getElementById('urgency-section');
             
+            // Atualiza a cada 2-4 minutos
             setInterval(() => {
-                if (spots > 0 && Math.random() < 0.3) {
-                    spots--;
+                if (currentIndex < spots.length) {
+                    const spot = spots[currentIndex];
                     urgencyElement.innerHTML = 
-                        `⏰ <strong>${spots} VAGAS RESTANTES!</strong> Entre em contato agora para garantir seu acesso.`;
+                        `⚡ <strong>APENAS ${spot} VAGA${spot > 1 ? 'S' : ''} RESTANTE${spot > 1 ? 'S' : ''}!</strong> Entre em contato agora!`;
                     
-                    if (spots === 0) {
-                        urgencyElement.innerHTML = 
-                            `⛔ <strong>VAGAS ESGOTADAS!</strong> Entre em contato para lista de espera.`;
-                        urgencyElement.style.background = 'linear-gradient(90deg, rgba(255,0,0,0.2), rgba(153,0,0,0.2))';
+                    currentIndex++;
+                    
+                    if (spot === 1) {
+                        urgencyElement.style.animation = 'pulse 1s infinite';
                     }
                 }
-            }, 60000); // A cada 1 minuto
-        });
+            }, Math.random() * (240000 - 120000) + 120000); // 2-4 minutos
+        }
     </script>
 </body>
 </html>
