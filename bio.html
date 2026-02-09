@@ -3,8 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luana Silva | Conteúdo Exclusivo</title>
+    <title>Luana Silva | Conteúdo Exclusivo 18+</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA BIO.HTML */
+        
+        /* Blur mais forte para GIFs */
+        .blurred-preview-video {
+            filter: blur(8px) brightness(0.6);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Mosaico effect */
+        .preview-card.locked::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0,0,0,0.3) 25%, 
+                transparent 25%, 
+                transparent 50%, 
+                rgba(0,0,0,0.3) 50%, 
+                rgba(0,0,0,0.3) 75%, 
+                transparent 75%, 
+                transparent);
+            background-size: 10px 10px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        /* Preview card container */
+        .preview-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* Aspect ratio 1:1 */
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        
+        /* Texto de bloqueio */
+        .locked-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 3;
+            border: 2px solid #ff9800;
+            pointer-events: none;
+            text-align: center;
+            min-width: 140px;
+        }
+        
+        /* Efeito hover para previews */
+        .preview-card:hover .blurred-preview-video {
+            filter: blur(4px) brightness(0.7);
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+        
+        /* Headline forte mas segura */
+        .headline {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(229, 57, 53, 0.1), rgba(255, 152, 0, 0.1));
+            border-radius: 15px;
+            border: 2px solid rgba(229, 57, 53, 0.2);
+        }
+        
+        /* Urgência segura */
+        .urgency-safe {
+            background: linear-gradient(90deg, rgba(255, 87, 34, 0.2), rgba(255, 152, 0, 0.2));
+            color: #ff9800;
+            padding: 15px;
+            text-align: center;
+            margin: 25px 0;
+            border-radius: 12px;
+            font-weight: bold;
+            border: 2px solid rgba(255, 152, 0, 0.3);
+            font-size: 16px;
+        }
+        
+        /* Botões melhorados */
+        .plan-btn.enhanced {
+            background: linear-gradient(135deg, #e53935, #d32f2f);
+            animation: pulse 1.5s infinite;
+            font-size: 18px;
+            padding: 18px;
+            font-weight: bold;
+            border: 2px solid #ff9800;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-btn.enhanced:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(229, 57, 53, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        /* FAQ seguro */
+        .faq-item {
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 18px 20px;
+            background: none;
+            border: none;
+            color: white;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .faq-question::after {
+            content: '▼';
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+        
+        .faq-question.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .faq-answer.show {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: #ccc;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* Garantia segura */
+        .guarantee-safe {
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .guarantee-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        /* Responsividade para previews */
+        @media (max-width: 768px) {
+            .preview-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .locked-text {
+                font-size: 12px;
+                padding: 8px 12px;
+                min-width: 120px;
+            }
+            
+            .headline h1 {
+                font-size: 20px;
+            }
+            
+            .plan-btn.enhanced {
+                font-size: 16px;
+                padding: 16px;
+            }
+        }
+        
+        /* Efeito de clique nos previews */
+        .preview-card {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .preview-card:active {
+            transform: scale(0.98);
+        }
+    </style>
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
             window.location.href = "index.html";
@@ -16,22 +244,34 @@
     <!-- MODAL DE CONSENTIMENTO -->
     <div id="consent-modal" class="modal">
         <div class="modal-content">
-            <h2>Confirmação Final</h2>
-            <p>Este espaço contém conteúdo exclusivo para maiores de 18 anos. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso.</p>
+            <h2>Confirmação de Acesso</h2>
+            <p>Este espaço contém conteúdo exclusivo para maiores de 18 anos. Ao prosseguir, você confirma que tem idade legal para acesso a material adulto.</p>
             <div class="modal-buttons">
-                <button id="consent-yes" class="plan-btn complete">Concordo e Prosseguir</button>
-                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Voltar para Instagram</a>
+                <button id="consent-yes" class="plan-btn complete">Tenho 18+ e Concordo</button>
+                <a href="https://www.instagram.com/luanasilva.official" class="plan-btn basic">Não Tenho 18 Anos</a>
             </div>
         </div>
     </div>
 
     <main class="profile-container" id="main-content">
         
+        <!-- HEADLINE SEGURA -->
+        <div class="headline">
+            <h1 style="color: #fff; font-size: 26px; margin-bottom: 15px;">
+                CONTEÚDO EXCLUSIVO LUANA SILVA
+            </h1>
+            <p style="color: #ccc; font-size: 16px; line-height: 1.6;">
+                <strong>Material pessoal e especial</strong> • <strong>Acesso restrito</strong> • <strong>Conteúdo 18+</strong><br>
+                <span style="color: #ff9800; font-size: 20px; font-weight: bold;">Entre em contato para conhecer</span>
+            </p>
+            <div class="guarantee-badge">✅ ACESSO VITALÍCIO</div>
+        </div>
+        
         <header class="profile-header">
             <video class="profile-banner" autoplay loop muted playsinline>
-                <source src="assets/banner-safe.mp4" type="video/mp4">
+                <source src="assets/banner.mp4" type="video/mp4">
             </video>
-            <img src="./assets/avatar-safe.jpg" class="avatar" alt="Foto de perfil de Luana Silva">
+            <img src="./assets/avatar.jpg" class="avatar" alt="Luana Silva">
             <div class="profile-info">
                 <h1>Luana Silva <svg class="verified-badge" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path fill="white" d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></h1>
                 <div class="user-status-line">
@@ -39,69 +279,104 @@
                     <span class="status-indicator">🟢 Disponível agora</span>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Meu Instagram">
+                    <a href="https://www.instagram.com/luanasilva.official?igsh=MWR2cjRhZ3BrbGN6bQ==" target="_blank" rel="noopener noreferrer" title="Instagram">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
                     </a>
-                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Meu X">
+                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" rel="noopener noreferrer" title="Twitter">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
                     <!-- WHATSAPP -->
-                    <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" target="_blank" rel="noopener noreferrer" title="Meu WhatsApp">
+                    <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" target="_blank" rel="noopener noreferrer" title="WhatsApp">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
                     </a>
                 </div>
             </div>
-            <p class="bio">Este é meu espaço pessoal e exclusivo onde compartilho conteúdos mais próximos e especiais com meus seguidores. Aqui você encontra material que não compartilho em outras redes, com uma conexão mais direta e autêntica. 💫</p>
+            <p class="bio">Espaço exclusivo para conteúdo adulto. Material pessoal e restrito para maiores de 18 anos. Entre em contato para conhecer todos os detalhes.</p>
         </header>
 
         <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">58</strong> acessos hoje</div>
-            <div id="online-users">🟢 <strong id="online-count">24</strong> pessoas online agora</div>
+            <div id="daily-access">🔥 <strong id="access-count">48</strong> acessos hoje</div>
+            <div id="online-users">🟢 <strong id="online-count">22</strong> pessoas online agora</div>
         </section>
+
+        <!-- URGÊNCIA SEGURA -->
+        <div class="urgency-safe" id="urgency-section">
+            ⏰ <strong>VAGAS LIMITADAS DISPONÍVEIS!</strong> 
+            Entre em contato agora para garantir seu acesso.
+        </div>
 
         <section id="content-previews">
-            <h2 class="section-title">Conteúdo Exclusivo</h2>
+            <h2 class="section-title">Prévia do Conteúdo 🔒</h2>
             <div class="preview-grid">
-                <div class="preview-card">
-                    <img src="assets/preview-safe-1.jpg" alt="Conteúdo exclusivo" class="preview-thumb">
+                <!-- PREVIEW 1 -->
+                <div class="preview-card locked" onclick="showLockedPreview(this)">
+                    <div class="preview-container">
+                        <video class="blurred-preview-video" src="assets/preview1.mp4" autoplay loop muted playsinline preload="auto"></video>
+                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                    </div>
                 </div>
-                <div class="preview-card">
-                    <img src="assets/preview-safe-2.jpg" alt="Conteúdo exclusivo" class="preview-thumb">
+                
+                <!-- PREVIEW 2 -->
+                <div class="preview-card locked" onclick="showLockedPreview(this)">
+                    <div class="preview-container">
+                        <video class="blurred-preview-video" src="assets/preview2.mp4" autoplay loop muted playsinline preload="auto"></video>
+                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                    </div>
                 </div>
-                <div class="preview-card">
-                    <img src="assets/preview-safe-3.jpg" alt="Conteúdo exclusivo" class="preview-thumb">
+                
+                <!-- PREVIEW 3 -->
+                <div class="preview-card locked" onclick="showLockedPreview(this)">
+                    <div class="preview-container">
+                        <video class="blurred-preview-video" src="assets/preview3.mp4" autoplay loop muted playsinline preload="auto"></video>
+                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                    </div>
                 </div>
-                <div class="preview-card">
-                    <img src="assets/preview-safe-4.jpg" alt="Conteúdo exclusivo" class="preview-thumb">
+                
+                <!-- PREVIEW 4 -->
+                <div class="preview-card locked" onclick="showLockedPreview(this)">
+                    <div class="preview-container">
+                        <video class="blurred-preview-video" src="assets/preview4.mp4" autoplay loop muted playsinline preload="auto"></video>
+                        <div class="locked-text">🔒 CONTEÚDO BLOQUEADO</div>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- BARRA DE PROMOÇÃO -->
         <section class="promo-banner">
             <div class="promo-content">
-                <h3>🌟 CONTEÚDO EXCLUSIVO 🌟</h3>
-                <p>Acesso a material especial e pessoal!</p>
+                <h3>🌟 OFERTA ESPECIAL 🌟</h3>
+                <p>Acesso a conteúdo exclusivo com <strong>condições especiais!</strong></p>
                 <div class="countdown-container">
-                    <span>Oportunidade por tempo limitado</span>
-                    <span id="countdown-timer">03:00:00</span>
+                    <span>Oferta por tempo limitado:</span>
+                    <span id="countdown-timer">02:00:00</span>
                 </div>
             </div>
         </section>
 
+        <!-- GARANTIA SEGURA -->
+        <div class="guarantee-safe">
+            <h3 style="color: #4caf50; margin: 0 0 15px 0;">✅ GARANTIA DE SATISFAÇÃO</h3>
+            <p style="color: #ccc; margin: 0;">
+                7 dias de garantia para você conhecer o conteúdo.<br>
+                Se não gostar, devolução do valor.
+            </p>
+        </div>
+
         <section id="pricing-plans">
-            <h2 class="section-title">Escolha Como Acessar</h2>
+            <h2 class="section-title">Escolha Seu Acesso</h2>
             <div class="plans-grid">
                 <div class="plan-card basic">
-                    <h3>Acesso Exclusivo</h3>
+                    <h3>Acesso Básico</h3>
                     <ul class="plan-desc">
-                        <li>Conteúdo selecionado especial</li>
-                        <li>Material pessoal e próximo</li>
-                        <li>Acesso à área reservada</li>
-                        <li>Conteúdo mais autêntico</li>
+                        <li>Seleção de conteúdo exclusivo</li>
+                        <li>Material pessoal e especial</li>
+                        <li>Acesso à área restrita</li>
+                        <li>Conteúdo selecionado</li>
                     </ul>
-                    <div class="price">Conteúdo Especial</div>
-                    <a class="plan-btn basic" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20conhecer%20seu%20conteúdo%20exclusivo!%20Me%20envie%20as%20informações%20por%20favor%20😊">
-                        📲 FALAR NO WHATSAPP
+                    <div class="price">Acesso Especial</div>
+                    <a class="plan-btn basic enhanced" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20o%20ACESSO%20BÁSICO%20ao%20seu%20conteúdo%20exclusivo!%20Me%20envie%20as%20informações%20🔓">
+                        🔓 QUERO ACESSO BÁSICO
                     </a>
                 </div>
                 <div class="plan-card complete featured">
@@ -109,23 +384,56 @@
                     <h3>Acesso Completo</h3>
                     <ul class="plan-desc">
                         <li>Toda biblioteca de conteúdo</li>
-                        <li>Material mais pessoal e íntimo</li>
-                        <li>Acesso total e irrestrito</li>
-                        <li>Conteúdo exclusivo constante</li>
+                        <li>Material completo e irrestrito</li>
+                        <li>Acesso total à área exclusiva</li>
                         <li>Prioridade no atendimento</li>
+                        <li>Conteúdo constante e atualizado</li>
                     </ul>
                     <div class="price">Acesso Total</div>
-                    <a class="plan-btn complete" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20o%20ACESSO%20COMPLETO%20ao%20seu%20conteúdo%20exclusivo!%20Me%20envie%20todas%20as%20informações%20⭐">
+                    <a class="plan-btn complete enhanced" href="https://wa.me/56974783157?text=Olá%20Luana!%20Quero%20o%20ACESSO%20COMPLETO%20ao%20seu%20conteúdo%20exclusivo!%20Me%20envie%20todas%20as%20informações%20⭐">
                         ⭐ QUERO ACESSO COMPLETO
                     </a>
                 </div>
             </div>
-            <p class="meta-note">Entre em contato direto para conhecer todos os detalhes do conteúdo!</p>
+            <p class="meta-note">Entre em contato direto para conhecer todos os detalhes!</p>
+        </section>
+
+        <!-- FAQ SEGURO -->
+        <section class="faq" style="margin-top: 50px;">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <button class="faq-question">Como funciona o acesso?</button>
+                <div class="faq-answer">
+                    <p>Entre em contato pelo WhatsApp, escolha seu plano e receba acesso imediato ao conteúdo exclusivo.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">Tem garantia?</button>
+                <div class="faq-answer">
+                    <p>Sim! 7 dias de garantia. Se não gostar do conteúdo, devolvemos seu investimento.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">É conteúdo adulto?</button>
+                <div class="faq-answer">
+                    <p>Sim, é conteúdo exclusivo para maiores de 18 anos. Material pessoal e restrito.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">Como é o pagamento?</button>
+                <div class="faq-answer">
+                    <p>Pagamento via PIX. Rápido, seguro e você recebe acesso imediato após confirmação.</p>
+                </div>
+            </div>
         </section>
         
         <!-- WHATSAPP FLOAT -->
         <div class="whatsapp-float">
-            <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20melhor%20seu%20conteúdo%20exclusivo!%20😊" 
+            <a href="https://wa.me/56974783157?text=Olá%20Luana!%20Vim%20do%20seu%20site%20e%20quero%20conhecer%20seu%20conteúdo%20exclusivo!%20😊" 
                target="_blank" 
                rel="noopener noreferrer"
                class="whatsapp-button">
@@ -137,5 +445,51 @@
 
     <div id="purchase-toast"></div>
     <script src="js/script.js" defer></script>
+    
+    <script>
+        // Script específico para bio.html
+        
+        function showLockedPreview(element) {
+            const lockedText = element.querySelector('.locked-text');
+            if (lockedText) {
+                lockedText.innerHTML = '🔒 ENTRE EM CONTATO<br>PARA ACESSAR';
+                lockedText.style.background = 'rgba(229, 57, 53, 0.9)';
+                
+                // Redireciona para WhatsApp após 2 segundos
+                setTimeout(() => {
+                    window.open('https://wa.me/56974783157?text=Olá%20Luana!%20Vi%20as%20prévias%20no%20seu%20site%20e%20quero%20conhecer%20o%20conteúdo%20completo!%20😊', '_blank');
+                }, 2000);
+            }
+        }
+        
+        // FAQ functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.faq-question').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const answer = button.nextElementSibling;
+                    answer.classList.toggle('show');
+                });
+            });
+            
+            // Contador de vagas
+            let spots = 5;
+            const urgencyElement = document.getElementById('urgency-section');
+            
+            setInterval(() => {
+                if (spots > 0 && Math.random() < 0.3) {
+                    spots--;
+                    urgencyElement.innerHTML = 
+                        `⏰ <strong>${spots} VAGAS RESTANTES!</strong> Entre em contato agora para garantir seu acesso.`;
+                    
+                    if (spots === 0) {
+                        urgencyElement.innerHTML = 
+                            `⛔ <strong>VAGAS ESGOTADAS!</strong> Entre em contato para lista de espera.`;
+                        urgencyElement.style.background = 'linear-gradient(90deg, rgba(255,0,0,0.2), rgba(153,0,0,0.2))';
+                    }
+                }
+            }, 60000); // A cada 1 minuto
+        });
+    </script>
 </body>
 </html>
