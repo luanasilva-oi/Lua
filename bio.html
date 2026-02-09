@@ -372,6 +372,99 @@
                 padding: 8px 20px;
             }
         }
+        /* NOTIFICAÇÕES DE VENDA - ESTILOS CORRIGIDOS */
+.sales-notification {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background: rgba(25, 25, 25, 0.95);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    z-index: 9998;
+    max-width: 280px;
+    display: none;
+    border: 2px solid #ff9800;
+    backdrop-filter: blur(10px);
+}
+
+.sales-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sales-icon {
+    font-size: 24px;
+    color: #ff9800;
+}
+
+.sales-text {
+    flex-grow: 1;
+}
+
+.sales-name {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 3px;
+    font-size: 14px;
+}
+
+.sales-plan {
+    font-size: 13px;
+    color: #ccc;
+}
+
+.sales-time {
+    font-size: 11px;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.sales-counter {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #e53935, #ff5722);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 9997;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+    border: 2px solid #ff9800;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
     </style>
     <script>
         if (localStorage.getItem('age_ok') !== '1') {
