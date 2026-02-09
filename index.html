@@ -1,355 +1,110 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="anti-bot-reset">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- META TAGS PARA BLOQUEAR TUDO -->
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noydir">
-    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
-    <meta name="bingbot" content="noindex, nofollow, noarchive">
-    <meta name="slurp" content="noindex, nofollow, noarchive">
-    <meta name="facebook-domain-verification" content="">
-    <meta name="facebook-crawler" content="noindex, nofollow">
-    <meta name="pinterest" content="nopin">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Verificação de Idade">
-    <meta name="twitter:description" content="Confirmação de acesso">
-    <meta name="twitter:image" content="">
+    <!-- META TAGS PADRÃO -->
+    <title>Luana Silva | Conteúdo Exclusivo</title>
     
-    <!-- OPEN GRAPH SEGURO -->
-    <meta property="og:title" content="Verificação de Idade">
-    <meta property="og:description" content="Confirmação de acesso necessário">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-    <meta property="og:image" content="">
-    <meta property="og:image:alt" content="">
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Verificação">
+    <!-- CSS ANTI-BOT (Carrega primeiro) -->
+    <link rel="stylesheet" href="css/anti-bot.css">
+    <link rel="stylesheet" href="css/style.css">
     
-    <title>Verificação de Idade</title>
-    <style>
-        /* CSS INLINE - Não carrega externo */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            overflow: hidden;
-        }
-        
-        .age-container {
-            max-width: 500px;
-            width: 100%;
-            background: #111;
-            padding: 40px 30px;
-            border-radius: 15px;
-            border: 2px solid #333;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-        
-        .age-logo {
-            font-size: 50px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.9; }
-        }
-        
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        
-        .age-text {
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 16px;
-        }
-        
-        .age-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .age-btn {
-            padding: 16px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .age-btn.yes {
-            background: linear-gradient(135deg, #ff9800, #ff5722);
-            color: #000;
-        }
-        
-        .age-btn.yes:hover {
-            background: linear-gradient(135deg, #ff5722, #ff9800);
-            transform: translateY(-2px);
-        }
-        
-        .age-btn.no {
-            background: #333;
-            color: #fff;
-            border: 2px solid #555;
-        }
-        
-        .age-btn.no:hover {
-            background: #444;
-        }
-        
-        .age-warning {
-            margin-top: 25px;
-            font-size: 12px;
-            color: #888;
-        }
-        
-        /* HONEYPOT INVISÍVEL PARA BOTS */
-        .bot-trap {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-            opacity: 0;
-            height: 0;
-            width: 0;
-            overflow: hidden;
-        }
-        
-        .bot-trap-link {
-            color: #000;
-            background: #000;
-        }
-    </style>
+    <!-- SISTEMA ANTI-BOT (Carrega antes de tudo) -->
+    <script src="js/anti-bot-system.js" defer></script>
 </head>
-<body>
-    <!-- ARMADILHA PARA BOTS (invisível para humanos) -->
-    <div class="bot-trap" aria-hidden="true">
-        <a href="honeypot.html" class="bot-trap-link">
-            conteúdo adulto explícito vídeos fotos nua masturbação gemidos
-        </a>
-        <div style="display:none;">
-            luana silva conteúdo premium adulto onlyfans privacy exclusivo
-        </div>
+<body class="dark">
+    <!-- OVERLAY DE SEGURANÇA (aparece até sistema carregar) -->
+    <div id="security-overlay" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 99998;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ff9800;
+        font-size: 18px;
+        font-weight: bold;
+    ">
+        🔒 CARREGANDO SISTEMA DE SEGURANÇA...
     </div>
-    
-    <div class="age-container">
-        <div class="age-logo">🔞</div>
-        <h1>Verificação de Idade</h1>
-        
-        <p class="age-text">
-            Este site contém material restrito para maiores de 18 anos.
-            <br><br>
-            Ao prosseguir, você confirma que tem idade legal para acessar
-            conteúdo adulto em sua jurisdição.
-        </p>
-        
-        <div class="age-buttons">
-            <button class="age-btn yes" id="age-yes">
-                TENHO 18+ ANOS E CONCORDO
-            </button>
-            <button class="age-btn no" id="age-no">
-                NÃO TENHO 18 ANOS
-            </button>
-        </div>
-        
-        <p class="age-warning">
-            ⚠️ O acesso é registrado e monitorado. <br>
-            Compartilhar conteúdo com menores é crime.
-        </p>
+
+    <!-- CONTEÚDO PRINCIPAL PROTEGIDO -->
+    <div id="protected-content" class="protected-content">
+        <!-- Seu conteúdo normal aqui -->
+        <main class="profile-container">
+            <!-- Banner com proteção canvas -->
+            <div class="profile-header">
+                <canvas class="protected-canvas" 
+                        width="1200" 
+                        height="300"
+                        data-protected-src="assets/banner-safe.mp4">
+                </canvas>
+                
+                <img src="" 
+                     data-protected-src="./assets/avatar-safe.jpg" 
+                     class="avatar" 
+                     alt="Luana Silva">
+                
+                <div class="profile-info">
+                    <h1 data-obfuscated="true">Luana Silva <span class="verified-badge">✓</span></h1>
+                    <p class="bio" data-obfuscated="true">
+                        Espaço exclusivo com conteúdo pessoal e especial...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Previews protegidos -->
+            <section id="content-previews">
+                <h2 class="section-title">Conteúdo Exclusivo</h2>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <div class="preview-container-protected">
+                            <video class="blurred-preview-video" 
+                                   data-protected-src="assets/preview1.mp4"
+                                   muted 
+                                   playsinline 
+                                   preload="none">
+                            </video>
+                            <div class="canvas-overlay">
+                                <span>🔒 CLIQUE PARA VER</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mais previews... -->
+                </div>
+            </section>
+
+            <!-- Botão WhatsApp protegido -->
+            <div class="whatsapp-float">
+                <a href="#" 
+                   class="whatsapp-button protected-button"
+                   data-whatsapp-protected="true"
+                   data-phone="56974783157"
+                   data-message="Olá Luana! Vim do seu site e quero conhecer seu conteúdo exclusivo! 😊">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
+                    FALE COMIGO NO WHATSAPP
+                </a>
+            </div>
+        </main>
     </div>
-    
-    <!-- CARREGAMENTO DINÂMICO DO SISTEMA DE PROTEÇÃO -->
+
+    <!-- Remove overlay quando sistema carrega -->
     <script>
-        // ============================================
-        // SISTEMA DE PROTEÇÃO ANTI-BOT - CARGA INICIAL
-        // ============================================
-        
-        // 1. BLOQUEIO DE FERRAMENTAS DE DESENVOLVEDOR
-        document.addEventListener('keydown', function(e) {
-            // F12
-            if (e.key === 'F12') {
-                e.preventDefault();
-                showDevToolsWarning();
-                return false;
-            }
-            
-            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
-            if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'i', 'j', 'c'].includes(e.key)) {
-                e.preventDefault();
-                showDevToolsWarning();
-                return false;
-            }
-            
-            // Ctrl+U (View Source)
-            if (e.ctrlKey && ['U', 'u'].includes(e.key)) {
-                e.preventDefault();
-                showDevToolsWarning();
-                return false;
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const overlay = document.getElementById('security-overlay');
+                if (overlay) {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.remove(), 500);
+                }
+            }, 1000);
         });
-        
-        // 2. BLOQUEIO DE CLIQUE DIREITO
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            showContextMenuWarning();
-            return false;
-        });
-        
-        // 3. DETECTA SE É HUMANO OU BOT
-        let isHuman = false;
-        let mouseMovement = 0;
-        let keyboardActivity = 0;
-        
-        document.addEventListener('mousemove', function() {
-            mouseMovement++;
-            if (mouseMovement > 2) isHuman = true;
-        });
-        
-        document.addEventListener('keydown', function() {
-            keyboardActivity++;
-            if (keyboardActivity > 1) isHuman = true;
-        });
-        
-        // 4. FUNÇÃO PARA ACEITAR IDADE
-        document.getElementById('age-yes').addEventListener('click', function() {
-            if (!isHuman) {
-                // Se não detectou movimento humano, pode ser bot
-                setTimeout(() => {
-                    window.location.href = 'honeypot.html';
-                }, 1000);
-                return;
-            }
-            
-            // Salva aceitação
-            localStorage.setItem('age_verified', 'true');
-            localStorage.setItem('verification_timestamp', Date.now());
-            
-            // Carrega sistema de proteção completo
-            loadProtectionSystem();
-        });
-        
-        document.getElementById('age-no').addEventListener('click', function() {
-            window.location.href = 'https://www.google.com';
-        });
-        
-        // 5. FUNÇÕES DE ALERTA
-        function showDevToolsWarning() {
-            document.body.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: #000;
-                    color: red;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 24px;
-                    font-weight: bold;
-                    text-align: center;
-                    padding: 20px;
-                    z-index: 99999;
-                ">
-                    ⚠️ ACESSO NÃO AUTORIZADO ⚠️<br><br>
-                    Ferramentas de desenvolvedor detectadas.<br>
-                    Esta ação foi registrada.
-                </div>
-            `;
-        }
-        
-        function showContextMenuWarning() {
-            const warning = document.createElement('div');
-            warning.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(255,0,0,0.9);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 10px;
-                font-weight: bold;
-                z-index: 99999;
-                box-shadow: 0 0 20px rgba(255,0,0,0.5);
-                animation: fadeInOut 2s ease;
-            `;
-            warning.textContent = '⚠️ Ação bloqueada';
-            document.body.appendChild(warning);
-            
-            setTimeout(() => warning.remove(), 2000);
-        }
-        
-        // 6. CARREGA SISTEMA DE PROTEÇÃO COMPLETO
-        function loadProtectionSystem() {
-            // Remove tudo da página atual
-            document.body.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: #000;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: #ff9800;
-                    font-size: 20px;
-                    font-weight: bold;
-                ">
-                    🔒 CARREGANDO CONTEÚDO SEGURO...
-                </div>
-            `;
-            
-            // Carrega CSS de proteção
-            const cssLink = document.createElement('link');
-            cssLink.rel = 'stylesheet';
-            cssLink.href = 'css/anti-bot.css';
-            document.head.appendChild(cssLink);
-            
-            // Carrega sistema JS
-            const script = document.createElement('script');
-            script.src = 'js/anti-bot-system.js';
-            script.onload = function() {
-                console.log('✅ Sistema anti-bot carregado');
-            };
-            document.head.appendChild(script);
-        }
-        
-        // 7. VERIFICA SE JÁ ESTÁ VERIFICADO
-        if (localStorage.getItem('age_verified') === 'true') {
-            const verifyTime = parseInt(localStorage.getItem('verification_timestamp'));
-            const currentTime = Date.now();
-            const hoursPassed = (currentTime - verifyTime) / (1000 * 60 * 60);
-            
-            // Revalida a cada 6 horas
-            if (hoursPassed < 6) {
-                loadProtectionSystem();
-            }
-        }
     </script>
 </body>
 </html>
