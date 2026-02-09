@@ -1,158 +1,146 @@
 // ==========================================================
-// SCRIPT COMPLETO COM TODOS OS SISTEMAS DINÂMICOS
+// SCRIPT CORRIGIDO - SISTEMA DE VENDAS OTIMIZADO
 // ==========================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("🚀 Site Luana Silva - Inicializando sistemas...");
+    console.log("🚀 Site Luana Silva - Inicializando...");
 
     // ==========================================================
-    // 1. PROTEÇÃO ANTI-ROBÔ (Textos e GIFs invisíveis para crawlers)
+    // 1. PROTEÇÃO ANTI-ROBÔ AVANÇADA
     // ==========================================================
-    function initAntiRobotProtection() {
-        // Esconde todo o conteúdo sensível até que o JS carregue
-        const sensitiveElements = document.querySelectorAll('.js-text, .protected-text, [data-sensitive]');
+    function initAdvancedAntiRobot() {
+        console.log("🛡️ Ativando proteção anti-robô...");
         
-        // Mostra textos apenas após carregamento
+        // 1. Carrega mídias apenas após verificação
         setTimeout(() => {
-            document.querySelectorAll('.js-text').forEach(el => {
-                el.style.display = 'block';
-                el.style.opacity = '1';
-                el.style.position = 'static';
-            });
-            
-            // Esconde textos de proteção
-            document.querySelectorAll('.protected-text').forEach(el => {
-                el.style.display = 'none';
-            });
-        }, 1000);
-
-        // Ofusca URLs dos vídeos para robôs
-        const videos = document.querySelectorAll('video source');
-        videos.forEach((video, index) => {
-            // Armazena o src real em data attribute
-            const realSrc = video.getAttribute('src');
-            if (realSrc && !realSrc.includes('data:')) {
-                video.setAttribute('data-real-src', realSrc);
-                video.removeAttribute('src');
-                
-                // Restaura após carregamento
-                setTimeout(() => {
-                    video.setAttribute('src', realSrc);
+            // Carrega vídeos (GIFs)
+            document.querySelectorAll('video[data-real-src]').forEach(video => {
+                const src = video.getAttribute('data-real-src');
+                if (src) {
+                    video.querySelector('source').setAttribute('src', src);
                     video.load();
-                }, 1500 + (index * 500));
-            }
-        });
-
-        // Proteção contra inspeção
-        const protectionScript = `
-            // Bloqueia acesso ao código fonte
-            document.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
-                    e.preventDefault();
-                    return false;
                 }
             });
             
-            // Esconde elementos do DevTools
-            Object.defineProperty(document, 'hidden', { get: () => true });
-        `;
-        
-        // Executa a proteção
-        try {
-            const script = document.createElement('script');
-            script.textContent = protectionScript;
-            document.head.appendChild(script);
-        } catch(e) {}
-        
-        console.log("🛡️ Proteção anti-robô ativada");
+            // Carrega imagens
+            document.querySelectorAll('img[data-real-src]').forEach(img => {
+                const src = img.getAttribute('data-real-src');
+                if (src) img.setAttribute('src', src);
+            });
+        }, 1500);
+
+        // 2. Ofusca conteúdo no HTML
+        const sensitiveElements = document.querySelectorAll('[data-protected]');
+        sensitiveElements.forEach(el => {
+            const original = el.innerHTML;
+            // Codifica simples (robôs não executam JS)
+            el.setAttribute('data-encoded', btoa(original));
+            el.innerHTML = 'Carregando conteúdo exclusivo...';
+            
+            // Decodifica após carregamento
+            setTimeout(() => {
+                try {
+                    el.innerHTML = atob(el.getAttribute('data-encoded'));
+                } catch(e) {
+                    el.innerHTML = original;
+                }
+            }, 2000);
+        });
+
+        // 3. Verificação periódica
+        setInterval(() => {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isBot = userAgent.includes('bot') || 
+                         userAgent.includes('crawler') || 
+                         userAgent.includes('spider') ||
+                         userAgent.includes('facebookexternalhit') ||
+                         userAgent.includes('whatsapp');
+            
+            if (isBot) {
+                console.log("🤖 Bot detectado - mantendo proteção");
+                // Mantém conteúdo seguro
+            }
+        }, 10000);
     }
 
     // ==========================================================
-    // 2. CONTADORES DINÂMICOS (Acessos e Online)
+    // 2. CONTADORES DINÂMICOS CORRIGIDOS
     // ==========================================================
     let accessCount = 44;
     let onlineCount = 30;
-    let isIncreasing = true;
 
     function initDynamicCounters() {
+        console.log("📊 Iniciando contadores dinâmicos...");
+        
         const accessEl = document.getElementById("access-count");
         const onlineEl = document.getElementById("online-count");
+        const urgencyEl = document.getElementById("urgency-text");
 
-        if (!accessEl || !onlineEl) return;
+        if (!accessEl || !onlineEl || !urgencyEl) return;
 
-        // Função para atualizar contador de acessos
+        // Atualiza contador de acessos
         function updateAccessCounter() {
             if (accessEl) {
-                // Variação mais realista: +1 a +3 a cada 30-90 segundos
-                const increment = Math.floor(Math.random() * 3) + 1;
+                // Variação mais suave: +1 a +2 a cada 40-80 segundos
+                const increment = Math.floor(Math.random() * 2) + 1;
                 accessCount += increment;
                 
-                // Limite máximo realista
-                if (accessCount > 200) {
-                    accessCount = Math.floor(Math.random() * (120 - 80 + 1)) + 80; // Reseta
+                // Limite e reset realista
+                if (accessCount > 180) {
+                    accessCount = Math.floor(Math.random() * (100 - 70 + 1)) + 70;
                 }
                 
                 accessEl.textContent = accessCount;
                 localStorage.setItem('daily_access_count', accessCount);
                 
-                // Próxima atualização em 30-90 segundos
-                setTimeout(updateAccessCounter, Math.random() * (90000 - 30000) + 30000);
+                // Próxima atualização
+                setTimeout(updateAccessCounter, Math.random() * (80000 - 40000) + 40000);
             }
         }
 
-        // Função para atualizar contador online (mais dinâmico)
+        // Atualiza contador online (sincronizado com urgência)
         function updateOnlineCounter() {
-            if (onlineEl) {
-                // Simula pessoas entrando e saindo
-                const change = Math.random() > 0.5 ? 1 : -1;
-                const amount = Math.floor(Math.random() * 3) + 1;
-                
-                onlineCount += (change * amount);
+            if (onlineEl && urgencyEl) {
+                // Variação suave: -2 a +2
+                const change = Math.floor(Math.random() * 5) - 2; // -2, -1, 0, 1, 2
+                onlineCount += change;
                 
                 // Mantém entre limites realistas
-                if (onlineCount < 15) onlineCount = 15 + Math.floor(Math.random() * 5);
-                if (onlineCount > 45) onlineCount = 45 - Math.floor(Math.random() * 5);
+                if (onlineCount < 25) onlineCount = 25 + Math.floor(Math.random() * 5);
+                if (onlineCount > 42) onlineCount = 42 - Math.floor(Math.random() * 5);
                 
                 onlineEl.textContent = onlineCount;
                 
-                // Atualiza mais frequentemente (10-30 segundos)
-                setTimeout(updateOnlineCounter, Math.random() * (30000 - 10000) + 10000);
+                // ATUALIZA TEXTO DE URGÊNCIA PARA FICAR SINCRONIZADO
+                urgencyEl.innerHTML = `⚡ <strong>${onlineCount} PESSOAS ONLINE AGORA!</strong> Vagas limitadas!`;
+                
+                // Próxima atualização mais frequente
+                setTimeout(updateOnlineCounter, Math.random() * (25000 - 15000) + 15000);
             }
         }
 
-        // Inicia os contadores
-        updateAccessCounter();
-        updateOnlineCounter();
-        
-        // Atualiza a cada minuto também (backup)
-        setInterval(() => {
-            if (accessEl && onlineEl) {
-                accessEl.textContent = accessCount;
-                onlineEl.textContent = onlineCount;
-            }
-        }, 60000);
-
-        console.log("📊 Contadores dinâmicos ativados");
+        // Inicia os contadores com delay inicial
+        setTimeout(() => {
+            updateAccessCounter();
+            updateOnlineCounter();
+        }, 3000);
     }
 
     // ==========================================================
-    // 3. SISTEMA DE VENDAS FAKE DINÂMICAS
+    // 3. SISTEMA DE VENDAS FAKE OTIMIZADO
     // ==========================================================
     let totalSales = 0;
-    let salesInterval;
+    let salesInterval = null;
+    let saleTimer = null;
 
-    function initFakeSalesSystem() {
-        // Nomes brasileiros realistas
-        const names = [
-            'Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael', 'Felipe', 'Daniel',
-            'Marcos', 'Thiago', 'Carlos', 'Eduardo', 'Bruno', 'Leonardo', 'André',
-            'Robson', 'Mário', 'Miguel', 'Benjamin', 'Arthur', 'Victor', 'Vitor',
-            'Alex', 'Adriano', 'Francisco', 'Antônio', 'Ricardo', 'Roberto', 'Paulo'
-        ];
+    function initOptimizedFakeSales() {
+        console.log("💰 Configurando sistema de vendas otimizado...");
         
-        const cities = ['SP', 'RJ', 'MG', 'RS', 'PR', 'SC', 'BA', 'PE', 'CE', 'DF'];
-
-        // Cria elementos se não existirem
+        // Nomes e cidades
+        const names = ['Pedro', 'João', 'Lucas', 'Mateus', 'Gabriel', 'Rafael'];
+        const cities = ['SP', 'RJ', 'MG', 'RS', 'PR', 'SC'];
+        
+        // Cria elementos se necessário
         if (!document.getElementById('sales-notification')) {
             const notification = document.createElement('div');
             notification.id = 'sales-notification';
@@ -164,12 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const counter = document.createElement('div');
             counter.id = 'sales-counter';
             counter.className = 'sales-counter';
-            counter.innerHTML = '<span class="fire-icon">🔥</span> <span id="total-sales">0</span> vendas hoje';
+            counter.innerHTML = '<span class="emoji-animate">🔥</span> <span id="total-sales">0</span> vendas hoje';
             document.body.appendChild(counter);
         }
 
-        // Função para mostrar notificação de venda
-        function showSaleNotification() {
+        // Função para mostrar UMA venda
+        function showSingleSale() {
             const notification = document.getElementById('sales-notification');
             const counter = document.getElementById('sales-counter');
             const totalSalesEl = document.getElementById('total-sales');
@@ -178,123 +166,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Incrementa vendas
             totalSales++;
-            localStorage.setItem('total_sales_today', totalSales);
             totalSalesEl.textContent = totalSales;
 
-            // Mostra contador
-            counter.style.display = 'flex';
-            
-            // Escolhe dados aleatórios
+            // Mostra contador após primeira venda
+            if (totalSales === 1) {
+                counter.style.display = 'flex';
+                setTimeout(() => {
+                    counter.style.opacity = '1';
+                }, 100);
+            }
+
+            // Dados aleatórios
             const randomName = names[Math.floor(Math.random() * names.length)];
             const randomCity = cities[Math.floor(Math.random() * cities.length)];
-            const randomPlan = Math.random() > 0.4 ? 'Completo ⭐' : 'Básico 🔓';
-            const planClass = randomPlan.includes('Completo') ? 'complete' : 'basic';
             
-            // Tempos aleatórios
+            // Escolhe plano aleatório (60% chance de completo, 40% de básico)
+            const isComplete = Math.random() < 0.6;
+            const randomPlan = isComplete ? 'Completo ⭐' : 'Básico 🔓';
+            const planIcon = isComplete ? '⭐' : '🔓';
+            
+            // Tempo aleatório
             const times = ['há 2 min', 'há 5 min', 'há 8 min', 'há 12 min', 'há 15 min', 'agora mesmo'];
             const randomTime = times[Math.floor(Math.random() * times.length)];
 
             // Cria notificação
             notification.innerHTML = `
                 <div class="sales-content">
-                    <div class="sales-icon">${randomPlan.includes('Completo') ? '⭐' : '🔓'}</div>
+                    <div class="sales-icon">${planIcon}</div>
                     <div class="sales-text">
                         <div class="sales-name">${randomName} • ${randomCity}</div>
-                        <div class="sales-plan ${planClass}">Acabou de comprar: ${randomPlan}</div>
+                        <div class="sales-plan">Acabou de comprar: ${randomPlan}</div>
                         <div class="sales-time">${randomTime}</div>
                     </div>
                 </div>
             `;
             
-            // Mostra notificação
+            // Mostra com animação
             notification.style.display = 'block';
+            notification.style.animation = 'slideInRight 0.5s ease';
             
-            // Remove após 8 segundos
+            // Remove após 6-8 segundos
+            const removeTime = Math.random() * (8000 - 6000) + 6000;
             setTimeout(() => {
                 notification.style.animation = 'slideOutRight 0.5s ease forwards';
                 setTimeout(() => {
                     notification.style.display = 'none';
                     notification.style.animation = '';
                 }, 500);
-            }, 8000);
+            }, removeTime);
         }
 
-        // Inicia com algumas vendas
-        const initialSales = Math.floor(Math.random() * 8) + 3;
-        for (let i = 0; i < initialSales; i++) {
-            setTimeout(() => showSaleNotification(), i * 3000);
-        }
-        totalSales = initialSales;
-        document.getElementById('total-sales').textContent = totalSales;
-        document.getElementById('sales-counter').style.display = 'flex';
-
-        // Agenda vendas aleatórias (a cada 45-180 segundos)
-        function scheduleNextSale() {
-            const nextSaleTime = Math.random() * (180000 - 45000) + 45000; // 45-180 segundos
-            salesInterval = setTimeout(() => {
-                showSaleNotification();
-                scheduleNextSale();
+        // FUNÇÃO PARA GERAR VENDAS AUTOMÁTICAS
+        function generateAutoSales() {
+            // Para o timer anterior se existir
+            if (saleTimer) clearTimeout(saleTimer);
+            
+            // Tempo aleatório entre 20 e 40 segundos
+            const nextSaleTime = Math.random() * (40000 - 20000) + 20000;
+            
+            saleTimer = setTimeout(() => {
+                showSingleSale();
+                // Agenda próxima venda
+                generateAutoSales();
             }, nextSaleTime);
         }
-        
-        scheduleNextSale();
 
-        console.log("💰 Sistema de vendas fake ativado");
+        // INICIA COM UMA VENDA IMEDIATA (quando usuário entra)
+        setTimeout(() => {
+            console.log("🔄 Gerando primeira venda fake...");
+            showSingleSale();
+            
+            // Inicia o ciclo automático de vendas
+            console.log("⏱️ Iniciando ciclo automático de vendas (20-40 segundos)");
+            generateAutoSales();
+        }, 2000); // 2 segundos após carregar a página
+
+        // Pausa vendas quando página não está visível
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                if (saleTimer) clearTimeout(saleTimer);
+            } else {
+                generateAutoSales();
+            }
+        });
     }
 
     // ==========================================================
-    // 4. TESTEMUNHOS FAKE DINÂMICOS
+    // 4. TESTEMUNHOS FAKE
     // ==========================================================
-    function initFakeTestimonials() {
+    function initTestimonials() {
+        console.log("💬 Carregando testemunhos...");
+        
         const testimonials = [
             {
                 name: 'Carlos, 28 anos • SP',
                 rating: '⭐⭐⭐⭐⭐',
-                text: 'Comprei semana passada e já vi mais de 100 vídeos. Vale cada centavo! Conteúdo real e muito explícito, exatamente como promete.',
+                text: 'Comprei semana passada e já vi mais de 100 vídeos. Vale cada centavo! Conteúdo real e muito explícito.',
                 time: 'Comprou há 2 dias'
             },
             {
                 name: 'Pedro, 32 anos • RJ',
                 rating: '⭐⭐⭐⭐⭐',
-                text: 'Já comprei vários conteúdos, mas esse é o mais autêntico. Os gemidos são reais, e ela não tem medo de mostrar tudo. Recomendo!',
+                text: 'Já comprei vários conteúdos, mas esse é o mais autêntico. Os gemidos são reais, e ela não tem medo de mostrar tudo.',
                 time: 'Comprou há 5 dias'
             },
             {
                 name: 'Bruno, 25 anos • MG',
                 rating: '⭐⭐⭐⭐⭐',
-                text: 'Pensei que era exagero, mas são mais de 600 vídeos mesmo! A qualidade é incrível. Melhor investimento que fiz no ano.',
+                text: 'Pensei que era exagero, mas são mais de 600 vídeos mesmo! A qualidade é incrível. Melhor investimento.',
                 time: 'Comprou hoje'
-            },
-            {
-                name: 'André, 30 anos • PR',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'Conteúdo 100% real como prometido. Os vídeos são longos e mostram tudo sem cortes. Já indiquei pra dois amigos!',
-                time: 'Comprou há 3 dias'
-            },
-            {
-                name: 'Ricardo, 35 anos • SC',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'O acesso completo vale muito a pena. São mais de 600 vídeos mesmo, tudo muito bem filmado e explícito. Recomendo demais!',
-                time: 'Comprou há 1 semana'
-            },
-            {
-                name: 'Marcos, 27 anos • RS',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'Ela não engana, o conteúdo é realmente explícito e de qualidade. Gemidos autênticos e vídeos bem feitos. Superou minhas expectativas.',
-                time: 'Comprou há 4 dias'
             }
         ];
 
         const container = document.getElementById('testimonials-container');
         if (!container) return;
 
-        // Mistura os testemunhos
-        const shuffled = [...testimonials].sort(() => Math.random() - 0.5);
-        
-        // Adiciona 3-4 testemunhos aleatórios
-        const count = Math.floor(Math.random() * 2) + 3; // 3-4 testemunhos
-        for (let i = 0; i < count && i < shuffled.length; i++) {
-            const testimonial = shuffled[i];
+        // Adiciona testemunhos
+        testimonials.forEach(testimonial => {
             const card = document.createElement('div');
             card.className = 'testimonial-card';
             card.innerHTML = `
@@ -306,96 +294,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="testimonial-time">${testimonial.time}</span>
             `;
             container.appendChild(card);
-        }
-
-        // Rotaciona testemunhos a cada 2-3 minutos
-        setInterval(() => {
-            if (container.children.length > 0) {
-                // Remove o primeiro e adiciona um novo aleatório
-                container.removeChild(container.firstElementChild);
-                
-                const randomTestimonial = testimonials[Math.floor(Math.random() * testimonials.length)];
-                const card = document.createElement('div');
-                card.className = 'testimonial-card';
-                card.innerHTML = `
-                    <div class="testimonial-header">
-                        <span class="testimonial-name">${randomTestimonial.name}</span>
-                        <span class="testimonial-rating">${randomTestimonial.rating}</span>
-                    </div>
-                    <p class="testimonial-text">${randomTestimonial.text}</p>
-                    <span class="testimonial-time">${randomTestimonial.time}</span>
-                `;
-                container.appendChild(card);
-            }
-        }, Math.random() * (180000 - 120000) + 120000); // 2-3 minutos
-
-        console.log("💬 Testemunhos fake ativados");
+        });
     }
 
     // ==========================================================
-    // 5. SISTEMA DE URGÊNCIA DINÂMICA
+    // 5. CONTADOR PROMOCIONAL
     // ==========================================================
-    function initDynamicUrgency() {
-        const urgencyEl = document.getElementById('urgency-text');
-        if (!urgencyEl) return;
-
-        const messages = [
-            '⚡ <strong>ÚLTIMAS VAGAS!</strong> Entre em contato agora para garantir seu acesso!',
-            '🔥 <strong>APENAS 3 VAGAS RESTANTES!</strong> Não perca essa oportunidade!',
-            '🚨 <strong>PROMOÇÃO TERMINA EM:</strong> <span id="urgency-timer">30:00</span>',
-            '💥 <strong>10 PESSOAS ONLINE AGORA!</strong> Vagas se esgotando rapidamente!',
-            '⭐ <strong>MAIS VENDIDO HOJE:</strong> Acesso Completo com 600+ vídeos!'
-        ];
-
-        let currentIndex = 0;
-
-        // Atualiza mensagem a cada 45-90 segundos
-        function updateUrgencyMessage() {
-            if (urgencyEl) {
-                currentIndex = (currentIndex + 1) % messages.length;
-                urgencyEl.innerHTML = messages[currentIndex];
-                
-                // Se tiver timer, inicia contagem
-                const timerEl = document.getElementById('urgency-timer');
-                if (timerEl && messages[currentIndex].includes('TERMINA EM')) {
-                    startUrgencyTimer(timerEl);
-                }
-            }
-            
-            // Próxima atualização em 45-90 segundos
-            setTimeout(updateUrgencyMessage, Math.random() * (90000 - 45000) + 45000);
-        }
-
-        function startUrgencyTimer(element) {
-            let seconds = 30 * 60; // 30 minutos
-            const interval = setInterval(() => {
-                const minutes = Math.floor(seconds / 60);
-                const secs = seconds % 60;
-                element.textContent = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                
-                seconds--;
-                if (seconds < 0) {
-                    clearInterval(interval);
-                    element.textContent = 'ENCERRADA!';
-                }
-            }, 1000);
-        }
-
-        updateUrgencyMessage();
-        console.log("⏰ Sistema de urgência dinâmica ativado");
-    }
-
-    // ==========================================================
-    // 6. CONTADOR PROMOCIONAL
-    // ==========================================================
-    function initPromoCountdown() {
+    function initCountdown() {
+        console.log("⏱️ Iniciando contador promocional...");
+        
         const countdownEl = document.getElementById('countdown-timer');
         if (!countdownEl) return;
 
-        // 2 horas a partir do primeiro acesso
-        let timeInSeconds = 2 * 60 * 60;
+        let timeInSeconds = 2 * 60 * 60; // 2 horas
         
-        // Verifica se já tem tempo salvo
+        // Verifica tempo salvo
         const savedTime = localStorage.getItem('promo_end_time');
         if (savedTime) {
             const now = Math.floor(Date.now() / 1000);
@@ -414,10 +327,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            // Efeito visual nos últimos 10 minutos
+            // Efeito nos últimos 10 minutos
             if (timeInSeconds <= 600) {
                 countdownEl.style.color = '#ff4444';
-                countdownEl.style.animation = timeInSeconds <= 300 ? 'pulse 0.5s infinite' : '';
             }
             
             if (timeInSeconds <= 0) {
@@ -429,14 +341,14 @@ document.addEventListener('DOMContentLoaded', () => {
             
             timeInSeconds--;
         }, 1000);
-
-        console.log("⏱️ Contador promocional ativado");
     }
 
     // ==========================================================
-    // 7. MODAL DE CONSENTIMENTO
+    // 6. MODAL DE CONSENTIMENTO
     // ==========================================================
     function initConsentModal() {
+        console.log("✅ Configurando modal de consentimento...");
+        
         const consentModal = document.getElementById('consent-modal');
         const consentYesBtn = document.getElementById('consent-yes');
         const mainContent = document.getElementById('main-content');
@@ -467,19 +379,25 @@ document.addEventListener('DOMContentLoaded', () => {
         consentModal.addEventListener('click', (e) => {
             if (e.target === consentModal) closeModal();
         });
-
-        console.log("✅ Modal de consentimento ativado");
     }
 
     // ==========================================================
-    // 8. OTIMIZAÇÕES E INTERAÇÕES
+    // 7. OTIMIZAÇÕES E INTERAÇÕES
     // ==========================================================
     function initOptimizations() {
+        console.log("⚡ Aplicando otimizações...");
+        
         // Lazy loading
         const images = document.querySelectorAll('img');
         images.forEach(img => img.loading = 'lazy');
         
-        // Feedback visual para botões
+        // Animações leves para emojis
+        document.querySelectorAll('.emoji-animate').forEach(emoji => {
+            emoji.style.display = 'inline-block';
+            emoji.style.animation = 'gentlePulse 2s infinite';
+        });
+        
+        // Feedback para botões
         document.querySelectorAll('.plan-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 this.style.transform = 'scale(0.97)';
@@ -487,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         
-        // Previews interativos
+        // Previews
         document.querySelectorAll('.preview-card.locked').forEach(card => {
             card.addEventListener('click', function() {
                 const text = this.querySelector('.locked-text');
@@ -503,41 +421,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    }
+
+    // ==========================================================
+    // 8. VERIFICAÇÃO DE PROTEÇÃO ANTI-ROBÔ
+    // ==========================================================
+    function verifyProtection() {
+        console.log("🔍 Verificando proteção anti-robô...");
         
-        console.log("⚡ Otimizações aplicadas");
+        // Testa se conteúdo está protegido
+        setTimeout(() => {
+            const testElements = document.querySelectorAll('[data-real-src], .robots-hide, .humans-show');
+            console.log(`✅ Elementos protegidos encontrados: ${testElements.length}`);
+            
+            // Verifica meta tags
+            const metaRobots = document.querySelector('meta[name="robots"]');
+            if (metaRobots && metaRobots.content.includes('noindex')) {
+                console.log("✅ Meta tags de proteção ativas");
+            }
+            
+            // Verifica se vídeos estão carregando corretamente
+            const videos = document.querySelectorAll('video');
+            videos.forEach((video, i) => {
+                setTimeout(() => {
+                    if (video.readyState >= 1) {
+                        console.log(`✅ Vídeo ${i+1} carregado após proteção`);
+                    }
+                }, 1000 * (i + 1));
+            });
+        }, 3000);
     }
 
     // ==========================================================
     // 9. INICIALIZAÇÃO DE TODOS OS SISTEMAS
     // ==========================================================
     function initializeAllSystems() {
-        console.log("🚀 Inicializando todos os sistemas...");
+        console.log("🚀 INICIANDO TODOS OS SISTEMAS...");
         
-        // 1. Proteção anti-robô (primeiro!)
-        initAntiRobotProtection();
+        // Ordem de inicialização importante:
         
-        // 2. Sistemas dinâmicos
-        initDynamicCounters();
-        initFakeSalesSystem();
-        initFakeTestimonials();
-        initDynamicUrgency();
-        initPromoCountdown();
+        // 1. Proteção anti-robô (PRIMEIRO!)
+        initAdvancedAntiRobot();
         
-        // 3. Modal e otimizações
+        // 2. Modal de consentimento
         initConsentModal();
-        initOptimizations();
         
-        // 4. Mostra conteúdo após carregamento
+        // 3. Sistemas visuais
         setTimeout(() => {
+            initDynamicCounters();
+            initTestimonials();
+            initCountdown();
+            initOptimizations();
+            
+            // 4. Vendas fake OTIMIZADO (gera 1 venda imediata + ciclos automáticos)
+            initOptimizedFakeSales();
+            
+            // 5. Verificação de proteção
+            verifyProtection();
+            
+            // 6. Mostra conteúdo
             document.body.classList.add('loaded');
-            console.log("✅ Todos os sistemas inicializados!");
+            console.log("✅ TODOS OS SISTEMAS INICIALIZADOS COM SUCESSO!");
+            console.log("💰 Vendas fake: ATIVO (1 venda imediata + a cada 20-40s)");
+            console.log("🛡️ Proteção anti-robô: ATIVA");
+            console.log("📊 Contadores: DINÂMICOS");
         }, 1000);
     }
 
     // ==========================================================
     // INICIALIZAÇÃO
     // ==========================================================
-    // Aguarda um pouco para não sobrecarregar
+    // Delay inicial para não sobrecarregar
     setTimeout(initializeAllSystems, 500);
 });
 
