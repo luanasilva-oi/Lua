@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luana Silva | Conteúdo Exclusivo</title>
     
-    <!-- CSS DIRETO NO ARQUIVO (SEM EXTERNO) -->
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -116,7 +115,7 @@
             border: 2px solid #ff9800;
         }
         
-        /* PREVIEWS */
+        /* PREVIEWS COM GIF */
         .section-title {
             margin-top: 40px;
             margin-bottom: 20px;
@@ -136,11 +135,16 @@
             aspect-ratio: 1/1;
             background: #1a1a1a;
         }
-        .preview-card img {
+        .preview-card video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: blur(4px) brightness(0.6);
+            transition: all 0.3s ease;
+        }
+        .preview-card:hover video {
             filter: blur(2px) brightness(0.7);
+            transform: scale(1.05);
         }
         .locked-text {
             position: absolute;
@@ -149,12 +153,19 @@
             transform: translate(-50%, -50%);
             background: rgba(229,57,53,0.9);
             color: white;
-            padding: 10px 16px;
-            border-radius: 20px;
+            padding: 12px 20px;
+            border-radius: 25px;
             font-size: 14px;
             font-weight: bold;
             border: 2px solid #ff9800;
             pointer-events: none;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .preview-card:hover .locked-text {
+            background: rgba(255,87,34,0.9);
+            transform: translate(-50%, -50%) scale(1.05);
         }
         
         /* PROMO BANNER */
@@ -269,6 +280,9 @@
         }
         
         /* FAQ */
+        .faq {
+            margin-top: 50px;
+        }
         .faq-item {
             margin-bottom: 15px;
             background: rgba(255,255,255,0.03);
@@ -317,19 +331,44 @@
             text-decoration: none;
             font-weight: bold;
             margin-top: 15px;
+            transition: all 0.3s ease;
         }
-        .faq-whatsapp-btn:hover { background: #1da851; }
+        .faq-whatsapp-btn:hover { 
+            background: #1da851; 
+            transform: translateY(-2px);
+        }
         .faq-whatsapp-btn svg { width: 20px; height: 20px; fill: white; }
         
         .meta-note { margin-top: 25px; color: #888; text-align: center; }
         
+        /* ANIMAÇÃO EMOJI */
+        .emoji-gentle {
+            display: inline-block;
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-2px) scale(1.05); }
+        }
+        
         /* RESPONSIVO */
         @media (max-width: 768px) {
-            .preview-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .locked-text { 
+                font-size: 12px; 
+                padding: 8px 12px; 
+                white-space: normal;
+                width: 90%;
+                text-align: center;
+            }
             .plans-grid { grid-template-columns: 1fr; }
             .plan-card.featured { transform: scale(1); }
             .profile-banner { height: 200px; }
             .avatar { width: 100px; height: 100px; margin-top: -50px; }
+        }
+        @media (max-width: 480px) {
+            .preview-grid { grid-template-columns: repeat(2, 1fr); }
+            .locked-text { font-size: 11px; padding: 6px 10px; }
         }
     </style>
 </head>
@@ -372,7 +411,7 @@
                 
                 <p class="bio">
                     Meu espaço mais íntimo e exclusivo... conteúdo real, gemidos autênticos, 
-                    momentos especiais. 💋
+                    momentos especiais. <span class="emoji-gentle">💋</span>
                 </p>
             </div>
         </header>
@@ -388,32 +427,46 @@
             ⚡ <strong id="online-urgency">30 PESSOAS ONLINE AGORA!</strong> Vagas limitadas!
         </div>
         
-        <!-- PREVIEWS -->
+        <!-- ========== PREVIEWS COM GIFS ========== -->
         <section id="content-previews">
-            <h2 class="section-title">Conteúdo Exclusivo 🔥</h2>
+            <h2 class="section-title">
+                <span class="emoji-gentle">🔥</span> Conteúdo Exclusivo <span class="emoji-gentle">🔥</span>
+            </h2>
             <div class="preview-grid">
-                <div class="preview-card" onclick="openWhatsApp()">
-                    <img src="assets/preview-safe-1.jpg" alt="Preview">
-                    <span class="locked-text">🔒 VER MAIS</span>
+                <!-- GIF 1 -->
+                <div class="preview-card" onclick="comprarCompleto()">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/preview1.mp4" type="video/mp4">
+                    </video>
+                    <span class="locked-text">🔓 DESBLOQUEAR AGORA</span>
                 </div>
-                <div class="preview-card" onclick="openWhatsApp()">
-                    <img src="assets/preview-safe-2.jpg" alt="Preview">
-                    <span class="locked-text">🔒 VER MAIS</span>
+                <!-- GIF 2 -->
+                <div class="preview-card" onclick="comprarCompleto()">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/preview2.mp4" type="video/mp4">
+                    </video>
+                    <span class="locked-text">🔓 DESBLOQUEAR AGORA</span>
                 </div>
-                <div class="preview-card" onclick="openWhatsApp()">
-                    <img src="assets/preview-safe-3.jpg" alt="Preview">
-                    <span class="locked-text">🔒 VER MAIS</span>
+                <!-- GIF 3 -->
+                <div class="preview-card" onclick="comprarCompleto()">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/preview3.mp4" type="video/mp4">
+                    </video>
+                    <span class="locked-text">🔓 DESBLOQUEAR AGORA</span>
                 </div>
-                <div class="preview-card" onclick="openWhatsApp()">
-                    <img src="assets/preview-safe-4.jpg" alt="Preview">
-                    <span class="locked-text">🔒 VER MAIS</span>
+                <!-- GIF 4 -->
+                <div class="preview-card" onclick="comprarCompleto()">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/preview4.mp4" type="video/mp4">
+                    </video>
+                    <span class="locked-text">🔓 DESBLOQUEAR AGORA</span>
                 </div>
             </div>
         </section>
         
         <!-- PROMO BANNER -->
         <section class="promo-banner">
-            <h3>🔥 OFERTA ESPECIAL 🔥</h3>
+            <h3><span class="emoji-gentle">🔥</span> OFERTA ESPECIAL <span class="emoji-gentle">🔥</span></h3>
             <p>Acesso vitalício com condições exclusivas!</p>
             <div class="countdown-container">
                 <span>Promoção por tempo limitado:</span>
@@ -423,12 +476,18 @@
         
         <!-- GARANTIA -->
         <div class="guarantee-simple">
-            <p>✅ GARANTIA DE SATISFAÇÃO<br>Vem conhecer meu conteúdo, amor 💋!</p>
+            <p>
+                <span class="emoji-gentle">✅</span> 
+                <strong>GARANTIA DE SATISFAÇÃO</strong><br>
+                Vem conhecer meu conteúdo, amor <span class="emoji-gentle">💋</span>!
+            </p>
         </div>
         
-        <!-- PLANOS COM CHECKOUT -->
+        <!-- ========== PLANOS COM CHECKOUT ========== -->
         <section id="pricing-plans">
-            <h2 class="section-title">Escolha Seu Acesso ⭐</h2>
+            <h2 class="section-title">
+                <span class="emoji-gentle">⭐</span> Escolha Seu Acesso <span class="emoji-gentle">⭐</span>
+            </h2>
             <div class="plans-grid">
                 <!-- PLANO BÁSICO -->
                 <div class="plan-card basic">
@@ -445,7 +504,7 @@
                     </a>
                 </div>
                 
-                <!-- PLANO COMPLETO -->
+                <!-- PLANO COMPLETO (Mais escolhido) -->
                 <div class="plan-card complete featured">
                     <div class="badge">Mais escolhido</div>
                     <h3>⭐ Acesso Completo</h3>
@@ -454,10 +513,13 @@
                         <li><strong>500+ fotos</strong> exclusivas</li>
                         <li>Masturbação intensa com <strong>gemidos reais</strong></li>
                         <li>Corpo <strong>100% à mostra</strong></li>
+                        <li>Conteúdo <strong>totalmente explícito</strong></li>
+                        <li>Close-ups íntimos</li>
                         <li>Acesso <strong>vitalício</strong></li>
+                        <li>Atualizações constantes</li>
                     </ul>
                     <div class="price">R$ 29,90</div>
-                    <a href="https://syncpagamentoseguro.com/checkout/a110b633-f78c-496e-951a-e5808629ec90+a110b69a-c20e-4115-b0ee-70c8037c08b4" class="checkout-btn" target="_blank">
+                    <a href="https://syncpagamentoseguro.com/checkout/a110b633-f78c-496e-951a-e5808629ec90+a110b69a-c20e-4115-b0ee-70c8037c08b4" class="checkout-btn" id="checkout-completo" target="_blank">
                         ⭐ COMPRAR ACESSO COMPLETO
                     </a>
                 </div>
@@ -467,7 +529,9 @@
         
         <!-- FAQ -->
         <section class="faq">
-            <h2 class="section-title">Perguntas Frequentes ❓</h2>
+            <h2 class="section-title">
+                <span class="emoji-gentle">❓</span> Perguntas Frequentes <span class="emoji-gentle">❓</span>
+            </h2>
             
             <div class="faq-item">
                 <button class="faq-question">Como faço para comprar?</button>
@@ -479,7 +543,7 @@
             <div class="faq-item">
                 <button class="faq-question">Qual a diferença entre os planos?</button>
                 <div class="faq-answer">
-                    <p><strong>Básico:</strong> 100+ vídeos selecionados<br><strong>Completo:</strong> 600+ vídeos + 500+ fotos</p>
+                    <p><strong>Básico:</strong> 100+ vídeos selecionados<br><strong>Completo:</strong> 600+ vídeos + 500+ fotos - TUDO que tenho!</p>
                 </div>
             </div>
             
@@ -493,7 +557,7 @@
             <div class="faq-item">
                 <button class="faq-question">Precisa de ajuda? Fale comigo!</button>
                 <div class="faq-answer">
-                    <p style="margin-bottom:15px;">Se tiver qualquer dúvida, é só me chamar no WhatsApp!</p>
+                    <p style="margin-bottom:15px;">Se tiver qualquer dúvida sobre os planos ou pagamento, é só me chamar no WhatsApp!</p>
                     <a href="#" onclick="openWhatsApp(event)" class="faq-whatsapp-btn">
                         <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
                         FALAR COM LUANA NO WHATSAPP
@@ -505,9 +569,9 @@
     
     <script>
         // ============================================
-        // WHATSAPP - ÚNICO LOCAL DE CONFIGURAÇÃO
+        // WHATSAPP - NÚMERO CORRETO
         // ============================================
-        const WHATSAPP_NUMBER = '5569974783157'; // Seu número completo com DDI + DDD
+        const WHATSAPP_NUMBER = '5569974783157'; // 55 (Brasil) + 69 (DDD) + 974783157
         
         function openWhatsApp(event) {
             if (event) {
@@ -519,6 +583,42 @@
             const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
             window.open(url, '_blank');
             return false;
+        }
+        
+        // ============================================
+        // COMPRAR PLANO COMPLETO - CHAMADO PELOS GIFs
+        // ============================================
+        function comprarCompleto() {
+            // Feedback visual no card clicado
+            const activeCard = event.currentTarget;
+            const lockText = activeCard.querySelector('.locked-text');
+            const originalText = lockText ? lockText.innerText : '';
+            
+            if (lockText) {
+                lockText.innerText = '⭐ REDIRECIONANDO...';
+                lockText.style.background = 'rgba(0,168,89,0.9)';
+                lockText.style.borderColor = '#00A859';
+            }
+            
+            // Efeito de clique
+            activeCard.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                activeCard.style.transform = '';
+            }, 200);
+            
+            // Redireciona para o CHECKOUT DO PLANO COMPLETO
+            setTimeout(() => {
+                window.open('https://syncpagamentoseguro.com/checkout/a110b633-f78c-496e-951a-e5808629ec90+a110b69a-c20e-4115-b0ee-70c8037c08b4', '_blank');
+                
+                // Restaura texto após redirecionar
+                if (lockText) {
+                    setTimeout(() => {
+                        lockText.innerText = originalText || '🔓 DESBLOQUEAR AGORA';
+                        lockText.style.background = '';
+                        lockText.style.borderColor = '';
+                    }, 1000);
+                }
+            }, 800);
         }
         
         // ============================================
@@ -553,13 +653,13 @@
         }
         
         // ============================================
-        // CONTADOR PROMOCIONAL
+        // CONTADOR PROMOCIONAL (2 HORAS)
         // ============================================
         function startCountdown() {
             const timer = document.getElementById('countdown-timer');
             if (!timer) return;
             
-            let timeInSeconds = 2 * 60 * 60; // 2 horas
+            let timeInSeconds = 2 * 60 * 60;
             
             setInterval(() => {
                 if (timeInSeconds > 0) {
@@ -575,20 +675,20 @@
         // ============================================
         // FAQ ACCORDION
         // ============================================
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.classList.toggle('active');
-                const answer = this.nextElementSibling;
-                answer.classList.toggle('show');
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('show');
+                });
             });
+            
+            // Inicia contadores
+            setInterval(updateOnlineCount, 15000);
+            setInterval(updateAccessCount, 45000);
+            startCountdown();
         });
-        
-        // ============================================
-        // INICIAR SISTEMAS
-        // ============================================
-        setInterval(updateOnlineCount, 15000); // A cada 15 segundos
-        setInterval(updateAccessCount, 45000); // A cada 45 segundos
-        startCountdown();
     </script>
 </body>
 </html>
