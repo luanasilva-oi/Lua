@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificação de Idade</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #000;
             color: #fff;
@@ -19,33 +14,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 20px;
         }
-        
         .age-container {
             max-width: 480px;
             width: 100%;
             background: #0f0f0f;
             padding: 40px 30px;
             border-radius: 14px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.6);
+            text-align: center;
             border: 1px solid #333;
         }
-        
-        h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        
-        .age-text {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #ddd;
-            margin-bottom: 30px;
-        }
-        
+        h1 { font-size: 28px; margin-bottom: 20px; color: #fff; }
+        .age-text { font-size: 16px; line-height: 1.6; color: #ddd; margin-bottom: 30px; }
         .age-btn {
             width: 100%;
             padding: 16px;
@@ -56,30 +37,11 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s ease;
             margin-bottom: 10px;
         }
-        
-        .age-btn:hover {
-            background: #ffc933;
-        }
-        
-        .age-btn.secondary {
-            background: #333;
-            color: #fff;
-            border: 1px solid #555;
-        }
-        
-        .age-btn.secondary:hover {
-            background: #444;
-        }
-        
-        .age-note {
-            display: block;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #888;
-        }
+        .age-btn:hover { background: #ffc933; }
+        .age-btn.secondary { background: #333; color: #fff; }
+        .age-note { display: block; margin-top: 20px; font-size: 12px; color: #888; }
     </style>
 </head>
 <body>
@@ -89,35 +51,16 @@
             Conteúdo destinado exclusivamente a maiores de 18 anos.<br>
             Ao prosseguir, você confirma que atende a esse requisito.
         </p>
-        
-        <button class="age-btn" onclick="acceptAge()">
-            CONFIRMAR IDADE
-        </button>
-        
-        <button class="age-btn secondary" onclick="window.location.href='https://www.google.com'">
-            Sair
-        </button>
-        
-        <span class="age-note">
-            Acesso permitido somente para maiores de 18 anos.
-        </span>
+        <button class="age-btn" onclick="acceptAge()">CONFIRMAR IDADE</button>
+        <button class="age-btn secondary" onclick="window.location.href='https://www.google.com'">Sair</button>
+        <span class="age-note">Acesso permitido somente para maiores de 18 anos.</span>
     </div>
-
     <script>
         function acceptAge() {
-            // Salva no localStorage
             localStorage.setItem('age_ok', '1');
-            localStorage.setItem('age_verified', 'true');
-            localStorage.setItem('verification_timestamp', Date.now().toString());
-            
-            console.log('✅ Idade confirmada, redirecionando...');
-            
-            // REDIRECIONAMENTO DIRETO - SEM COMPLICAÇÕES
             window.location.href = 'bio.html';
         }
-        
-        // Se já tiver confirmado antes, vai direto
-        if (localStorage.getItem('age_ok') === '1' || localStorage.getItem('age_verified') === 'true') {
+        if (localStorage.getItem('age_ok') === '1') {
             window.location.href = 'bio.html';
         }
     </script>
