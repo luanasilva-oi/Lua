@@ -56,7 +56,7 @@
         .username { font-size: 16px; color: #aaa; }
         .status-indicator { font-size: 14px; color: #4caf50; font-weight: bold; }
         
-        /* SOCIAL LINKS - APENAS INSTAGRAM E TWITTER */
+        /* SOCIAL LINKS - INSTAGRAM E WHATSAPP */
         .social-links {
             display: flex;
             justify-content: center;
@@ -78,7 +78,7 @@
             background: rgba(255,255,255,0.1);
         }
         .social-links a.instagram { color: #E4405F; }
-        .social-links a.twitter { color: #1DA1F2; }
+        .social-links a.whatsapp { color: #25D366; }
         .social-links svg { width: 24px; height: 24px; fill: currentColor; }
         
         .bio {
@@ -278,7 +278,7 @@
             background: linear-gradient(135deg, #008C4A, #00A859);
         }
         
-        /* FAQ - COM EMAIL E INSTAGRAM */
+        /* FAQ - COM WHATSAPP, INSTAGRAM E EMAIL */
         .faq {
             margin-top: 50px;
         }
@@ -314,34 +314,56 @@
         }
         .faq-answer.show {
             padding: 20px;
-            max-height: 300px;
+            max-height: 400px;
         }
         .faq-answer p { color: #ccc; line-height: 1.6; }
         
-        /* BOTÃO INSTAGRAM PARA FAQ */
-        .faq-instagram-btn {
-            display: inline-flex;
+        /* BOTÕES DE CONTATO */
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .contact-btn {
+            display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(45deg, #833AB4, #E4405F, #FCAF45);
-            color: white;
-            padding: 14px 30px;
+            gap: 12px;
+            padding: 16px 20px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 15px;
+            font-size: 16px;
             transition: all 0.3s ease;
-            border: 2px solid #fff;
+            border: 2px solid transparent;
+        }
+        
+        .contact-btn.whatsapp {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        .contact-btn.whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+        
+        .contact-btn.instagram {
+            background: linear-gradient(45deg, #833AB4, #E4405F, #FCAF45);
+            color: white;
             box-shadow: 0 4px 15px rgba(225,48,108,0.3);
         }
-        .faq-instagram-btn:hover { 
+        .contact-btn.instagram:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(225,48,108,0.5);
         }
-        .faq-instagram-btn svg { 
-            width: 22px; 
-            height: 22px; 
-            fill: white; 
+        
+        .contact-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
         }
         
         /* EMAIL CARD */
@@ -360,13 +382,20 @@
             display: inline-block;
             background: rgba(255,152,0,0.1);
             color: #ff9800;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
             margin-top: 10px;
             border: 1px solid #ff9800;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
+        .email-address:hover {
+            background: rgba(255,152,0,0.2);
+            transform: scale(1.02);
+        }
+        
         .meta-note { margin-top: 25px; color: #888; text-align: center; }
         
         /* ANIMAÇÃO EMOJI */
@@ -377,6 +406,44 @@
         @keyframes gentleFloat {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-2px) scale(1.05); }
+        }
+        
+        /* BOTÃO FLUTUANTE WHATSAPP */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .whatsapp-float-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .whatsapp-float-btn:hover {
+            transform: scale(1.1);
+            background: #1da851;
+            box-shadow: 0 10px 35px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-float-btn svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         /* RESPONSIVO */
@@ -394,15 +461,40 @@
             .profile-banner { height: 200px; }
             .avatar { width: 100px; height: 100px; margin-top: -50px; }
             .email-address { font-size: 16px; }
+            .whatsapp-float-btn {
+                width: 60px;
+                height: 60px;
+            }
+            .whatsapp-float-btn svg {
+                width: 30px;
+                height: 30px;
+            }
+            .contact-btn {
+                padding: 14px 18px;
+                font-size: 15px;
+            }
         }
         @media (max-width: 480px) {
             .preview-grid { grid-template-columns: repeat(2, 1fr); }
             .locked-text { font-size: 11px; padding: 6px 10px; }
             .email-address { font-size: 14px; }
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- BOTÃO FLUTUANTE WHATSAPP -->
+    <div class="whatsapp-float">
+        <a href="#" onclick="openWhatsApp(event)" class="whatsapp-float-btn">
+            <svg viewBox="0 0 24 24">
+                <path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/>
+            </svg>
+        </a>
+    </div>
+
     <div class="profile-container">
         <!-- HEADER -->
         <header class="profile-header">
@@ -425,15 +517,14 @@
                     <span class="status-indicator">🟢 Online agora</span>
                 </div>
                 
-                <!-- SOCIAL LINKS - APENAS INSTAGRAM E TWITTER (SEM WHATSAPP) -->
+                <!-- SOCIAL LINKS - INSTAGRAM E WHATSAPP -->
                 <div class="social-links">
                     <a href="https://www.instagram.com/luanasilva.official" target="_blank" class="instagram">
                         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
                     </a>
-                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" class="twitter">
-                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    <a href="#" onclick="openWhatsApp(event)" class="whatsapp">
+                        <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
                     </a>
-                    <!-- WHATSAPP FOI REMOVIDO COMPLETAMENTE -->
                 </div>
                 
                 <p class="bio">
@@ -554,7 +645,7 @@
             <p class="meta-note">Pagamento 100% seguro • Acesso imediato • Garantia total</p>
         </section>
         
-        <!-- FAQ COM INSTAGRAM E EMAIL -->
+        <!-- FAQ COM WHATSAPP, INSTAGRAM E EMAIL -->
         <section class="faq">
             <h2 class="section-title">
                 <span class="emoji-gentle">❓</span> Perguntas Frequentes <span class="emoji-gentle">❓</span>
@@ -581,23 +672,29 @@
                 </div>
             </div>
             
-            <!-- NOVO: FALAR COM LUANA NO INSTAGRAM OU EMAIL -->
+            <!-- FALE COMIGO - WHATSAPP + INSTAGRAM + EMAIL -->
             <div class="faq-item">
                 <button class="faq-question">Precisa de ajuda? Fale comigo!</button>
                 <div class="faq-answer">
-                    <p style="margin-bottom:20px;">Se tiver qualquer dúvida sobre os planos, pagamento ou acesso, você pode:</p>
+                    <p style="margin-bottom:20px;">Se tiver qualquer dúvida sobre os planos, pagamento ou acesso, escolha a melhor opção para você:</p>
                     
-                    <!-- OPÇÃO 1: INSTAGRAM -->
-                    <a href="https://www.instagram.com/luanasilva.official" target="_blank" class="faq-instagram-btn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
-                        </svg>
-                        FALAR COM LUANA NO INSTAGRAM
-                    </a>
+                    <div class="contact-buttons">
+                        <!-- OPÇÃO 1: WHATSAPP (PRINCIPAL) -->
+                        <a href="#" onclick="openWhatsApp(event)" class="contact-btn whatsapp">
+                            <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
+                            💬 FALAR COM LUANA NO WHATSAPP
+                        </a>
+                        
+                        <!-- OPÇÃO 2: INSTAGRAM -->
+                        <a href="https://www.instagram.com/luanasilva.official" target="_blank" class="contact-btn instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
+                            📱 FALAR COM LUANA NO INSTAGRAM
+                        </a>
+                    </div>
                     
-                    <p style="margin: 20px 0 10px; color: #888;">ou</p>
+                    <p style="margin: 20px 0 10px; color: #888; text-align: center;">ou</p>
                     
-                    <!-- OPÇÃO 2: EMAIL PARA SUPORTE -->
+                    <!-- OPÇÃO 3: EMAIL (BACKUP) -->
                     <div class="email-support">
                         <strong>📧 SUPORTE POR EMAIL</strong>
                         <div class="email-address" onclick="copiarEmail()">
@@ -613,6 +710,47 @@
     </div>
     
     <script>
+        // ============================================
+        // WHATSAPP - NOVO NÚMERO +1 587 395 1709
+        // ============================================
+        const WHATSAPP_NUMBER = '15873951709'; // +1 587 395 1709 sem espaços
+        
+        function openWhatsApp(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            const message = encodeURIComponent('Olá Luana! Vim do seu site e quero tirar uma dúvida sobre o conteúdo! 😊');
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(url, '_blank');
+            return false;
+        }
+        
+        // ============================================
+        // COPIAR EMAIL PARA ÁREA DE TRANSFERÊNCIA
+        // ============================================
+        function copiarEmail() {
+            const email = 'luanasilvahott@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                // Feedback visual
+                const emailEl = document.querySelector('.email-address');
+                const originalText = emailEl.innerText;
+                emailEl.innerText = '✅ EMAIL COPIADO!';
+                emailEl.style.background = 'rgba(76,175,80,0.2)';
+                emailEl.style.color = '#4caf50';
+                
+                setTimeout(() => {
+                    emailEl.innerText = originalText;
+                    emailEl.style.background = 'rgba(255,152,0,0.1)';
+                    emailEl.style.color = '#ff9800';
+                }, 2000);
+            }).catch(err => {
+                // Fallback para mobile
+                alert('Email: luanasilvahott@gmail.com');
+            });
+        }
+        
         // ============================================
         // COMPRAR PLANO COMPLETO - CHAMADO PELOS GIFs
         // ============================================
@@ -647,30 +785,6 @@
                     }, 1000);
                 }
             }, 800);
-        }
-        
-        // ============================================
-        // COPIAR EMAIL PARA ÁREA DE TRANSFERÊNCIA
-        // ============================================
-        function copiarEmail() {
-            const email = 'luanasilvahott@gmail.com';
-            navigator.clipboard.writeText(email).then(() => {
-                // Feedback visual
-                const emailEl = document.querySelector('.email-address');
-                const originalText = emailEl.innerText;
-                emailEl.innerText = '✅ EMAIL COPIADO!';
-                emailEl.style.background = 'rgba(76,175,80,0.2)';
-                emailEl.style.color = '#4caf50';
-                
-                setTimeout(() => {
-                    emailEl.innerText = originalText;
-                    emailEl.style.background = 'rgba(255,152,0,0.1)';
-                    emailEl.style.color = '#ff9800';
-                }, 2000);
-            }).catch(err => {
-                // Fallback para mobile
-                alert('Email: luanasilvahott@gmail.com');
-            });
         }
         
         // ============================================
