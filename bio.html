@@ -379,6 +379,103 @@
             50% { transform: translateY(-2px) scale(1.05); }
         }
         
+        /* ESTILOS DO MODAL */
+        .modal {
+            display: flex;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            border: 2px solid #ff9800;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 24px;
+        }
+        
+        .modal-content p {
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        #main-content {
+            filter: blur(10px);
+            pointer-events: none;
+            transition: filter 0.3s ease;
+        }
+        
+        #main-content.active {
+            filter: none;
+            pointer-events: auto;
+        }
+        
+        .plan-btn {
+            display: block;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .plan-btn.complete {
+            background: linear-gradient(135deg, #e53935, #d32f2f);
+            color: white;
+        }
+        
+        .plan-btn.complete:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #d32f2f, #c62828);
+        }
+        
+        .plan-btn.basic {
+            background: #333;
+            color: #fff;
+            border: 2px solid #555;
+        }
+        
+        .plan-btn.basic:hover {
+            background: #444;
+        }
+        
         /* RESPONSIVO */
         @media (max-width: 768px) {
             .preview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -405,6 +502,12 @@
                 font-size: 16px;
                 padding: 14px;
             }
+            .modal-content {
+                padding: 25px;
+            }
+            .modal-content h2 {
+                font-size: 20px;
+            }
         }
         @media (max-width: 480px) {
             .preview-grid { grid-template-columns: repeat(2, 1fr); }
@@ -416,211 +519,255 @@
             .whatsapp-btn svg {
                 display: none;
             }
+            .modal-content {
+                padding: 20px;
+            }
+            .modal-content p {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- BOTÃO FLUTUANTE WHATSAPP -->
-    <div class="whatsapp-float">
-        <a href="#" onclick="openWhatsApp(event)" class="whatsapp-float-btn">
-            <svg viewBox="0 0 24 24">
-                <path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/>
-            </svg>
-        </a>
+    <!-- MODAL DE CONSENTIMENTO -->
+    <div id="consent-modal" class="modal" style="display: flex;">
+        <div class="modal-content">
+            <h2>🔞 Confirmação de Acesso</h2>
+            <p>Este site contém conteúdo adulto exclusivo para maiores de 18 anos. Ao prosseguir, você confirma que tem idade legal e concorda com os termos de acesso.</p>
+            <div class="modal-buttons">
+                <button id="consent-yes" class="plan-btn complete" onclick="closeModal()">
+                    TENHO 18+ E CONCORDO
+                </button>
+                <a href="https://www.google.com" class="plan-btn basic" style="text-align: center; text-decoration: none;">
+                    Sair do Site
+                </a>
+            </div>
+        </div>
     </div>
 
-    <div class="profile-container">
-        <!-- HEADER -->
-        <header class="profile-header">
-            <video class="profile-banner" autoplay loop muted playsinline>
-                <source src="assets/banner.mp4" type="video/mp4">
-            </video>
-            <img src="assets/avatar.jpg" class="avatar" alt="Luana Silva">
+    <!-- CONTEÚDO PRINCIPAL (bloqueado inicialmente) -->
+    <main id="main-content">
+        <!-- BOTÃO FLUTUANTE WHATSAPP -->
+        <div class="whatsapp-float">
+            <a href="#" onclick="openWhatsApp(event)" class="whatsapp-float-btn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="profile-container">
+            <!-- HEADER -->
+            <header class="profile-header">
+                <video class="profile-banner" autoplay loop muted playsinline>
+                    <source src="assets/banner.mp4" type="video/mp4">
+                </video>
+                <img src="assets/avatar.jpg" class="avatar" alt="Luana Silva">
+                
+                <div class="profile-info">
+                    <h1>
+                        Luana Silva
+                        <svg class="verified-badge" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#1DA1F2"/>
+                            <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="white"/>
+                        </svg>
+                    </h1>
+                    
+                    <div class="user-status-line">
+                        <span class="username">@luanasilva.official</span>
+                        <span class="status-indicator">🟢 Online agora</span>
+                    </div>
+                    
+                    <!-- SOCIAL LINKS - INSTAGRAM, X (TWITTER) E WHATSAPP -->
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/luanasilva.official" target="_blank" class="instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
+                        </a>
+                        <a href="https://x.com/LuanaSilva_ofc" target="_blank" class="twitter">
+                            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" onclick="openWhatsApp(event)" class="whatsapp">
+                            <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
+                        </a>
+                    </div>
+                    
+                    <p class="bio">
+                        Meu espaço mais íntimo e exclusivo... conteúdo real, gemidos autênticos, 
+                        momentos especiais. <span class="emoji-gentle">💋</span>
+                    </p>
+                </div>
+            </header>
             
-            <div class="profile-info">
-                <h1>
-                    Luana Silva
-                    <svg class="verified-badge" viewBox="0 0 24 24">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="#1DA1F2"/>
-                        <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="white"/>
-                    </svg>
-                </h1>
-                
-                <div class="user-status-line">
-                    <span class="username">@luanasilva.official</span>
-                    <span class="status-indicator">🟢 Online agora</span>
+            <!-- STATUS -->
+            <section id="status-section">
+                <div id="daily-access">🔥 <strong id="access-count">44</strong> acessos hoje</div>
+                <div id="online-users">🟢 <strong id="online-count">30</strong> pessoas online agora</div>
+            </section>
+            
+            <!-- URGÊNCIA -->
+            <div class="urgency-bar">
+                ⚡ <strong id="online-urgency">30 PESSOAS ONLINE AGORA!</strong> Vagas limitadas!
+            </div>
+            
+            <!-- PREVIEWS COM GIFS - AGORA ABRE WHATSAPP -->
+            <section id="content-previews">
+                <h2 class="section-title">
+                    <span class="emoji-gentle">🔥</span> Conteúdo Exclusivo <span class="emoji-gentle">🔥</span>
+                </h2>
+                <div class="preview-grid">
+                    <!-- GIF 1 - ABRE WHATSAPP -->
+                    <div class="preview-card" onclick="openWhatsApp(event)">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/preview1.mp4" type="video/mp4">
+                        </video>
+                        <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
+                    </div>
+                    <!-- GIF 2 - ABRE WHATSAPP -->
+                    <div class="preview-card" onclick="openWhatsApp(event)">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/preview2.mp4" type="video/mp4">
+                        </video>
+                        <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
+                    </div>
+                    <!-- GIF 3 - ABRE WHATSAPP -->
+                    <div class="preview-card" onclick="openWhatsApp(event)">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/preview3.mp4" type="video/mp4">
+                        </video>
+                        <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
+                    </div>
+                    <!-- GIF 4 - ABRE WHATSAPP -->
+                    <div class="preview-card" onclick="openWhatsApp(event)">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/preview4.mp4" type="video/mp4">
+                        </video>
+                        <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
+                    </div>
                 </div>
-                
-                <!-- SOCIAL LINKS - INSTAGRAM, X (TWITTER) E WHATSAPP -->
-                <div class="social-links">
-                    <a href="https://www.instagram.com/luanasilva.official" target="_blank" class="instagram">
-                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
-                    </a>
-                    <a href="https://x.com/LuanaSilva_ofc" target="_blank" class="twitter">
-                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </a>
-                    <a href="#" onclick="openWhatsApp(event)" class="whatsapp">
-                        <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
-                    </a>
+            </section>
+            
+            <!-- PROMO BANNER -->
+            <section class="promo-banner">
+                <h3><span class="emoji-gentle">🔥</span> OFERTA ESPECIAL <span class="emoji-gentle">🔥</span></h3>
+                <p>Acesso vitalício com condições exclusivas!</p>
+                <div class="countdown-container">
+                    <span>Promoção por tempo limitado:</span>
+                    <span id="countdown-timer">02:00:00</span>
                 </div>
-                
-                <p class="bio">
-                    Meu espaço mais íntimo e exclusivo... conteúdo real, gemidos autênticos, 
-                    momentos especiais. <span class="emoji-gentle">💋</span>
+            </section>
+            
+            <!-- GARANTIA -->
+            <div class="guarantee-simple">
+                <p>
+                    <span class="emoji-gentle">✅</span> 
+                    <strong>GARANTIA DE SATISFAÇÃO</strong><br>
+                    Vem conhecer meu conteúdo, amor <span class="emoji-gentle">💋</span>!
                 </p>
             </div>
-        </header>
-        
-        <!-- STATUS -->
-        <section id="status-section">
-            <div id="daily-access">🔥 <strong id="access-count">44</strong> acessos hoje</div>
-            <div id="online-users">🟢 <strong id="online-count">30</strong> pessoas online agora</div>
-        </section>
-        
-        <!-- URGÊNCIA -->
-        <div class="urgency-bar">
-            ⚡ <strong id="online-urgency">30 PESSOAS ONLINE AGORA!</strong> Vagas limitadas!
-        </div>
-        
-        <!-- PREVIEWS COM GIFS - AGORA ABRE WHATSAPP -->
-        <section id="content-previews">
-            <h2 class="section-title">
-                <span class="emoji-gentle">🔥</span> Conteúdo Exclusivo <span class="emoji-gentle">🔥</span>
-            </h2>
-            <div class="preview-grid">
-                <!-- GIF 1 - ABRE WHATSAPP -->
-                <div class="preview-card" onclick="openWhatsApp(event)">
-                    <video autoplay loop muted playsinline>
-                        <source src="assets/preview1.mp4" type="video/mp4">
-                    </video>
-                    <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
+            
+            <!-- PLANOS COM WHATSAPP (CHECKOUT REMOVIDO) -->
+            <section id="pricing-plans">
+                <h2 class="section-title">
+                    <span class="emoji-gentle">⭐</span> Escolha Seu Acesso <span class="emoji-gentle">⭐</span>
+                </h2>
+                <div class="plans-grid">
+                    <!-- PLANO BÁSICO - WHATSAPP -->
+                    <div class="plan-card basic">
+                        <h3>🔓 Acesso Básico</h3>
+                        <ul class="plan-desc">
+                            <li><strong>100+ vídeos de masturbação</strong> com gemidos reais</li>
+                            <li>Corpo à mostra, <strong>sem censura</strong></li>
+                            <li>Vídeos reais e <strong>autênticos</strong></li>
+                            <li>Acesso <strong>vitalício</strong></li>
+                        </ul>
+                        <div class="price">R$ 14,99</div>
+                        <a href="#" onclick="openWhatsApp(event)" class="whatsapp-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
+                            QUERO NO WHATSAPP
+                        </a>
+                    </div>
+                    
+                    <!-- PLANO COMPLETO - WHATSAPP -->
+                    <div class="plan-card complete featured">
+                        <div class="badge">Mais escolhido</div>
+                        <h3>⭐ Acesso Completo</h3>
+                        <ul class="plan-desc">
+                            <li><strong>600+ vídeos</strong> sem censura</li>
+                            <li><strong>500+ fotos</strong> exclusivas</li>
+                            <li>Masturbação intensa com <strong>gemidos reais</strong></li>
+                            <li>Corpo <strong>100% à mostra</strong></li>
+                            <li>Conteúdo <strong>totalmente explícito</strong></li>
+                            <li>Close-ups íntimos</li>
+                            <li>Acesso <strong>vitalício</strong></li>
+                            <li>Atualizações constantes</li>
+                        </ul>
+                        <div class="price">R$ 29,90</div>
+                        <a href="#" onclick="openWhatsApp(event)" class="whatsapp-btn">
+                            <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
+                            QUERO AGORA NO WHATSAPP
+                        </a>
+                    </div>
                 </div>
-                <!-- GIF 2 - ABRE WHATSAPP -->
-                <div class="preview-card" onclick="openWhatsApp(event)">
-                    <video autoplay loop muted playsinline>
-                        <source src="assets/preview2.mp4" type="video/mp4">
-                    </video>
-                    <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
-                </div>
-                <!-- GIF 3 - ABRE WHATSAPP -->
-                <div class="preview-card" onclick="openWhatsApp(event)">
-                    <video autoplay loop muted playsinline>
-                        <source src="assets/preview3.mp4" type="video/mp4">
-                    </video>
-                    <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
-                </div>
-                <!-- GIF 4 - ABRE WHATSAPP -->
-                <div class="preview-card" onclick="openWhatsApp(event)">
-                    <video autoplay loop muted playsinline>
-                        <source src="assets/preview4.mp4" type="video/mp4">
-                    </video>
-                    <span class="locked-text">🔓 FALAR NO WHATSAPP</span>
-                </div>
-            </div>
-        </section>
-        
-        <!-- PROMO BANNER -->
-        <section class="promo-banner">
-            <h3><span class="emoji-gentle">🔥</span> OFERTA ESPECIAL <span class="emoji-gentle">🔥</span></h3>
-            <p>Acesso vitalício com condições exclusivas!</p>
-            <div class="countdown-container">
-                <span>Promoção por tempo limitado:</span>
-                <span id="countdown-timer">02:00:00</span>
-            </div>
-        </section>
-        
-        <!-- GARANTIA -->
-        <div class="guarantee-simple">
-            <p>
-                <span class="emoji-gentle">✅</span> 
-                <strong>GARANTIA DE SATISFAÇÃO</strong><br>
-                Vem conhecer meu conteúdo, amor <span class="emoji-gentle">💋</span>!
-            </p>
-        </div>
-        
-        <!-- PLANOS COM WHATSAPP (CHECKOUT REMOVIDO) -->
-        <section id="pricing-plans">
-            <h2 class="section-title">
-                <span class="emoji-gentle">⭐</span> Escolha Seu Acesso <span class="emoji-gentle">⭐</span>
-            </h2>
-            <div class="plans-grid">
-                <!-- PLANO BÁSICO - WHATSAPP -->
-                <div class="plan-card basic">
-                    <h3>🔓 Acesso Básico</h3>
-                    <ul class="plan-desc">
-                        <li><strong>100+ vídeos de masturbação</strong> com gemidos reais</li>
-                        <li>Corpo à mostra, <strong>sem censura</strong></li>
-                        <li>Vídeos reais e <strong>autênticos</strong></li>
-                        <li>Acesso <strong>vitalício</strong></li>
-                    </ul>
-                    <div class="price">R$ 14,99</div>
-                    <a href="#" onclick="openWhatsApp(event)" class="whatsapp-btn">
-                        <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
-                        QUERO NO WHATSAPP
-                    </a>
+                <p class="meta-note">Pagamento via PIX • Acesso imediato • Garantia total</p>
+            </section>
+            
+            <!-- FAQ -->
+            <section class="faq">
+                <h2 class="section-title">
+                    <span class="emoji-gentle">❓</span> Perguntas Frequentes <span class="emoji-gentle">❓</span>
+                </h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">Como faço para comprar?</button>
+                    <div class="faq-answer">
+                        <p>Clique nos botões verdes "QUERO NO WHATSAPP" acima, escolha seu plano e fale comigo diretamente! Te explico tudo e envio o acesso após pagamento via PIX.</p>
+                    </div>
                 </div>
                 
-                <!-- PLANO COMPLETO - WHATSAPP -->
-                <div class="plan-card complete featured">
-                    <div class="badge">Mais escolhido</div>
-                    <h3>⭐ Acesso Completo</h3>
-                    <ul class="plan-desc">
-                        <li><strong>600+ vídeos</strong> sem censura</li>
-                        <li><strong>500+ fotos</strong> exclusivas</li>
-                        <li>Masturbação intensa com <strong>gemidos reais</strong></li>
-                        <li>Corpo <strong>100% à mostra</strong></li>
-                        <li>Conteúdo <strong>totalmente explícito</strong></li>
-                        <li>Close-ups íntimos</li>
-                        <li>Acesso <strong>vitalício</strong></li>
-                        <li>Atualizações constantes</li>
-                    </ul>
-                    <div class="price">R$ 29,90</div>
-                    <a href="#" onclick="openWhatsApp(event)" class="whatsapp-btn">
-                        <svg viewBox="0 0 24 24"><path d="M12.032 0C5.424 0 0 5.424 0 12.032c0 2.112.576 4.08 1.536 5.784L0 24l6.36-1.536c1.68.96 3.648 1.536 5.76 1.536 6.576 0 12-5.424 12-12.032C24 5.424 18.576 0 12.032 0zm6.432 16.704c-.336.912-1.824 1.632-2.976 1.824-.624.096-1.44.144-2.88-.624-1.824-.912-3.024-2.688-3.12-2.784-.096-.096-.768-.912-.768-1.728s.48-.864.672-1.104c.144-.192.336-.24.432-.24.096 0 .144 0 .192.048.048.048.096.144.144.24.048.096.192.336.288.48.096.144.192.288.24.384.048.096.096.24.048.384-.048.144-.096.336-.192.48-.096.144-.24.336-.336.432-.096.096-.192.192-.096.384.096.192.432.912.936 1.44.672.672 1.248.912 1.44 1.008.192.096.336.048.48-.048.144-.096.624-.576.816-.768.192-.192.336-.192.48-.144.144.048.912.432 1.056.528.144.096.24.144.288.24.048.096.048.432-.288 1.296z"/></svg>
-                        QUERO AGORA NO WHATSAPP
-                    </a>
+                <div class="faq-item">
+                    <button class="faq-question">Qual a diferença entre os planos?</button>
+                    <div class="faq-answer">
+                        <p><strong>Básico:</strong> 100+ vídeos selecionados<br><strong>Completo:</strong> 600+ vídeos + 500+ fotos - TUDO que tenho!</p>
+                    </div>
                 </div>
-            </div>
-            <p class="meta-note">Pagamento via PIX • Acesso imediato • Garantia total</p>
-        </section>
-        
-        <!-- FAQ COM CONTATOS (EMAIL REMOVIDO) -->
-        <section class="faq">
-            <h2 class="section-title">
-                <span class="emoji-gentle">❓</span> Perguntas Frequentes <span class="emoji-gentle">❓</span>
-            </h2>
-            
-            <div class="faq-item">
-                <button class="faq-question">Como faço para comprar?</button>
-                <div class="faq-answer">
-                    <p>Clique nos botões verdes "QUERO NO WHATSAPP" acima, escolha seu plano e fale comigo diretamente! Te explico tudo e envio o acesso após pagamento via PIX.</p>
+                
+                <div class="faq-item">
+                    <button class="faq-question">O conteúdo é real?</button>
+                    <div class="faq-answer">
+                        <p>SIM! Vídeos reais, gemidos autênticos, corpo totalmente à mostra. Conteúdo 100% real e sem censura!</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">Qual a diferença entre os planos?</button>
-                <div class="faq-answer">
-                    <p><strong>Básico:</strong> 100+ vídeos selecionados<br><strong>Completo:</strong> 600+ vídeos + 500+ fotos - TUDO que tenho!</p>
+                
+                <div class="faq-item">
+                    <button class="faq-question">Como recebo o acesso?</button>
+                    <div class="faq-answer">
+                        <p>Após falar comigo no WhatsApp e confirmar o pagamento via PIX, envio o link do Google Drive com TODO o conteúdo na hora!</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">O conteúdo é real?</button>
-                <div class="faq-answer">
-                    <p>SIM! Vídeos reais, gemidos autênticos, corpo totalmente à mostra. Conteúdo 100% real e sem censura!</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <button class="faq-question">Como recebo o acesso?</button>
-                <div class="faq-answer">
-                    <p>Após falar comigo no WhatsApp e confirmar o pagamento via PIX, envio o link do Google Drive com TODO o conteúdo na hora!</p>
-                </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    </main>
     
     <script>
+        // ============================================
+        // MODAL DE CONSENTIMENTO
+        // ============================================
+        function closeModal() {
+            document.getElementById('consent-modal').style.display = 'none';
+            document.getElementById('main-content').classList.add('active');
+            
+            // Salva que já aceitou
+            localStorage.setItem('modal_accepted', 'true');
+        }
+        
+        // Verifica se já aceitou antes
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('modal_accepted') === 'true') {
+                document.getElementById('consent-modal').style.display = 'none';
+                document.getElementById('main-content').classList.add('active');
+            }
+        });
+        
         // ============================================
         // WHATSAPP - +1 587 395 1709
         // ============================================
@@ -635,7 +782,6 @@
             // Feedback visual no elemento clicado
             const element = event.currentTarget;
             if (element) {
-                const originalColor = element.style.background;
                 element.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     element.style.transform = '';
