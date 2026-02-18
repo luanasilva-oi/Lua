@@ -72,6 +72,11 @@
             font-size: 13px;
             color: #666;
         }
+        .countdown {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ff9800;
+        }
     </style>
 </head>
 <body>
@@ -80,16 +85,48 @@
         <img src="assets/lua.jpg" alt="Luana" class="profile-img">
 
         <h2>Acesso VIP</h2>
-        <p>Clique no botão abaixo para entrar no meu canal exclusivo no Telegram. Você será redirecionado automaticamente.</p>
+        <p>Clique no botão abaixo para entrar no meu canal exclusivo no Telegram. Você será redirecionado automaticamente em <span id="timer">10</span> segundos.</p>
 
         <!-- Link para o Telegram (substitua pelo seu link) -->
-        <a href="http://t.me/Luana_Oficial_bot?start=instagram" class="telegram-btn" target="_blank" rel="noopener noreferrer">
+        <a href="https://t.me/Luana_Oficial_bot?start=instagram" class="telegram-btn" id="redirectBtn" target="_blank" rel="noopener noreferrer">
             <i>📱</i> Entrar no Telegram
         </a>
 
         <div class="footer-note">
             Ao clicar, você será direcionado para o Telegram.
         </div>
+        <div class="countdown" id="countdownMsg">Redirecionando em 10 segundos...</div>
     </div>
+
+    <script>
+        (function() {
+            var seconds = 10;
+            var timerSpan = document.getElementById('timer');
+            var countdownMsg = document.getElementById('countdownMsg');
+            var link = 'https://t.me/Luana_Oficial_bot?start=instagram'; // Substitua pelo seu link
+            var btn = document.getElementById('redirectBtn');
+
+            // Atualiza contador a cada segundo
+            var interval = setInterval(function() {
+                seconds--;
+                if (timerSpan) timerSpan.textContent = seconds;
+                if (countdownMsg) countdownMsg.textContent = 'Redirecionando em ' + seconds + ' segundos...';
+                
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    // Redireciona
+                    window.location.href = link;
+                }
+            }, 1000);
+
+            // Se o botão for clicado antes, cancela o redirecionamento automático e abre o link
+            btn.addEventListener('click', function(e) {
+                e.preventDefault(); // evita duplo redirecionamento
+                clearInterval(interval);
+                window.open(link, '_blank');
+                // Opcional: após abrir, talvez mostrar mensagem ou não fazer nada
+            });
+        })();
+    </script>
 </body>
 </html>
