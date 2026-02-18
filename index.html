@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conteúdo VIP</title>
+    <title>Redirecionando...</title>
     <style>
         body {
             margin: 0;
@@ -26,14 +26,37 @@
             text-align: center;
             border: 1px solid #333;
         }
+        /* Proteção da imagem: ela é renderizada como background de uma div */
         .profile-img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #ff9800;
             margin: 0 auto 20px;
-            display: block;
+            background-image: url('assets/lua.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 4px solid #ff9800;
+            /* Impede seleção e arraste */
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none; /* Bloqueia qualquer interação direta */
+        }
+        /* Camada transparente por cima da imagem para bloquear clique direito */
+        .img-protector {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+        .img-protector::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 10;
         }
         h2 {
             font-size: 22px;
@@ -45,6 +68,12 @@
             font-size: 16px;
             line-height: 1.5;
             margin-bottom: 25px;
+        }
+        .countdown {
+            font-size: 18px;
+            color: #ff9800;
+            margin: 20px 0;
+            font-weight: bold;
         }
         .telegram-btn {
             display: inline-block;
@@ -72,61 +101,65 @@
             font-size: 13px;
             color: #666;
         }
-        .countdown {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #ff9800;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Foto de rosto (coloque o caminho correto da sua imagem) -->
-        <img src="assets/lua.jpg" alt="Luana" class="profile-img">
+        <!-- Imagem protegida: div com background, dentro de um protetor -->
+        <div class="img-protector">
+            <div class="profile-img"></div>
+        </div>
 
         <h2>Acesso VIP</h2>
-        <p>Clique no botão abaixo para entrar no meu canal exclusivo no Telegram. Você será redirecionado automaticamente em <span id="timer">10</span> segundos.</p>
+        <p>Você será redirecionado automaticamente para o Telegram em <span id="timer">10</span> segundos.</p>
 
-        <!-- Link para o Telegram (substitua pelo seu link) -->
-        <a href="https://t.me/Luana_Oficial_bot?start=instagram" class="telegram-btn" id="redirectBtn" target="_blank" rel="noopener noreferrer">
-            <i>📱</i> Entrar no Telegram
+        <!-- Link manual caso o redirecionamento falhe -->
+        <a href="https://t.me/Luana_Oficial_bot?start=instagram" id="redirect-link" class="telegram-btn" target="_blank" rel="noopener noreferrer">
+            <i>📱</i> Entrar agora
         </a>
 
         <div class="footer-note">
             Ao clicar, você será direcionado para o Telegram.
         </div>
-        <div class="countdown" id="countdownMsg">Redirecionando em 10 segundos...</div>
     </div>
 
     <script>
-        (function() {
-            var seconds = 10;
-            var timerSpan = document.getElementById('timer');
-            var countdownMsg = document.getElementById('countdownMsg');
-            var link = 'https://t.me/Luana_Oficial_bot?start=instagram'; // Substitua pelo seu link
-            var btn = document.getElementById('redirectBtn');
+        // ============================================
+        // PROTEÇÃO ADICIONAL CONTRA DOWNLOAD DA IMAGEM
+        // ============================================
+        document.addEventListener('contextmenu', function(e) {
+            // Bloqueia clique direito em toda a página
+            e.preventDefault();
+            return false;
+        });
 
-            // Atualiza contador a cada segundo
-            var interval = setInterval(function() {
-                seconds--;
-                if (timerSpan) timerSpan.textContent = seconds;
-                if (countdownMsg) countdownMsg.textContent = 'Redirecionando em ' + seconds + ' segundos...';
-                
-                if (seconds <= 0) {
-                    clearInterval(interval);
-                    // Redireciona
-                    window.location.href = link;
-                }
-            }, 1000);
+        // Bloqueia combinações de teclado para salvar imagem (Ctrl+S, Ctrl+Shift+I, etc.)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J')) {
+                e.preventDefault();
+                return false;
+            }
+        });
 
-            // Se o botão for clicado antes, cancela o redirecionamento automático e abre o link
-            btn.addEventListener('click', function(e) {
-                e.preventDefault(); // evita duplo redirecionamento
-                clearInterval(interval);
-                window.open(link, '_blank');
-                // Opcional: após abrir, talvez mostrar mensagem ou não fazer nada
-            });
-        })();
+        // Impede arrastar a imagem (já que é uma div, mas garantimos)
+        document.querySelector('.profile-img')?.addEventListener('dragstart', (e) => e.preventDefault());
+
+        // ============================================
+        // REDIRECIONAMENTO AUTOMÁTICO
+        // ============================================
+        let seconds = 10;
+        const timerSpan = document.getElementById('timer');
+        const link = document.getElementById('redirect-link').href;
+
+        const countdown = setInterval(() => {
+            seconds--;
+            timerSpan.textContent = seconds;
+
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = link;
+            }
+        }, 1000);
     </script>
 </body>
 </html>
