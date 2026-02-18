@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteúdo VIP</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            width: 90%;
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff9800;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        h2 {
+            font-size: 22px;
+            margin: 15px 0 10px;
+            color: #fff;
+        }
+        p {
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .telegram-btn {
+            display: inline-block;
+            background: #0088cc;
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,136,204,0.3);
+        }
+        .telegram-btn:hover {
+            background: #0077b5;
+            transform: scale(1.05);
+        }
+        .telegram-btn i {
+            margin-right: 8px;
+        }
+        .footer-note {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Foto de rosto (coloque o caminho correto da sua imagem) -->
+        <img src="assets/avatar.jpg" alt="Luana" class="profile-img">
+
+        <h2>Acesso VIP</h2>
+        <p>Clique no botão abaixo para entrar no meu canal exclusivo no Telegram. Você será redirecionado automaticamente.</p>
+
+        <!-- Link para o Telegram (substitua pelo seu link) -->
+        <a href="http://t.me/Luana_Oficial_bot?start=instagram" class="telegram-btn" target="_blank" rel="noopener noreferrer">
+            <i>📱</i> Entrar no Telegram
+        </a>
+
+        <div class="footer-note">
+            Ao clicar, você será direcionado para o Telegram.
+        </div>
+    </div>
+</body>
+</html>
