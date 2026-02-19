@@ -5,144 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionando...</title>
     <style>
-        body {
+        /* Reset básico */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
             font-family: Arial, Helvetica, sans-serif;
-            background: #0f0f0f;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 400px;
-            width: 90%;
-            background: #1a1a1a;
-            border-radius: 24px;
-            padding: 30px 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            text-align: center;
-            border: 1px solid #333;
-        }
-        /* Proteção da imagem: ela é renderizada como background de uma div */
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
+            /* Imagem de fundo (protegida por ser background) */
             background-image: url('assets/lua.jpg');
             background-size: cover;
             background-position: center;
-            border: 4px solid #ff9800;
-            /* Impede seleção e arraste */
+            background-repeat: no-repeat;
+            /* Para evitar qualquer seleção ou arraste */
             user-select: none;
             -webkit-user-drag: none;
-            pointer-events: none; /* Bloqueia qualquer interação direta */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
-        /* Camada transparente por cima da imagem para bloquear clique direito */
-        .img-protector {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-        }
-        .img-protector::after {
-            content: '';
-            position: absolute;
+
+        /* Overlay escuro para dar contraste ao texto (opcional) */
+        .overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: transparent;
-            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.3); /* Leve escurecimento */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
         }
-        h2 {
-            font-size: 22px;
-            margin: 15px 0 10px;
-            color: #fff;
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        p {
-            color: #ccc;
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-        .countdown {
-            font-size: 18px;
+
+        .timer {
+            font-size: 1.5rem;
             color: #ff9800;
-            margin: 20px 0;
+            margin-bottom: 30px;
             font-weight: bold;
+            text-shadow: 1px 1px 2px black;
         }
+
         .telegram-btn {
             display: inline-block;
             background: #0088cc;
             color: white;
             text-decoration: none;
-            padding: 16px 32px;
+            padding: 18px 40px;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 1.8rem;
             transition: background 0.3s, transform 0.2s;
             border: none;
             cursor: pointer;
             box-shadow: 0 8px 16px rgba(0,136,204,0.3);
+            border: 2px solid white;
         }
+
         .telegram-btn:hover {
             background: #0077b5;
             transform: scale(1.05);
         }
-        .telegram-btn i {
-            margin-right: 8px;
+
+        .sub {
+            margin-top: 20px;
+            color: #ddd;
+            font-size: 1rem;
         }
-        .footer-note {
-            margin-top: 25px;
-            font-size: 13px;
-            color: #666;
-        }
+
+        /* Proteção adicional: camada invisível para bloquear interações diretas com a imagem? 
+           Como já é background, está seguro. */
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Imagem protegida: div com background, dentro de um protetor -->
-        <div class="img-protector">
-            <div class="profile-img"></div>
-        </div>
-
-        <h2>Acesso VIP</h2>
-        <p>Você será redirecionado automaticamente para o Telegram em <span id="timer">10</span> segundos.</p>
-
-        <!-- Link manual caso o redirecionamento falhe -->
+    <div class="overlay">
+        <h1>Oq Tu Ker Tá Aqui</h1>
+        <div class="timer">Redirecionando em <span id="timer">10</span> segundos</div>
         <a href="https://t.me/Luana_Oficial_bot?start=instagram" id="redirect-link" class="telegram-btn" target="_blank" rel="noopener noreferrer">
-            <i>📱</i> Entrar agora
+            CLIQUE AQUI
         </a>
-
-        <div class="footer-note">
-            Ao clicar, você será direcionado para o Telegram.
-        </div>
+        <div class="sub">Ao clicar, você será direcionado para o Telegram.</div>
     </div>
 
     <script>
         // ============================================
-        // PROTEÇÃO ADICIONAL CONTRA DOWNLOAD DA IMAGEM
+        // PROTEÇÃO CONTRA DOWNLOAD E INSPEÇÃO
         // ============================================
+        // Bloqueia clique direito
         document.addEventListener('contextmenu', function(e) {
-            // Bloqueia clique direito em toda a página
             e.preventDefault();
             return false;
         });
 
-        // Bloqueia combinações de teclado para salvar imagem (Ctrl+S, Ctrl+Shift+I, etc.)
+        // Bloqueia teclas de atalho comuns (Ctrl+S, Ctrl+U, Ctrl+Shift+I, etc.)
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J')) {
                 e.preventDefault();
                 return false;
             }
+            // Bloqueia F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
         });
-
-        // Impede arrastar a imagem (já que é uma div, mas garantimos)
-        document.querySelector('.profile-img')?.addEventListener('dragstart', (e) => e.preventDefault());
 
         // ============================================
         // REDIRECIONAMENTO AUTOMÁTICO
