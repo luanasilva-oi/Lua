@@ -22,7 +22,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* Para evitar qualquer seleção ou arraste */
+            /* Proteção extra */
             user-select: none;
             -webkit-user-drag: none;
             -webkit-touch-callout: none;
@@ -31,14 +31,14 @@
             -ms-user-select: none;
         }
 
-        /* Overlay escuro para dar contraste ao texto (opcional) */
+        /* Overlay escuro para dar contraste ao texto */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.3); /* Leve escurecimento */
+            background-color: rgba(0, 0, 0, 0.4); /* Leve escurecimento */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -62,8 +62,12 @@
             text-shadow: 1px 1px 2px black;
         }
 
+        /* Botão com ícone do Telegram */
         .telegram-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             background: #0088cc;
             color: white;
             text-decoration: none;
@@ -83,14 +87,18 @@
             transform: scale(1.05);
         }
 
+        /* Ícone SVG do Telegram */
+        .telegram-icon {
+            width: 1.8rem;
+            height: 1.8rem;
+            fill: white;
+        }
+
         .sub {
             margin-top: 20px;
             color: #ddd;
             font-size: 1rem;
         }
-
-        /* Proteção adicional: camada invisível para bloquear interações diretas com a imagem? 
-           Como já é background, está seguro. */
     </style>
 </head>
 <body>
@@ -98,6 +106,10 @@
         <h1>Oq Tu Ker Tá Aqui</h1>
         <div class="timer">Redirecionando em <span id="timer">10</span> segundos</div>
         <a href="https://t.me/Luana_Oficial_bot?start=instagram" id="redirect-link" class="telegram-btn" target="_blank" rel="noopener noreferrer">
+            <!-- Ícone SVG do Telegram -->
+            <svg class="telegram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.97 9.274c-.145.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.203-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.941z"/>
+            </svg>
             CLIQUE AQUI
         </a>
         <div class="sub">Ao clicar, você será direcionado para o Telegram.</div>
@@ -107,19 +119,16 @@
         // ============================================
         // PROTEÇÃO CONTRA DOWNLOAD E INSPEÇÃO
         // ============================================
-        // Bloqueia clique direito
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
             return false;
         });
 
-        // Bloqueia teclas de atalho comuns (Ctrl+S, Ctrl+U, Ctrl+Shift+I, etc.)
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J')) {
                 e.preventDefault();
                 return false;
             }
-            // Bloqueia F12
             if (e.key === 'F12') {
                 e.preventDefault();
                 return false;
