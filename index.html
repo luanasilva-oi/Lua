@@ -1,156 +1,211 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecionando...</title>
-    <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redirecionando...</title>
 
-        body {
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
-            /* Imagem de fundo (protegida por ser background) */
-            background-image: url('assets/lua.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            /* Proteção extra */
-            user-select: none;
-            -webkit-user-drag: none;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
+<style>
 
-        /* Overlay escuro para dar contraste ao texto */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-        h1 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+body{
+font-family:Arial, Helvetica, sans-serif;
+height:100vh;
+overflow:hidden;
+user-select:none;
+}
 
-        .timer {
-            font-size: 1.5rem;
-            color: #ff9800;
-            margin-bottom: 30px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px black;
-        }
+/* VIDEO BACKGROUND */
 
-        /* Botão com ícone do Telegram */
-        .telegram-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: #0088cc;
-            color: white;
-            text-decoration: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.8rem;
-            transition: background 0.3s, transform 0.2s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 16px rgba(0,136,204,0.3);
-            border: 2px solid white;
-        }
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-1;
+}
 
-        .telegram-btn:hover {
-            background: #0077b5;
-            transform: scale(1.05);
-        }
+/* OVERLAY */
 
-        /* Ícone SVG do Telegram */
-        .telegram-icon {
-            width: 1.8rem;
-            height: 1.8rem;
-            fill: white;
-        }
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+opacity:0;
+animation:fadeIn 1.2s ease forwards;
+}
 
-        .sub {
-            margin-top: 20px;
-            color: #ddd;
-            font-size: 1rem;
-        }
-    </style>
+/* FADE LOAD */
+
+@keyframes fadeIn{
+to{
+opacity:1;
+}
+}
+
+/* TITULO */
+
+h1{
+color:white;
+font-size:2.6rem;
+margin-bottom:20px;
+text-shadow:0 0 15px rgba(0,0,0,0.7);
+}
+
+/* TIMER */
+
+.timer{
+font-size:1.6rem;
+color:#ff9800;
+margin-bottom:30px;
+font-weight:bold;
+}
+
+/* BOTAO */
+
+.telegram-btn{
+display:flex;
+align-items:center;
+gap:12px;
+background:#0088cc;
+color:white;
+text-decoration:none;
+padding:18px 42px;
+border-radius:50px;
+font-size:1.8rem;
+font-weight:bold;
+transition:0.25s;
+box-shadow:0 10px 25px rgba(0,136,204,0.35);
+border:2px solid white;
+}
+
+/* HOVER */
+
+.telegram-btn:hover{
+transform:scale(1.07);
+background:#0077b5;
+}
+
+/* ICON */
+
+.telegram-icon{
+width:30px;
+height:30px;
+fill:white;
+}
+
+/* SUB */
+
+.sub{
+margin-top:20px;
+color:#ddd;
+font-size:1rem;
+opacity:0.9;
+}
+
+</style>
 </head>
+
 <body>
-    <div class="overlay">
-        <h1>Oq Tu Ker Tá Aqui</h1>
-        <div class="timer">Redirecionando em <span id="timer">5</span> segundos</div>
-        <a href="https://t.me/Luana_Oficial_bot?start=tiktok" id="redirect-link" class="telegram-btn" target="_blank" rel="noopener noreferrer">
-            <!-- Ícone SVG do Telegram -->
-            <svg class="telegram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.97 9.274c-.145.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.203-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.941z"/>
-            </svg>
-            CLIQUE AQUI
-        </a>
-        <div class="sub">Ao clicar, você será direcionado para o Telegram.</div>
-    </div>
 
-    <script>
-        // ============================================
-        // PROTEÇÃO CONTRA DOWNLOAD E INSPEÇÃO
-        // ============================================
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            return false;
-        });
+<!-- VIDEO -->
 
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J')) {
-                e.preventDefault();
-                return false;
-            }
-            if (e.key === 'F12') {
-                e.preventDefault();
-                return false;
-            }
-        });
+<video autoplay muted loop playsinline class="video-bg">
+<source src="assets/video.mp4" type="video/mp4">
+</video>
 
-        // ============================================
-        // REDIRECIONAMENTO AUTOMÁTICO (5 SEGUNDOS)
-        // ============================================
-        let seconds = 5; // ALTERADO PARA 5 SEGUNDOS
-        const timerSpan = document.getElementById('timer');
-        const link = document.getElementById('redirect-link').href;
+<!-- CONTEUDO -->
 
-        const countdown = setInterval(() => {
-            seconds--;
-            timerSpan.textContent = seconds;
+<div class="overlay">
 
-            if (seconds <= 0) {
-                clearInterval(countdown);
-                window.location.href = link; // Redireciona para o link do bot
-            }
-        }, 1000);
-    </script>
+<h1>Oq Tu Ker Tá Aqui</h1>
+
+<div class="timer">
+Redirecionando em <span id="timer">5</span> segundos
+</div>
+
+<a href="https://t.me/Luana_Oficial_bot?start=tiktok" 
+id="redirect-link"
+class="telegram-btn"
+target="_blank"
+rel="noopener noreferrer">
+
+<svg class="telegram-icon" viewBox="0 0 24 24">
+<path d="M12 0C5.373 0 0 5.373 0 12s5.373 
+12 12 12 12-5.373 12-12S18.627 
+0 12 0zm5.562 8.161l-1.97 
+9.274c-.145.658-.537.818-1.084.508l-3-2.211-1.447 
+1.394c-.16.16-.295.295-.605.295l.213-3.053 
+5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 
+4.326-2.962-.924c-.643-.203-.657-.643.136-.953l11.57-4.458c.538-.196 
+1.006.128.832.941z"/>
+</svg>
+
+CLIQUE AQUI
+
+</a>
+
+<div class="sub">
+Ao clicar, você será direcionado para o Telegram.
+</div>
+
+</div>
+
+<script>
+
+/* BLOQUEAR MENU */
+
+document.addEventListener("contextmenu",e=>e.preventDefault())
+
+document.addEventListener("keydown",function(e){
+
+if(
+(e.ctrlKey && ["s","u","i","j"].includes(e.key.toLowerCase()))
+|| e.key === "F12"
+){
+e.preventDefault()
+}
+
+})
+
+/* REDIRECIONAMENTO */
+
+let seconds = 5
+const timer = document.getElementById("timer")
+const link = document.getElementById("redirect-link").href
+
+const countdown = setInterval(()=>{
+
+seconds--
+timer.textContent = seconds
+
+if(seconds <= 0){
+
+clearInterval(countdown)
+window.location.href = link
+
+}
+
+},1000)
+
+</script>
+
 </body>
 </html>
