@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redirecionando...</title>
+<title>Luana Oficial - Redirecionando...</title>
 
 <style>
 
@@ -17,107 +17,146 @@ box-sizing:border-box;
 body{
 font-family:Arial, Helvetica, sans-serif;
 height:100vh;
+background-color: #ff69b4; /* Fundo rosa da imagem */
+display: flex;
+align-items: center;
+justify-content:center;
 overflow:hidden;
 user-select:none;
 }
 
-/* VIDEO BACKGROUND */
-
-.video-bg{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-1;
-}
-
-/* OVERLAY */
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.45);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
-opacity:0;
-animation:fadeIn 1.2s ease forwards;
+/* CARTÃO CENTRAL */
+.card {
+background: #ffffff;
+width: 90%;
+max-width: 420px;
+padding: 40px 30px;
+border-radius: 24px;
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+opacity: 0;
+animation: fadeIn 1.2s ease forwards;
 }
 
 /* FADE LOAD */
-
 @keyframes fadeIn{
 to{
 opacity:1;
 }
 }
 
-/* TITULO */
+/* FOTO DE PERFIL */
+.profile-container {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+overflow: hidden;
+border: 3px solid #eee;
+margin-bottom: 20px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
 
-h1{
-color:white;
-font-size:2.6rem;
-margin-bottom:20px;
-text-shadow:0 0 15px rgba(0,0,0,0.7);
+.profile-container img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* NOME */
+h1 {
+color: #111;
+font-size: 1.8rem;
+margin-bottom: 12px;
+font-weight: 700;
+}
+
+/* STATUS / VERIFICADO */
+.status-info {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-size: 0.95rem;
+margin-bottom: 8px;
+flex-wrap: wrap;
+}
+
+.verified {
+color: #0095f6;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 4px;
+}
+
+.online {
+color: #28a745;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 4px;
+}
+
+.online::before {
+content: "";
+display: inline-block;
+width: 8px;
+height: 8px;
+background-color: #28a745;
+border-radius: 50%;
+}
+
+/* TEMPO DE RESPOSTA */
+.response-time {
+color: #888;
+font-size: 0.88rem;
+margin-bottom: 25px;
 }
 
 /* TIMER */
-
 .timer{
-font-size:1.6rem;
-color:#ff9800;
-margin-bottom:30px;
-font-weight:bold;
+font-size: 0.95rem;
+color: #666;
+margin-bottom: 20px;
+}
+
+.timer span {
+font-weight: bold;
+color: #ff1493;
 }
 
 /* BOTAO */
-
 .telegram-btn{
 display:flex;
 align-items:center;
-gap:12px;
-background:#0088cc;
+justify-content: center;
+gap:10px;
+background:#ff1493; /* Tom de rosa do botão da imagem */
 color:white;
 text-decoration:none;
-padding:18px 42px;
-border-radius:50px;
-font-size:1.8rem;
+padding:16px 24px;
+width: 100%;
+border-radius:16px;
+font-size:1.15rem;
 font-weight:bold;
 transition:0.25s;
-box-shadow:0 10px 25px rgba(0,136,204,0.35);
-border:2px solid white;
+box-shadow:0 8px 20px rgba(255, 20, 147, 0.35);
 }
 
 /* HOVER */
-
 .telegram-btn:hover{
-transform:scale(1.07);
-background:#0077b5;
+transform:scale(1.02);
+background:#e00b82;
 }
 
 /* ICON */
-
 .telegram-icon{
-width:30px;
-height:30px;
+width:24px;
+height:24px;
 fill:white;
-}
-
-/* SUB */
-
-.sub{
-margin-top:20px;
-color:#ddd;
-font-size:1rem;
-opacity:0.9;
 }
 
 </style>
@@ -125,17 +164,26 @@ opacity:0.9;
 
 <body>
 
-<!-- VIDEO -->
+<div class="card">
 
-<video autoplay muted loop playsinline class="video-bg">
-<source src="assets/video.mp4" type="video/mp4">
-</video>
+<!-- FOTO DE PERFIL (Altere o caminho 'assets/perfil.jpg' para o local da sua foto) -->
+<div class="profile-container">
+<img src="assets/perfil.jpg" alt="Luana Oficial">
+</div>
 
-<!-- CONTEUDO -->
+<h1>Luana Oficial</h1>
 
-<div class="overlay">
+<div class="status-info">
+<span class="verified">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="#0095f6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+Verificado
+</span>
+<span class="online">Online</span>
+</div>
 
-<h1>Oq Tu Ker Tá Aqui</h1>
+<div class="response-time">
+Tempo médio de resposta: 3 minutos
+</div>
 
 <div class="timer">
 Redirecionando em <span id="timer">5</span> segundos
@@ -158,51 +206,39 @@ rel="noopener noreferrer">
 1.006.128.832.941z"/>
 </svg>
 
-CLIQUE AQUI
+Toque aqui pra ter Acesso!
 
 </a>
-
-<div class="sub">
-Ao clicar, você será direcionado para o Telegram.
-</div>
 
 </div>
 
 <script>
 
 /* BLOQUEAR MENU */
-
 document.addEventListener("contextmenu",e=>e.preventDefault())
 
 document.addEventListener("keydown",function(e){
-
 if(
 (e.ctrlKey && ["s","u","i","j"].includes(e.key.toLowerCase()))
 || e.key === "F12"
 ){
 e.preventDefault()
 }
-
 })
 
 /* REDIRECIONAMENTO */
-
 let seconds = 5
 const timer = document.getElementById("timer")
 const link = document.getElementById("redirect-link").href
 
 const countdown = setInterval(()=>{
-
 seconds--
 timer.textContent = seconds
 
 if(seconds <= 0){
-
 clearInterval(countdown)
 window.location.href = link
-
 }
-
 },1000)
 
 </script>
